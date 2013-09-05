@@ -12,10 +12,14 @@ namespace SuperBitBros
     {
         static void Main(string[] args)
         {
-            Gameworld world = new Gameworld();
+            GameWorld world = new GameWorld();
             OpenGLView view = new OpenGLGameView(world);
 
-            view.Start();
+            Textures.Load();
+
+            world.LoadMapFromResources();
+
+            view.Start(60, 120);
         }
     }
 }

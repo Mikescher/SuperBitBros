@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuperBitBros
+namespace Entities.SuperBitBros
 {
-    class StaticEntity : Entity
+    abstract class StaticEntity : Entity
     {
         public StaticEntity()
             : base()

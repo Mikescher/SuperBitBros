@@ -44,12 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity.cs" />
+    <Compile Include="Entities\Blocks\Block.cs" />
+    <Compile Include="Entities\Blocks\CastleBlock.cs" />
+    <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\EmptyCoinBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\FlagBlock.cs" />
+    <Compile Include="Entities\Blocks\HillBlock.cs" />
+    <Compile Include="Entities\Blocks\PipeBlock.cs" />
+    <Compile Include="Entities\Blocks\StandardAirBlock.cs" />
+    <Compile Include="Entities\DynamicEntity.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="GameModel.cs" />
-    <Compile Include="Gameworld.cs" />
-    <Compile Include="GroundEntity.cs" />
+    <Compile Include="GameWorld.cs" />
+    <Compile Include="Entities\Blocks\StandardGroundBlock.cs" />
+    <Compile Include="MapParser.cs" />
+    <Compile Include="OpenGL\Rectangle3d.cs" />
+    <Compile Include="OpenGL\OGLSingleTexture.cs" />
+    <Compile Include="OpenGL\OGLTexture.cs" />
+    <Compile Include="OpenGL\OGLTextureSheet.cs" />
     <Compile Include="OpenGLGameView.cs" />
     <Compile Include="OpenGLView.cs" />
+    <Compile Include="OpenGL\Rectangle2d.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -57,7 +73,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StaticEntity.cs" />
+    <Compile Include="Entities\StaticEntity.cs" />
+    <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -76,6 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\map_01-03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\font_raster.png" />
+    <None Include="Resources\mario_small.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

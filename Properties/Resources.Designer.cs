@@ -63,6 +63,16 @@ namespace SuperBitBros.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap font_raster {
+            get {
+                object obj = ResourceManager.GetObject("font_raster", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap map_01_01 {
             get {
                 object obj = ResourceManager.GetObject("map_01_01", resourceCulture);
@@ -86,6 +96,16 @@ namespace SuperBitBros.Properties {
         internal static System.Drawing.Bitmap map_01_03 {
             get {
                 object obj = ResourceManager.GetObject("map_01_03", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mario_small {
+            get {
+                object obj = ResourceManager.GetObject("mario_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

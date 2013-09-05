@@ -4,16 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
+using OpenTK.Input;
+using SuperBitBros;
+using SuperBitBros.OpenGL;
 
-namespace SuperBitBros
+namespace Entities.SuperBitBros
 {
     abstract class Entity
     {
-        public Vector2d position;
+        public const int DISTANCE_BACKRGOUND = 100;
+        public const int DISTANCE_BLOCKS = 50;
+        public const int DISTANCE_MOBS = 40;
+        public const int DISTANCE_PLAYER = 30;
+        public const int DISTANCE_FOREGROUND = 10;
+
+        public Vector2d position; // bottom left
         public double distance;
 
         public double width;
         public double height;
+
+        protected OGLTexture texture;
+
+        protected GameModel owner;
 
         public Entity()
         {
@@ -23,9 +36,14 @@ namespace SuperBitBros
             this.height = 1;
         }
 
-        public Vector2d GetTopLeft()
+        public Rectangle2d GetPosition()
         {
-            return new Vector2d(position.X, position.Y + height);
+            return new Rectangle2d(position, width, height);
+        }
+
+        public Rectangle3d GetPositionWithDistance()
+        {
+            return new Rectangle3d(new Vector3d(position.X, position.Y, distance), width, height);
         }
 
         public Vector3d GetTopLeftWithDistance()
@@ -63,9 +81,18 @@ namespace SuperBitBros
             return new Vector3d(position.X + width, position.Y, distance);
         }
 
-        public virtual void OnAdd()
+        public virtual void OnAdd(GameModel owner)
         {
-            //override me
+            this.owner = owner;
         }
+
+        public virtual OGLTexture GetCurrentTexture()
+        {
+            return texture;
+        }
+
+        public virtual void Update(KeyboardDevice keboard) { }
+
+        public abstract bool IsBlocking(Entity sender);
     }
 }
