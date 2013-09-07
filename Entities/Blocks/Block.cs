@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities.SuperBitBros;
 
-namespace SuperBitBros.Entities.Blocks
+namespace SuperBitBros.OpenGL.Entities.Blocks
 {
     abstract class Block : StaticEntity
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuperBitBros.Entities.Blocks
+namespace SuperBitBros.OpenGL.Entities.Blocks
 {
     class StandardGroundBlock : Block
     {

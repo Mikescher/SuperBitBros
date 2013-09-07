@@ -7,7 +7,7 @@
     <ProjectGuid>{2883D4C2-0746-40F8-96BF-87099D37213C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SuperBitBros</RootNamespace>
+    <RootNamespace>SuperBitBros.OpenGL</RootNamespace>
     <AssemblyName>SuperBitBros</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AnimatedDynamicEntity.cs" />
+    <Compile Include="Entities\AnimatedTexture.cs" />
     <Compile Include="Entities\Blocks\Block.cs" />
     <Compile Include="Entities\Blocks\CastleBlock.cs" />
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Entities\Blocks\HillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
     <Compile Include="Entities\Blocks\StandardAirBlock.cs" />
+    <Compile Include="Entities\CoinEntity.cs" />
     <Compile Include="Entities\DynamicEntity.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="GameModel.cs" />
@@ -65,7 +68,7 @@
     <Compile Include="OpenGLGameView.cs" />
     <Compile Include="OpenGLView.cs" />
     <Compile Include="OpenGL\Rectangle2d.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Entities\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

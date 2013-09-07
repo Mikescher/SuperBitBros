@@ -1,35 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.SuperBitBros;
+﻿using Entities.SuperBitBros;
 using OpenTK;
 using OpenTK.Input;
+using System.Collections.Generic;
 
-namespace SuperBitBros
-{
-    abstract class GameModel
-    {
-        public List<Entity> entityList {get; protected set;}
+namespace SuperBitBros.OpenGL {
+    abstract class GameModel {
+        public List<Entity> entityList { get; protected set; }
 
-        public GameModel()
-        {
+        public GameModel() {
             entityList = new List<Entity>();
         }
 
-        public virtual void AddEntity(Entity e, double x, double y)
-        {
+        public virtual void AddEntity(Entity e, double x, double y) {
             e.position.X = x;
             e.position.Y = y;
             entityList.Add(e);
             e.OnAdd(this);
         }
 
-        public virtual void Update(KeyboardDevice keyboard)
-        {
-            foreach(Entity entity in entityList) {
-                entity.Update(keyboard);
+        public virtual bool RemoveEntity(Entity e) {
+            e.OnRemove();
+            return entityList.Remove(e);
+        }
+
+        public virtual List<Entity> GetCurrentEntityList() {
+            return new List<Entity>(entityList);
+        }
+
+        public virtual void Update(KeyboardDevice keyboard) {
+            foreach (Entity e in GetCurrentEntityList()) {
+                e.Update(keyboard);
             }
         }
 

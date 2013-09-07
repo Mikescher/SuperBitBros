@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL.Entities.Blocks;
 
-namespace SuperBitBros
+namespace SuperBitBros.OpenGL
 {
     public enum ParseTriggerType { NO_TRIGGER, SPAWN_PLAYER};
 
@@ -17,7 +17,7 @@ namespace SuperBitBros
         public static Block findBlock(Color c)
         {
             if (c == StandardGroundBlock.GetColor()) return new StandardGroundBlock();
-            else if (c == StandardAirBlock.GetColor()) return new StandardAirBlock();
+            //else if (c == StandardAirBlock.GetColor()) return new StandardAirBlock(); //TODO reincomm
             else if (c == CoinBoxBlock.GetColor()) return new CoinBoxBlock();
             else if (c == EmptyCoinBoxBlock.GetColor()) return new EmptyCoinBoxBlock();
             else if (c == HillBlock.GetColor()) return new HillBlock();

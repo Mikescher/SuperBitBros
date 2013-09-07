@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OpenTK.Graphics.OpenGL;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK.Graphics.OpenGL;
 
-namespace SuperBitBros.OpenGL
-{
+namespace SuperBitBros.OpenGL {
     enum OGLTextureMode { TM_SINGLE, TM_REFERENCE_XY, TM_REFERENCE_POS };
 
-    class OGLTexture
-    {
+    class OGLTexture {
         private OGLSingleTexture texSingle;
 
         private OGLTextureSheet texSheet;
@@ -23,22 +17,19 @@ namespace SuperBitBros.OpenGL
 
         private OGLTextureMode mode;
 
-        public OGLTexture(OGLSingleTexture tex)
-        {
+        public OGLTexture(OGLSingleTexture tex) {
             mode = OGLTextureMode.TM_SINGLE;
             texSingle = tex;
         }
 
-        public OGLTexture(OGLTextureSheet tex, int x, int y)
-        {
+        public OGLTexture(OGLTextureSheet tex, int x, int y) {
             mode = OGLTextureMode.TM_REFERENCE_XY;
             texSheet = tex;
             sheetX = x;
             sheetY = y;
         }
 
-        public OGLTexture(OGLTextureSheet tex, int pos)
-        {
+        public OGLTexture(OGLTextureSheet tex, int pos) {
             mode = OGLTextureMode.TM_REFERENCE_POS;
             texSheet = tex;
             sheetPos = pos;
@@ -83,21 +74,21 @@ namespace SuperBitBros.OpenGL
             return id;
         }
 
-        public Rectangle2d GetCoordinates()
-        {
-            switch (mode)
-            {
-                case OGLTextureMode.TM_SINGLE: return texSingle.GetCoordinates();
-                case OGLTextureMode.TM_REFERENCE_XY: return texSheet.GetCoordinates(sheetX, sheetY);
-                case OGLTextureMode.TM_REFERENCE_POS: return texSheet.GetCoordinates(sheetPos);
-                default: throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
+        public Rectangle2d GetCoordinates() {
+            switch (mode) {
+                case OGLTextureMode.TM_SINGLE:
+                    return texSingle.GetCoordinates();
+                case OGLTextureMode.TM_REFERENCE_XY:
+                    return texSheet.GetCoordinates(sheetX, sheetY);
+                case OGLTextureMode.TM_REFERENCE_POS:
+                    return texSheet.GetCoordinates(sheetPos);
+                default:
+                    throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
             }
         }
 
-        public void bind()
-        {
-            switch (mode)
-            {
+        public void bind() {
+            switch (mode) {
                 case OGLTextureMode.TM_SINGLE:
                     texSingle.bind();
                     return;
@@ -105,7 +96,7 @@ namespace SuperBitBros.OpenGL
                 case OGLTextureMode.TM_REFERENCE_POS:
                     texSheet.bind();
                     return;
-                default: 
+                default:
                     throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
             }
         }
