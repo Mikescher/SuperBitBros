@@ -2,6 +2,7 @@
 using OpenTK.Input;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.Entities;
+using System;
 
 namespace Entities.SuperBitBros {
     enum Direction { LEFT, RIGHT };
@@ -10,7 +11,9 @@ namespace Entities.SuperBitBros {
         public const int PLAYER_WIDTH = 24;
         public const int PLAYER_HEIGHT = 24;
 
-        public const double PLAYER_SPEED = 3;
+        public const double PLAYER_SPEED_FRICTION = 0.15;
+        public const double PLAYER_SPEED_ACC = PLAYER_SPEED_FRICTION + 0.1;
+        public const double PLAYER_SPEED_MAX = 4.5;
         public const double PLAYER_JUMP_POWER = 9;
 
         public Direction direction;
@@ -42,12 +45,14 @@ namespace Entities.SuperBitBros {
 
             Vector2d delta = new Vector2d(0, 0);
 
-            if (keyboard[Key.Left]) {
-                delta.X -= PLAYER_SPEED;
+            delta.X = -Math.Sign(movementDelta.X) * Math.Min(PLAYER_SPEED_FRICTION, Math.Abs(movementDelta.X));
+
+            if (keyboard[Key.Left] && movementDelta.X > -PLAYER_SPEED_MAX) {
+                delta.X -= PLAYER_SPEED_ACC;
             }
 
-            if (keyboard[Key.Right]) {
-                delta.X += PLAYER_SPEED;
+            if (keyboard[Key.Right] && movementDelta.X < PLAYER_SPEED_MAX) {
+                delta.X += PLAYER_SPEED_ACC;
             }
 
             if (keyboard[Key.Space] && IsOnGround()) {

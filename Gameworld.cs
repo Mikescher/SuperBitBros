@@ -1,5 +1,6 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK;
+using SuperBitBros.OpenGL.Entities;
 using SuperBitBros.OpenGL.Entities.Blocks;
 using SuperBitBros.OpenGL.Properties;
 using System;
@@ -7,47 +8,14 @@ using System.Drawing;
 
 namespace SuperBitBros.OpenGL {
     class GameWorld : GameModel {
-        private const int MAP_WIDTH_MAX = 400;
-        private const int MAP_HEIGHT_MAX = 150;
 
         private Vector2d offset = new Vector2d(0, 0);
 
-        private Block[,] BlockMap = new Block[MAP_WIDTH_MAX, MAP_HEIGHT_MAX];
-
-        private Player player;
+        public Player player;
 
         public GameWorld()
             : base() {
 
-        }
-
-        public void AddBlock(Block b, int x, int y) {
-            AddEntity(b, Block.BLOCK_WIDTH * x, Block.BLOCK_HEIGHT * y);
-
-            if (BlockMap[x, y] != null)
-                Console.Error.WriteLine("Block overrides other block when added to Blockmap: X:{0}, Y:{1}, Block:{2}", x, y, b.ToString());
-            BlockMap[x, y] = b;
-
-            b.OnBlockAdd(this, x, y);
-        }
-
-        public void ReplaceBlock(Block oldb, Block newb) {
-            int x = (int)(oldb.GetBottomLeft().X / Block.BLOCK_WIDTH);
-            int y = (int)(oldb.GetBottomLeft().Y / Block.BLOCK_HEIGHT);
-
-            if (BlockMap[x, y] != null)
-                RemoveEntity(BlockMap[x, y]);
-
-            AddEntity(newb, Block.BLOCK_WIDTH * x, Block.BLOCK_HEIGHT * y);
-
-            BlockMap[x, y] = newb;
-            newb.OnBlockAdd(this, x, y);
-        }
-
-        public Block GetBlock(int x, int y) {
-            if (x < 0 || y < 0 || x > MAP_WIDTH_MAX || y > MAP_HEIGHT_MAX)
-                return null;
-            return BlockMap[x, y];
         }
 
         public void CallParseTrigger(ParseTriggerType trigger, double x, double y) {
@@ -58,6 +26,10 @@ namespace SuperBitBros.OpenGL {
                 Player p = new Player();
                 AddEntity(p, x, y);
                 player = p;
+            } else if (trigger == ParseTriggerType.SPAWN_GOOMBA) {
+                AddEntity(new Goomba(), x, y);
+            } else if (trigger == ParseTriggerType.SPAWN_PIRANHAPLANT) {
+                AddEntity(new PiranhaPlant(), x, y);
             }
         }
 
@@ -79,6 +51,10 @@ namespace SuperBitBros.OpenGL {
                     } else
                         Console.Error.WriteLine("Could not parse Color in Map: {0}", pixel);
                 }
+            }
+
+            foreach (DynamicEntity e in entityList) {
+                e.OnAfterMapGen();
             }
         }
 

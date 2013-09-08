@@ -15,7 +15,7 @@ namespace SuperBitBros.OpenGL.Entities.Blocks {
             return color;
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement) {
+        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) {
             if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).movementDelta.Y > 0) {
                 owner.AddEntity(new CoinEntity(), GetTopLeft().X, GetTopLeft().Y);
                 ((GameWorld)owner).ReplaceBlock(this, new EmptyCoinBoxBlock());

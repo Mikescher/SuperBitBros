@@ -1,59 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.SuperBitBros;
+﻿using Entities.SuperBitBros;
+using OpenTK;
 
-namespace SuperBitBros.OpenGL.Entities.Blocks
-{
-    abstract class Block : StaticEntity
-    {
+namespace SuperBitBros.OpenGL.Entities.Blocks {
+    abstract class Block : Entity {
         public const int BLOCK_WIDTH = 16;
         public const int BLOCK_HEIGHT = 24;
 
-        private GameWorld world_owner;
-        private int blockPosX;
-        private int blockPosY;
+        protected GameModel owner;
+        public int blockPosX;
+        public int blockPosY;
+
+        public Rectangle2d position2dCache = null;
+        public Rectangle3d position3dCache = null;
 
         public Block()
-            : base()
-        {
+            : base() {
             distance = Entity.DISTANCE_BLOCKS;
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT;
         }
 
-        public void OnBlockAdd(GameWorld world, int x, int y)
-        {
-            world_owner = world;
-            blockPosX = x;
-            blockPosY = y;
+        public virtual void OnAdd(GameModel mod, int bx, int by) {
+            owner = mod;
+            blockPosX = bx;
+            blockPosY = by;
         }
 
-        public Block getTopBlock()
-        {
-            return world_owner.GetBlock(blockPosX, blockPosY);
+        public override Rectangle2d GetPosition() {
+            if (position2dCache == null) {
+                position2dCache = new Rectangle2d(position, width, height);
+            }
+            return position2dCache;
         }
 
-        public Block getLeftBlock()
-        {
-            return world_owner.GetBlock(blockPosX - 1, blockPosY);
+        public override Rectangle3d GetPositionWithDistance() {
+            if (position3dCache == null) {
+                position3dCache = new Rectangle3d(new Vector3d(position.X, position.Y, distance), width, height);
+            }
+            return position3dCache;
         }
 
-        public Block getRightBlock()
-        {
-            return world_owner.GetBlock(blockPosX + 1, blockPosY);
+        public Block getTopBlock() {
+            return owner.GetBlock(blockPosX, blockPosY);
         }
 
-        public Block getBottomBlock()
-        {
-            return world_owner.GetBlock(blockPosX, blockPosY - 1);
+        public Block getLeftBlock() {
+            return owner.GetBlock(blockPosX - 1, blockPosY);
         }
 
-        public override bool IsBlocking(Entity sender)
-        {
+        public Block getRightBlock() {
+            return owner.GetBlock(blockPosX + 1, blockPosY);
+        }
+
+        public Block getBottomBlock() {
+            return owner.GetBlock(blockPosX, blockPosY - 1);
+        }
+
+        public override bool IsBlocking(Entity sender) {
             return true;
         }
+
+        public virtual bool RenderBackgroundAir() { return true; }
     }
 }

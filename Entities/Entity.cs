@@ -4,10 +4,12 @@ using SuperBitBros.OpenGL;
 
 namespace Entities.SuperBitBros {
     abstract class Entity {
+        // 0 < DEPTH <= 100
         public const int DISTANCE_BACKRGOUND = 100;
         public const int DISTANCE_BLOCKS = 50;
-        public const int DISTANCE_POWERUPS = 45;
+        public const int DISTANCE_CORPSE = 45;
         public const int DISTANCE_MOBS = 40;
+        public const int DISTANCE_POWERUPS = 25;
         public const int DISTANCE_PLAYER = 30;
         public const int DISTANCE_FOREGROUND = 10;
 
@@ -19,8 +21,6 @@ namespace Entities.SuperBitBros {
 
         protected OGLTexture texture;
 
-        protected GameModel owner;
-
         public Entity() {
             this.position = new Vector2d(-1, -1);
             this.distance = 1;
@@ -28,48 +28,48 @@ namespace Entities.SuperBitBros {
             this.height = 1;
         }
 
-        public Rectangle2d GetPosition() {
+        public virtual Rectangle2d GetPosition() {
             return new Rectangle2d(position, width, height);
         }
 
-        public Rectangle3d GetPositionWithDistance() {
+        public virtual Rectangle2d GetTexturePosition() {
+            return GetPosition();
+        }
+
+        public virtual Rectangle3d GetPositionWithDistance() {
             return new Rectangle3d(new Vector3d(position.X, position.Y, distance), width, height);
         }
 
-        public Vector2d GetTopLeft() {
+        public virtual Vector2d GetTopLeft() {
             return new Vector2d(position.X, position.Y + height);
         }
 
-        public Vector3d GetTopLeftWithDistance() {
+        public virtual Vector3d GetTopLeftWithDistance() {
             return new Vector3d(position.X, position.Y + height, distance);
         }
 
-        public Vector2d GetTopRight() {
+        public virtual Vector2d GetTopRight() {
             return new Vector2d(position.X + width, position.Y + height);
         }
 
-        public Vector3d GetTopRightWithDistance() {
+        public virtual Vector3d GetTopRightWithDistance() {
             return new Vector3d(position.X + width, position.Y + height, distance);
         }
 
-        public Vector2d GetBottomLeft() {
+        public virtual Vector2d GetBottomLeft() {
             return new Vector2d(position.X, position.Y);
         }
 
-        public Vector3d GetBottomLeftWithDistance() {
+        public virtual Vector3d GetBottomLeftWithDistance() {
             return new Vector3d(position.X, position.Y, distance);
         }
 
-        public Vector2d GetBottomRight() {
+        public virtual Vector2d GetBottomRight() {
             return new Vector2d(position.X + width, position.Y);
         }
 
-        public Vector3d GetBottomRightWithDistance() {
+        public virtual Vector3d GetBottomRightWithDistance() {
             return new Vector3d(position.X + width, position.Y, distance);
-        }
-
-        public virtual void OnAdd(GameModel owner) {
-            this.owner = owner;
         }
 
         public virtual void OnRemove() { }
@@ -82,8 +82,6 @@ namespace Entities.SuperBitBros {
 
         public abstract bool IsBlocking(Entity sender);
 
-        public virtual bool RenderBackgroundAir() { return true; }
-
-        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement) { }
+        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) { }
     }
 }

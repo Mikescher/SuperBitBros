@@ -57,6 +57,9 @@
     <Compile Include="Entities\CoinEntity.cs" />
     <Compile Include="Entities\DynamicEntity.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Goomba.cs" />
+    <Compile Include="Entities\GoombaCorpse.cs" />
+    <Compile Include="Entities\PiranhaPlant.cs" />
     <Compile Include="GameModel.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Entities\Blocks\StandardGroundBlock.cs" />
@@ -76,7 +79,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Entities\StaticEntity.cs" />
     <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\font_raster.png" />
+    <None Include="Resources\plant.png" />
     <None Include="Resources\mario_small.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

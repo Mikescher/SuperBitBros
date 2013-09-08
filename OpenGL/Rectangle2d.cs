@@ -7,6 +7,13 @@ namespace SuperBitBros.OpenGL {
         public Vector2d br { get; private set; }
         public Vector2d tr { get; private set; }
 
+        public Rectangle2d(double bl_x, double bl_y, double width, double height) {
+            tl = new Vector2d(bl_x, bl_y + height);
+            bl = new Vector2d(bl_x, bl_y);
+            br = new Vector2d(bl_x + width, bl_y);
+            tr = new Vector2d(bl_x + width, bl_y + height);
+        }
+
         public Rectangle2d(Vector2d bottomleft, double width, double height) {
             tl = new Vector2d(bottomleft.X, bottomleft.Y + height);
             bl = new Vector2d(bottomleft.X, bottomleft.Y);
