@@ -117,14 +117,12 @@ namespace SuperBitBros.OpenGL.Entities {
             }
         }
 
-        public override void OnHeadJump(Entity e)
-        {
+        public override void OnHeadJump(Entity e) {
             if (e.GetType() == typeof(Player))
-                Console.Out.WriteLine("DEAD_PP");
+                Console.Out.WriteLine("DEAD_PP_N00b");
         }
 
-        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision)
-        {
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement) {
             if (e.GetType() == typeof(Player))
                 Console.Out.WriteLine("DEAD_PP");
         }

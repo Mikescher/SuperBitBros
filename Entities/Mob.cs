@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.SuperBitBros;
+﻿using Entities.SuperBitBros;
 using OpenTK;
 using SuperBitBros.OpenGL.Entities.Blocks;
 
-namespace SuperBitBros.OpenGL.Entities
-{
-    abstract class Mob : DynamicEntity
-    {
+namespace SuperBitBros.OpenGL.Entities {
+    abstract class Mob : DynamicEntity {
         protected int walkDirection = -1; // +1 ||-1 || 0
 
         public Mob()
-            : base()
-        {
+            : base() {
             //constructor
         }
 
-        protected void DoWalk(double speedacc, double speedmax)
-        {
+        protected void DoWalk(double speedacc, double speedmax) {
             Vector2d delta = new Vector2d(0, 0);
 
-            if (IsOnGround())
-            {
+            if (IsOnGround()) {
                 Vector2d blockPos;
                 if (walkDirection < 0)
                     blockPos = new Vector2d((int)((position.X + width) / Block.BLOCK_WIDTH), (int)((position.Y) / Block.BLOCK_HEIGHT));
@@ -35,40 +25,35 @@ namespace SuperBitBros.OpenGL.Entities
                 int x = (int)blockPos.X + walkDirection;
 
                 Block next = owner.GetBlock(x, y);
-                if (next == null || ! Entity.TestBlocking(next, this))
-                {
+                if (next == null || !Entity.TestBlocking(next, this)) {
                     walkDirection *= -1;
                 }
             }
 
-            if ((walkDirection > 0 && IsCollidingRight()) || (walkDirection < 0 && IsCollidingLeft()))
-            {
+            if ((walkDirection > 0 && IsCollidingRight()) || (walkDirection < 0 && IsCollidingLeft())) {
                 walkDirection *= -1;
             }
 
-            if ((walkDirection < 0 && movementDelta.X > -speedmax) || (walkDirection > 0 && movementDelta.X < speedmax))
-            {
+            if ((walkDirection < 0 && movementDelta.X > -speedmax) || (walkDirection > 0 && movementDelta.X < speedmax)) {
                 delta.X = speedacc * walkDirection;
             }
 
             updateGravitationalMovement(delta);
         }
 
-        protected override bool IsBlockingOther(Entity sender)
-        {
+        protected override bool IsBlockingOther(Entity sender) {
             return true;
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision)
-        {
+        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) {
             if (collidingEntity.GetBottomLeft().Y >= GetTopRight().Y && collidingEntity is DynamicEntity && ((DynamicEntity)collidingEntity).movementDelta.Y < 0 && isBlockingMovement)
                 OnHeadJump(collidingEntity);
-            else
-                OnTouch(collidingEntity, isCollider, isBlockingMovement, isDirectCollision);
+            else if (isDirectCollision)
+                OnTouch(collidingEntity, isCollider, isBlockingMovement);
         }
 
         public abstract void OnHeadJump(Entity e);
-        public abstract void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision);
+        public abstract void OnTouch(Entity e, bool isCollider, bool isBlockingMovement);
 
     }
 }

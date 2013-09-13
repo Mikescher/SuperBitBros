@@ -1,8 +1,7 @@
-﻿using System;
-using Entities.SuperBitBros;
-using OpenTK;
+﻿using Entities.SuperBitBros;
 using OpenTK.Input;
 using SuperBitBros.OpenGL.Entities.Blocks;
+using System;
 
 namespace SuperBitBros.OpenGL.Entities {
     class Goomba : Mob {
@@ -24,14 +23,12 @@ namespace SuperBitBros.OpenGL.Entities {
             DoWalk(GOOMBA_ACC, GOOMBA_SPEED);
         }
 
-        public override void OnHeadJump(Entity e)
-        {
+        public override void OnHeadJump(Entity e) {
             owner.RemoveEntity(this);
             owner.AddEntity(new GoombaCorpse(), position.X, position.Y);
         }
 
-        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision)
-        {
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement) {
             if (e.GetType() == typeof(Player))
                 Console.Out.WriteLine("DEAD");
         }
