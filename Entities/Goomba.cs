@@ -1,10 +1,14 @@
-﻿using Entities.SuperBitBros;
+﻿using System;
+using Entities.SuperBitBros;
 using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.OpenGL.Entities.Blocks;
 
 namespace SuperBitBros.OpenGL.Entities {
-    class Goomba : DynamicEntity {
+    class Goomba : Mob {
+
+        public const double GOOMBA_ACC = 0.2;
+        public const double GOOMBA_SPEED = 1;
 
         public Goomba() {
             distance = Entity.DISTANCE_MOBS;
@@ -17,18 +21,19 @@ namespace SuperBitBros.OpenGL.Entities {
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
-            updateGravitationalMovement(Vector2d.Zero);
+            DoWalk(GOOMBA_ACC, GOOMBA_SPEED);
         }
 
-        public override bool IsBlocking(Entity sender) {
-            return false;
+        public override void OnHeadJump(Entity e)
+        {
+            owner.RemoveEntity(this);
+            owner.AddEntity(new GoombaCorpse(), position.X, position.Y);
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) {
-            if (collidingEntity.GetType() == typeof(Player) && isDirectCollision) {
-                owner.RemoveEntity(this);
-                owner.AddEntity(new GoombaCorpse(), position.X, position.Y);
-            }
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision)
+        {
+            if (e.GetType() == typeof(Player))
+                Console.Out.WriteLine("DEAD");
         }
     }
 }

@@ -31,7 +31,9 @@ namespace SuperBitBros.OpenGL {
             double texWidth = 1.0 / width;
             double texHeight = 1.0 / height;
 
-            return new Rectangle2d(new Vector2d(texWidth * x, texHeight * y), texWidth, texHeight);
+            Vector2d p = new Vector2d(texWidth * x, texHeight * y);
+
+            return new Rectangle2d(p, texWidth, texHeight);
         }
 
         public Rectangle2d GetCoordinates(int pos) {

@@ -4,7 +4,7 @@ using SuperBitBros.OpenGL.Entities.Blocks;
 using System;
 
 namespace SuperBitBros.OpenGL.Entities {
-    class PiranhaPlant : DynamicEntity {
+    class PiranhaPlant : Mob {
         private const int UPDATE_SPEED = 5;
         private const int CYCLUS_SPEED = 60;
         private const int STATE_COUNT = 13;
@@ -117,14 +117,16 @@ namespace SuperBitBros.OpenGL.Entities {
             }
         }
 
-        public override bool IsBlocking(Entity sender) {
-            return false;
+        public override void OnHeadJump(Entity e)
+        {
+            if (e.GetType() == typeof(Player))
+                Console.Out.WriteLine("DEAD_PP");
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) {
-            if (collidingEntity.GetType() == typeof(Player) && isDirectCollision) {
-                Console.Out.WriteLine("Plant Hit");
-            }
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision)
+        {
+            if (e.GetType() == typeof(Player))
+                Console.Out.WriteLine("DEAD_PP");
         }
     }
 }

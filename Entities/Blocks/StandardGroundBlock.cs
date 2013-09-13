@@ -9,7 +9,7 @@ namespace SuperBitBros.OpenGL.Entities.Blocks
 {
     class StandardGroundBlock : Block
     {
-        static Color color = Color.FromArgb(0, 0, 0);
+        public static Color color = Color.FromArgb(0, 0, 0);
 
         public StandardGroundBlock()
             : base()

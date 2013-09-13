@@ -59,7 +59,22 @@ namespace Entities.SuperBitBros {
                 delta.Y = PLAYER_JUMP_POWER + GRAVITY_ACCELERATION;
             }
 
-            updateGravitationalMovement(delta);
+            if (keyboard[Key.ShiftLeft]) // DEBUG
+            {
+                delta = Vector2d.Zero;
+                if (keyboard[Key.Left])
+                    delta.X -= PLAYER_SPEED_MAX*2;
+                if (keyboard[Key.Right])
+                    delta.X += PLAYER_SPEED_MAX*2;
+                if (keyboard[Key.Space] || keyboard[Key.Up])
+                    delta.Y += PLAYER_SPEED_MAX;
+                if (keyboard[Key.Down])
+                    delta.Y -= PLAYER_SPEED_MAX;
+                moveBy(delta, false);
+            }
+            else
+                updateGravitationalMovement(delta);
+            
 
             UpdateTexture();
         }
@@ -88,8 +103,9 @@ namespace Entities.SuperBitBros {
             }
         }
 
-        public override bool IsBlocking(Entity sender) {
-            return false;
+        protected override bool IsBlockingOther(Entity sender)
+        {
+            return true;
         }
     }
 }

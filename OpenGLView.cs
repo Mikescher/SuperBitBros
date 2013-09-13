@@ -75,7 +75,7 @@ namespace SuperBitBros.OpenGL {
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat);
 
-            GL.Begin(BeginMode.Polygon);
+            GL.Begin(BeginMode.Quads);
             GL.TexCoord2(coords.bl);
             GL.Vertex3(rect.tl.X, rect.tl.Y, distance);
             GL.TexCoord2(coords.tl);

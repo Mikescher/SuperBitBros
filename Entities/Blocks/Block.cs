@@ -56,10 +56,11 @@ namespace SuperBitBros.OpenGL.Entities.Blocks {
             return owner.GetBlock(blockPosX, blockPosY - 1);
         }
 
-        public override bool IsBlocking(Entity sender) {
+        protected override bool IsBlockingOther(Entity sender)
+        {
             return true;
         }
 
-        public virtual bool RenderBackgroundAir() { return true; }
+        public virtual bool RenderBackgroundAir() { return false; }
     }
 }

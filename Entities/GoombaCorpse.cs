@@ -19,7 +19,8 @@ namespace SuperBitBros.OpenGL.Entities {
             updateGravitationalMovement(Vector2d.Zero);
         }
 
-        public override bool IsBlocking(Entity sender) {
+        protected override bool IsBlockingOther(Entity sender)
+        {
             return false;
         }
     }

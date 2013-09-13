@@ -4,7 +4,9 @@ using System.Drawing;
 
 namespace SuperBitBros.OpenGL.Entities.Blocks {
     class CoinBoxBlock : Block {
-        static Color color = Color.FromArgb(0, 0, 255);
+        private const double COIN_SPAWN_FORCE = 3;
+
+        public static Color color = Color.FromArgb(0, 0, 255);
 
         public CoinBoxBlock()
             : base() {
@@ -17,7 +19,7 @@ namespace SuperBitBros.OpenGL.Entities.Blocks {
 
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) {
             if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).movementDelta.Y > 0) {
-                owner.AddEntity(new CoinEntity(), GetTopLeft().X, GetTopLeft().Y);
+                owner.AddEntity(new CoinEntity(COIN_SPAWN_FORCE), GetTopLeft().X, GetTopLeft().Y);
                 ((GameWorld)owner).ReplaceBlock(this, new EmptyCoinBoxBlock());
             }
         }

@@ -9,7 +9,7 @@ namespace SuperBitBros.OpenGL.Entities.Blocks
 {
     class HillBlock : Block
     {
-        static Color color = Color.FromArgb(255, 0, 255);
+        public static Color color = Color.FromArgb(255, 0, 255);
 
         public HillBlock()
             : base()

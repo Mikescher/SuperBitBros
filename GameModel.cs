@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 namespace SuperBitBros.OpenGL {
     abstract class GameModel {
-        private const int MAP_WIDTH_MAX = 400;
-        private const int MAP_HEIGHT_MAX = 150;
+        public const int MAP_WIDTH_MAX = 400;
+        public const int MAP_HEIGHT_MAX = 150;
 
         public List<DynamicEntity> entityList { get; protected set; }
         public List<Block> blockList { get; protected set; }
@@ -19,7 +19,7 @@ namespace SuperBitBros.OpenGL {
             blockList = new List<Block>();
         }
 
-        public void AddBlock(Block b, int x, int y) {
+        protected void AddBlock(Block b, int x, int y) {
             b.position.X = Block.BLOCK_WIDTH * x;
             b.position.Y = Block.BLOCK_HEIGHT * y;
             blockList.Add(b);
@@ -40,7 +40,7 @@ namespace SuperBitBros.OpenGL {
             AddBlock(newb, x, y);
         }
 
-        public void RemoveBlock(int x, int y) {
+        protected void RemoveBlock(int x, int y) {
             if (BlockMap[x, y] != null) {
                 blockList.Remove(BlockMap[x, y]);
                 BlockMap[x, y].OnRemove();
@@ -54,11 +54,12 @@ namespace SuperBitBros.OpenGL {
             return BlockMap[x, y];
         }
 
-        public virtual void AddEntity(DynamicEntity e, double x, double y) {
+        public virtual Entity AddEntity(DynamicEntity e, double x, double y) {
             e.position.X = x;
             e.position.Y = y;
             entityList.Add(e);
             e.OnAdd(this);
+            return e;
         }
 
         public virtual bool RemoveEntity(DynamicEntity e) {
@@ -66,12 +67,21 @@ namespace SuperBitBros.OpenGL {
             return entityList.Remove(e);
         }
 
-        public virtual List<Entity> GetCurrentEntityList() {
-            return new List<Entity>(entityList);
+        public virtual List<DynamicEntity> GetCurrentEntityList() {
+            return new List<DynamicEntity>(entityList);
+        }
+
+        public virtual List<Block> GetCurrentBlockList()
+        {
+            return new List<Block>(blockList);
         }
 
         public virtual void Update(KeyboardDevice keyboard) {
-            foreach (Entity e in GetCurrentEntityList()) {
+            foreach (DynamicEntity e in GetCurrentEntityList()) {
+                e.Update(keyboard);
+            }
+            foreach (Block e in GetCurrentBlockList())
+            {
                 e.Update(keyboard);
             }
         }

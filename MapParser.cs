@@ -26,6 +26,10 @@ namespace SuperBitBros.OpenGL {
                 return new CastleBlock();
             else if (c == FlagBlock.GetColor())
                 return new FlagBlock();
+            else if (c == CrazyCoinBoxBlock.GetColor())
+                return new CrazyCoinBoxBlock();
+            else if (c == EndlessCrazyCoinBoxBlock.GetColor())
+                return new EndlessCrazyCoinBoxBlock();
             else
                 return null;
         }

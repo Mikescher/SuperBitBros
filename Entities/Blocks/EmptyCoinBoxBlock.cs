@@ -9,7 +9,7 @@ namespace SuperBitBros.OpenGL.Entities.Blocks
 {
     class EmptyCoinBoxBlock : Block
     {
-        static Color color = Color.FromArgb(255, 255, 0);
+        public static Color color = Color.FromArgb(255, 255, 0);
 
         public EmptyCoinBoxBlock()
             : base()

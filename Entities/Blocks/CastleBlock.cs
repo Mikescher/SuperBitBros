@@ -9,7 +9,7 @@ namespace SuperBitBros.OpenGL.Entities.Blocks
 {
     class CastleBlock : Block
     {
-        static Color color = Color.FromArgb(255, 0, 0);
+        public static Color color = Color.FromArgb(255, 0, 0);
 
         public CastleBlock()
             : base()
