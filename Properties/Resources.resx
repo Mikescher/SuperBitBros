@@ -122,13 +122,10 @@
     <value>..\resources\font_raster.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="map_01_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\map_01-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\map_01-01.ora;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="map_01_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\map_01-02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="map_01_03" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\map_01-03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="map_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_img.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mario_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mario_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -1,6 +1,7 @@
-﻿using SuperBitBros.OpenGL.Properties;
+﻿using SuperBitBros.OpenGL;
+using SuperBitBros.Properties;
 
-namespace SuperBitBros.OpenGL {
+namespace SuperBitBros {
     class Textures {
         public static OGLTextureSheet font_sheet;
         public static OGLTextureSheet mario_small_sheet;

@@ -1,6 +1,7 @@
 ﻿using OpenTK;
+using SuperBitBros;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL;
-using SuperBitBros.OpenGL.Entities.Blocks;
 using System;
 
 namespace Entities.SuperBitBros {

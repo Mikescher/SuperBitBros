@@ -1,9 +1,9 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK.Input;
-using SuperBitBros.OpenGL.Entities.Blocks;
+using SuperBitBros.Entities.Blocks;
 using System;
 
-namespace SuperBitBros.OpenGL.Entities {
+namespace SuperBitBros.Entities {
     class Goomba : Mob {
 
         public const double GOOMBA_ACC = 0.2;

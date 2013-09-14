@@ -3,7 +3,7 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 
-namespace SuperBitBros.OpenGL.Entities.Blocks {
+namespace SuperBitBros.Entities.Blocks {
     class CrazyCoinBoxBlock : Block {
         private Random random = new Random();
 

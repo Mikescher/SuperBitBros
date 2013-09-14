@@ -7,10 +7,25 @@
     <ProjectGuid>{2883D4C2-0746-40F8-96BF-87099D37213C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SuperBitBros.OpenGL</RootNamespace>
+    <RootNamespace>SuperBitBros</RootNamespace>
     <AssemblyName>SuperBitBros</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>veröffentlichen\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>References\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="OpenTK.GLControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -69,14 +87,16 @@
     <Compile Include="GameWorld.cs" />
     <Compile Include="Entities\Blocks\StandardGroundBlock.cs" />
     <Compile Include="MapParser.cs" />
+    <Compile Include="OpenGL\Rectangle2d.cs" />
     <Compile Include="OpenGL\Rectangle3d.cs" />
     <Compile Include="OpenGL\OGLSingleTexture.cs" />
     <Compile Include="OpenGL\OGLTexture.cs" />
     <Compile Include="OpenGL\OGLTextureSheet.cs" />
     <Compile Include="OpenGLGameView.cs" />
     <Compile Include="OpenGLView.cs" />
-    <Compile Include="OpenGL\Rectangle2d.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="OpenRasterFormat\OpenRasterImage.cs" />
+    <Compile Include="OpenRasterFormat\OpenRasterLayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -96,18 +116,30 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\map_01-01.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\map_01-02.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\map_01-03.png" />
+    <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\font_raster.png" />
+    <None Include="Resources\map_img.png" />
     <None Include="Resources\plant.png" />
     <None Include="Resources\mario_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

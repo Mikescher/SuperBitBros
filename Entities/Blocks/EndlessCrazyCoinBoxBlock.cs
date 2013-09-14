@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuperBitBros.OpenGL.Entities.Blocks
+namespace SuperBitBros.Entities.Blocks
 {
     class EndlessCrazyCoinBoxBlock : CrazyCoinBoxBlock
     {

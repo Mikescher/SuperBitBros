@@ -1,8 +1,8 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK;
-using SuperBitBros.OpenGL.Entities.Blocks;
+using SuperBitBros.Entities.Blocks;
 
-namespace SuperBitBros.OpenGL.Entities {
+namespace SuperBitBros.Entities {
     abstract class Mob : DynamicEntity {
         protected int walkDirection = -1; // +1 ||-1 || 0
 

@@ -1,11 +1,12 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK;
-using SuperBitBros.OpenGL.Entities;
-using SuperBitBros.OpenGL.Entities.Blocks;
-using SuperBitBros.OpenGL.Properties;
+using SuperBitBros.Entities;
+using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenRasterFormat;
+using SuperBitBros.Properties;
 using System;
 
-namespace SuperBitBros.OpenGL {
+namespace SuperBitBros {
     class GameWorld : GameModel {
 
         private Vector2d offset = new Vector2d(0, 0);
@@ -17,43 +18,60 @@ namespace SuperBitBros.OpenGL {
 
         }
 
-        public void CallParseTrigger(ParseTriggerType trigger, double x, double y) {
+        public void SpawnEntityFromMapData(SpawnEntityType setype, double x, double y) {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
-            if (trigger == ParseTriggerType.SPAWN_PLAYER) {
+            if (setype == SpawnEntityType.SPAWN_GOOMBA) {
+                AddEntity(new Goomba(), px, py);
+            } else if (setype == SpawnEntityType.SPAWN_PIRANHAPLANT) {
+                AddEntity(new PiranhaPlant(), px, py);
+            } else if (setype == SpawnEntityType.SPAWN_COIN) {
+                AddEntity(new CoinEntity(), px, py);
+            }
+        }
+
+        public void AddTriggerFromMapData(AddTriggerType triggertype, double x, double y) {
+            double px = x * Block.BLOCK_WIDTH;
+            double py = y * Block.BLOCK_HEIGHT;
+
+            if (triggertype == AddTriggerType.PLAYER_SPAWN_POSITION) {
                 Player p = new Player();
-                AddEntity(p, x, y);
+                AddEntity(p, px, py);
                 player = p;
-            } else if (trigger == ParseTriggerType.SPAWN_GOOMBA) {
-                AddEntity(new Goomba(), x, y);
-            } else if (trigger == ParseTriggerType.SPAWN_PIRANHAPLANT) {
-                AddEntity(new PiranhaPlant(), x, y);
-            } else if (trigger == ParseTriggerType.SPAWN_COIN) {
-                AddEntity(new CoinEntity(), x, y);
+            } else if (triggertype == AddTriggerType.DEATH_ZONE) {
+                //TODO DEATH
             }
         }
 
         public void LoadMapFromResources() {
-            ImageMapParser parser = new ImageMapParser(Resources.map_01_01);
+            ImageMapParser parser = new ImageMapParser(new OpenRasterImage(Resources.map_01_01));
             mapWidth = parser.GetWidth() * Block.BLOCK_WIDTH;
             mapHeight = parser.GetHeight() * Block.BLOCK_HEIGHT;
 
             for (int x = 0; x < parser.GetWidth(); x++) {
                 for (int y = 0; y < parser.GetHeight(); y++) {
-                    int px = x;
-                    int py = parser.GetHeight() - (1 + y);
+                    int imgX = x;
+                    int imgY = parser.GetHeight() - (1 + y);
 
-                    Block ent = parser.FindBlock(px, py);
-                    ParseTriggerType trig = parser.FindSpawnTrigger(px, py);
+                    Block block = parser.GetBlock(imgX, imgY);
+                    SpawnEntityType set = parser.GetEntity(imgX, imgY);
+                    AddTriggerType att = parser.GetTrigger(imgX, imgY);
 
-                    if (ent != null) {
-                        AddBlock(ent, x, y);
-                    } else if (trig != ParseTriggerType.NO_TRIGGER) {
-                        AddBlock(parser.GetMapAirBlock(), x, y);
-                        CallParseTrigger(trig, x * Block.BLOCK_WIDTH, y * Block.BLOCK_HEIGHT);
-                    } else
-                        Console.Error.WriteLine("Could not parse Color in Map: {0}", parser.GetPositionColor(px, py));
+                    if (block == null)
+                        Console.Error.WriteLine("Could not parse Block-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_BLOCKS, imgX, imgY), x, y);
+                    else
+                        AddBlock(block, x, y);
+
+                    if (set == SpawnEntityType.UNKNOWN_SPAWN)
+                        Console.Error.WriteLine("Could not parse SpawnEntity-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_ENTITIES, imgX, imgY), x, y);
+                    else if (set != SpawnEntityType.NO_SPAWN)
+                        SpawnEntityFromMapData(set, x, y);
+
+                    if (att == AddTriggerType.UNKNOWN_TRIGGER)
+                        Console.Error.WriteLine("Could not parse Trigger-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y);
+                    else if (att != AddTriggerType.NO_TRIGGER)
+                        AddTriggerFromMapData(att, x, y);
                 }
             }
 
@@ -79,7 +97,7 @@ namespace SuperBitBros.OpenGL {
             if (diffToMid.Y < -2 * window_height / 6.0) {
                 offset.Y -= diffToMid.Y - (2 * window_height / 6.0) * Math.Sign(diffToMid.Y);
             }
-            if (diffToOff.Y < 2* Block.BLOCK_HEIGHT) {
+            if (diffToOff.Y < 2 * Block.BLOCK_HEIGHT) {
                 offset.Y += diffToOff.Y - 2 * Block.BLOCK_HEIGHT;
             }
 

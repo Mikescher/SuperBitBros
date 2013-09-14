@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.OpenGL;
-using SuperBitBros.OpenGL.Entities.Blocks;
+using SuperBitBros.Entities.Blocks;
 using System;
 
 namespace Entities.SuperBitBros {

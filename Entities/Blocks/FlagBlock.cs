@@ -1,7 +1,7 @@
 ﻿using Entities.SuperBitBros;
 using System.Drawing;
 
-namespace SuperBitBros.OpenGL.Entities.Blocks {
+namespace SuperBitBros.Entities.Blocks {
     class FlagBlock : Block {
         public static Color color = Color.FromArgb(0, 255, 255);
 

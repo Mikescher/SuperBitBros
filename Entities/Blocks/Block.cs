@@ -1,7 +1,8 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK;
+using SuperBitBros.OpenGL;
 
-namespace SuperBitBros.OpenGL.Entities.Blocks {
+namespace SuperBitBros.Entities.Blocks {
     abstract class Block : Entity {
         public const int BLOCK_WIDTH = 16;
         public const int BLOCK_HEIGHT = 24;

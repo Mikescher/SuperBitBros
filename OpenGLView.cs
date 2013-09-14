@@ -1,9 +1,10 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using SuperBitBros.OpenGL;
 using System;
 
-namespace SuperBitBros.OpenGL {
+namespace SuperBitBros {
     abstract class OpenGLView {
         private const int RESOLUTION_WIDTH = 540;
         private const int RESOLUTION_HEIGHT = 280;

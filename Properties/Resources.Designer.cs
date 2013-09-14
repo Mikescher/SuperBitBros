@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SuperBitBros.OpenGL.Properties {
+namespace SuperBitBros.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SuperBitBros.OpenGL.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SuperBitBros.OpenGL.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SuperBitBros.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -71,31 +71,21 @@ namespace SuperBitBros.OpenGL.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap map_01_01 {
+        internal static byte[] map_01_01 {
             get {
                 object obj = ResourceManager.GetObject("map_01_01", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap map_01_02 {
+        internal static System.Drawing.Bitmap map_img {
             get {
-                object obj = ResourceManager.GetObject("map_01_02", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap map_01_03 {
-            get {
-                object obj = ResourceManager.GetObject("map_01_03", resourceCulture);
+                object obj = ResourceManager.GetObject("map_img", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

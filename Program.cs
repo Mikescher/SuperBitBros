@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SuperBitBros.OpenGL {
+namespace SuperBitBros {
     class Program {
         static void Main(string[] args) {
             Console.Out.WriteLine("START");

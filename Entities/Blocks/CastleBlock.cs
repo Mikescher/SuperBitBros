@@ -1,7 +1,7 @@
 ﻿using Entities.SuperBitBros;
 using System.Drawing;
 
-namespace SuperBitBros.OpenGL.Entities.Blocks {
+namespace SuperBitBros.Entities.Blocks {
     class CastleBlock : Block {
         public static Color color = Color.FromArgb(255, 0, 0);
 

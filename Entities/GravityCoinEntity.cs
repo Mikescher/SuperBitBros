@@ -2,7 +2,7 @@
 using OpenTK;
 using OpenTK.Input;
 using System;
-namespace SuperBitBros.OpenGL.Entities {
+namespace SuperBitBros.Entities {
     class GravityCoinEntity : CoinEntity {
         public const double COIN_FRICTION = 0.1;
 

@@ -1,16 +1,17 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK;
 using OpenTK.Input;
-using SuperBitBros.OpenGL.Entities.Blocks;
+using SuperBitBros.Entities.Blocks;
 using System;
 using System.Collections.Generic;
 
-namespace SuperBitBros.OpenGL {
+namespace SuperBitBros {
     abstract class GameModel {
         public const int MAP_WIDTH_MAX = 400;
         public const int MAP_HEIGHT_MAX = 150;
 
         public List<DynamicEntity> entityList { get; protected set; }
+        [Obsolete("Dont use")]
         public List<Block> blockList { get; protected set; }
         private Block[,] BlockMap = new Block[MAP_WIDTH_MAX, MAP_HEIGHT_MAX];
 

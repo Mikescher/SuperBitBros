@@ -1,20 +1,27 @@
-﻿using SuperBitBros.OpenGL.Entities.Blocks;
-using System;
+﻿using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenRasterFormat;
 using System.Drawing;
 
-namespace SuperBitBros.OpenGL {
-    public enum ParseTriggerType { NO_TRIGGER, SPAWN_PLAYER, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN };
+namespace SuperBitBros {
+    public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN };
+    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION };
 
     class ImageMapParser {
-        private static readonly Color COL_SPAWN_PLAYER = Color.FromArgb(128, 128, 128);
+        public const string LAYER_BLOCKS = "Blocks";
+        public const string LAYER_ENTITIES = "Entities";
+        public const string LAYER_TRIGGER = "Trigger";
+
         private static readonly Color COL_SPAWN_GOOMBA = Color.FromArgb(127, 0, 0);
         private static readonly Color COL_SPAWN_PIRANHAPLANT = Color.FromArgb(0, 127, 0);
         private static readonly Color COL_SPAWN_COIN = Color.FromArgb(100, 200, 100);
 
-        private Type mapAir = typeof(StandardAirBlock);
-        private Bitmap map;
+        private static readonly Color COL_SPAWN_PLAYER = Color.FromArgb(128, 128, 128);
+        private static readonly Color COL_DEATH_ZONE = Color.FromArgb(127, 0, 64);
 
-        public ImageMapParser(Bitmap map) {
+
+        public readonly OpenRasterImage map;
+
+        public ImageMapParser(OpenRasterImage map) {
             this.map = map;
         }
 
@@ -26,24 +33,26 @@ namespace SuperBitBros.OpenGL {
             return map.Height;
         }
 
-        public Color GetPositionColor(int x, int y) {
-            return map.GetPixel(x, y);
+        public Block GetBlock(int x, int y) {
+            return FindBlock(map.GetColor(LAYER_BLOCKS, x, y));
         }
 
-        public Block FindBlock(int x, int y) {
-            return FindBlock(GetPositionColor(x, y));
+        public SpawnEntityType GetEntity(int x, int y) {
+            return FindSpawnEntityType(map.GetColor(LAYER_ENTITIES, x, y));
         }
 
-        public Block FindBlock(Color c) {
+        public AddTriggerType GetTrigger(int x, int y) {
+            return FindTriggerType(map.GetColor(LAYER_TRIGGER, x, y));
+        }
+
+        private Block FindBlock(Color c) {
             if (c == StandardGroundBlock.GetColor())
                 return new StandardGroundBlock();
-            else if (c == StandardAirBlock.GetColor()) {
-                mapAir = typeof(StandardAirBlock);
+            else if (c == StandardAirBlock.GetColor())
                 return new StandardAirBlock();
-            } else if (c == GroundAirBlock.GetColor()) {
-                mapAir = typeof(GroundAirBlock);
+            else if (c == GroundAirBlock.GetColor())
                 return new GroundAirBlock();
-            } else if (c == CoinBoxBlock.GetColor())
+            else if (c == CoinBoxBlock.GetColor())
                 return new CoinBoxBlock();
             else if (c == EmptyCoinBoxBlock.GetColor())
                 return new EmptyCoinBoxBlock();
@@ -63,25 +72,28 @@ namespace SuperBitBros.OpenGL {
                 return null;
         }
 
-        public ParseTriggerType FindSpawnTrigger(int x, int y) {
-            return FindSpawnTrigger(GetPositionColor(x, y));
-        }
-
-        public ParseTriggerType FindSpawnTrigger(Color c) {
-            if (c == COL_SPAWN_PLAYER)
-                return ParseTriggerType.SPAWN_PLAYER;
+        private SpawnEntityType FindSpawnEntityType(Color c) {
+            if (c.A != 255)
+                return SpawnEntityType.NO_SPAWN;
             else if (c == COL_SPAWN_GOOMBA)
-                return ParseTriggerType.SPAWN_GOOMBA;
+                return SpawnEntityType.SPAWN_GOOMBA;
             else if (c == COL_SPAWN_PIRANHAPLANT)
-                return ParseTriggerType.SPAWN_PIRANHAPLANT;
+                return SpawnEntityType.SPAWN_PIRANHAPLANT;
             else if (c == COL_SPAWN_COIN)
-                return ParseTriggerType.SPAWN_COIN;
+                return SpawnEntityType.SPAWN_COIN;
             else
-                return ParseTriggerType.NO_TRIGGER;
+                return SpawnEntityType.UNKNOWN_SPAWN;
         }
 
-        public StandardAirBlock GetMapAirBlock() {
-            return (StandardAirBlock)Activator.CreateInstance(mapAir);
+        private AddTriggerType FindTriggerType(Color c) {
+            if (c.A != 255)
+                return AddTriggerType.NO_TRIGGER;
+            else if (c == COL_SPAWN_PLAYER)
+                return AddTriggerType.PLAYER_SPAWN_POSITION;
+            else if (c == COL_DEATH_ZONE)
+                return AddTriggerType.DEATH_ZONE;
+            else
+                return AddTriggerType.UNKNOWN_TRIGGER;
         }
     }
 }

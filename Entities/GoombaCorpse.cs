@@ -2,8 +2,8 @@
 using Entities.SuperBitBros;
 using OpenTK;
 using OpenTK.Input;
-using SuperBitBros.OpenGL.Entities.Blocks;
-namespace SuperBitBros.OpenGL.Entities {
+using SuperBitBros.Entities.Blocks;
+namespace SuperBitBros.Entities {
     class GoombaCorpse : DynamicEntity {
         public GoombaCorpse() {
             distance = Entity.DISTANCE_CORPSE;

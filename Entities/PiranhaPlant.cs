@@ -1,9 +1,10 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK.Input;
-using SuperBitBros.OpenGL.Entities.Blocks;
+using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL;
 using System;
 
-namespace SuperBitBros.OpenGL.Entities {
+namespace SuperBitBros.Entities {
     class PiranhaPlant : Mob {
         private const double SHRINK_WIDTH = 0.1;
         private const int UPDATE_SPEED = 5;
