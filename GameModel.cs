@@ -14,6 +14,9 @@ namespace SuperBitBros.OpenGL {
         public List<Block> blockList { get; protected set; }
         private Block[,] BlockMap = new Block[MAP_WIDTH_MAX, MAP_HEIGHT_MAX];
 
+        protected double mapWidth = 0;
+        protected double mapHeight = 0;
+
         public GameModel() {
             entityList = new List<DynamicEntity>();
             blockList = new List<Block>();
@@ -71,8 +74,7 @@ namespace SuperBitBros.OpenGL {
             return new List<DynamicEntity>(entityList);
         }
 
-        public virtual List<Block> GetCurrentBlockList()
-        {
+        public virtual List<Block> GetCurrentBlockList() {
             return new List<Block>(blockList);
         }
 
@@ -80,8 +82,7 @@ namespace SuperBitBros.OpenGL {
             foreach (DynamicEntity e in GetCurrentEntityList()) {
                 e.Update(keyboard);
             }
-            foreach (Block e in GetCurrentBlockList())
-            {
+            foreach (Block e in GetCurrentBlockList()) {
                 e.Update(keyboard);
             }
         }

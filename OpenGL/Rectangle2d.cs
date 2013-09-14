@@ -39,8 +39,15 @@ namespace SuperBitBros.OpenGL {
             return new Vector2d((bl.X + tr.X) / 2.0, (bl.Y + tr.Y) / 2.0);
         }
 
-        public bool isColldingWith(Rectangle2d rect) {
+        public bool IsColldingWith(Rectangle2d rect) {
             return !(this.tl.X >= rect.br.X || this.br.X <= rect.tl.X || this.tl.Y <= rect.br.Y || this.br.Y >= rect.tl.Y);
+        }
+
+        public bool IsTouching(Rectangle2d rect) {
+            return (this.tl.X == rect.br.X && this.tl.X > rect.tl.X) ||
+                   (this.br.X == rect.tl.X && this.br.X < rect.br.X) ||
+                   (this.tl.Y == rect.br.Y && this.tl.Y < rect.tl.Y) ||
+                   (this.br.Y == rect.tl.Y && this.br.Y > rect.br.Y);
         }
 
         public Vector2d getDistanceTo(Rectangle2d rect) {

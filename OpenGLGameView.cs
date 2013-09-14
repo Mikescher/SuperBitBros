@@ -17,6 +17,8 @@ namespace SuperBitBros.OpenGL {
             StartRender();
 
             Vector2d offset = model.GetOffset(window.Width, window.Height);
+            offset.X = (int)offset.X; // Cast to int for ... reasons
+            offset.Y = (int)offset.Y;
             GL.Translate(-offset.X, -offset.Y, 0);
 
             //Render from behind to nearest 100 = behindest

@@ -16,7 +16,7 @@ namespace SuperBitBros.OpenGL.Entities {
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
-            updateGravitationalMovement(Vector2d.Zero);
+            DoGravitationalMovement(Vector2d.Zero);
         }
 
         protected override bool IsBlockingOther(Entity sender)

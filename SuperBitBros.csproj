@@ -61,8 +61,10 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Goomba.cs" />
     <Compile Include="Entities\GoombaCorpse.cs" />
+    <Compile Include="Entities\GravityCoinEntity.cs" />
     <Compile Include="Entities\Mob.cs" />
     <Compile Include="Entities\PiranhaPlant.cs" />
+    <Compile Include="Entities\Blocks\GroundAirBlock.cs" />
     <Compile Include="GameModel.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Entities\Blocks\StandardGroundBlock.cs" />

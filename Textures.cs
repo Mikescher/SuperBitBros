@@ -8,6 +8,7 @@ namespace SuperBitBros.OpenGL {
 
         public static OGLTexture texture_ground;
         public static OGLTexture texture_air;
+        public static OGLTexture texture_ground_air;
         public static OGLTexture texture_coinblock_full;
         public static OGLTexture texture_coinblock_empty;
         public static OGLTexture texture_hill;
@@ -30,6 +31,7 @@ namespace SuperBitBros.OpenGL {
 
             texture_ground = font_sheet.GetTextureWrapper(35);
             texture_air = font_sheet.GetTextureWrapper(0);
+            texture_ground_air = font_sheet.GetTextureWrapper(7);
             texture_coinblock_full = font_sheet.GetTextureWrapper(88);
             texture_coinblock_empty = font_sheet.GetTextureWrapper(79);
             texture_hill = font_sheet.GetTextureWrapper(77);

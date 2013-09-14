@@ -1,8 +1,8 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.Entities.Blocks;
+using System;
 
 namespace Entities.SuperBitBros {
     abstract class Entity {
@@ -74,9 +74,8 @@ namespace Entities.SuperBitBros {
             return new Vector3d(position.X + width, position.Y, distance);
         }
 
-        public virtual Vector2d GetMiddle()
-        {
-            return new Vector2d(position.X + width/2, position.Y + height/2);
+        public virtual Vector2d GetMiddle() {
+            return new Vector2d(position.X + width / 2, position.Y + height / 2);
         }
 
         public virtual void OnRemove() { }
@@ -89,10 +88,9 @@ namespace Entities.SuperBitBros {
 
         protected abstract bool IsBlockingOther(Entity sender);
 
-        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) { }
+        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) { }
 
-        public static bool TestBlocking(Entity e1, Entity e2)
-        {
+        public static bool TestBlocking(Entity e1, Entity e2) {
             if (e1 is DynamicEntity && e2 is DynamicEntity) // 2 DynEntities
                 return e1.IsBlockingOther(e1) && e2.IsBlockingOther(e2);
             else if (e1 is Block) // Der Block zählt
@@ -102,9 +100,9 @@ namespace Entities.SuperBitBros {
             else // Wad Wad Wad ???
             {
                 Console.Error.WriteLine("2 Block Collision ???? {0} <-> {1}", e1, e2);
-                return true; 
+                return true;
             }
-            
+
         }
     }
 }

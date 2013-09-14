@@ -28,7 +28,7 @@ namespace SuperBitBros.OpenGL.Entities {
             owner.AddEntity(new GoombaCorpse(), position.X, position.Y);
         }
 
-        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement) {
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
             if (e.GetType() == typeof(Player))
                 Console.Out.WriteLine("DEAD");
         }

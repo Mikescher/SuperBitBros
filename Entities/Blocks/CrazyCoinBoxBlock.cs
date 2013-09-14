@@ -1,7 +1,7 @@
 ﻿using Entities.SuperBitBros;
+using OpenTK.Input;
 using System;
 using System.Drawing;
-using OpenTK.Input;
 
 namespace SuperBitBros.OpenGL.Entities.Blocks {
     class CrazyCoinBoxBlock : Block {
@@ -27,18 +27,15 @@ namespace SuperBitBros.OpenGL.Entities.Blocks {
             return color;
         }
 
-        public override void Update(KeyboardDevice keyboard)
-        {
+        public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
-            if (isActive)
-            {
+            if (isActive) {
                 timeUntilDried--;
                 timeUntilSpawn--;
 
-                if (timeUntilSpawn <= 0 && timeUntilDried > 0)
-                {
-                    CoinEntity ce = new CoinEntity(0, true);
+                if (timeUntilSpawn <= 0 && timeUntilDried > 0) {
+                    CoinEntity ce = new GravityCoinEntity(0, true);
                     owner.AddEntity(ce, GetTopLeft().X, GetTopLeft().Y);
                     double angle = random.NextDouble() * (Math.PI / 3) - (Math.PI / 6);
                     angle += Math.Sign(angle) * (Math.PI / 8);
@@ -50,15 +47,14 @@ namespace SuperBitBros.OpenGL.Entities.Blocks {
                     timeUntilDried--;
                 }
 
-                if (timeUntilDried <= 0)
-                {
+                if (timeUntilDried <= 0) {
                     isActive = false;
                     ((GameWorld)owner).ReplaceBlock(this, new EmptyCoinBoxBlock());
                 }
             }
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) {
+        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
             if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).movementDelta.Y > 0) {
                 isActive = true;
             }

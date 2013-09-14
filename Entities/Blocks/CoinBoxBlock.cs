@@ -1,5 +1,4 @@
 ﻿using Entities.SuperBitBros;
-using System;
 using System.Drawing;
 
 namespace SuperBitBros.OpenGL.Entities.Blocks {
@@ -17,9 +16,9 @@ namespace SuperBitBros.OpenGL.Entities.Blocks {
             return color;
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision) {
+        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
             if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).movementDelta.Y > 0) {
-                owner.AddEntity(new CoinEntity(COIN_SPAWN_FORCE), GetTopLeft().X, GetTopLeft().Y);
+                owner.AddEntity(new GravityCoinEntity(COIN_SPAWN_FORCE), GetTopLeft().X, GetTopLeft().Y);
                 ((GameWorld)owner).ReplaceBlock(this, new EmptyCoinBoxBlock());
             }
         }

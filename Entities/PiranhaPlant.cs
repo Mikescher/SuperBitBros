@@ -5,6 +5,7 @@ using System;
 
 namespace SuperBitBros.OpenGL.Entities {
     class PiranhaPlant : Mob {
+        private const double SHRINK_WIDTH = 0.1;
         private const int UPDATE_SPEED = 5;
         private const int CYCLUS_SPEED = 60;
         private const int STATE_COUNT = 13;
@@ -23,8 +24,14 @@ namespace SuperBitBros.OpenGL.Entities {
             texture = Textures.piranhaplant_sheet.GetTextureWrapper(0);
         }
 
+        public override void OnAdd(GameModel owner) {
+            base.OnAdd(owner);
+            position.X += SHRINK_WIDTH;
+            width -= SHRINK_WIDTH * 2;
+        }
+
         public override Rectangle2d GetTexturePosition() {
-            return new Rectangle2d(position, 2 * Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT * 2);
+            return new Rectangle2d(position.X - SHRINK_WIDTH, position.Y, 2 * Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT * 2);
         }
 
         public override void Update(KeyboardDevice keyboard) {
@@ -106,24 +113,20 @@ namespace SuperBitBros.OpenGL.Entities {
 
         private void testPlayerBlocking() {
             Player p = ((GameWorld)owner).player;
-            Rectangle2d prect = new Rectangle2d(
-                p.position.X - DynamicEntity.DETECTION_TOLERANCE,
-                p.position.Y - DynamicEntity.DETECTION_TOLERANCE,
-                p.width + DynamicEntity.DETECTION_TOLERANCE * 2,
-                p.height + DynamicEntity.DETECTION_TOLERANCE);
+            Rectangle2d prect = p.GetPosition();
 
-            if (prect.isColldingWith(pipeUnder)) {
+            if (prect.IsTouching(pipeUnder)) {
                 lastUpdate = 0;
             }
         }
 
         public override void OnHeadJump(Entity e) {
-            if (e.GetType() == typeof(Player))
+            if (e.GetType() == typeof(Player) && state != 0)
                 Console.Out.WriteLine("DEAD_PP_N00b");
         }
 
-        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement) {
-            if (e.GetType() == typeof(Player))
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
+            if (e.GetType() == typeof(Player) && state != 0)
                 Console.Out.WriteLine("DEAD_PP");
         }
     }

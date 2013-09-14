@@ -2,14 +2,17 @@
 using OpenTK.Input;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.Entities;
+using SuperBitBros.OpenGL.Entities.Blocks;
 using System;
 
 namespace Entities.SuperBitBros {
     enum Direction { LEFT, RIGHT };
 
     class Player : AnimatedDynamicEntity {
-        public const int PLAYER_WIDTH = 24;
-        public const int PLAYER_HEIGHT = 24;
+        public const double PLAYER_SCALE = 0.9;
+
+        public const int PLAYER_WIDTH = Block.BLOCK_WIDTH;
+        public const int PLAYER_HEIGHT = Block.BLOCK_HEIGHT;
 
         public const double PLAYER_SPEED_FRICTION = 0.15;
         public const double PLAYER_SPEED_ACC = PLAYER_SPEED_FRICTION + 0.1;
@@ -21,8 +24,8 @@ namespace Entities.SuperBitBros {
         public Player() {
             direction = Direction.RIGHT;
             distance = Entity.DISTANCE_PLAYER;
-            width = PLAYER_WIDTH;
-            height = PLAYER_HEIGHT;
+            width = PLAYER_WIDTH * PLAYER_SCALE;
+            height = PLAYER_HEIGHT * PLAYER_SCALE;
 
             atexture.animation_speed = 5;
 
@@ -63,18 +66,17 @@ namespace Entities.SuperBitBros {
             {
                 delta = Vector2d.Zero;
                 if (keyboard[Key.Left])
-                    delta.X -= PLAYER_SPEED_MAX*2;
+                    delta.X -= PLAYER_SPEED_MAX * 2;
                 if (keyboard[Key.Right])
-                    delta.X += PLAYER_SPEED_MAX*2;
+                    delta.X += PLAYER_SPEED_MAX * 2;
                 if (keyboard[Key.Space] || keyboard[Key.Up])
                     delta.Y += PLAYER_SPEED_MAX;
                 if (keyboard[Key.Down])
                     delta.Y -= PLAYER_SPEED_MAX;
-                moveBy(delta, false);
-            }
-            else
-                updateGravitationalMovement(delta);
-            
+                MoveBy(delta, false);
+            } else
+                DoGravitationalMovement(delta);
+
 
             UpdateTexture();
         }
@@ -103,8 +105,7 @@ namespace Entities.SuperBitBros {
             }
         }
 
-        protected override bool IsBlockingOther(Entity sender)
-        {
+        protected override bool IsBlockingOther(Entity sender) {
             return true;
         }
     }

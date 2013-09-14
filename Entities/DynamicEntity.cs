@@ -27,7 +27,7 @@ namespace Entities.SuperBitBros {
 
         public virtual void OnAfterMapGen() { }
 
-        public void moveBy(Vector2d vec, bool doCollision = true, bool doPhysicPush = true) {
+        public void MoveBy(Vector2d vec, bool doCollision = true, bool doPhysicPush = true) {
             Rectangle2d nocollnewpos = new Rectangle2d(
                 new Vector2d(
                     position.X + vec.X - DETECTION_TOLERANCE,
@@ -35,12 +35,10 @@ namespace Entities.SuperBitBros {
                 width + DETECTION_TOLERANCE * 2,
                 height + DETECTION_TOLERANCE * 2);
 
-            if (doCollision)
-            {
+            if (doCollision) {
                 position.X += testXCollision(vec);
                 position.Y += testYCollision(vec);
-            }
-            else
+            } else
                 position = Vector2d.Add(position, vec);
 
             if (doPhysicPush)
@@ -51,15 +49,15 @@ namespace Entities.SuperBitBros {
             Rectangle2d currPosition = GetPosition();
 
             foreach (Entity e in owner.GetCurrentEntityList()) {
-                if (nocollnewpos.isColldingWith(e.GetPosition()) && e != this) {
-                    bool isColl = currPosition.isColldingWith(e.GetPosition());
+                if (nocollnewpos.IsColldingWith(e.GetPosition()) && e != this) {
+                    bool isColl = currPosition.IsColldingWith(e.GetPosition());
+                    bool isTouch = currPosition.IsTouching(e.GetPosition());
                     bool isBlock = Entity.TestBlocking(e, this);
 
-                    e.onCollide(this, false, isBlock, isColl);
-                    this.onCollide(e, true, isBlock, isColl);
+                    e.onCollide(this, false, isBlock, isColl, isTouch);
+                    this.onCollide(e, true, isBlock, isColl, isTouch);
 
-                    if (isBlock && isColl)
-                    {
+                    if (isBlock && isColl) {
                         Console.Error.WriteLine("Entity PUSHBACK !!!");
                         PushBackFrom(e);
                     }
@@ -74,15 +72,15 @@ namespace Entities.SuperBitBros {
             for (int x = left; x < right; x++) {
                 for (int y = bottom; y < top; y++) {
                     Block b = owner.GetBlock(x, y);
-                    if (b != null && nocollnewpos.isColldingWith(b.GetPosition())) {
-                        bool isColl = currPosition.isColldingWith(b.GetPosition());
+                    if (b != null && nocollnewpos.IsColldingWith(b.GetPosition())) {
+                        bool isColl = currPosition.IsColldingWith(b.GetPosition());
+                        bool isTouch = currPosition.IsTouching(b.GetPosition());
                         bool isBlock = Entity.TestBlocking(b, this);
 
-                        b.onCollide(this, false, isBlock, isColl);
-                        this.onCollide(b, true, isBlock, isColl);
+                        b.onCollide(this, false, isBlock, isColl, isTouch);
+                        this.onCollide(b, true, isBlock, isColl, isTouch);
 
-                        if (isBlock && isColl)
-                        {
+                        if (isBlock && isColl) {
                             Console.Error.WriteLine("Block PUSHBACK !!!");
                             PushBackFrom(b);
                         }
@@ -91,8 +89,7 @@ namespace Entities.SuperBitBros {
             }
         }
 
-        private void PushBackFrom(Entity e)
-        {
+        private void PushBackFrom(Entity e) {
             Vector2d force = Vector2d.Subtract(GetMiddle(), e.GetMiddle());
             if (force.X == 0 && force.Y == 0)
                 force.Y = 1;
@@ -111,7 +108,7 @@ namespace Entities.SuperBitBros {
             // TEST ENTITIES
 
             foreach (Entity e in owner.entityList) {
-                if (e != this && Entity.TestBlocking(e, this) && newpos.isColldingWith(e.GetPosition())) {
+                if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition())) {
                     return this.GetPosition().getDistanceTo(e.GetPosition()).X;
                 }
             }
@@ -126,7 +123,7 @@ namespace Entities.SuperBitBros {
             for (int x = left; x < right; x++) {
                 for (int y = bottom; y < top; y++) {
                     Block b = owner.GetBlock(x, y);
-                    if (b != null && Entity.TestBlocking(b, this) && newpos.isColldingWith(b.GetPosition())) {
+                    if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition())) {
                         return this.GetPosition().getDistanceTo(b.GetPosition()).X;
                     }
                 }
@@ -141,7 +138,7 @@ namespace Entities.SuperBitBros {
             // TEST ENTITIES
 
             foreach (Entity e in owner.entityList) {
-                if (e != this && Entity.TestBlocking(e, this) && newpos.isColldingWith(e.GetPosition())) {
+                if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition())) {
                     return this.GetPosition().getDistanceTo(e.GetPosition()).Y;
                 }
             }
@@ -156,7 +153,7 @@ namespace Entities.SuperBitBros {
             for (int x = left; x < right; x++) {
                 for (int y = bottom; y < top; y++) {
                     Block b = owner.GetBlock(x, y);
-                    if (b != null && Entity.TestBlocking(b, this) && newpos.isColldingWith(b.GetPosition())) {
+                    if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition())) {
                         return this.GetPosition().getDistanceTo(b.GetPosition()).Y;
                     }
                 }
@@ -181,8 +178,7 @@ namespace Entities.SuperBitBros {
             return testXCollision(new Vector2d(-DETECTION_TOLERANCE, 0)) >= 0;
         }
 
-        protected void updateGravitationalMovement(Vector2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true)
-        {
+        protected void DoGravitationalMovement(Vector2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true) {
             //movementDelta.X = 0;
             movementDelta.Y -= DynamicEntity.GRAVITY_ACCELERATION;
             if (IsOnGround())
@@ -202,7 +198,7 @@ namespace Entities.SuperBitBros {
             if (IsCollidingRight() && resetXOnCollision)
                 movementDelta.X = Math.Min(movementDelta.X, 0);
 
-            moveBy(movementDelta);
+            MoveBy(movementDelta);
         }
     }
 }
