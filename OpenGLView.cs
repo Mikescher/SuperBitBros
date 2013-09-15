@@ -1,30 +1,45 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using QuickFont;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using System.Drawing;
 
 namespace SuperBitBros {
     abstract class OpenGLView {
-        private const int RESOLUTION_WIDTH = 540;
-        private const int RESOLUTION_HEIGHT = 280;
+        protected const int INIT_RESOLUTION_WIDTH = 540;
+        protected const int INIT_RESOLUTION_HEIGHT = 280;
 
-        protected GameWindow window;
+        protected MyGameWindow window;
         protected GameModel model;
 
+        protected QFont DebugFont;
+
         public OpenGLView(GameModel model) {
-            window = new GameWindow(RESOLUTION_WIDTH, RESOLUTION_HEIGHT, GraphicsMode.Default, "title");
+            window = new MyGameWindow(INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT);
             this.model = model;
 
             window.RenderFrame += new EventHandler<FrameEventArgs>(OnRender);
             window.UpdateFrame += new EventHandler<FrameEventArgs>(OnUpdate);
+
+            window.Load += new EventHandler<EventArgs>(OnLoad);
 
             OnInit();
         }
 
         public virtual void Start(int fps, int ups) {
             window.Run(fps, ups);
+        }
+
+        protected void OnLoad(object sender, EventArgs e) {
+            OnInit();
+
+            QFontBuilderConfiguration builderConfig = new QFontBuilderConfiguration(true);
+            builderConfig.ShadowConfig.blurRadius = 1; //reduce blur radius because font is very small
+            builderConfig.TextGenerationRenderHint = TextGenerationRenderHint.ClearTypeGridFit; //best render hint for this font
+            DebugFont = new QFont(new Font("Times New Roman", 72));
         }
 
         private void OnInit() {
@@ -50,7 +65,7 @@ namespace SuperBitBros {
             GL.Clear(ClearBufferMask.DepthBufferBit);
 
             GL.LoadIdentity();
-            GL.Ortho(0, RESOLUTION_WIDTH, 0, RESOLUTION_HEIGHT, 0, -100);
+            GL.Ortho(0, window.Width, 0, window.Height, 0, -100);
         }
 
         protected virtual void EndRender() {
@@ -62,7 +77,7 @@ namespace SuperBitBros {
         }
 
         protected virtual void RenderRectangle(Rect2d rect, double distance) {
-            GL.Begin(BeginMode.Polygon);
+            GL.Begin(BeginMode.Quads);
             GL.Vertex3(rect.tl.X, rect.tl.Y, distance);
             GL.Vertex3(rect.bl.X, rect.bl.Y, distance);
             GL.Vertex3(rect.br.X, rect.br.Y, distance);
@@ -87,6 +102,62 @@ namespace SuperBitBros {
             GL.TexCoord2(coords.br);
             GL.Vertex3(rect.tr.X, rect.tr.Y, distance);
             GL.End();
+        }
+
+        protected virtual void RenderColoredRectangle(Rect2d rect, double distance, Color4 col) {
+            GL.Begin(BeginMode.Quads);
+            GL.Color4(col);
+            GL.Vertex3(rect.tl.X, rect.tl.Y, distance);
+            GL.Vertex3(rect.bl.X, rect.bl.Y, distance);
+            GL.Vertex3(rect.br.X, rect.br.Y, distance);
+            GL.Vertex3(rect.tr.X, rect.tr.Y, distance);
+            GL.Color3(1.0, 1.0, 1.0);
+            GL.End();
+        }
+
+        protected virtual void RenderColoredBox(Rect2d rect, double distance, Color4 col) {
+            GL.Begin(BeginMode.LineLoop);
+            GL.Color4(col);
+            GL.Vertex3(rect.tl.X, rect.tl.Y, distance);
+            GL.Vertex3(rect.bl.X, rect.bl.Y, distance);
+            GL.Vertex3(rect.br.X, rect.br.Y, distance);
+            GL.Vertex3(rect.tr.X, rect.tr.Y, distance);
+            GL.Color3(1.0, 1.0, 1.0);
+            GL.End();
+        }
+
+        protected virtual void RenderArrow(Vec2d pos, Vec2d arrow, double distance, Color4 col) {
+            Vec2d end = pos + arrow;
+
+            Vec2d smallArr = new Vec2d(arrow);
+            smallArr.SetLength(smallArr.GetLength() - 7);
+
+            Vec2d rot1 = pos + smallArr;
+
+            Vec2d rot2 = pos + smallArr;
+
+            rot1.rotateAround(end, Math.PI / 6);
+            rot2.rotateAround(end, -Math.PI / 6);
+
+            GL.Begin(BeginMode.LineStrip);
+            GL.Color4(col);
+            GL.Vertex3(pos.X, pos.Y, distance);
+            GL.Vertex3(end.X, end.Y, distance);
+            GL.Vertex3(rot1.X, rot1.Y, distance);
+            GL.Vertex3(end.X, end.Y, distance);
+            GL.Vertex3(rot2.X, rot2.Y, distance);
+            GL.Color3(1.0, 1.0, 1.0);
+            GL.End();
+        }
+
+        public void RenderFont(Vec2d pos, QFont font, string text, Color4 col) {
+            GL.Color4(col);
+
+            font.Print(text, new Vector2((float)pos.X, (float)pos.Y));
+
+            font.Print(text, new Vector2(0, 0));
+
+            font.Print(text, new Vector2(72, 72));
         }
     }
 }

@@ -1,12 +1,16 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK.Graphics.OpenGL;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.Trigger;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace SuperBitBros {
     class OpenGLGameView : OpenGLView {
+
+
         public OpenGLGameView(GameModel model)
             : base(model) {
             //
@@ -15,6 +19,7 @@ namespace SuperBitBros {
         protected override void OnRender(object sender, EventArgs e) {
             GL.ClearColor(Color.FromArgb(0, 0, 0));
             StartRender();
+
 
             Vec2i offset = (Vec2i)model.GetOffset(window.Width, window.Height); // Cast to int for ... reasons
             GL.Translate(-offset.X, -offset.Y, 0);
@@ -29,6 +34,10 @@ namespace SuperBitBros {
             double depthposition = 100;
             while (depthposition > 0) {
                 depthposition = renderInDepth(depthposition, bRange);
+            }
+
+            if (Program.IS_DEBUG) {
+                RenderDebug();
             }
 
             EndRender();
@@ -63,6 +72,44 @@ namespace SuperBitBros {
             }
 
             return nextDepth;
+        }
+
+        private void RenderDebug() {
+            GL.Disable(EnableCap.Texture2D);
+
+            //######################
+            // RENDER TRIGGER
+            //######################
+
+            for (int x = 0; x < model.mapBlockWidth; x++) {
+                for (int y = 0; y < model.mapBlockHeight; y++) {
+                    List<Trigger> tlist = model.getTriggerList(x, y);
+
+                    if (tlist != null) {
+                        foreach (Trigger t in tlist) {
+                            RenderColoredRectangle(t.GetPosition(), 0, Color.FromArgb(200, 255, 0, 0));
+                        }
+                    }
+                }
+            }
+
+            //############################################
+            // RENDER COLLSIIONBOXES && MOVEMNT VECTORS
+            //############################################
+
+            foreach (DynamicEntity e in model.entityList) {
+                RenderColoredBox(e.GetPosition(), 0.1, Color.FromArgb(200, 0, 0, 255));
+
+                RenderArrow(e.GetMiddle(), e.movementDelta * 8, 0.2, Color.FromArgb(200, 0, 0, 255));
+            }
+
+            //######################
+            // RENDER DEBUG TEXTS
+            //######################
+
+
+
+            GL.Enable(EnableCap.Texture2D);
         }
     }
 }

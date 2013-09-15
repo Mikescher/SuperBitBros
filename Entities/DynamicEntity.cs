@@ -1,7 +1,9 @@
 ﻿using SuperBitBros;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.Trigger;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using System.Collections.Generic;
 
 namespace Entities.SuperBitBros {
     abstract class DynamicEntity : Entity {
@@ -10,8 +12,6 @@ namespace Entities.SuperBitBros {
         public const double MAX_GRAVITY = 20;
         public const double DETECTION_TOLERANCE = 0.005; // Touching Detection Tolerance
         public const int BLOCK_DETECTION_RANGE = 3;
-
-        protected GameModel owner;
 
         public Vec2d movementDelta = new Vec2d(0, 0);
         protected Vec2d physicPushForce = new Vec2d(0, 0);
@@ -48,6 +48,8 @@ namespace Entities.SuperBitBros {
 
             Rect2d currPosition = GetPosition();
 
+            // Collide with Entities
+
             foreach (Entity e in owner.GetCurrentEntityList()) {
                 if (nocollnewpos.IsColldingWith(e.GetPosition()) && e != this) {
                     bool isColl = currPosition.IsColldingWith(e.GetPosition());
@@ -63,6 +65,8 @@ namespace Entities.SuperBitBros {
                     }
                 }
             }
+
+            // Collide with Blocks
 
             int left = (int)((position.X - BLOCK_DETECTION_RANGE * Block.BLOCK_WIDTH) / Block.BLOCK_WIDTH);
             int bottom = (int)((position.Y - BLOCK_DETECTION_RANGE * Block.BLOCK_HEIGHT) / Block.BLOCK_HEIGHT);
@@ -83,6 +87,24 @@ namespace Entities.SuperBitBros {
                         if (isBlock && isColl) {
                             Console.Error.WriteLine("Block PUSHBACK !!!");
                             PushBackFrom(b);
+                        }
+                    }
+                }
+            }
+
+            // Collide with TriggerZones
+
+            for (int x = left; x < right; x++) {
+                for (int y = bottom; y < top; y++) {
+                    List<Trigger> tlist = owner.getTriggerList(x, y);
+
+                    if (tlist != null) {
+                        foreach (Trigger t in tlist) {
+                            bool isColl = currPosition.IsColldingWith(t.GetPosition());
+
+                            if (isColl) {
+                                t.OnCollide(this);
+                            }
                         }
                     }
                 }
@@ -198,6 +220,10 @@ namespace Entities.SuperBitBros {
                 movementDelta.X = Math.Min(movementDelta.X, 0);
 
             MoveBy(movementDelta);
+        }
+
+        public void Kill() {
+            owner.RemoveEntity(this);
         }
     }
 }

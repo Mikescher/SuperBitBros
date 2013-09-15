@@ -2,6 +2,8 @@
 
 namespace SuperBitBros {
     class Program {
+        public const bool IS_DEBUG = true;
+
         static void Main(string[] args) {
             Console.Out.WriteLine("START");
             GameWorld world = new GameWorld();

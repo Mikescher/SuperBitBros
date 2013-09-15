@@ -36,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -52,6 +54,9 @@
     </Reference>
     <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="OpenTK.GLControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
+    <Reference Include="QuickFont">
+      <HintPath>References\QuickFont.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -73,8 +78,10 @@
     <Compile Include="Entities\Blocks\FlagBlock.cs" />
     <Compile Include="Entities\Blocks\HillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
+    <Compile Include="Entities\Trigger\DeathZone.cs" />
     <Compile Include="Entities\Trigger\PipeZones\PipeZone.cs" />
     <Compile Include="Entities\Blocks\StandardAirBlock.cs" />
+    <Compile Include="Entities\Trigger\PlayerSpawnZone.cs" />
     <Compile Include="Entities\Trigger\Trigger.cs" />
     <Compile Include="Entities\CoinEntity.cs" />
     <Compile Include="Entities\DynamicEntity.cs" />
@@ -89,6 +96,7 @@
     <Compile Include="GameWorld.cs" />
     <Compile Include="Entities\Blocks\StandardGroundBlock.cs" />
     <Compile Include="MapParser.cs" />
+    <Compile Include="MyGameWindow.cs" />
     <Compile Include="OpenGL\OGLMath\Rect2d.cs" />
     <Compile Include="OpenGL\OGLMath\Rect2i.cs" />
     <Compile Include="OpenGL\OGLMath\Vec2d.cs" />

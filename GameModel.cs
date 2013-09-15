@@ -1,7 +1,7 @@
 ﻿using Entities.SuperBitBros;
-using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.Trigger;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,9 @@ namespace SuperBitBros {
     abstract class GameModel {
         public List<DynamicEntity> entityList { get; protected set; }
         public List<Block> blockList { get; protected set; }
+
         private Block[,] blockMap;
+        private List<Trigger>[,] triggerMap;
 
         public int mapBlockWidth { get; protected set; }
         public int mapBlockHeight { get; protected set; }
@@ -96,12 +98,31 @@ namespace SuperBitBros {
 
         public void setSize(int w, int h) {
             blockMap = new Block[w, h];
+            triggerMap = new List<Trigger>[w, h];
 
             mapBlockWidth = w;
             mapBlockHeight = h;
 
             mapRealWidth = Block.BLOCK_WIDTH * w;
             mapRealHeight = Block.BLOCK_HEIGHT * h;
+        }
+
+        public List<Trigger> getTriggerList(int x, int y) {
+            if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
+                return null;
+            return triggerMap[x, y];
+        }
+
+        public void AddTrigger(Trigger t, int x, int y) {
+            if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
+                return;
+
+            if (triggerMap[x, y] == null)
+                triggerMap[x, y] = new List<Trigger>();
+
+            triggerMap[x, y].Add(t);
+
+            t.OnAdd(this);
         }
 
         public abstract Vec2d GetOffset(int window_width, int window_height);

@@ -1,6 +1,7 @@
 ﻿using Entities.SuperBitBros;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.Trigger;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
@@ -8,7 +9,6 @@ using System;
 
 namespace SuperBitBros {
     class GameWorld : GameModel {
-
         private Vec2d offset = Vec2d.Zero;
 
         public Player player;
@@ -31,21 +31,23 @@ namespace SuperBitBros {
             }
         }
 
-        public void AddTriggerFromMapData(AddTriggerType triggertype, double x, double y) {
+        public void AddTriggerFromMapData(AddTriggerType triggertype, int x, int y) {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
             if (triggertype == AddTriggerType.PLAYER_SPAWN_POSITION) {
-                Player p = new Player();
-                AddEntity(p, px, py);
-                player = p;
-                offset.Set(px, py);
+                PlayerSpawnZone zone = new PlayerSpawnZone(new Vec2i(x, y));
+                AddTrigger(zone, x, y);
+
+                player = zone.SpawnPlayer();
+
+                offset.Set(player.position.X, player.position.Y);
             } else if (triggertype == AddTriggerType.DEATH_ZONE) {
-                //TODO DEATH
+                AddTrigger(new DeathZone(new Vec2i(x, y)), x, y);
             }
         }
 
-        public void AddPipeZoneFromMapData(PipeZoneType pipeZoneType, double x, double y) {
+        public void AddPipeZoneFromMapData(PipeZoneType pipeZoneType, int x, int y) {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
@@ -113,11 +115,11 @@ namespace SuperBitBros {
 
             offset += cameraBox.GetDistanceTo(playerPos);
 
-            offset.X = Math.Min(offset.X + window_width, mapRealWidth) - window_width;
-            offset.Y = Math.Min(offset.Y + window_height, mapRealHeight) - window_height;
-
             offset.X = Math.Max(offset.X, 0);
             offset.Y = Math.Max(offset.Y, 0);
+
+            offset.X = Math.Min(offset.X + window_width, mapRealWidth) - window_width;
+            offset.Y = Math.Min(offset.Y + window_height, mapRealHeight) - window_height;
 
             return offset;
         }

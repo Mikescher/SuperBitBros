@@ -5,8 +5,8 @@ namespace SuperBitBros.Entities.Blocks {
     abstract class Block : Entity {
         public const int BLOCK_WIDTH = 16;
         public const int BLOCK_HEIGHT = 24;
+        public static readonly  Vec2d BLOCK_SIZE = new Vec2d(BLOCK_WIDTH, BLOCK_HEIGHT);
 
-        protected GameModel owner;
         public Vec2i blockPos = Vec2i.Zero;
 
         public Rect2d position2dCache = null;

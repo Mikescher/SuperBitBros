@@ -1,5 +1,6 @@
 ﻿using OpenTK;
 using OpenTK.Input;
+using SuperBitBros;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
@@ -15,6 +16,8 @@ namespace Entities.SuperBitBros {
         public const int DISTANCE_POWERUPS = 25;
         public const int DISTANCE_PLAYER = 30;
         public const int DISTANCE_FOREGROUND = 10;
+
+        protected GameModel owner;
 
         public Vec2d position; // bottom left
         public double distance;
@@ -87,7 +90,6 @@ namespace Entities.SuperBitBros {
                 Console.Error.WriteLine("2 Block Collision ???? {0} <-> {1}", e1, e2);
                 return true;
             }
-
         }
     }
 }

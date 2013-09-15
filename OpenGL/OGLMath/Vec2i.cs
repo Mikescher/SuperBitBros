@@ -116,5 +116,16 @@ namespace SuperBitBros.OpenGL.OGLMath {
             X = px;
             Y = py;
         }
+
+        public void rotateAround(Vec2i centerPoint, double rads) {
+            double cosTheta = Math.Cos(rads);
+            double sinTheta = Math.Sin(rads);
+
+            double nX = (cosTheta * (this.X - centerPoint.X) - sinTheta * (this.Y - centerPoint.Y) + centerPoint.X);
+            double nY = (sinTheta * (this.X - centerPoint.X) + cosTheta * (this.Y - centerPoint.Y) + centerPoint.Y);
+
+            X = (int)nX;
+            Y = (int)nY;
+        }
     }
 }
