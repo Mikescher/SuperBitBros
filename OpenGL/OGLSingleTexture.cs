@@ -1,5 +1,5 @@
-﻿using OpenTK;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System.Drawing;
 
 namespace SuperBitBros.OpenGL {
@@ -22,8 +22,8 @@ namespace SuperBitBros.OpenGL {
             GL.BindTexture(TextureTarget.Texture2D, id);
         }
 
-        public Rectangle2d GetCoordinates() {
-            return new Rectangle2d(new Vector2d(0, 0), 1);
+        public Rect2d GetCoordinates() {
+            return new Rect2d(new Vec2d(0, 0), 1);
         }
 
         public OGLTexture GetTextureWrapper() {

@@ -1,6 +1,7 @@
 ﻿using Entities.SuperBitBros;
 using OpenTK;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities {
     abstract class Mob : DynamicEntity {
@@ -12,14 +13,14 @@ namespace SuperBitBros.Entities {
         }
 
         protected void DoWalk(double speedacc, double speedmax) {
-            Vector2d delta = new Vector2d(0, 0);
+            Vec2d delta = new Vec2d(0, 0);
 
             if (IsOnGround()) {
-                Vector2d blockPos;
+                Vec2d blockPos;
                 if (walkDirection < 0)
-                    blockPos = new Vector2d((int)((position.X + width) / Block.BLOCK_WIDTH), (int)((position.Y) / Block.BLOCK_HEIGHT));
+                    blockPos = new Vec2d((int)((position.X + width) / Block.BLOCK_WIDTH), (int)((position.Y) / Block.BLOCK_HEIGHT));
                 else
-                    blockPos = new Vector2d((int)((position.X) / Block.BLOCK_WIDTH), (int)((position.Y) / Block.BLOCK_HEIGHT));
+                    blockPos = new Vec2d((int)((position.X) / Block.BLOCK_WIDTH), (int)((position.Y) / Block.BLOCK_HEIGHT));
 
                 int y = (int)blockPos.Y - 1;
                 int x = (int)blockPos.X + walkDirection;

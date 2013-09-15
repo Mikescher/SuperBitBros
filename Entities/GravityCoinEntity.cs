@@ -1,6 +1,6 @@
 ﻿
-using OpenTK;
 using OpenTK.Input;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 namespace SuperBitBros.Entities {
     class GravityCoinEntity : CoinEntity {
@@ -23,7 +23,7 @@ namespace SuperBitBros.Entities {
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
-            Vector2d delta = new Vector2d(0, 0);
+            Vec2d delta = new Vec2d(0, 0);
 
             if (IsOnGround()) {
                 delta.X = -Math.Sign(movementDelta.X) * Math.Min(COIN_FRICTION, Math.Abs(movementDelta.X));

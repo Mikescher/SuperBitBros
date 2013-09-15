@@ -2,6 +2,7 @@
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using SuperBitBros.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 
 namespace SuperBitBros {
@@ -56,11 +57,11 @@ namespace SuperBitBros {
             window.SwapBuffers();
         }
 
-        protected virtual void RenderRectangle(Vector2d tl, Vector2d bl, Vector2d br, Vector2d tr, double distance) {
-            RenderRectangle(new Rectangle2d(bl, tr), distance);
+        protected virtual void RenderRectangle(Vec2d tl, Vec2d bl, Vec2d br, Vec2d tr, double distance) {
+            RenderRectangle(new Rect2d(bl, tr), distance);
         }
 
-        protected virtual void RenderRectangle(Rectangle2d rect, double distance) {
+        protected virtual void RenderRectangle(Rect2d rect, double distance) {
             GL.Begin(BeginMode.Polygon);
             GL.Vertex3(rect.tl.X, rect.tl.Y, distance);
             GL.Vertex3(rect.bl.X, rect.bl.Y, distance);
@@ -69,8 +70,8 @@ namespace SuperBitBros {
             GL.End();
         }
 
-        protected virtual void RenderRectangle(Rectangle2d rect, OGLTexture texture, double distance) {
-            Rectangle2d coords = texture.GetCoordinates();
+        protected virtual void RenderRectangle(Rect2d rect, OGLTexture texture, double distance) {
+            Rect2d coords = texture.GetCoordinates();
             texture.bind();
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat);

@@ -1,7 +1,6 @@
-﻿using OpenTK;
-using SuperBitBros;
+﻿using SuperBitBros;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 
 namespace Entities.SuperBitBros {
@@ -14,8 +13,8 @@ namespace Entities.SuperBitBros {
 
         protected GameModel owner;
 
-        public Vector2d movementDelta = new Vector2d(0, 0);
-        protected Vector2d physicPushForce = new Vector2d(0, 0);
+        public Vec2d movementDelta = new Vec2d(0, 0);
+        protected Vec2d physicPushForce = new Vec2d(0, 0);
 
         public DynamicEntity()
             : base() {
@@ -28,9 +27,9 @@ namespace Entities.SuperBitBros {
 
         public virtual void OnAfterMapGen() { }
 
-        public void MoveBy(Vector2d vec, bool doCollision = true, bool doPhysicPush = true) {
-            Rectangle2d nocollnewpos = new Rectangle2d(
-                new Vector2d(
+        public void MoveBy(Vec2d vec, bool doCollision = true, bool doPhysicPush = true) {
+            Rect2d nocollnewpos = new Rect2d(
+                new Vec2d(
                     position.X + vec.X - DETECTION_TOLERANCE,
                     position.Y + vec.Y - DETECTION_TOLERANCE),
                 width + DETECTION_TOLERANCE * 2,
@@ -40,14 +39,14 @@ namespace Entities.SuperBitBros {
                 position.X += testXCollision(vec);
                 position.Y += testYCollision(vec);
             } else
-                position = Vector2d.Add(position, vec);
+                position += vec;
 
             if (doPhysicPush)
-                position = Vector2d.Add(position, physicPushForce);
+                position += physicPushForce;
             physicPushForce.X = 0;
             physicPushForce.Y = 0;
 
-            Rectangle2d currPosition = GetPosition();
+            Rect2d currPosition = GetPosition();
 
             foreach (Entity e in owner.GetCurrentEntityList()) {
                 if (nocollnewpos.IsColldingWith(e.GetPosition()) && e != this) {
@@ -91,26 +90,25 @@ namespace Entities.SuperBitBros {
         }
 
         private void PushBackFrom(Entity e) {
-            Vector2d force = Vector2d.Subtract(GetMiddle(), e.GetMiddle());
+            Vec2d force = GetMiddle() - e.GetMiddle();
             if (force.X == 0 && force.Y == 0)
                 force.Y = 1;
 
-            force.Normalize();
-            force = Vector2d.Multiply(force, PUSH_BACK_FORCE);
+            force.SetLength(PUSH_BACK_FORCE);
             physicPushForce = force;
 
             if (e is DynamicEntity)
                 ((DynamicEntity)e).physicPushForce = -force;
         }
 
-        private double testXCollision(Vector2d vec) {
-            Rectangle2d newpos = new Rectangle2d(new Vector2d(position.X + vec.X, position.Y), width, height);
+        private double testXCollision(Vec2d vec) {
+            Rect2d newpos = new Rect2d(new Vec2d(position.X + vec.X, position.Y), width, height);
 
             // TEST ENTITIES
 
             foreach (Entity e in owner.entityList) {
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition())) {
-                    return this.GetPosition().getDistanceTo(e.GetPosition()).X;
+                    return this.GetPosition().GetDistanceTo(e.GetPosition()).X;
                 }
             }
 
@@ -125,7 +123,7 @@ namespace Entities.SuperBitBros {
                 for (int y = bottom; y < top; y++) {
                     Block b = owner.GetBlock(x, y);
                     if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition())) {
-                        return this.GetPosition().getDistanceTo(b.GetPosition()).X;
+                        return this.GetPosition().GetDistanceTo(b.GetPosition()).X;
                     }
                 }
             }
@@ -133,14 +131,14 @@ namespace Entities.SuperBitBros {
             return vec.X;
         }
 
-        private double testYCollision(Vector2d vec) {
-            Rectangle2d newpos = new Rectangle2d(new Vector2d(position.X, position.Y + vec.Y), width, height);
+        private double testYCollision(Vec2d vec) {
+            Rect2d newpos = new Rect2d(new Vec2d(position.X, position.Y + vec.Y), width, height);
 
             // TEST ENTITIES
 
             foreach (Entity e in owner.entityList) {
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition())) {
-                    return this.GetPosition().getDistanceTo(e.GetPosition()).Y;
+                    return this.GetPosition().GetDistanceTo(e.GetPosition()).Y;
                 }
             }
 
@@ -155,7 +153,7 @@ namespace Entities.SuperBitBros {
                 for (int y = bottom; y < top; y++) {
                     Block b = owner.GetBlock(x, y);
                     if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition())) {
-                        return this.GetPosition().getDistanceTo(b.GetPosition()).Y;
+                        return this.GetPosition().GetDistanceTo(b.GetPosition()).Y;
                     }
                 }
             }
@@ -164,22 +162,22 @@ namespace Entities.SuperBitBros {
         }
 
         protected bool IsOnGround() {
-            return testYCollision(new Vector2d(0, -DETECTION_TOLERANCE)) >= 0;
+            return testYCollision(new Vec2d(0, -DETECTION_TOLERANCE)) >= 0;
         }
 
         protected bool IsOnCeiling() {
-            return testYCollision(new Vector2d(0, DETECTION_TOLERANCE)) <= 0;
+            return testYCollision(new Vec2d(0, DETECTION_TOLERANCE)) <= 0;
         }
 
         protected bool IsCollidingRight() {
-            return testXCollision(new Vector2d(DETECTION_TOLERANCE, 0)) <= 0;
+            return testXCollision(new Vec2d(DETECTION_TOLERANCE, 0)) <= 0;
         }
 
         protected bool IsCollidingLeft() {
-            return testXCollision(new Vector2d(-DETECTION_TOLERANCE, 0)) >= 0;
+            return testXCollision(new Vec2d(-DETECTION_TOLERANCE, 0)) >= 0;
         }
 
-        protected void DoGravitationalMovement(Vector2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true) {
+        protected void DoGravitationalMovement(Vec2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true) {
             //movementDelta.X = 0;
             movementDelta.Y -= DynamicEntity.GRAVITY_ACCELERATION;
             if (IsOnGround())
@@ -188,7 +186,7 @@ namespace Entities.SuperBitBros {
             if (movementDelta.Y < -MAX_GRAVITY)
                 movementDelta.Y = -MAX_GRAVITY;
 
-            movementDelta = Vector2d.Add(movementDelta, additionalForce);
+            movementDelta += additionalForce;
 
             if (IsOnGround() && resetYOnCollision)
                 movementDelta.Y = Math.Max(movementDelta.Y, 0);

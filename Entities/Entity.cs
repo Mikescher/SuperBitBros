@@ -1,7 +1,8 @@
 ﻿using OpenTK;
 using OpenTK.Input;
-using SuperBitBros.OpenGL;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 
 namespace Entities.SuperBitBros {
@@ -15,7 +16,7 @@ namespace Entities.SuperBitBros {
         public const int DISTANCE_PLAYER = 30;
         public const int DISTANCE_FOREGROUND = 10;
 
-        public Vector2d position; // bottom left
+        public Vec2d position; // bottom left
         public double distance;
 
         public double width;
@@ -24,58 +25,42 @@ namespace Entities.SuperBitBros {
         protected OGLTexture texture;
 
         public Entity() {
-            this.position = new Vector2d(-1, -1);
+            this.position = new Vec2d(-1, -1);
             this.distance = 1;
             this.width = 1;
             this.height = 1;
         }
 
-        public virtual Rectangle2d GetPosition() {
-            return new Rectangle2d(position, width, height);
+        public virtual Rect2d GetPosition() {
+            return new Rect2d(position, width, height);
         }
 
-        public virtual Rectangle2d GetTexturePosition() {
+        public virtual Rect2d GetTexturePosition() {
             return GetPosition();
         }
 
-        public virtual Rectangle3d GetPositionWithDistance() {
-            return new Rectangle3d(new Vector3d(position.X, position.Y, distance), width, height);
+        public virtual Vec2d GetTopLeft() {
+            return new Vec2d(position.X, position.Y + height);
         }
 
-        public virtual Vector2d GetTopLeft() {
-            return new Vector2d(position.X, position.Y + height);
+        public virtual Vec2d GetTopRight() {
+            return new Vec2d(position.X + width, position.Y + height);
         }
 
-        public virtual Vector3d GetTopLeftWithDistance() {
-            return new Vector3d(position.X, position.Y + height, distance);
+        public virtual Vec2d GetBottomLeft() {
+            return new Vec2d(position.X, position.Y);
         }
 
-        public virtual Vector2d GetTopRight() {
-            return new Vector2d(position.X + width, position.Y + height);
-        }
-
-        public virtual Vector3d GetTopRightWithDistance() {
-            return new Vector3d(position.X + width, position.Y + height, distance);
-        }
-
-        public virtual Vector2d GetBottomLeft() {
-            return new Vector2d(position.X, position.Y);
-        }
-
-        public virtual Vector3d GetBottomLeftWithDistance() {
-            return new Vector3d(position.X, position.Y, distance);
-        }
-
-        public virtual Vector2d GetBottomRight() {
-            return new Vector2d(position.X + width, position.Y);
+        public virtual Vec2d GetBottomRight() {
+            return new Vec2d(position.X + width, position.Y);
         }
 
         public virtual Vector3d GetBottomRightWithDistance() {
             return new Vector3d(position.X + width, position.Y, distance);
         }
 
-        public virtual Vector2d GetMiddle() {
-            return new Vector2d(position.X + width / 2, position.Y + height / 2);
+        public virtual Vec2d GetMiddle() {
+            return new Vec2d(position.X + width / 2, position.Y + height / 2);
         }
 
         public virtual void OnRemove() { }

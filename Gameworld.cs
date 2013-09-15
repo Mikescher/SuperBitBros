@@ -1,7 +1,7 @@
 ﻿using Entities.SuperBitBros;
-using OpenTK;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
 using System;
@@ -9,7 +9,7 @@ using System;
 namespace SuperBitBros {
     class GameWorld : GameModel {
 
-        private Vector2d offset = new Vector2d(0, 0);
+        private Vec2d offset = Vec2d.Zero;
 
         public Player player;
 
@@ -39,15 +39,30 @@ namespace SuperBitBros {
                 Player p = new Player();
                 AddEntity(p, px, py);
                 player = p;
+                offset.Set(px, py);
             } else if (triggertype == AddTriggerType.DEATH_ZONE) {
                 //TODO DEATH
             }
         }
 
+        public void AddPipeZoneFromMapData(PipeZoneType pipeZoneType, double x, double y) {
+            double px = x * Block.BLOCK_WIDTH;
+            double py = y * Block.BLOCK_HEIGHT;
+
+            if (pipeZoneType == PipeZoneType.MOVEMENT_NORTH_ZONE) {
+
+            } else if (pipeZoneType == PipeZoneType.MOVEMENT_EAST_ZONE) {
+
+            } else if (pipeZoneType == PipeZoneType.MOVEMENT_SOUTH_ZONE) {
+
+            } else if (pipeZoneType == PipeZoneType.MOVEMENT_WEST_ZONE) {
+
+            }
+        }
+
         public void LoadMapFromResources() {
             ImageMapParser parser = new ImageMapParser(new OpenRasterImage(Resources.map_01_01));
-            mapWidth = parser.GetWidth() * Block.BLOCK_WIDTH;
-            mapHeight = parser.GetHeight() * Block.BLOCK_HEIGHT;
+            setSize(parser.GetWidth(), parser.GetHeight());
 
             for (int x = 0; x < parser.GetWidth(); x++) {
                 for (int y = 0; y < parser.GetHeight(); y++) {
@@ -57,6 +72,7 @@ namespace SuperBitBros {
                     Block block = parser.GetBlock(imgX, imgY);
                     SpawnEntityType set = parser.GetEntity(imgX, imgY);
                     AddTriggerType att = parser.GetTrigger(imgX, imgY);
+                    PipeZoneType pzt = parser.GetPipeZone(imgX, imgY);
 
                     if (block == null)
                         Console.Error.WriteLine("Could not parse Block-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_BLOCKS, imgX, imgY), x, y);
@@ -72,6 +88,11 @@ namespace SuperBitBros {
                         Console.Error.WriteLine("Could not parse Trigger-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y);
                     else if (att != AddTriggerType.NO_TRIGGER)
                         AddTriggerFromMapData(att, x, y);
+
+                    if (pzt == PipeZoneType.UNKNOWN_ZONE)
+                        Console.Error.WriteLine("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY), x, y);
+                    else if (pzt != PipeZoneType.NO_ZONE)
+                        AddPipeZoneFromMapData(pzt, x, y);
                 }
             }
 
@@ -80,29 +101,20 @@ namespace SuperBitBros {
             }
         }
 
-        public override Vector2d GetOffset(int window_width, int window_height) {
-            Vector2d screenMiddle = new Vector2d(offset.X + (window_width / 2.0), offset.Y + (window_height / 2.0));
+        public override Vec2d GetOffset(int window_width, int window_height) {
+            Rect2d cameraBox = new Rect2d(offset, window_width, window_height);
 
-            Vector2d playerPos = player.GetPosition().GetMiddle();
+            cameraBox.TrimNorth(window_height / 4.0);
+            cameraBox.TrimEast(window_width / 3.0);
+            cameraBox.TrimSouth(Block.BLOCK_HEIGHT * 2);
+            cameraBox.TrimWest(window_width / 3.0);
 
-            Vector2d diffToMid = Vector2d.Subtract(screenMiddle, playerPos);
-            Vector2d diffToOff = Vector2d.Subtract(player.GetBottomLeft(), offset);
+            Vec2d playerPos = player.GetPosition().bl;
 
-            if (Math.Abs(diffToMid.X) > window_width / 8.0) {
-                diffToMid.X -= (window_width / 8.0) * Math.Sign(diffToMid.X);
+            offset += cameraBox.GetDistanceTo(playerPos);
 
-                offset.X -= diffToMid.X;
-            }
-
-            if (diffToMid.Y < -2 * window_height / 6.0) {
-                offset.Y -= diffToMid.Y - (2 * window_height / 6.0) * Math.Sign(diffToMid.Y);
-            }
-            if (diffToOff.Y < 2 * Block.BLOCK_HEIGHT) {
-                offset.Y += diffToOff.Y - 2 * Block.BLOCK_HEIGHT;
-            }
-
-            offset.X = Math.Min(offset.X + window_width, mapWidth) - window_width;
-            offset.Y = Math.Min(offset.Y + window_height, mapHeight) - window_height;
+            offset.X = Math.Min(offset.X + window_width, mapRealWidth) - window_width;
+            offset.Y = Math.Min(offset.Y + window_height, mapRealHeight) - window_height;
 
             offset.X = Math.Max(offset.X, 0);
             offset.Y = Math.Max(offset.Y, 0);

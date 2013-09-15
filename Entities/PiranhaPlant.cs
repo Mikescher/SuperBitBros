@@ -2,6 +2,7 @@
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 
 namespace SuperBitBros.Entities {
@@ -15,7 +16,7 @@ namespace SuperBitBros.Entities {
         private bool direction = true;
         private int state = 0;
 
-        private Rectangle2d pipeUnder = null;
+        private Rect2d pipeUnder = null;
 
         public PiranhaPlant() {
             distance = Entity.DISTANCE_MOBS;
@@ -31,8 +32,8 @@ namespace SuperBitBros.Entities {
             width -= SHRINK_WIDTH * 2;
         }
 
-        public override Rectangle2d GetTexturePosition() {
-            return new Rectangle2d(position.X - SHRINK_WIDTH, position.Y, 2 * Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT * 2);
+        public override Rect2d GetTexturePosition() {
+            return new Rect2d(position.X - SHRINK_WIDTH, position.Y, 2 * Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT * 2);
         }
 
         public override void Update(KeyboardDevice keyboard) {
@@ -109,12 +110,12 @@ namespace SuperBitBros.Entities {
             int width = maxX - minX + 1;
             int height = maxY - minY + 1;
 
-            pipeUnder = new Rectangle2d(minX * Block.BLOCK_WIDTH, minY * Block.BLOCK_HEIGHT, width * Block.BLOCK_WIDTH, height * Block.BLOCK_HEIGHT);
+            pipeUnder = new Rect2d(minX * Block.BLOCK_WIDTH, minY * Block.BLOCK_HEIGHT, width * Block.BLOCK_WIDTH, height * Block.BLOCK_HEIGHT);
         }
 
         private void testPlayerBlocking() {
             Player p = ((GameWorld)owner).player;
-            Rectangle2d prect = p.GetPosition();
+            Rect2d prect = p.GetPosition();
 
             if (prect.IsTouching(pipeUnder)) {
                 lastUpdate = 0;

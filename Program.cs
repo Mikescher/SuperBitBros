@@ -15,3 +15,7 @@ namespace SuperBitBros {
         }
     }
 }
+
+//TODO Offset
+//TODO Replace All Vector with own things (add VectorInt where possible)
+//TODO Trigegr and PipeZones

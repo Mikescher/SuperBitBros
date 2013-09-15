@@ -1,8 +1,7 @@
 ﻿using Entities.SuperBitBros;
-using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Drawing;
 
@@ -17,12 +16,10 @@ namespace SuperBitBros {
             GL.ClearColor(Color.FromArgb(0, 0, 0));
             StartRender();
 
-            Vector2d offset = model.GetOffset(window.Width, window.Height);
-            offset.X = (int)offset.X; // Cast to int for ... reasons
-            offset.Y = (int)offset.Y;
+            Vec2i offset = (Vec2i)model.GetOffset(window.Width, window.Height); // Cast to int for ... reasons
             GL.Translate(-offset.X, -offset.Y, 0);
 
-            Rectangle2d bRange = new Rectangle2d((int)(offset.X / Block.BLOCK_WIDTH) - 1,
+            Rect2i bRange = new Rect2i((int)(offset.X / Block.BLOCK_WIDTH) - 1,
                                                  (int)(offset.Y / Block.BLOCK_HEIGHT) - 1,
                                                  (int)(window.Width / Block.BLOCK_WIDTH) + 2,
                                                  (int)(window.Height / Block.BLOCK_HEIGHT) + 2);
@@ -37,16 +34,11 @@ namespace SuperBitBros {
             EndRender();
         }
 
-        protected double renderInDepth(double depth, Rectangle2d blockRange) {
+        protected double renderInDepth(double depth, Rect2i blockRange) {
             double nextDepth = 0;
 
-            int x1 = (int)blockRange.bl.X;
-            int y1 = (int)blockRange.bl.Y;
-            int x2 = (int)blockRange.tr.X;
-            int y2 = (int)blockRange.tr.Y;
-
-            for (int x = x1; x <= x2; x++) {
-                for (int y = y1; y <= y2; y++) {
+            for (int x = blockRange.bl.X; x <= blockRange.tr.X; x++) {
+                for (int y = blockRange.bl.Y; y <= blockRange.tr.Y; y++) {
                     Block block = model.GetBlock(x, y);
                     if (block == null)
                         continue;

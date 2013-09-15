@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -74,7 +75,7 @@ namespace SuperBitBros.OpenGL {
             return id;
         }
 
-        public Rectangle2d GetCoordinates() {
+        public Rect2d GetCoordinates() {
             switch (mode) {
                 case OGLTextureMode.TM_SINGLE:
                     return texSingle.GetCoordinates();

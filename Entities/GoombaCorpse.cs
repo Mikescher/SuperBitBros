@@ -3,6 +3,7 @@ using Entities.SuperBitBros;
 using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL.OGLMath;
 namespace SuperBitBros.Entities {
     class GoombaCorpse : DynamicEntity {
         public GoombaCorpse() {
@@ -16,7 +17,7 @@ namespace SuperBitBros.Entities {
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
-            DoGravitationalMovement(Vector2d.Zero);
+            DoGravitationalMovement(Vec2d.Zero);
         }
 
         protected override bool IsBlockingOther(Entity sender)

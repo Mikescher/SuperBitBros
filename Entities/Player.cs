@@ -3,6 +3,7 @@ using OpenTK.Input;
 using SuperBitBros;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 
 namespace Entities.SuperBitBros {
@@ -46,7 +47,7 @@ namespace Entities.SuperBitBros {
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
-            Vector2d delta = new Vector2d(0, 0);
+            Vec2d delta = Vec2d.Zero;
 
             delta.X = -Math.Sign(movementDelta.X) * Math.Min(PLAYER_SPEED_FRICTION, Math.Abs(movementDelta.X));
 
@@ -64,7 +65,7 @@ namespace Entities.SuperBitBros {
 
             if (keyboard[Key.ShiftLeft]) // DEBUG
             {
-                delta = Vector2d.Zero;
+                delta = Vec2d.Zero;
                 if (keyboard[Key.Left])
                     delta.X -= PLAYER_SPEED_MAX * 2;
                 if (keyboard[Key.Right])

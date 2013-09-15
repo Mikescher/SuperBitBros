@@ -5,19 +5,37 @@ using System.Drawing;
 namespace SuperBitBros {
     public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN };
     public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION };
+    public enum PipeZoneType { NO_ZONE, UNKNOWN_ZONE, MOVEMENT_NORTH_ZONE, MOVEMENT_EAST_ZONE, MOVEMENT_SOUTH_ZONE, MOVEMENT_WEST_ZONE };
 
     class ImageMapParser {
-        public const string LAYER_BLOCKS = "Blocks";
-        public const string LAYER_ENTITIES = "Entities";
+        public const string LAYER_PIPEZONES = "PipeNetwork";
         public const string LAYER_TRIGGER = "Trigger";
+        public const string LAYER_ENTITIES = "Entities";
+        public const string LAYER_BLOCKS = "Blocks";
+
+        //##################
+        // ENTITIES
+        //##################
 
         private static readonly Color COL_SPAWN_GOOMBA = Color.FromArgb(127, 0, 0);
         private static readonly Color COL_SPAWN_PIRANHAPLANT = Color.FromArgb(0, 127, 0);
         private static readonly Color COL_SPAWN_COIN = Color.FromArgb(100, 200, 100);
 
-        private static readonly Color COL_SPAWN_PLAYER = Color.FromArgb(128, 128, 128);
-        private static readonly Color COL_DEATH_ZONE = Color.FromArgb(127, 0, 64);
+        //##################
+        // TRIGGER
+        //##################
 
+        private static readonly Color COL_SPAWN_PLAYER = Color.FromArgb(128, 128, 128);
+        private static readonly Color COL_DEATH_ZONE = Color.FromArgb(128, 0, 64);
+
+        //##################
+        // PIPEZONES
+        //##################
+
+        private static readonly Color COL_PIPEZONE_MOVE_NORTH = Color.FromArgb(128, 0, 255);
+        private static readonly Color COL_PIPEZONE_MOVE_EAST = Color.FromArgb(255, 0, 0);
+        private static readonly Color COL_PIPEZONE_MOVE_SOUTH = Color.FromArgb(128, 255, 0);
+        private static readonly Color COL_PIPEZONE_MOVE_WEST = Color.FromArgb(0, 255, 255);
 
         public readonly OpenRasterImage map;
 
@@ -43,6 +61,10 @@ namespace SuperBitBros {
 
         public AddTriggerType GetTrigger(int x, int y) {
             return FindTriggerType(map.GetColor(LAYER_TRIGGER, x, y));
+        }
+
+        public PipeZoneType GetPipeZone(int x, int y) {
+            return FindPipeZoneType(map.GetColor(LAYER_PIPEZONES, x, y));
         }
 
         private Block FindBlock(Color c) {
@@ -94,6 +116,21 @@ namespace SuperBitBros {
                 return AddTriggerType.DEATH_ZONE;
             else
                 return AddTriggerType.UNKNOWN_TRIGGER;
+        }
+
+        private PipeZoneType FindPipeZoneType(Color c) {
+            if (c.A != 255)
+                return PipeZoneType.NO_ZONE;
+            else if (c == COL_PIPEZONE_MOVE_NORTH)
+                return PipeZoneType.MOVEMENT_NORTH_ZONE;
+            else if (c == COL_PIPEZONE_MOVE_EAST)
+                return PipeZoneType.MOVEMENT_EAST_ZONE;
+            else if (c == COL_PIPEZONE_MOVE_SOUTH)
+                return PipeZoneType.MOVEMENT_SOUTH_ZONE;
+            else if (c == COL_PIPEZONE_MOVE_WEST)
+                return PipeZoneType.MOVEMENT_WEST_ZONE;
+            else
+                return PipeZoneType.UNKNOWN_ZONE;
         }
     }
 }

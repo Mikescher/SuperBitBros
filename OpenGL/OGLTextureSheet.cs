@@ -1,5 +1,6 @@
 ﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Drawing;
 
@@ -24,19 +25,19 @@ namespace SuperBitBros.OpenGL {
             return new OGLTextureSheet(OGLTexture.LoadResourceIntoUID(bmp), width, height);
         }
 
-        public Rectangle2d GetCoordinates(int x, int y) {
+        public Rect2d GetCoordinates(int x, int y) {
             if (x >= width || y >= height || x < 0 || y < 0) {
                 throw new ArgumentException(String.Format("X:{0}, Y:{1}, W:{2}, H:{3}", x, y, width, height));
             }
             double texWidth = 1.0 / width;
             double texHeight = 1.0 / height;
 
-            Vector2d p = new Vector2d(texWidth * x, texHeight * y);
+            Vec2d p = new Vec2d(texWidth * x, texHeight * y);
 
-            return new Rectangle2d(p, texWidth, texHeight);
+            return new Rect2d(p, texWidth, texHeight);
         }
 
-        public Rectangle2d GetCoordinates(int pos) {
+        public Rect2d GetCoordinates(int pos) {
             return GetCoordinates(pos % width, pos / width);
         }
 

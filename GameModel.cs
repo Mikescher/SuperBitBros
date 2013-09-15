@@ -2,23 +2,29 @@
 using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Collections.Generic;
 
 namespace SuperBitBros {
     abstract class GameModel {
-        public const int MAP_WIDTH_MAX = 400;
-        public const int MAP_HEIGHT_MAX = 150;
-
         public List<DynamicEntity> entityList { get; protected set; }
-        [Obsolete("Dont use")]
         public List<Block> blockList { get; protected set; }
-        private Block[,] BlockMap = new Block[MAP_WIDTH_MAX, MAP_HEIGHT_MAX];
+        private Block[,] blockMap;
 
-        protected double mapWidth = 0;
-        protected double mapHeight = 0;
+        public int mapBlockWidth { get; protected set; }
+        public int mapBlockHeight { get; protected set; }
+
+        public double mapRealWidth { get; protected set; }
+        public double mapRealHeight { get; protected set; }
 
         public GameModel() {
+            mapBlockWidth = 0;
+            mapBlockHeight = 0;
+
+            mapRealWidth = 0;
+            mapRealHeight = 0;
+
             entityList = new List<DynamicEntity>();
             blockList = new List<Block>();
         }
@@ -28,16 +34,16 @@ namespace SuperBitBros {
             b.position.Y = Block.BLOCK_HEIGHT * y;
             blockList.Add(b);
 
-            if (BlockMap[x, y] != null)
+            if (blockMap[x, y] != null)
                 Console.Error.WriteLine("Block overrides other block when added to Blockmap: X:{0}, Y:{1}, Block:{2}", x, y, b.ToString());
-            BlockMap[x, y] = b;
+            blockMap[x, y] = b;
 
             b.OnAdd(this, x, y);
         }
 
         public void ReplaceBlock(Block oldb, Block newb) {
-            int x = oldb.blockPosX;
-            int y = oldb.blockPosY;
+            int x = oldb.blockPos.X;
+            int y = oldb.blockPos.Y;
 
             RemoveBlock(x, y);
 
@@ -45,17 +51,17 @@ namespace SuperBitBros {
         }
 
         protected void RemoveBlock(int x, int y) {
-            if (BlockMap[x, y] != null) {
-                blockList.Remove(BlockMap[x, y]);
-                BlockMap[x, y].OnRemove();
-                BlockMap[x, y] = null;
+            if (blockMap[x, y] != null) {
+                blockList.Remove(blockMap[x, y]);
+                blockMap[x, y].OnRemove();
+                blockMap[x, y] = null;
             }
         }
 
         public Block GetBlock(int x, int y) {
-            if (x < 0 || y < 0 || x >= MAP_WIDTH_MAX || y >= MAP_HEIGHT_MAX)
+            if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
                 return null;
-            return BlockMap[x, y];
+            return blockMap[x, y];
         }
 
         public virtual Entity AddEntity(DynamicEntity e, double x, double y) {
@@ -88,6 +94,16 @@ namespace SuperBitBros {
             }
         }
 
-        public abstract Vector2d GetOffset(int window_width, int window_height);
+        public void setSize(int w, int h) {
+            blockMap = new Block[w, h];
+
+            mapBlockWidth = w;
+            mapBlockHeight = h;
+
+            mapRealWidth = Block.BLOCK_WIDTH * w;
+            mapRealHeight = Block.BLOCK_HEIGHT * h;
+        }
+
+        public abstract Vec2d GetOffset(int window_width, int window_height);
     }
 }
