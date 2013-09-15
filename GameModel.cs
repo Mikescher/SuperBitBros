@@ -1,10 +1,12 @@
 ﻿using Entities.SuperBitBros;
+using OpenTK.Graphics;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.Trigger;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace SuperBitBros {
     abstract class GameModel {
@@ -64,6 +66,12 @@ namespace SuperBitBros {
             if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
                 return null;
             return blockMap[x, y];
+        }
+
+        public Color4 GetBlockColor(int x, int y) {
+            if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
+                return Color.White;
+            return blockMap[x, y].GetBlockColor();
         }
 
         public virtual Entity AddEntity(DynamicEntity e, double x, double y) {

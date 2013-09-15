@@ -1,6 +1,7 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using QuickFont;
 using System;
 
 namespace SuperBitBros {
@@ -14,6 +15,7 @@ namespace SuperBitBros {
             base.OnResize(e);
 
             GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
+            QFont.InvalidateViewport();
         }
     }
 }

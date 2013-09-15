@@ -103,15 +103,22 @@ namespace SuperBitBros {
             }
         }
 
-        public override Vec2d GetOffset(int window_width, int window_height) {
-            Rect2d cameraBox = new Rect2d(offset, window_width, window_height);
+        public Rect2d GetOffsetBox(int window_width, int window_height) {
+            Rect2d result = new Rect2d(offset, window_width, window_height);
 
-            cameraBox.TrimNorth(window_height / 4.0);
-            cameraBox.TrimEast(window_width / 3.0);
-            cameraBox.TrimSouth(Block.BLOCK_HEIGHT * 2);
-            cameraBox.TrimWest(window_width / 3.0);
+            result.TrimNorth(window_height / 4.0);
+            result.TrimEast(window_width / 3.0);
+            result.TrimSouth(Block.BLOCK_HEIGHT * 2);
+            result.TrimWest(window_width / 3.0);
+
+            return result;
+        }
+
+        public override Vec2d GetOffset(int window_width, int window_height) {
+            Rect2d cameraBox = GetOffsetBox(window_width, window_height);
 
             Vec2d playerPos = player.GetPosition().bl;
+            playerPos.X += player.width / 2.0;
 
             offset += cameraBox.GetDistanceTo(playerPos);
 

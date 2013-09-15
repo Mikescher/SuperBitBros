@@ -13,11 +13,10 @@ namespace SuperBitBros {
 
             world.LoadMapFromResources();
 
-            view.Start(60, 120);
+            view.Start(60, 60);
         }
     }
 }
 
-//TODO Offset
-//TODO Replace All Vector with own things (add VectorInt where possible)
+//TODO Performance 4 Fullscreen
 //TODO Trigegr and PipeZones

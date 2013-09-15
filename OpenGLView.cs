@@ -15,6 +15,9 @@ namespace SuperBitBros {
         protected MyGameWindow window;
         protected GameModel model;
 
+        protected FrequencyCounter fps_counter = new FrequencyCounter();
+        protected FrequencyCounter ups_counter = new FrequencyCounter();
+
         protected QFont DebugFont;
 
         public OpenGLView(GameModel model) {
@@ -30,16 +33,11 @@ namespace SuperBitBros {
         }
 
         public virtual void Start(int fps, int ups) {
-            window.Run(fps, ups);
+            window.Run(ups, fps);
         }
 
         protected void OnLoad(object sender, EventArgs e) {
             OnInit();
-
-            QFontBuilderConfiguration builderConfig = new QFontBuilderConfiguration(true);
-            builderConfig.ShadowConfig.blurRadius = 1; //reduce blur radius because font is very small
-            builderConfig.TextGenerationRenderHint = TextGenerationRenderHint.ClearTypeGridFit; //best render hint for this font
-            DebugFont = new QFont(new Font("Times New Roman", 72));
         }
 
         private void OnInit() {
@@ -52,11 +50,20 @@ namespace SuperBitBros {
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
             GL.ClearColor(Color4.Black);
+
+            QFontBuilderConfiguration builderConfig = new QFontBuilderConfiguration(true);
+            builderConfig.ShadowConfig.blurRadius = 1; //reduce blur radius because font is very small
+            builderConfig.TextGenerationRenderHint = TextGenerationRenderHint.ClearTypeGridFit; //best render hint for this font
+            DebugFont = new QFont(new Font("Arial", 8));
+            DebugFont.Options.DropShadowActive = true;
         }
 
-        protected abstract void OnRender(object sender, EventArgs e);
+        protected virtual void OnRender(object sender, EventArgs e) {
+            fps_counter.Inc();
+        }
 
         protected virtual void OnUpdate(object sender, EventArgs e) {
+            ups_counter.Inc();
             model.Update(window.Keyboard);
         }
 
@@ -74,6 +81,17 @@ namespace SuperBitBros {
 
         protected virtual void RenderRectangle(Vec2d tl, Vec2d bl, Vec2d br, Vec2d tr, double distance) {
             RenderRectangle(new Rect2d(bl, tr), distance);
+        }
+
+        protected virtual void RenderRectangle(Rect2d rect, double distance, Color4 col) {
+            GL.Begin(BeginMode.Quads);
+            GL.Color4(col);
+            GL.Vertex3(rect.tl.X, rect.tl.Y, distance);
+            GL.Vertex3(rect.bl.X, rect.bl.Y, distance);
+            GL.Vertex3(rect.br.X, rect.br.Y, distance);
+            GL.Vertex3(rect.tr.X, rect.tr.Y, distance);
+            GL.Color3(1.0, 1.0, 1.0);
+            GL.End();
         }
 
         protected virtual void RenderRectangle(Rect2d rect, double distance) {
@@ -151,13 +169,36 @@ namespace SuperBitBros {
         }
 
         public void RenderFont(Vec2d pos, QFont font, string text, Color4 col) {
+            font.Options.Colour = col;
+
+            QFont.Begin();
+
+            GL.PushMatrix();
+
+            GL.Translate(pos.X, pos.Y, 0.2);
+            DebugFont.Print(text);
+            GL.Color3(1.0, 1.0, 1.0);
+
+            GL.PopMatrix();
+
+            QFont.End();
+        }
+
+        public void RenderPixel(Vec2d pos, double distance, Color4 col) {
+            GL.Begin(BeginMode.Points);
             GL.Color4(col);
+            GL.Vertex3(pos.X, pos.Y, distance);
+            GL.Color3(1.0, 1.0, 1.0);
+            GL.End();
+        }
 
-            font.Print(text, new Vector2((float)pos.X, (float)pos.Y));
-
-            font.Print(text, new Vector2(0, 0));
-
-            font.Print(text, new Vector2(72, 72));
+        public void RenderLine(Vec2d start, Vec2d end, double distance, Color4 col) {
+            GL.Begin(BeginMode.Lines);
+            GL.Color4(col);
+            GL.Vertex3(start.X, start.Y, distance);
+            GL.Vertex3(end.X, end.Y, distance);
+            GL.Color3(1.0, 1.0, 1.0);
+            GL.End();
         }
     }
 }

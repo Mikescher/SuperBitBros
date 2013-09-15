@@ -21,7 +21,7 @@ namespace SuperBitBros.Entities {
         public PiranhaPlant() {
             distance = Entity.DISTANCE_MOBS;
             width = 2 * Block.BLOCK_WIDTH;
-            height = (Block.BLOCK_HEIGHT * 2.0) * (state / STATE_COUNT);
+            height = 0;
 
             texture = Textures.piranhaplant_sheet.GetTextureWrapper(0);
         }
@@ -47,7 +47,7 @@ namespace SuperBitBros.Entities {
                     direction = false;
 
                 texture = Textures.piranhaplant_sheet.GetTextureWrapper(state);
-                height = (Block.BLOCK_HEIGHT * 2.0) * (state * 1.0 / STATE_COUNT);
+                height = (Block.BLOCK_HEIGHT * 2.0) * (state*1.0 / (STATE_COUNT - 1));
                 lastUpdate = 0;
             }
             lastUpdate++;

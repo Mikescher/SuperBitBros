@@ -1,4 +1,5 @@
 ﻿using Entities.SuperBitBros;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.Trigger;
@@ -17,6 +18,8 @@ namespace SuperBitBros {
         }
 
         protected override void OnRender(object sender, EventArgs e) {
+            base.OnRender(sender, e);
+
             GL.ClearColor(Color.FromArgb(0, 0, 0));
             StartRender();
 
@@ -37,7 +40,7 @@ namespace SuperBitBros {
             }
 
             if (Program.IS_DEBUG) {
-                RenderDebug();
+                RenderDebug(offset);
             }
 
             EndRender();
@@ -74,7 +77,7 @@ namespace SuperBitBros {
             return nextDepth;
         }
 
-        private void RenderDebug() {
+        private void RenderDebug(Vec2i offset) {
             GL.Disable(EnableCap.Texture2D);
 
             //######################
@@ -104,12 +107,42 @@ namespace SuperBitBros {
             }
 
             //######################
+            // RENDER OFFSET BOX
+            //######################
+
+            RenderColoredBox(((GameWorld)model).GetOffsetBox(window.Width, window.Height), 0.1, Color.FromArgb(200, 255, 0, 0));
+
+            //######################
+            // RENDER MINIMAP
+            //######################
+
+            RenderMinimap(offset);
+
+            //######################
             // RENDER DEBUG TEXTS
             //######################
 
-
+            int foy = 0;
+            Color4 col = Color.FromArgb(0, 0, 0);
+            RenderFont(new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("FPS: {0} / {1}", (int)fps_counter.frequency, window.TargetRenderFrequency), col);
+            RenderFont(new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("UPS: {0}", (int)ups_counter.frequency), col);
+            RenderFont(new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Entities: {0}", model.entityList.Count), col);
+            RenderFont(new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player: [int] {0}", (Vec2i)((GameWorld)model).player.position), col);
+            RenderFont(new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Offset: [int] {0}", (Vec2i)offset), col);
 
             GL.Enable(EnableCap.Texture2D);
+        }
+
+        private void RenderMinimap(Vec2i offset) {
+            Rect2d mapRect = new Rect2d(offset.X + window.Width - 5 - model.mapBlockWidth, offset.Y + window.Height - 5 - model.mapBlockHeight, model.mapBlockWidth, model.mapBlockHeight);
+
+            for (int x = 0; x < model.mapBlockWidth; x++) {
+                for (int y = 0; y < model.mapBlockHeight; y++) {
+                    RenderPixel(mapRect.bl + new Vec2d(x, y), 0.3, model.GetBlockColor(x, y));
+                }
+            }
+
+            RenderColoredBox(new Rect2d(offset / Block.BLOCK_SIZE + mapRect.bl, window.Width * 1.0 / Block.BLOCK_WIDTH, window.Height * 1.0 / Block.BLOCK_HEIGHT), 0.25, Color.FromArgb(255, 255, 0, 0));
         }
     }
 }

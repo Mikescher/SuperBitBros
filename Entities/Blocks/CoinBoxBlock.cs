@@ -22,5 +22,9 @@ namespace SuperBitBros.Entities.Blocks {
                 ((GameWorld)owner).ReplaceBlock(this, new EmptyCoinBoxBlock());
             }
         }
+
+        public override Color GetBlockColor() {
+            return color;
+        }
     }
 }

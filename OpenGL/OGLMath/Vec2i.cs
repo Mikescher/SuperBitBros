@@ -127,5 +127,9 @@ namespace SuperBitBros.OpenGL.OGLMath {
             X = (int)nX;
             Y = (int)nY;
         }
+
+        public override string ToString() {
+            return String.Format("({0}|{1})", X, Y);
+        }
     }
 }

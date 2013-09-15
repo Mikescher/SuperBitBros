@@ -35,5 +35,9 @@ namespace SuperBitBros.Entities.Blocks {
                 }
             }
         }
+
+        public override Color GetBlockColor() {
+            return color;
+        }
     }
 }

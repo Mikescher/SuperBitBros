@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
-namespace SuperBitBros.Entities.Blocks
-{
-    class PipeBlock : Block
-    {
+namespace SuperBitBros.Entities.Blocks {
+    class PipeBlock : Block {
         public static Color color = Color.FromArgb(0, 255, 0);
 
         public PipeBlock()
-            : base()
-        {
+            : base() {
             texture = Textures.texture_pipe;
         }
 
-        public static Color GetColor()
-        {
-            return color; 
+        public static Color GetColor() {
+            return color;
+        }
+
+        public override Color GetBlockColor() {
+            return color;
         }
     }
 }

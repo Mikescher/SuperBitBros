@@ -97,6 +97,7 @@
     <Compile Include="Entities\Blocks\StandardGroundBlock.cs" />
     <Compile Include="MapParser.cs" />
     <Compile Include="MyGameWindow.cs" />
+    <Compile Include="OpenGL\FrequencyCounter.cs" />
     <Compile Include="OpenGL\OGLMath\Rect2d.cs" />
     <Compile Include="OpenGL\OGLMath\Rect2i.cs" />
     <Compile Include="OpenGL\OGLMath\Vec2d.cs" />
