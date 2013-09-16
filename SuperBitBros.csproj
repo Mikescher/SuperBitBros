@@ -85,6 +85,7 @@
     <Compile Include="Entities\EnityController\DefaultNewtonController.cs" />
     <Compile Include="Entities\EnityController\DefaultMobController.cs" />
     <Compile Include="Entities\EnityController\DefaultPlayerController.cs" />
+    <Compile Include="Entities\EnityController\PipePlayerController.cs" />
     <Compile Include="Triggers\DeathZone.cs" />
     <Compile Include="Triggers\PipeZones\MoveEastPipeZone.cs" />
     <Compile Include="Triggers\PipeZones\MoveNorthPipeZone.cs" />

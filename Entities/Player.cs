@@ -6,6 +6,9 @@ using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using SuperBitBros.Entities.EnityController;
+using SuperBitBros.Triggers;
+using SuperBitBros.Triggers.PipeZones;
+using System.Collections.Generic;
 
 namespace SuperBitBros.Entities {
     enum Direction { LEFT, RIGHT };
@@ -46,7 +49,23 @@ namespace SuperBitBros.Entities {
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
+            if (keyboard[Key.Down] && IsOnGround())
+                TestForSouthPipe();
+
             UpdateTexture();
+        }
+
+        private void TestForSouthPipe()
+        {
+            Vec2i blockpos = (Vec2i)(position / Block.BLOCK_SIZE);
+
+            blockpos.Y--;
+
+            List<Trigger> triggerlist = owner.getTriggerList(blockpos.X, blockpos.Y);
+            if (triggerlist != null)
+                foreach (Trigger t in owner.getTriggerList(blockpos.X, blockpos.Y))
+                    if (t is PipeZone && (t as PipeZone).GetDirection() == PipeDirection.SOUTH)
+                        AddController(new PipePlayerController(this, PipeDirection.SOUTH));
         }
 
         private void UpdateTexture() {
