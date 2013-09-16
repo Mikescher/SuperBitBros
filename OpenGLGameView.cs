@@ -1,12 +1,13 @@
-﻿using Entities.SuperBitBros;
+﻿using SuperBitBros.Entities;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.Entities.Trigger;
+using SuperBitBros.Triggers;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using SuperBitBros.Triggers.PipeZones;
 
 namespace SuperBitBros {
     class OpenGLGameView : OpenGLView {
@@ -90,7 +91,29 @@ namespace SuperBitBros {
 
                     if (tlist != null) {
                         foreach (Trigger t in tlist) {
-                            RenderColoredRectangle(t.GetPosition(), 0, Color.FromArgb(200, 255, 0, 0));
+                            RenderColoredRectangle(t.GetPosition(), 0.15, Color.FromArgb(128, t.GetTriggerColor()));
+
+                            if (t is PipeZone)
+                            {
+                                Vec2d start = t.GetPosition().GetMiddle();
+                                Vec2d arr = Vec2d.Zero;
+                                if (t is MoveNorthPipeZone) {
+                                    start.Y -= Block.BLOCK_HEIGHT / 4.0;
+                                    arr = new Vec2d(0, Block.BLOCK_HEIGHT / 2.0);
+                                } else if (t is MoveEastPipeZone) {
+                                    start.X -= Block.BLOCK_HEIGHT / 4.0;
+                                    arr = new Vec2d(Block.BLOCK_WIDTH / 2.0, 0);
+                                } else if (t is MoveSouthPipeZone) {
+                                    start.Y += Block.BLOCK_WIDTH / 4.0;
+                                    arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 2.0);
+                                } else if (t is MoveWestPipeZone) {
+                                    start.X += Block.BLOCK_WIDTH / 4.0;
+                                    arr = new Vec2d(-Block.BLOCK_WIDTH / 2.0, 0);
+                                }
+
+                                RenderColoredBox(t.GetPosition(), 0.1, t.GetTriggerColor());
+                                RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                            }
                         }
                     }
                 }
@@ -103,7 +126,7 @@ namespace SuperBitBros {
             foreach (DynamicEntity e in model.entityList) {
                 RenderColoredBox(e.GetPosition(), 0.1, Color.FromArgb(200, 0, 0, 255));
 
-                RenderArrow(e.GetMiddle(), e.movementDelta * 8, 0.2, Color.FromArgb(200, 0, 0, 255));
+                RenderArrow(e.GetMiddle(), e.GetMovement() * 8, 0.2, Color.FromArgb(200, 0, 0, 255));
             }
 
             //######################

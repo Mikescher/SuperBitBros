@@ -78,11 +78,22 @@
     <Compile Include="Entities\Blocks\FlagBlock.cs" />
     <Compile Include="Entities\Blocks\HillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
-    <Compile Include="Entities\Trigger\DeathZone.cs" />
-    <Compile Include="Entities\Trigger\PipeZones\PipeZone.cs" />
+    <Compile Include="Entities\EnityController\AbstractEntityController.cs" />
+    <Compile Include="Entities\EnityController\AbstractNewtonEntityController.cs" />
+    <Compile Include="Entities\EnityController\BouncingCoinController.cs" />
+    <Compile Include="Entities\EnityController\CoinController.cs" />
+    <Compile Include="Entities\EnityController\DefaultNewtonController.cs" />
+    <Compile Include="Entities\EnityController\DefaultMobController.cs" />
+    <Compile Include="Entities\EnityController\DefaultPlayerController.cs" />
+    <Compile Include="Triggers\DeathZone.cs" />
+    <Compile Include="Triggers\PipeZones\MoveEastPipeZone.cs" />
+    <Compile Include="Triggers\PipeZones\MoveNorthPipeZone.cs" />
+    <Compile Include="Triggers\PipeZones\MoveSouthPipeZone.cs" />
+    <Compile Include="Triggers\PipeZones\MoveWestPipeZone.cs" />
+    <Compile Include="Triggers\PipeZones\PipeZone.cs" />
     <Compile Include="Entities\Blocks\StandardAirBlock.cs" />
-    <Compile Include="Entities\Trigger\PlayerSpawnZone.cs" />
-    <Compile Include="Entities\Trigger\Trigger.cs" />
+    <Compile Include="Triggers\PlayerSpawnZone.cs" />
+    <Compile Include="Triggers\Trigger.cs" />
     <Compile Include="Entities\CoinEntity.cs" />
     <Compile Include="Entities\DynamicEntity.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -129,6 +140,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
   <ItemGroup>

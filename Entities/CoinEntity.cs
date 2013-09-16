@@ -1,5 +1,5 @@
 ﻿
-using Entities.SuperBitBros;
+using SuperBitBros.Entities;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 namespace SuperBitBros.Entities {

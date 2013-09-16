@@ -1,8 +1,9 @@
-﻿using Entities.SuperBitBros;
+﻿using System.Drawing;
+using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
 
-namespace SuperBitBros.Entities.Trigger {
+namespace SuperBitBros.Triggers {
     abstract class Trigger {
         protected readonly Vec2i position; // block position
 
@@ -21,5 +22,6 @@ namespace SuperBitBros.Entities.Trigger {
         }
 
         public abstract void OnCollide(DynamicEntity collider);
+        public abstract Color GetTriggerColor();
     }
 }

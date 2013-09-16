@@ -1,7 +1,8 @@
-﻿using Entities.SuperBitBros;
+﻿using SuperBitBros.Entities;
 using OpenTK.Input;
 using System;
 using System.Drawing;
+using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.Blocks {
     class CrazyCoinBoxBlock : Block {
@@ -35,13 +36,12 @@ namespace SuperBitBros.Entities.Blocks {
                 timeUntilSpawn--;
 
                 if (timeUntilSpawn <= 0 && timeUntilDried > 0) {
-                    CoinEntity ce = new GravityCoinEntity(0, true);
-                    owner.AddEntity(ce, GetTopLeft().X, GetTopLeft().Y);
                     double angle = random.NextDouble() * (Math.PI / 3) - (Math.PI / 6);
                     angle += Math.Sign(angle) * (Math.PI / 8);
                     double force = random.NextDouble() * (COIN_MAX_SPAWN_FORCE - COIN_MIN_SPAWN_FORCE) + COIN_MIN_SPAWN_FORCE;
-                    ce.movementDelta.X = Math.Sin(angle) * force;
-                    ce.movementDelta.Y = Math.Cos(angle) * force;
+
+                    CoinEntity ce = new GravityCoinEntity(new Vec2d(Math.Sin(angle) * force, Math.Cos(angle) * force), true);
+                    owner.AddEntity(ce, GetTopLeft().X, GetTopLeft().Y);
 
                     timeUntilSpawn = COIN_SPAWN_TIME;
                     timeUntilDried--;
@@ -55,7 +55,7 @@ namespace SuperBitBros.Entities.Blocks {
         }
 
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
-            if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).movementDelta.Y > 0) {
+            if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0) {
                 isActive = true;
             }
         }

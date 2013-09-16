@@ -5,20 +5,17 @@ using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using SuperBitBros.Entities.EnityController;
 
-namespace Entities.SuperBitBros {
+namespace SuperBitBros.Entities {
     enum Direction { LEFT, RIGHT };
 
-    class Player : AnimatedDynamicEntity {
+    class Player : AnimatedDynamicEntity
+    {
         public const double PLAYER_SCALE = 0.9;
 
         public const int PLAYER_WIDTH = Block.BLOCK_WIDTH;
         public const int PLAYER_HEIGHT = Block.BLOCK_HEIGHT;
-
-        public const double PLAYER_SPEED_FRICTION = 0.15;
-        public const double PLAYER_SPEED_ACC = PLAYER_SPEED_FRICTION + 0.1;
-        public const double PLAYER_SPEED_MAX = 4.5;
-        public const double PLAYER_JUMP_POWER = 9;
 
         public Direction direction;
 
@@ -42,53 +39,24 @@ namespace Entities.SuperBitBros {
             atexture.Add(2, Textures.mario_small_sheet.GetTextureWrapper(5, 1));
             atexture.Add(2, Textures.mario_small_sheet.GetTextureWrapper(0, 0));
             atexture.Add(2, Textures.mario_small_sheet.GetTextureWrapper(0, 1));
+
+            AddController(new DefaultPlayerController(this));
         }
 
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
-
-            Vec2d delta = Vec2d.Zero;
-
-            delta.X = -Math.Sign(movementDelta.X) * Math.Min(PLAYER_SPEED_FRICTION, Math.Abs(movementDelta.X));
-
-            if (keyboard[Key.Left] && movementDelta.X > -PLAYER_SPEED_MAX) {
-                delta.X -= PLAYER_SPEED_ACC;
-            }
-
-            if (keyboard[Key.Right] && movementDelta.X < PLAYER_SPEED_MAX) {
-                delta.X += PLAYER_SPEED_ACC;
-            }
-
-            if (keyboard[Key.Space] && IsOnGround()) {
-                delta.Y = PLAYER_JUMP_POWER + GRAVITY_ACCELERATION;
-            }
-
-            if (keyboard[Key.ShiftLeft]) // DEBUG
-            {
-                delta = Vec2d.Zero;
-                if (keyboard[Key.Left])
-                    delta.X -= PLAYER_SPEED_MAX * 2;
-                if (keyboard[Key.Right])
-                    delta.X += PLAYER_SPEED_MAX * 2;
-                if (keyboard[Key.Space] || keyboard[Key.Up])
-                    delta.Y += PLAYER_SPEED_MAX;
-                if (keyboard[Key.Down])
-                    delta.Y -= PLAYER_SPEED_MAX;
-                MoveBy(delta, false);
-            } else
-                DoGravitationalMovement(delta);
-
 
             UpdateTexture();
         }
 
         private void UpdateTexture() {
             if (IsOnGround()) {
-                if (movementDelta.X > 0) {
+                if (GetMovement().X > 0)
+                {
                     atexture.SetLayer(1);
                     UpdateAnimation();
                     direction = Direction.RIGHT;
-                } else if (movementDelta.X < 0) {
+                } else if (GetMovement().X < 0) {
                     atexture.SetLayer(0);
                     UpdateAnimation();
                     direction = Direction.LEFT;
@@ -96,9 +64,12 @@ namespace Entities.SuperBitBros {
                     atexture.Set(2, (direction == Direction.LEFT) ? 0 : 1);
                 }
             } else {
-                if (movementDelta.X > 0) {
+                if (GetMovement().X > 0)
+                {
                     direction = Direction.RIGHT;
-                } else if (movementDelta.X < 0) {
+                }
+                else if (GetMovement().X < 0)
+                {
                     direction = Direction.LEFT;
                 }
 

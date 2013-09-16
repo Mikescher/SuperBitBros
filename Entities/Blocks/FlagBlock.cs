@@ -1,4 +1,4 @@
-﻿using Entities.SuperBitBros;
+﻿using SuperBitBros.Entities;
 using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {

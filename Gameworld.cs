@@ -1,11 +1,11 @@
-﻿using Entities.SuperBitBros;
-using SuperBitBros.Entities;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.Entities.Trigger;
+using SuperBitBros.Triggers;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
 using System;
+using SuperBitBros.Triggers.PipeZones;
 
 namespace SuperBitBros {
     class GameWorld : GameModel {
@@ -52,13 +52,13 @@ namespace SuperBitBros {
             double py = y * Block.BLOCK_HEIGHT;
 
             if (pipeZoneType == PipeZoneType.MOVEMENT_NORTH_ZONE) {
-
+                AddTrigger(new MoveNorthPipeZone(new Vec2i(x, y)), x, y);
             } else if (pipeZoneType == PipeZoneType.MOVEMENT_EAST_ZONE) {
-
+                AddTrigger(new MoveEastPipeZone(new Vec2i(x, y)), x, y);
             } else if (pipeZoneType == PipeZoneType.MOVEMENT_SOUTH_ZONE) {
-
+                AddTrigger(new MoveSouthPipeZone(new Vec2i(x, y)), x, y);
             } else if (pipeZoneType == PipeZoneType.MOVEMENT_WEST_ZONE) {
-
+                AddTrigger(new MoveWestPipeZone(new Vec2i(x, y)), x, y);
             }
         }
 

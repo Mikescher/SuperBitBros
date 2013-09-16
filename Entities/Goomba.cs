@@ -1,7 +1,8 @@
-﻿using Entities.SuperBitBros;
+﻿using SuperBitBros.Entities;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using System;
+using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities {
     class Goomba : Mob {
@@ -15,17 +16,13 @@ namespace SuperBitBros.Entities {
             height = Block.BLOCK_HEIGHT;
 
             texture = Textures.texture_goomba;
-        }
 
-        public override void Update(KeyboardDevice keyboard) {
-            base.Update(keyboard);
-
-            DoWalk(GOOMBA_ACC, GOOMBA_SPEED);
+            AddController(new DefaultMobController(this));
         }
 
         public override void OnHeadJump(Entity e) {
             owner.RemoveEntity(this);
-            owner.AddEntity(new GoombaCorpse(), position.X, position.Y);
+            owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
         }
 
         public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {

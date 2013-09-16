@@ -1,5 +1,6 @@
-﻿using Entities.SuperBitBros;
+﻿using SuperBitBros.Entities;
 using System.Drawing;
+using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.Blocks {
     class CoinBoxBlock : Block {
@@ -17,8 +18,8 @@ namespace SuperBitBros.Entities.Blocks {
         }
 
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
-            if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).movementDelta.Y > 0) {
-                owner.AddEntity(new GravityCoinEntity(COIN_SPAWN_FORCE), GetTopLeft().X, GetTopLeft().Y);
+            if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0) {
+                owner.AddEntity(new GravityCoinEntity(new Vec2d(0, COIN_SPAWN_FORCE)), GetTopLeft().X, GetTopLeft().Y);
                 ((GameWorld)owner).ReplaceBlock(this, new EmptyCoinBoxBlock());
             }
         }

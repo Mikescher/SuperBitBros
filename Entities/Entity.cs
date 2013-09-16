@@ -6,7 +6,7 @@ using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 
-namespace Entities.SuperBitBros {
+namespace SuperBitBros.Entities {
     abstract class Entity {
         // 0 < DEPTH <= 100
         public const int DISTANCE_BACKRGOUND = 100;
@@ -17,7 +17,7 @@ namespace Entities.SuperBitBros {
         public const int DISTANCE_PLAYER = 30;
         public const int DISTANCE_FOREGROUND = 10;
 
-        protected GameModel owner;
+        public GameModel owner;
 
         public Vec2d position; // bottom left
         public double distance;

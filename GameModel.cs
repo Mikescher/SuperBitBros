@@ -1,12 +1,12 @@
-﻿using Entities.SuperBitBros;
-using OpenTK.Graphics;
+﻿using OpenTK.Graphics;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.Entities.Trigger;
+using SuperBitBros.Triggers;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using SuperBitBros.Entities;
 
 namespace SuperBitBros {
     abstract class GameModel {

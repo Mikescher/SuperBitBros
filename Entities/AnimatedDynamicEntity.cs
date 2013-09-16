@@ -1,4 +1,4 @@
-﻿using Entities.SuperBitBros;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.OpenGL;
 
 namespace SuperBitBros.Entities {

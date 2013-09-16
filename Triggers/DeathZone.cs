@@ -1,8 +1,9 @@
-﻿using Entities.SuperBitBros;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using System.Drawing;
 
-namespace SuperBitBros.Entities.Trigger {
+namespace SuperBitBros.Triggers {
     class DeathZone : Trigger {
 
         public DeathZone(Vec2i pos)
@@ -16,6 +17,17 @@ namespace SuperBitBros.Entities.Trigger {
             } else if (collider is Mob) {
                 collider.Kill();
             }
+        }
+
+        public static Color color = Color.FromArgb(128, 0, 64);
+        public static Color GetColor()
+        {
+            return color;
+        }
+
+        public override Color GetTriggerColor()
+        {
+            return GetColor();
         }
     }
 }
