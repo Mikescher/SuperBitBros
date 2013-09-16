@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class PipeBlock : Block {
+
+    public class PipeBlock : Block {
         public static Color color = Color.FromArgb(0, 255, 0);
 
         public PipeBlock()

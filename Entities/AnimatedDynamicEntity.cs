@@ -1,14 +1,12 @@
-﻿using SuperBitBros.Entities;
-using SuperBitBros.OpenGL;
+﻿using SuperBitBros.OpenGL;
 
 namespace SuperBitBros.Entities {
-    abstract class AnimatedDynamicEntity : DynamicEntity {
 
+    public abstract class AnimatedDynamicEntity : DynamicEntity {
         protected AnimatedTexture atexture;
 
         public AnimatedDynamicEntity()
             : base() {
-
             atexture = new AnimatedTexture();
         }
 

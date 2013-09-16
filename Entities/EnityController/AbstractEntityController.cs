@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 
-namespace SuperBitBros.Entities.EnityController
-{
-    abstract class AbstractEntityController
-    {
+namespace SuperBitBros.Entities.EnityController {
+
+    public abstract class AbstractEntityController {
         protected DynamicEntity ent;
 
         protected GameModel owner { get { return ent.owner; } }
 
-        public AbstractEntityController(DynamicEntity e)
-        {
+        public AbstractEntityController(DynamicEntity e) {
             this.ent = e;
         }
 
@@ -23,5 +16,8 @@ namespace SuperBitBros.Entities.EnityController
         public abstract bool IsActive();
 
         public abstract void OnIllegalIntersection(Entity other);
+
+        public abstract void OnHide();
+        public abstract void OnReshow();
     }
 }

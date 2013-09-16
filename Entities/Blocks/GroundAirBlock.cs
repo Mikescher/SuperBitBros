@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class GroundAirBlock : StandardAirBlock {
+
+    public class GroundAirBlock : StandardAirBlock {
         public new static Color color = Color.FromArgb(192, 192, 192);
 
         public GroundAirBlock()

@@ -1,8 +1,8 @@
-﻿using SuperBitBros.Entities;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class CastleBlock : Block {
+
+    public class CastleBlock : Block {
         public static Color color = Color.FromArgb(255, 0, 0);
 
         public CastleBlock()

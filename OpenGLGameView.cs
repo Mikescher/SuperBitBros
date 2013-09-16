@@ -1,17 +1,18 @@
-﻿using SuperBitBros.Entities;
-using OpenTK.Graphics;
+﻿using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
+using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.Triggers;
 using SuperBitBros.OpenGL.OGLMath;
+using SuperBitBros.Triggers;
+using SuperBitBros.Triggers.PipeZones;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using SuperBitBros.Triggers.PipeZones;
 
 namespace SuperBitBros {
-    class OpenGLGameView : OpenGLView {
 
+    public class OpenGLGameView : OpenGLView {
 
         public OpenGLGameView(GameModel model)
             : base(model) {
@@ -23,7 +24,6 @@ namespace SuperBitBros {
 
             GL.ClearColor(Color.FromArgb(0, 0, 0));
             StartRender();
-
 
             Vec2i offset = (Vec2i)model.GetOffset(window.Width, window.Height); // Cast to int for ... reasons
             GL.Translate(-offset.X, -offset.Y, 0);
@@ -78,6 +78,14 @@ namespace SuperBitBros {
             return nextDepth;
         }
 
+        protected override void OnUpdate(object sender, EventArgs e) {
+            base.OnUpdate(sender, e);
+            if (window.Keyboard[Key.F10] && DateTime.Now.Millisecond < 10) {
+                Console.Out.WriteLine("Change DEBUGMODE");
+                Program.IS_DEBUG = !Program.IS_DEBUG;
+            }
+        }
+
         private void RenderDebug(Vec2i offset) {
             GL.Disable(EnableCap.Texture2D);
 
@@ -93,26 +101,64 @@ namespace SuperBitBros {
                         foreach (Trigger t in tlist) {
                             RenderColoredRectangle(t.GetPosition(), 0.15, Color.FromArgb(128, t.GetTriggerColor()));
 
-                            if (t is PipeZone)
-                            {
-                                Vec2d start = t.GetPosition().GetMiddle();
-                                Vec2d arr = Vec2d.Zero;
-                                if (t is MoveNorthPipeZone) {
-                                    start.Y -= Block.BLOCK_HEIGHT / 4.0;
-                                    arr = new Vec2d(0, Block.BLOCK_HEIGHT / 2.0);
-                                } else if (t is MoveEastPipeZone) {
-                                    start.X -= Block.BLOCK_HEIGHT / 4.0;
-                                    arr = new Vec2d(Block.BLOCK_WIDTH / 2.0, 0);
-                                } else if (t is MoveSouthPipeZone) {
-                                    start.Y += Block.BLOCK_WIDTH / 4.0;
-                                    arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 2.0);
-                                } else if (t is MoveWestPipeZone) {
-                                    start.X += Block.BLOCK_WIDTH / 4.0;
-                                    arr = new Vec2d(-Block.BLOCK_WIDTH / 2.0, 0);
-                                }
+                            if (t is PipeZone) {
+                                PipeZone z = t as PipeZone;
 
                                 RenderColoredBox(t.GetPosition(), 0.1, t.GetTriggerColor());
-                                RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+
+                                Vec2d start = t.GetPosition().GetMiddle();
+                                Vec2d arr = Vec2d.Zero;
+
+                                switch (z.GetRealDirection()) {
+                                    case PipeDirection.NORTH:
+                                        start.Y -= Block.BLOCK_HEIGHT / 4.0;
+                                        arr = new Vec2d(0, Block.BLOCK_HEIGHT / 2.0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        break;
+
+                                    case PipeDirection.EAST:
+                                        start.X -= Block.BLOCK_HEIGHT / 4.0;
+                                        arr = new Vec2d(Block.BLOCK_WIDTH / 2.0, 0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        break;
+
+                                    case PipeDirection.SOUTH:
+                                        start.Y += Block.BLOCK_WIDTH / 4.0;
+                                        arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 2.0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        break;
+
+                                    case PipeDirection.WEST:
+                                        start.X += Block.BLOCK_WIDTH / 4.0;
+                                        arr = new Vec2d(-Block.BLOCK_WIDTH / 2.0, 0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        break;
+
+                                    case PipeDirection.NORTHSOUTH:
+                                        arr = new Vec2d(0, Block.BLOCK_HEIGHT / 4.0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 4.0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        break;
+
+                                    case PipeDirection.EASTWEST:
+                                        arr = new Vec2d(Block.BLOCK_WIDTH / 4.0, 0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        arr = new Vec2d(-Block.BLOCK_WIDTH / 4.0, 0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        break;
+
+                                    case PipeDirection.ANY:
+                                        arr = new Vec2d(0, Block.BLOCK_HEIGHT / 4.0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 4.0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        arr = new Vec2d(Block.BLOCK_WIDTH / 4.0, 0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        arr = new Vec2d(-Block.BLOCK_WIDTH / 4.0, 0);
+                                        RenderArrow(start, arr, 0.1, t.GetTriggerColor());
+                                        break;
+                                }
                             }
                         }
                     }

@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class StandardGroundBlock : Block {
+
+    public class StandardGroundBlock : Block {
         public static Color color = Color.FromArgb(0, 0, 0);
 
         public StandardGroundBlock()

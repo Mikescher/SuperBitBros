@@ -1,9 +1,10 @@
-﻿using SuperBitBros.Entities;
-using System.Drawing;
+﻿using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class CoinBoxBlock : Block {
+
+    public class CoinBoxBlock : Block {
         private const double COIN_SPAWN_FORCE = 3;
 
         public static Color color = Color.FromArgb(0, 0, 255);

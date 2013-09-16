@@ -3,20 +3,16 @@ using System.Drawing;
 
 namespace SuperBitBros.Triggers.PipeZones {
 
-    public class MoveNorthPipeZone : PipeZone {
+    public class EnterEastPipeZone : MoveEastPipeZone {
 
-        public MoveNorthPipeZone(Vec2i pos)
+        public EnterEastPipeZone(Vec2i pos)
             : base(pos) {
             //--
         }
 
-        protected override PipeDirection GetDirection() {
-            return PipeDirection.NORTH;
-        }
+        public new static Color color = Color.FromArgb(128, 0, 0);
 
-        public static Color color = Color.FromArgb(128, 0, 255);
-
-        public static Color GetColor() {
+        public new static Color GetColor() {
             return color;
         }
 
@@ -25,7 +21,7 @@ namespace SuperBitBros.Triggers.PipeZones {
         }
 
         public override bool CanEnter() {
-            return false;
+            return true;
         }
     }
 }

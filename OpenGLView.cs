@@ -8,7 +8,8 @@ using System;
 using System.Drawing;
 
 namespace SuperBitBros {
-    abstract class OpenGLView {
+
+    public abstract class OpenGLView {
         protected const int INIT_RESOLUTION_WIDTH = 540;
         protected const int INIT_RESOLUTION_HEIGHT = 280;
 

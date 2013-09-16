@@ -3,7 +3,8 @@ using SuperBitBros.OpenGL.OGLMath;
 using System.Drawing;
 
 namespace SuperBitBros.OpenGL {
-    class OGLSingleTexture {
+
+    public class OGLSingleTexture {
         private int id;
 
         private OGLSingleTexture(int id) {

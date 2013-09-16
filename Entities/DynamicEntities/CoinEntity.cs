@@ -1,9 +1,9 @@
-﻿
-using SuperBitBros.Entities;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
-namespace SuperBitBros.Entities {
-    class CoinEntity : AnimatedDynamicEntity {
+
+namespace SuperBitBros.Entities.DynamicEntities {
+
+    public class CoinEntity : AnimatedDynamicEntity {
 
         public CoinEntity()
             : base() {

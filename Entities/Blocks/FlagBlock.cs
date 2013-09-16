@@ -1,8 +1,9 @@
-﻿using SuperBitBros.Entities;
+﻿using SuperBitBros.Entities.DynamicEntities;
 using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class FlagBlock : Block {
+
+    public class FlagBlock : Block {
         public static Color color = Color.FromArgb(0, 255, 255);
 
         private bool isStatic = false;

@@ -5,10 +5,11 @@ using QuickFont;
 using System;
 
 namespace SuperBitBros {
-    class MyGameWindow : GameWindow {
+
+    public class MyGameWindow : GameWindow {
+
         public MyGameWindow(int resX, int resY)
             : base(resX, resY, GraphicsMode.Default, "tite") {
-
         }
 
         protected override void OnResize(EventArgs e) {

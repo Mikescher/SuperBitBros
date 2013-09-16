@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace SuperBitBros.Entities {
 
-    class AnimatedTexture {
+    public class AnimatedTexture {
         private int pos;
         private int layer;
         private List<List<OGLTexture>> textureList;
         private int updateCount;
 
         public int animation_speed; // updates between Frames
-
 
         public AnimatedTexture() {
             textureList = new List<List<OGLTexture>>();

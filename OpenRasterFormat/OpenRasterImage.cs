@@ -6,11 +6,12 @@ using System.IO;
 using System.Xml;
 
 namespace SuperBitBros.OpenRasterFormat {
-    class OpenRasterImage {
 
+    public class OpenRasterImage {
         public List<OpenRasterLayer> layers = new List<OpenRasterLayer>();
 
         public int Width { get; protected set; }
+
         public int Height { get; protected set; }
 
         public OpenRasterImage(byte[] file) {

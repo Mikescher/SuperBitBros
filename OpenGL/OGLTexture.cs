@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace SuperBitBros.OpenGL {
-    enum OGLTextureMode { TM_SINGLE, TM_REFERENCE_XY, TM_REFERENCE_POS };
 
-    class OGLTexture {
+    internal enum OGLTextureMode { TM_SINGLE, TM_REFERENCE_XY, TM_REFERENCE_POS };
+
+    public class OGLTexture {
         private OGLSingleTexture texSingle;
 
         private OGLTextureSheet texSheet;
@@ -79,10 +80,13 @@ namespace SuperBitBros.OpenGL {
             switch (mode) {
                 case OGLTextureMode.TM_SINGLE:
                     return texSingle.GetCoordinates();
+
                 case OGLTextureMode.TM_REFERENCE_XY:
                     return texSheet.GetCoordinates(sheetX, sheetY);
+
                 case OGLTextureMode.TM_REFERENCE_POS:
                     return texSheet.GetCoordinates(sheetPos);
+
                 default:
                     throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
             }
@@ -93,10 +97,12 @@ namespace SuperBitBros.OpenGL {
                 case OGLTextureMode.TM_SINGLE:
                     texSingle.bind();
                     return;
+
                 case OGLTextureMode.TM_REFERENCE_XY:
                 case OGLTextureMode.TM_REFERENCE_POS:
                     texSheet.bind();
                     return;
+
                 default:
                     throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
             }

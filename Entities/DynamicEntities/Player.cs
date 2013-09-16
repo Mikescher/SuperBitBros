@@ -1,20 +1,16 @@
-﻿using OpenTK;
-using OpenTK.Input;
-using SuperBitBros;
-using SuperBitBros.Entities;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.OpenGL.OGLMath;
-using System;
 using SuperBitBros.Entities.EnityController;
+using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
 using System.Collections.Generic;
 
-namespace SuperBitBros.Entities {
-    enum Direction { LEFT, RIGHT };
+namespace SuperBitBros.Entities.DynamicEntities {
 
-    class Player : AnimatedDynamicEntity
-    {
+    public enum Direction { LEFT, RIGHT };
+
+    public class Player : AnimatedDynamicEntity {
         public const double PLAYER_SCALE = 0.9;
 
         public const int PLAYER_WIDTH = Block.BLOCK_WIDTH;
@@ -46,32 +42,42 @@ namespace SuperBitBros.Entities {
             AddController(new DefaultPlayerController(this));
         }
 
+        private bool IsInUserControlled() {
+            return controllerStack.Count != 0 && controllerStack.Peek() is DefaultPlayerController;
+        }
+
         public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
-            if (keyboard[Key.Down] && IsOnGround())
-                TestForSouthPipe();
+            if (IsInUserControlled()) {
+                if (keyboard[Key.Down] && IsOnGround())
+                    TestForPipe(PipeDirection.SOUTH);
+                if (keyboard[Key.Right] && IsCollidingRight())
+                    TestForPipe(PipeDirection.EAST);
+                if (keyboard[Key.Up] && IsOnCeiling())
+                    TestForPipe(PipeDirection.NORTH);
+                if (keyboard[Key.Down] && IsCollidingLeft())
+                    TestForPipe(PipeDirection.WEST);
+            }
 
             UpdateTexture();
         }
 
-        private void TestForSouthPipe()
-        {
+        private void TestForPipe(PipeDirection d) {
             Vec2i blockpos = (Vec2i)(position / Block.BLOCK_SIZE);
 
-            blockpos.Y--;
+            blockpos += PipeZone.GetVectorForDirection(d);
 
             List<Trigger> triggerlist = owner.getTriggerList(blockpos.X, blockpos.Y);
             if (triggerlist != null)
                 foreach (Trigger t in owner.getTriggerList(blockpos.X, blockpos.Y))
-                    if (t is PipeZone && (t as PipeZone).GetDirection() == PipeDirection.SOUTH)
-                        AddController(new PipePlayerController(this, PipeDirection.SOUTH));
+                    if (t is PipeZone && (t as PipeZone).IsDirection(d) && (t as PipeZone).CanEnter())
+                        AddController(new PipePlayerController(this, d));
         }
 
         private void UpdateTexture() {
             if (IsOnGround()) {
-                if (GetMovement().X > 0)
-                {
+                if (GetMovement().X > 0) {
                     atexture.SetLayer(1);
                     UpdateAnimation();
                     direction = Direction.RIGHT;
@@ -83,12 +89,9 @@ namespace SuperBitBros.Entities {
                     atexture.Set(2, (direction == Direction.LEFT) ? 0 : 1);
                 }
             } else {
-                if (GetMovement().X > 0)
-                {
+                if (GetMovement().X > 0) {
                     direction = Direction.RIGHT;
-                }
-                else if (GetMovement().X < 0)
-                {
+                } else if (GetMovement().X < 0) {
                     direction = Direction.LEFT;
                 }
 

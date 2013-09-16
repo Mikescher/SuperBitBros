@@ -1,8 +1,8 @@
-﻿using SuperBitBros.Entities;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class StandardAirBlock : Block {
+
+    public class StandardAirBlock : Block {
         public static Color color = Color.FromArgb(255, 255, 255);
 
         public StandardAirBlock()

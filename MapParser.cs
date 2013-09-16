@@ -1,15 +1,16 @@
 ﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenRasterFormat;
-using System.Drawing;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
+using System.Drawing;
 
 namespace SuperBitBros {
-    public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN };
-    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION };
-    public enum PipeZoneType { NO_ZONE, UNKNOWN_ZONE, MOVEMENT_NORTH_ZONE, MOVEMENT_EAST_ZONE, MOVEMENT_SOUTH_ZONE, MOVEMENT_WEST_ZONE };
 
-    class ImageMapParser {
+    public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN };
+
+    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION };
+
+    public class ImageMapParser {
         public const string LAYER_PIPEZONES = "PipeNetwork";
         public const string LAYER_TRIGGER = "Trigger";
         public const string LAYER_ENTITIES = "Entities";
@@ -49,7 +50,7 @@ namespace SuperBitBros {
             return FindTriggerType(map.GetColor(LAYER_TRIGGER, x, y));
         }
 
-        public PipeZoneType GetPipeZone(int x, int y) {
+        public PipeZoneTypeWrapper GetPipeZone(int x, int y) {
             return FindPipeZoneType(map.GetColor(LAYER_PIPEZONES, x, y));
         }
 
@@ -104,19 +105,44 @@ namespace SuperBitBros {
                 return AddTriggerType.UNKNOWN_TRIGGER;
         }
 
-        private PipeZoneType FindPipeZoneType(Color c) {
+        private PipeZoneTypeWrapper FindPipeZoneType(Color c) {
             if (c.A != 255)
-                return PipeZoneType.NO_ZONE;
+                return null;
+            //MOVE N-E-S-W
             else if (c == MoveNorthPipeZone.GetColor())
-                return PipeZoneType.MOVEMENT_NORTH_ZONE;
+                return new PipeZoneTypeWrapper(typeof(MoveNorthPipeZone));
             else if (c == MoveEastPipeZone.GetColor())
-                return PipeZoneType.MOVEMENT_EAST_ZONE;
+                return new PipeZoneTypeWrapper(typeof(MoveEastPipeZone));
             else if (c == MoveSouthPipeZone.GetColor())
-                return PipeZoneType.MOVEMENT_SOUTH_ZONE;
+                return new PipeZoneTypeWrapper(typeof(MoveSouthPipeZone));
             else if (c == MoveWestPipeZone.GetColor())
-                return PipeZoneType.MOVEMENT_WEST_ZONE;
+                return new PipeZoneTypeWrapper(typeof(MoveWestPipeZone));
+            //MOVE Multi
+            else if (c == MoveEastWestPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(MoveEastWestPipeZone));
+            else if (c == MoveNorthSouthPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(MoveNorthSouthPipeZone));
+            else if (c == MoveAnyPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(MoveAnyPipeZone));
+            //ENTER N-E-S-W
+            else if (c == EnterNorthPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(EnterNorthPipeZone));
+            else if (c == EnterEastPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(EnterEastPipeZone));
+            else if (c == EnterSouthPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(EnterSouthPipeZone));
+            else if (c == EnterWestPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(EnterWestPipeZone));
+            // Enter Multi
+            else if (c == EnterEastWestPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(EnterEastWestPipeZone));
+            else if (c == EnterNorthSouthPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(EnterNorthSouthPipeZone));
+            else if (c == EnterAnyPipeZone.GetColor())
+                return new PipeZoneTypeWrapper(typeof(EnterAnyPipeZone));
+            // Unknown
             else
-                return PipeZoneType.UNKNOWN_ZONE;
+                return new PipeZoneTypeWrapper(null);
         }
     }
 }

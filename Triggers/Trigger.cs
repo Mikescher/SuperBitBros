@@ -1,10 +1,11 @@
-﻿using System.Drawing;
-using SuperBitBros.Entities;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.Triggers {
-    abstract class Trigger {
+
+    public abstract class Trigger {
         protected readonly Vec2i position; // block position
 
         protected GameModel owner;
@@ -22,6 +23,7 @@ namespace SuperBitBros.Triggers {
         }
 
         public abstract void OnCollide(DynamicEntity collider);
+
         public abstract Color GetTriggerColor();
     }
 }

@@ -1,12 +1,10 @@
-﻿using SuperBitBros.Entities;
-using OpenTK.Input;
-using SuperBitBros.Entities.Blocks;
-using System;
+﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
+using System;
 
-namespace SuperBitBros.Entities {
-    class Goomba : Mob {
+namespace SuperBitBros.Entities.DynamicEntities {
 
+    public class Goomba : Mob {
         public const double GOOMBA_ACC = 0.2;
         public const double GOOMBA_SPEED = 1;
 

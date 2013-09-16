@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK.Input;
+﻿using OpenTK.Input;
+using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
 
-namespace SuperBitBros.Entities.EnityController
-{
-    class BouncingCoinController : CoinController
-    {
+namespace SuperBitBros.Entities.EnityController {
+
+    public class BouncingCoinController : CoinController {
+
         public BouncingCoinController(CoinEntity e, Vec2d spawnForce)
-            : base(e, spawnForce)
-        {
+            : base(e, spawnForce) {
             //--
         }
 
-        public override void Update(KeyboardDevice keyboard)
-        {
+        public override void Update(KeyboardDevice keyboard) {
             base.Update(keyboard);
 
             if (ent.IsOnCeiling())
                 movementDelta.Y = Math.Min(movementDelta.Y, 0);
-            if (ent.IsOnGround())
-            {
+            if (ent.IsOnGround()) {
                 if (movementDelta.Y < 0.25)
                     movementDelta.Y = -movementDelta.Y * (2 / 3.0);
                 else
@@ -31,8 +25,7 @@ namespace SuperBitBros.Entities.EnityController
             }
         }
 
-        public override bool IsActive()
-        {
+        public override bool IsActive() {
             return true;
         }
     }

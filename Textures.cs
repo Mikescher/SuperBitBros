@@ -2,7 +2,8 @@
 using SuperBitBros.Properties;
 
 namespace SuperBitBros {
-    class Textures {
+
+    public class Textures {
         public static OGLTextureSheet font_sheet;
         public static OGLTextureSheet mario_small_sheet;
         public static OGLTextureSheet piranhaplant_sheet;

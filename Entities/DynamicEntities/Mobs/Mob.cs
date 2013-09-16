@@ -1,11 +1,7 @@
-﻿using SuperBitBros.Entities;
-using OpenTK;
-using SuperBitBros.Entities.Blocks;
-using SuperBitBros.OpenGL.OGLMath;
+﻿namespace SuperBitBros.Entities.DynamicEntities {
 
-namespace SuperBitBros.Entities {
-    abstract class Mob : DynamicEntity {
-        
+    public abstract class Mob : DynamicEntity {
+
         public Mob()
             : base() {
             //--
@@ -23,7 +19,7 @@ namespace SuperBitBros.Entities {
         }
 
         public abstract void OnHeadJump(Entity e);
-        public abstract void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching);
 
+        public abstract void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching);
     }
 }

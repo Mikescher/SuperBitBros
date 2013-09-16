@@ -1,10 +1,12 @@
 ﻿using System;
 
 namespace SuperBitBros.OpenGL {
-    class FrequencyCounter {
+
+    public class FrequencyCounter {
         private const int UPDATE_TIME = 500;
 
         public double frequency { get; private set; }
+
         private long lastUpdate;
         private int count;
 

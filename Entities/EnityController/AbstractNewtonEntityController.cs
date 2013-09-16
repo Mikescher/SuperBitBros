@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SuperBitBros.Entities.Blocks;
+﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
 
-namespace SuperBitBros.Entities.EnityController
-{
-    abstract class AbstractNewtonEntityController : AbstractEntityController
-    {
+namespace SuperBitBros.Entities.EnityController {
+
+    public abstract class AbstractNewtonEntityController : AbstractEntityController {
         public const double PUSH_BACK_FORCE = 2;
         public const double GRAVITY_ACCELERATION = 0.4;
         public const double MAX_GRAVITY = 20;
@@ -18,13 +13,21 @@ namespace SuperBitBros.Entities.EnityController
         protected Vec2d physicPushForce = Vec2d.Zero;
 
         public AbstractNewtonEntityController(DynamicEntity e)
-            : base(e)
-        {
+            : base(e) {
             //--
         }
 
-        public void DoGravitationalMovement(Vec2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true)
-        {
+        public override void OnHide() {
+            movementDelta = Vec2d.Zero;
+            physicPushForce = Vec2d.Zero;
+        }
+
+        public override void OnReshow() {
+            movementDelta = Vec2d.Zero;
+            physicPushForce = Vec2d.Zero;
+        }
+
+        public void DoGravitationalMovement(Vec2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true) {
             //movementDelta.X = 0;
             movementDelta.Y -= GRAVITY_ACCELERATION;
             if (ent.IsOnGround())
@@ -47,14 +50,11 @@ namespace SuperBitBros.Entities.EnityController
             MoveBy(movementDelta);
         }
 
-        public void MoveBy(Vec2d vec, bool doCollision = true, bool doPhysicPush = true)
-        {
-            if (doCollision)
-            {
+        public void MoveBy(Vec2d vec, bool doCollision = true, bool doPhysicPush = true) {
+            if (doCollision) {
                 ent.position.X += DoXCollisionMove(vec);
                 ent.position.Y += DoYCollisionMove(vec);
-            }
-            else
+            } else
                 ent.position += vec;
 
             if (doPhysicPush)
@@ -65,16 +65,13 @@ namespace SuperBitBros.Entities.EnityController
             ent.DoCollisions();
         }
 
-        private double DoXCollisionMove(Vec2d vec)
-        {
+        private double DoXCollisionMove(Vec2d vec) {
             Rect2d newpos = new Rect2d(new Vec2d(ent.position.X + vec.X, ent.position.Y), ent.width, ent.height);
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
-            {
-                if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition()))
-                {
+            foreach (Entity e in owner.entityList) {
+                if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition())) {
                     return ent.GetPosition().GetDistanceTo(e.GetPosition()).X;
                 }
             }
@@ -86,13 +83,10 @@ namespace SuperBitBros.Entities.EnityController
             int right = (int)Math.Ceiling((newpos.tl.X + DynamicEntity.BLOCK_DETECTION_RANGE * Block.BLOCK_WIDTH) / Block.BLOCK_WIDTH);
             int top = (int)Math.Ceiling((newpos.tl.Y + DynamicEntity.BLOCK_DETECTION_RANGE * Block.BLOCK_HEIGHT) / Block.BLOCK_HEIGHT);
 
-            for (int x = left; x < right; x++)
-            {
-                for (int y = bottom; y < top; y++)
-                {
+            for (int x = left; x < right; x++) {
+                for (int y = bottom; y < top; y++) {
                     Block b = owner.GetBlock(x, y);
-                    if (b != null && Entity.TestBlocking(b, ent) && newpos.IsColldingWith(b.GetPosition()))
-                    {
+                    if (b != null && Entity.TestBlocking(b, ent) && newpos.IsColldingWith(b.GetPosition())) {
                         return ent.GetPosition().GetDistanceTo(b.GetPosition()).X;
                     }
                 }
@@ -101,16 +95,13 @@ namespace SuperBitBros.Entities.EnityController
             return vec.X;
         }
 
-        private double DoYCollisionMove(Vec2d vec)
-        {
+        private double DoYCollisionMove(Vec2d vec) {
             Rect2d newpos = new Rect2d(new Vec2d(ent.position.X, ent.position.Y + vec.Y), ent.width, ent.height);
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
-            {
-                if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition()))
-                {
+            foreach (Entity e in owner.entityList) {
+                if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition())) {
                     return ent.GetPosition().GetDistanceTo(e.GetPosition()).Y;
                 }
             }
@@ -122,13 +113,10 @@ namespace SuperBitBros.Entities.EnityController
             int right = (int)Math.Ceiling((newpos.tl.X + DynamicEntity.BLOCK_DETECTION_RANGE * Block.BLOCK_WIDTH) / Block.BLOCK_WIDTH);
             int top = (int)Math.Ceiling((newpos.tl.Y + DynamicEntity.BLOCK_DETECTION_RANGE * Block.BLOCK_HEIGHT) / Block.BLOCK_HEIGHT);
 
-            for (int x = left; x < right; x++)
-            {
-                for (int y = bottom; y < top; y++)
-                {
+            for (int x = left; x < right; x++) {
+                for (int y = bottom; y < top; y++) {
                     Block b = owner.GetBlock(x, y);
-                    if (b != null && Entity.TestBlocking(b, ent) && newpos.IsColldingWith(b.GetPosition()))
-                    {
+                    if (b != null && Entity.TestBlocking(b, ent) && newpos.IsColldingWith(b.GetPosition())) {
                         return ent.GetPosition().GetDistanceTo(b.GetPosition()).Y;
                     }
                 }
@@ -137,13 +125,11 @@ namespace SuperBitBros.Entities.EnityController
             return vec.Y;
         }
 
-        public override void OnIllegalIntersection(Entity other)
-        {
+        public override void OnIllegalIntersection(Entity other) {
             PushBackFrom(other);
         }
 
-        private void PushBackFrom(Entity e)
-        {
+        private void PushBackFrom(Entity e) {
             Vec2d force = ent.GetMiddle() - e.GetMiddle();
             if (force.X == 0 && force.Y == 0)
                 force.Y = 1;

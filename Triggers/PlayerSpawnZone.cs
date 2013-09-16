@@ -1,10 +1,13 @@
-﻿using System.Drawing;
-using SuperBitBros.Entities;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.Triggers {
-    class PlayerSpawnZone : Trigger {
+
+    public class PlayerSpawnZone : Trigger {
+
         public PlayerSpawnZone(Vec2i pos)
             : base(pos) {
             //--
@@ -21,13 +24,12 @@ namespace SuperBitBros.Triggers {
         }
 
         public static Color color = Color.FromArgb(128, 128, 128);
-        public static Color GetColor()
-        {
+
+        public static Color GetColor() {
             return color;
         }
 
-        public override Color GetTriggerColor()
-        {
+        public override Color GetTriggerColor() {
             return GetColor();
         }
     }

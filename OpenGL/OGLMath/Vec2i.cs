@@ -2,7 +2,9 @@
 using System;
 
 namespace SuperBitBros.OpenGL.OGLMath {
-    class Vec2i {
+
+    public class Vec2i {
+
         public static Vec2i Zero { get { return new Vec2i(); } private set { } }
 
         public int X;
@@ -87,7 +89,7 @@ namespace SuperBitBros.OpenGL.OGLMath {
             return (X * 1024 + Y).GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         public double GetLength() {
             return Math.Sqrt(X * X + Y * Y);

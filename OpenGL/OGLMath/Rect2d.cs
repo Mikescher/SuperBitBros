@@ -1,13 +1,16 @@
-﻿
-namespace SuperBitBros.OpenGL.OGLMath {
-    class Rect2d {
+﻿namespace SuperBitBros.OpenGL.OGLMath {
+
+    public class Rect2d {
         private Vec2d position; // bottomLeft
         private double width;
         private double height;
 
         public Vec2d tl { get { return new Vec2d(position.X, position.Y + height); } }
+
         public Vec2d bl { get { return new Vec2d(position.X, position.Y); } }
+
         public Vec2d br { get { return new Vec2d(position.X + width, position.Y); } }
+
         public Vec2d tr { get { return new Vec2d(position.X + width, position.Y + height); } }
 
         public Rect2d(double bl_x, double bl_y, double pwidth, double pheight) {

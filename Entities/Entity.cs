@@ -1,15 +1,17 @@
 ﻿using OpenTK;
 using OpenTK.Input;
-using SuperBitBros;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 
 namespace SuperBitBros.Entities {
-    abstract class Entity {
+
+    public abstract class Entity {
+
         // 0 < DEPTH <= 100
         public const int DISTANCE_BACKRGOUND = 100;
+
         public const int DISTANCE_BLOCKS = 50;
         public const int DISTANCE_CORPSE = 45;
         public const int DISTANCE_MOBS = 40;
@@ -66,17 +68,20 @@ namespace SuperBitBros.Entities {
             return new Vec2d(position.X + width / 2, position.Y + height / 2);
         }
 
-        public virtual void OnRemove() { }
+        public virtual void OnRemove() {
+        }
 
         public virtual OGLTexture GetCurrentTexture() {
             return texture;
         }
 
-        public virtual void Update(KeyboardDevice keyboard) { }
+        public virtual void Update(KeyboardDevice keyboard) {
+        }
 
         protected abstract bool IsBlockingOther(Entity sender);
 
-        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) { }
+        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
+        }
 
         public static bool TestBlocking(Entity e1, Entity e2) {
             if (e1 is DynamicEntity && e2 is DynamicEntity) // 2 DynEntities

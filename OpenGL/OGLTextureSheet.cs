@@ -1,11 +1,11 @@
-﻿using OpenTK;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Drawing;
 
 namespace SuperBitBros.OpenGL {
-    class OGLTextureSheet {
+
+    public class OGLTextureSheet {
         private int id;
 
         private int width; // texturecount X-Axis

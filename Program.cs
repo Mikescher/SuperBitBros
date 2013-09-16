@@ -1,10 +1,11 @@
 ﻿using System;
 
 namespace SuperBitBros {
-    class Program {
-        public const bool IS_DEBUG = true;
 
-        static void Main(string[] args) {
+    public class Program {
+        public static bool IS_DEBUG = true;
+
+        private static void Main(string[] args) {
             Console.Out.WriteLine("START");
             GameWorld world = new GameWorld();
             OpenGLView view = new OpenGLGameView(world);

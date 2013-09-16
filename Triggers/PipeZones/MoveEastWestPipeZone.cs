@@ -3,18 +3,18 @@ using System.Drawing;
 
 namespace SuperBitBros.Triggers.PipeZones {
 
-    public class MoveNorthPipeZone : PipeZone {
+    public class MoveEastWestPipeZone : PipeZone {
 
-        public MoveNorthPipeZone(Vec2i pos)
+        public MoveEastWestPipeZone(Vec2i pos)
             : base(pos) {
             //--
         }
 
         protected override PipeDirection GetDirection() {
-            return PipeDirection.NORTH;
+            return PipeDirection.EASTWEST;
         }
 
-        public static Color color = Color.FromArgb(128, 0, 255);
+        public static Color color = Color.FromArgb(255, 64, 0);
 
         public static Color GetColor() {
             return color;

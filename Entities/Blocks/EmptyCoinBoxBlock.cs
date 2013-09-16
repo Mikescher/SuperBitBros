@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class EmptyCoinBoxBlock : Block {
+
+    public class EmptyCoinBoxBlock : Block {
         public static Color color = Color.FromArgb(255, 255, 0);
 
         public EmptyCoinBoxBlock()

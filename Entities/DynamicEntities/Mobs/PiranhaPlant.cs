@@ -1,12 +1,11 @@
-﻿using SuperBitBros.Entities;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 
-namespace SuperBitBros.Entities {
-    class PiranhaPlant : Mob {
+namespace SuperBitBros.Entities.DynamicEntities {
+
+    public class PiranhaPlant : Mob {
         private const double SHRINK_WIDTH = 0.1;
         private const int UPDATE_SPEED = 5;
         private const int CYCLUS_SPEED = 60;
@@ -47,7 +46,7 @@ namespace SuperBitBros.Entities {
                     direction = false;
 
                 texture = Textures.piranhaplant_sheet.GetTextureWrapper(state);
-                height = (Block.BLOCK_HEIGHT * 2.0) * (state*1.0 / (STATE_COUNT - 1));
+                height = (Block.BLOCK_HEIGHT * 2.0) * (state * 1.0 / (STATE_COUNT - 1));
                 lastUpdate = 0;
             }
             lastUpdate++;

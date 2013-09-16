@@ -1,11 +1,12 @@
-﻿using SuperBitBros.Entities;
-using OpenTK.Input;
+﻿using OpenTK.Input;
+using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Drawing;
-using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.Blocks {
-    class CrazyCoinBoxBlock : Block {
+
+    public class CrazyCoinBoxBlock : Block {
         private Random random = new Random();
 
         private const double COIN_MAX_SPAWN_FORCE = 6;

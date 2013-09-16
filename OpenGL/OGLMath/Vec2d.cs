@@ -2,7 +2,9 @@
 using System;
 
 namespace SuperBitBros.OpenGL.OGLMath {
-    class Vec2d {
+
+    public class Vec2d {
+
         public static Vec2d Zero { get { return new Vec2d(); } private set { } }
 
         public double X;
@@ -73,19 +75,22 @@ namespace SuperBitBros.OpenGL.OGLMath {
             return (mySizeA.X == mySizeB.X &&
                     mySizeA.Y == mySizeB.Y);
         }
+
         public static bool operator !=(Vec2d mySizeA, Vec2d mySizeB) {
             return !(mySizeA == mySizeB);
         }
+
         public override bool Equals(object obj) {
             if (obj is Vec2d)
                 return this == (Vec2d)obj;
             return false;
         }
+
         public override int GetHashCode() {
             return (X * 1024 + Y).GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         public double GetLength() {
             return Math.Sqrt(X * X + Y * Y);

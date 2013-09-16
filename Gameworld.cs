@@ -1,21 +1,22 @@
 ﻿using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.Triggers;
+using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
-using System;
+using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
+using System;
 
 namespace SuperBitBros {
-    class GameWorld : GameModel {
+
+    public class GameWorld : GameModel {
         private Vec2d offset = Vec2d.Zero;
 
         public Player player;
 
         public GameWorld()
             : base() {
-
         }
 
         public void SpawnEntityFromMapData(SpawnEntityType setype, double x, double y) {
@@ -47,19 +48,11 @@ namespace SuperBitBros {
             }
         }
 
-        public void AddPipeZoneFromMapData(PipeZoneType pipeZoneType, int x, int y) {
+        public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y) {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
-            if (pipeZoneType == PipeZoneType.MOVEMENT_NORTH_ZONE) {
-                AddTrigger(new MoveNorthPipeZone(new Vec2i(x, y)), x, y);
-            } else if (pipeZoneType == PipeZoneType.MOVEMENT_EAST_ZONE) {
-                AddTrigger(new MoveEastPipeZone(new Vec2i(x, y)), x, y);
-            } else if (pipeZoneType == PipeZoneType.MOVEMENT_SOUTH_ZONE) {
-                AddTrigger(new MoveSouthPipeZone(new Vec2i(x, y)), x, y);
-            } else if (pipeZoneType == PipeZoneType.MOVEMENT_WEST_ZONE) {
-                AddTrigger(new MoveWestPipeZone(new Vec2i(x, y)), x, y);
-            }
+            AddTrigger(pipeZoneType.Get(new Vec2i(x, y)), x, y);
         }
 
         public void LoadMapFromResources() {
@@ -74,7 +67,7 @@ namespace SuperBitBros {
                     Block block = parser.GetBlock(imgX, imgY);
                     SpawnEntityType set = parser.GetEntity(imgX, imgY);
                     AddTriggerType att = parser.GetTrigger(imgX, imgY);
-                    PipeZoneType pzt = parser.GetPipeZone(imgX, imgY);
+                    PipeZoneTypeWrapper pzt = parser.GetPipeZone(imgX, imgY);
 
                     if (block == null)
                         Console.Error.WriteLine("Could not parse Block-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_BLOCKS, imgX, imgY), x, y);
@@ -91,9 +84,11 @@ namespace SuperBitBros {
                     else if (att != AddTriggerType.NO_TRIGGER)
                         AddTriggerFromMapData(att, x, y);
 
-                    if (pzt == PipeZoneType.UNKNOWN_ZONE)
+                    if (pzt == null) {
+                        // No Zone
+                    } else if (!pzt.IsSet())
                         Console.Error.WriteLine("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY), x, y);
-                    else if (pzt != PipeZoneType.NO_ZONE)
+                    else
                         AddPipeZoneFromMapData(pzt, x, y);
                 }
             }

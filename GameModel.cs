@@ -1,25 +1,30 @@
 ﻿using OpenTK.Graphics;
 using OpenTK.Input;
+using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.Triggers;
 using SuperBitBros.OpenGL.OGLMath;
+using SuperBitBros.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using SuperBitBros.Entities;
 
 namespace SuperBitBros {
-    abstract class GameModel {
+
+    public abstract class GameModel {
+
         public List<DynamicEntity> entityList { get; protected set; }
+
         public List<Block> blockList { get; protected set; }
 
         private Block[,] blockMap;
         private List<Trigger>[,] triggerMap;
 
         public int mapBlockWidth { get; protected set; }
+
         public int mapBlockHeight { get; protected set; }
 
         public double mapRealWidth { get; protected set; }
+
         public double mapRealHeight { get; protected set; }
 
         public GameModel() {

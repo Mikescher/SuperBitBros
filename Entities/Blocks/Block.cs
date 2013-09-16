@@ -1,9 +1,9 @@
-﻿using SuperBitBros.Entities;
-using SuperBitBros.OpenGL.OGLMath;
+﻿using SuperBitBros.OpenGL.OGLMath;
 using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    abstract class Block : Entity {
+
+    public abstract class Block : Entity {
         public const int BLOCK_WIDTH = 16;
         public const int BLOCK_HEIGHT = 24;
         public static readonly Vec2d BLOCK_SIZE = new Vec2d(BLOCK_WIDTH, BLOCK_HEIGHT);
@@ -53,6 +53,8 @@ namespace SuperBitBros.Entities.Blocks {
 
         public abstract Color GetBlockColor();
 
-        public virtual bool RenderBackgroundAir() { return false; }
+        public virtual bool RenderBackgroundAir() {
+            return false;
+        }
     }
 }

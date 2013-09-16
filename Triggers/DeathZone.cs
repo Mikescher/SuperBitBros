@@ -1,10 +1,12 @@
 ﻿using SuperBitBros.Entities;
+using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Drawing;
 
 namespace SuperBitBros.Triggers {
-    class DeathZone : Trigger {
+
+    public class DeathZone : Trigger {
 
         public DeathZone(Vec2i pos)
             : base(pos) {
@@ -20,13 +22,12 @@ namespace SuperBitBros.Triggers {
         }
 
         public static Color color = Color.FromArgb(128, 0, 64);
-        public static Color GetColor()
-        {
+
+        public static Color GetColor() {
             return color;
         }
 
-        public override Color GetTriggerColor()
-        {
+        public override Color GetTriggerColor() {
             return GetColor();
         }
     }

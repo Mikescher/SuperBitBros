@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks {
-    class HillBlock : Block {
+
+    public class HillBlock : Block {
         public static Color color = Color.FromArgb(255, 0, 255);
 
         public HillBlock()
