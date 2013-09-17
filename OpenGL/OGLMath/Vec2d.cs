@@ -85,15 +85,20 @@ namespace SuperBitBros.OpenGL.OGLMath
             return new Vec2d(-v.X, -v.Y);
         }
 
-        public static bool operator ==(Vec2d mySizeA, Vec2d mySizeB)
+        public static bool operator ==(Vec2d a, Vec2d b)
         {
-            return (mySizeA.X == mySizeB.X &&
-                    mySizeA.Y == mySizeB.Y);
+            if ((object)a == null && (object)b == null)
+                return true;
+
+            if ((object)a == null || (object)b == null)
+                return false;
+
+            return (a.X == b.X && a.Y == b.Y);
         }
 
-        public static bool operator !=(Vec2d mySizeA, Vec2d mySizeB)
+        public static bool operator !=(Vec2d a, Vec2d b)
         {
-            return !(mySizeA == mySizeB);
+            return !(a == b);
         }
 
         public override bool Equals(object obj)
@@ -105,7 +110,7 @@ namespace SuperBitBros.OpenGL.OGLMath
 
         public override int GetHashCode()
         {
-            return (X * 1024 + Y).GetHashCode();
+            return X.GetHashCode() + Y.GetHashCode();
         }
 
         #endregion Operators

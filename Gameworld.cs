@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
@@ -13,13 +14,20 @@ namespace SuperBitBros
 {
     public class GameWorld : GameModel
     {
-        private Vec2d offset = Vec2d.Zero;
+        public OffsetCalculator offset = new OffsetCalculator();
 
         public Player player;
 
         public GameWorld()
             : base()
         {
+        }
+
+        public override void Update(KeyboardDevice keyboard, int window_width, int window_height)
+        {
+            base.Update(keyboard, window_width, window_height);
+
+            offset.Calculate(player.GetPosition(), window_width, window_height, mapRealWidth, mapRealHeight);
         }
 
         public void SpawnEntityFromMapData(EntityTypeWrapper setype, double x, double y)
@@ -42,7 +50,7 @@ namespace SuperBitBros
 
                 player = zone.SpawnPlayer();
 
-                offset.Set(player.position.X, player.position.Y);
+                offset.Change(player.position);
             }
             else if (triggertype == AddTriggerType.DEATH_ZONE)
             {
@@ -101,40 +109,17 @@ namespace SuperBitBros
                 }
             }
 
+            offset.AddVisionBoxes(parser.GetVisionZones());
+
             foreach (DynamicEntity e in entityList)
             {
                 e.OnAfterMapGen();
             }
         }
 
-        public Rect2d GetOffsetBox(int window_width, int window_height)
+        public override Vec2d GetOffset()
         {
-            Rect2d result = new Rect2d(offset, window_width, window_height);
-
-            result.TrimNorth(window_height / 4.0);
-            result.TrimEast(window_width / 3.0);
-            result.TrimSouth(Block.BLOCK_HEIGHT * 2);
-            result.TrimWest(window_width / 3.0);
-
-            return result;
-        }
-
-        public override Vec2d GetOffset(int window_width, int window_height)
-        {
-            Rect2d cameraBox = GetOffsetBox(window_width, window_height);
-
-            Vec2d playerPos = player.GetPosition().bl;
-            playerPos.X += player.width / 2.0;
-
-            offset += cameraBox.GetDistanceTo(playerPos);
-
-            offset.X = Math.Max(offset.X, 0);
-            offset.Y = Math.Max(offset.Y, 0);
-
-            offset.X = Math.Min(offset.X + window_width, mapRealWidth) - window_width;
-            offset.Y = Math.Min(offset.Y + window_height, mapRealHeight) - window_height;
-
-            return offset;
+            return offset.Value;
         }
     }
 }

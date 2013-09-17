@@ -1,8 +1,11 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.Entities.DynamicEntities.Mobs;
+using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
@@ -15,6 +18,7 @@ namespace SuperBitBros
 
     public class ImageMapParser
     {
+        public const string LAYER_PLAYERVISION = "PlayerVision";
         public const string LAYER_PIPEZONES = "PipeNetwork";
         public const string LAYER_TRIGGER = "Trigger";
         public const string LAYER_ENTITIES = "Entities";
@@ -159,6 +163,56 @@ namespace SuperBitBros
             // Unknown
             else
                 return new PipeZoneTypeWrapper(null);
+        }
+
+        public List<Rect2d> GetVisionZones()
+        {
+            List<Color> finished = new List<Color>();
+
+            List<Rect2d> ls = new List<Rect2d>();
+
+            for (int y = 0; y < GetHeight(); y++)
+			{
+                for (int x = 0; x < GetWidth(); x++)
+			    {
+			        Color c = map.GetColor(LAYER_PLAYERVISION, x, y);
+                    if (c.A == 255 && ! finished.Contains(c)) {
+                        finished.Add(c);
+                        Rect2d r = (Rect2d)FindVisionRect(c);
+                        r *= Block.BLOCK_SIZE;
+                        ls.Add(r);
+                    }
+			    }
+			}
+
+            return ls;
+        }
+
+        private Rect2i FindVisionRect(Color c)
+        {
+            int minX = int.MaxValue;
+            int maxX = int.MinValue;
+            int minY = int.MaxValue;
+            int maxY = int.MinValue;
+
+            for (int y = 0; y < GetHeight(); y++)
+            {
+                for (int x = 0; x < GetWidth(); x++)
+                {
+                    if (map.GetColor(LAYER_PLAYERVISION, x, y) == c)
+                    {
+                        minX = Math.Min(minX, x);
+                        maxX = Math.Max(maxX, x+1);
+                        minY = Math.Min(minY, y);
+                        maxY = Math.Max(maxY, y+1);
+                    }
+                }
+            }
+
+            if (minX < maxX && minY < maxY)
+                return new Rect2i(minX, GetHeight() - maxY, maxX - minX, maxY - minY);
+            else
+                throw new Exception("Could not find VisionRect: " + c);
         }
     }
 }

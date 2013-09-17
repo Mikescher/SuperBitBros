@@ -88,6 +88,7 @@
     <Compile Include="Entities\EnityController\DefaultMobController.cs" />
     <Compile Include="Entities\EnityController\DefaultPlayerController.cs" />
     <Compile Include="Entities\EnityController\PipePlayerController.cs" />
+    <Compile Include="OffsetCalculator.cs" />
     <Compile Include="OpenGL\AvgDurationWatch.cs" />
     <Compile Include="OpenGL\BooleanKeySwitch.cs" />
     <Compile Include="Triggers\DeathZone.cs" />

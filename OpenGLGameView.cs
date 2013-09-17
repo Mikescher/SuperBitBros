@@ -28,7 +28,7 @@ namespace SuperBitBros
             GL.ClearColor(Color.FromArgb(0, 0, 0));
             StartRender();
 
-            Vec2i offset = (Vec2i)model.GetOffset(window.Width, window.Height); // Cast to int for ... reasons
+            Vec2i offset = (Vec2i)model.GetOffset(); // Cast to int for ... reasons
             GL.Translate(-offset.X, -offset.Y, 0);
 
             Rect2i bRange = new Rect2i((int)(offset.X / Block.BLOCK_WIDTH) - 1,
@@ -200,7 +200,7 @@ namespace SuperBitBros
             // RENDER OFFSET BOX
             //######################
 
-            RenderColoredBox(((GameWorld)model).GetOffsetBox(window.Width, window.Height), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 255, 0, 0));
+            RenderColoredBox(((GameWorld)model).offset.GetOffsetBox(window.Width, window.Height), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 255, 0, 0));
 
             //######################
             // RENDER MINIMAP

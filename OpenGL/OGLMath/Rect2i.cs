@@ -3,55 +3,132 @@
     public class Rect2i
     {
         private Vec2i position; // bottomLeft
-        private int width;
-        private int height;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
-        public Vec2i tl { get { return new Vec2i(position.X, position.Y + height); } }
+        public Vec2i tl { get { return new Vec2i(position.X, position.Y + Height); } }
 
         public Vec2i bl { get { return new Vec2i(position.X, position.Y); } }
 
-        public Vec2i br { get { return new Vec2i(position.X + width, position.Y); } }
+        public Vec2i br { get { return new Vec2i(position.X + Width, position.Y); } }
 
-        public Vec2i tr { get { return new Vec2i(position.X + width, position.Y + height); } }
+        public Vec2i tr { get { return new Vec2i(position.X + Width, position.Y + Height); } }
 
         public Rect2i(int bl_x, int bl_y, int pwidth, int pheight)
         {
             position = new Vec2i(bl_x, bl_y);
-            width = pwidth;
-            height = pheight;
+            Width = pwidth;
+            Height = pheight;
         }
 
         public Rect2i(Vec2i bottomleft, int pwidth, int pheight)
         {
             position = new Vec2i(bottomleft);
-            width = pwidth;
-            height = pheight;
+            Width = pwidth;
+            Height = pheight;
         }
 
         public Rect2i(Vec2i bottomleft, int psize)
         {
             position = new Vec2i(bottomleft);
-            width = psize;
-            height = psize;
+            Width = psize;
+            Height = psize;
         }
 
         public Rect2i(Vec2i bottomleft, Vec2i topRight)
         {
             position = new Vec2i(bottomleft);
-            width = topRight.X - bottomleft.X;
-            height = topRight.Y - bottomleft.Y;
+            Width = topRight.X - bottomleft.X;
+            Height = topRight.Y - bottomleft.Y;
         }
 
         public Rect2i(Rect2i r)
         {
             position = new Vec2i(r.position);
-            width = r.width;
-            height = r.height;
+            Width = r.Width;
+            Height = r.Height;
         }
+
+        #region Operators
+
+        public static implicit operator Rect2d(Rect2i instance)
+        {
+            return new Rect2d(instance.position, instance.Width, instance.Height);
+        }
+
+        public static Rect2i operator +(Rect2i v1, Vec2i v2)
+        {
+            return new Rect2i(v1.position + v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2i operator +(Rect2i v1, int v2)
+        {
+            return new Rect2i(v1.position + v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2i operator -(Rect2i v1, Vec2i v2)
+        {
+            return new Rect2i(v1.position - v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2i operator -(Rect2i v1, int v2)
+        {
+            return new Rect2i(v1.position - v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2i operator *(Rect2i v1, Vec2i v2)
+        {
+            return new Rect2i(v1.position * v2, v1.Width * v2.X, v1.Height * v2.Y);
+        }
+
+        public static Rect2i operator *(Rect2i v1, int v2)
+        {
+            return new Rect2i(v1.position * v2, v1.Width * v2, v1.Height * v2);
+        }
+
+        public static Rect2i operator /(Rect2i v1, Vec2i v2)
+        {
+            return new Rect2i(v1.position / v2, v1.Width / v2.X, v1.Height / v2.Y);
+        }
+
+        public static Rect2i operator /(Rect2i v1, int v2)
+        {
+            return new Rect2i(v1.position / v2, v1.Width / v2, v1.Height / v2);
+        }
+
+        public static bool operator ==(Rect2i a, Rect2i b)
+        {
+            if ((object)a == null && (object)b == null)
+                return true;
+
+            if ((object)a == null || (object)b == null)
+                return false;
+
+            return (a.position == b.position && a.Width == b.Width && a.Height == b.Height);
+        }
+
+        public static bool operator !=(Rect2i a, Rect2i b)
+        {
+            return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Rect2i)
+                return this == (Rect2i)obj;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return position.GetHashCode() + Width.GetHashCode() + Height.GetHashCode();
+        }
+
+        #endregion Operators
 
         public Vec2d GetMiddle()
         {
-            return new Vec2d(position.X + width / 2.0, position.Y + height / 2.0);
+            return new Vec2d(position.X + Width / 2.0, position.Y + Height / 2.0);
         }
 
         public bool IsColldingWith(Rect2i rect)
@@ -91,24 +168,24 @@
 
         public void TrimNorth(int len)
         {
-            height -= len;
+            Height -= len;
         }
 
         public void TrimEast(int len)
         {
-            width -= len;
+            Width -= len;
         }
 
         public void TrimSouth(int len)
         {
             position.Y += len;
-            height -= len;
+            Height -= len;
         }
 
         public void TrimWest(int len)
         {
             position.X += len;
-            height -= len;
+            Height -= len;
         }
 
         public bool Includes(Vec2i vec)

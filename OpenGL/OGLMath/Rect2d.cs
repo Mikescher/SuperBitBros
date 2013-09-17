@@ -3,55 +3,132 @@
     public class Rect2d
     {
         private Vec2d position; // bottomLeft
-        private double width;
-        private double height;
+        public double Width { get; private set; }
+        public double Height { get; private set; }
 
-        public Vec2d tl { get { return new Vec2d(position.X, position.Y + height); } }
+        public Vec2d tl { get { return new Vec2d(position.X, position.Y + Height); } }
 
         public Vec2d bl { get { return new Vec2d(position.X, position.Y); } }
 
-        public Vec2d br { get { return new Vec2d(position.X + width, position.Y); } }
+        public Vec2d br { get { return new Vec2d(position.X + Width, position.Y); } }
 
-        public Vec2d tr { get { return new Vec2d(position.X + width, position.Y + height); } }
+        public Vec2d tr { get { return new Vec2d(position.X + Width, position.Y + Height); } }
 
         public Rect2d(double bl_x, double bl_y, double pwidth, double pheight)
         {
             position = new Vec2d(bl_x, bl_y);
-            width = pwidth;
-            height = pheight;
+            Width = pwidth;
+            Height = pheight;
         }
 
         public Rect2d(Vec2d bottomleft, double pwidth, double pheight)
         {
             position = new Vec2d(bottomleft);
-            width = pwidth;
-            height = pheight;
+            Width = pwidth;
+            Height = pheight;
         }
 
         public Rect2d(Vec2d bottomleft, double psize)
         {
             position = new Vec2d(bottomleft);
-            width = psize;
-            height = psize;
+            Width = psize;
+            Height = psize;
         }
 
         public Rect2d(Vec2d bottomleft, Vec2d topRight)
         {
             position = new Vec2d(bottomleft);
-            width = topRight.X - bottomleft.X;
-            height = topRight.Y - bottomleft.Y;
+            Width = topRight.X - bottomleft.X;
+            Height = topRight.Y - bottomleft.Y;
         }
 
         public Rect2d(Rect2d r)
         {
             position = new Vec2d(r.position);
-            width = r.width;
-            height = r.height;
+            Width = r.Width;
+            Height = r.Height;
         }
+
+        #region Operators
+
+        public static explicit operator Rect2i(Rect2d instance)
+        {
+            return new Rect2i((Vec2i)instance.position, (int)instance.Width, (int)instance.Height);
+        }
+
+        public static Rect2d operator +(Rect2d v1, Vec2d v2)
+        {
+            return new Rect2d(v1.position + v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2d operator +(Rect2d v1, double v2)
+        {
+            return new Rect2d(v1.position + v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2d operator -(Rect2d v1, Vec2d v2)
+        {
+            return new Rect2d(v1.position - v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2d operator -(Rect2d v1, double v2)
+        {
+            return new Rect2d(v1.position - v2, v1.Width, v1.Height);
+        }
+
+        public static Rect2d operator *(Rect2d v1, Vec2d v2)
+        {
+            return new Rect2d(v1.position * v2, v1.Width * v2.X, v1.Height * v2.Y);
+        }
+
+        public static Rect2d operator *(Rect2d v1, double v2)
+        {
+            return new Rect2d(v1.position * v2, v1.Width * v2, v1.Height * v2);
+        }
+
+        public static Rect2d operator /(Rect2d v1, Vec2d v2)
+        {
+            return new Rect2d(v1.position / v2, v1.Width / v2.X, v1.Height / v2.Y);
+        }
+
+        public static Rect2d operator /(Rect2d v1, double v2)
+        {
+            return new Rect2d(v1.position / v2, v1.Width / v2, v1.Height / v2);
+        }
+
+        public static bool operator ==(Rect2d a, Rect2d b)
+        {
+            if ((object)a == null && (object)b == null) 
+                return true;
+
+            if ((object)a == null || (object)b == null) 
+                return false;
+
+            return (a.position == b.position && a.Width == b.Width && a.Height == b.Height);
+        }
+
+        public static bool operator !=(Rect2d a, Rect2d b)
+        {
+            return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Rect2d)
+                return this == (Rect2d)obj;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return position.GetHashCode() + Width.GetHashCode() + Height.GetHashCode();
+        }
+
+        #endregion Operators
 
         public Vec2d GetMiddle()
         {
-            return new Vec2d(position.X + width / 2.0, position.Y + height / 2.0);
+            return new Vec2d(position.X + Width / 2.0, position.Y + Height / 2.0);
         }
 
         public bool IsColldingWith(Rect2d rect)
@@ -91,29 +168,29 @@
 
         public void TrimNorth(double len)
         {
-            height -= len;
+            Height -= len;
         }
 
         public void TrimEast(double len)
         {
-            width -= len;
+            Width -= len;
         }
 
         public void TrimSouth(double len)
         {
             position.Y += len;
-            height -= len;
+            Height -= len;
         }
 
         public void TrimWest(double len)
         {
             position.X += len;
-            width -= len;
+            Width -= len;
         }
 
         public bool Includes(Vec2d vec)
         {
-            return (vec.X > position.X && vec.Y > position.Y && vec.X < tl.X && vec.Y < tl.Y);
+            return (vec.X > position.X && vec.Y > position.Y && vec.X < tr.X && vec.Y < tr.Y);
         }
 
         public Vec2d GetDistanceTo(Vec2d vec)

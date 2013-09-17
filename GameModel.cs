@@ -119,7 +119,7 @@ namespace SuperBitBros
             return new List<Block>(blockList);
         }
 
-        public virtual void Update(KeyboardDevice keyboard)
+        public virtual void Update(KeyboardDevice keyboard, int window_width, int window_height)
         {
             foreach (DynamicEntity e in GetCurrentEntityList())
             {
@@ -175,6 +175,6 @@ namespace SuperBitBros
             t.OnAdd(this);
         }
 
-        public abstract Vec2d GetOffset(int window_width, int window_height);
+        public abstract Vec2d GetOffset();
     }
 }

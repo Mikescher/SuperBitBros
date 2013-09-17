@@ -77,7 +77,7 @@ namespace SuperBitBros
             ups_counter.Inc();
             update_watch.Start();
 
-            model.Update(window.Keyboard);
+            model.Update(window.Keyboard, window.Width, window.Height);
 
             Program.debugViewSwitch.Update(window.Keyboard);
             Program.minimapViewSwitch.Update(window.Keyboard);
