@@ -16,6 +16,8 @@ namespace SuperBitBros
 
         public List<Block> blockList { get; protected set; }
 
+        private List<DynamicEntity> killList;
+
         private Block[,] blockMap;
         private List<Trigger>[,] triggerMap;
 
@@ -37,6 +39,7 @@ namespace SuperBitBros
 
             entityList = new List<DynamicEntity>();
             blockList = new List<Block>();
+            killList = new List<DynamicEntity>();
         }
 
         protected void AddBlock(Block b, int x, int y)
@@ -70,6 +73,11 @@ namespace SuperBitBros
                 blockMap[x, y].OnRemove();
                 blockMap[x, y] = null;
             }
+        }
+
+        public Block GetBlock(Vec2i v)
+        {
+            return GetBlock(v.X, v.Y);
         }
 
         public Block GetBlock(int x, int y)
@@ -121,6 +129,18 @@ namespace SuperBitBros
             {
                 e.Update(keyboard);
             }
+
+            foreach (DynamicEntity e in killList)
+            {
+                if (!RemoveEntity(e)) 
+                    Console.Error.WriteLine("Could not KillLater Entity: " + e);
+            }
+            killList.Clear();
+        }
+
+        public void KillLater(DynamicEntity e)
+        {
+            if (!killList.Contains(e)) killList.Add(e);
         }
 
         public void setSize(int w, int h)

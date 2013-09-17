@@ -3,7 +3,7 @@ using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
 
-namespace SuperBitBros.Entities.DynamicEntities
+namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
     public class PiranhaPlant : Mob
     {

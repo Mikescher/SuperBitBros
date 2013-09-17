@@ -75,9 +75,11 @@
     <Compile Include="Entities\Blocks\CrazyCoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\EmptyCoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\EndlessCrazyCoinBoxBlock.cs" />
-    <Compile Include="Entities\Blocks\FlagBlock.cs" />
     <Compile Include="Entities\Blocks\HillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
+    <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
+    <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
+    <Compile Include="Entities\EntityTypeWrapper.cs" />
     <Compile Include="Entities\EnityController\AbstractEntityController.cs" />
     <Compile Include="Entities\EnityController\AbstractNewtonEntityController.cs" />
     <Compile Include="Entities\EnityController\BouncingCoinController.cs" />
@@ -86,6 +88,8 @@
     <Compile Include="Entities\EnityController\DefaultMobController.cs" />
     <Compile Include="Entities\EnityController\DefaultPlayerController.cs" />
     <Compile Include="Entities\EnityController\PipePlayerController.cs" />
+    <Compile Include="OpenGL\AvgDurationWatch.cs" />
+    <Compile Include="OpenGL\BooleanKeySwitch.cs" />
     <Compile Include="Triggers\DeathZone.cs" />
     <Compile Include="Triggers\PipeZones\EnterAnyPipeZone.cs" />
     <Compile Include="Triggers\PipeZones\MoveAnyPipeZone.cs" />
@@ -152,6 +156,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
   <ItemGroup>

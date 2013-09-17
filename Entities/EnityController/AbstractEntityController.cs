@@ -1,4 +1,5 @@
 ﻿using OpenTK.Input;
+using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.EnityController
 {
@@ -22,5 +23,7 @@ namespace SuperBitBros.Entities.EnityController
         public abstract void OnHide();
 
         public abstract void OnReshow();
+
+        public abstract Vec2d GetDelta();
     }
 }

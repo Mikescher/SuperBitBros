@@ -1,4 +1,4 @@
-﻿namespace SuperBitBros.Entities.DynamicEntities
+﻿namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
     public abstract class Mob : DynamicEntity
     {

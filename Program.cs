@@ -1,10 +1,13 @@
 ﻿using System;
+using OpenTK.Input;
+using SuperBitBros.OpenGL;
 
 namespace SuperBitBros
 {
     public class Program
     {
-        public static bool IS_DEBUG = true;
+        public static BooleanKeySwitch debugViewSwitch = new BooleanKeySwitch(true, Key.F10, KeyTriggerMode.ON_DOWN);
+        public static BooleanKeySwitch minimapViewSwitch = new BooleanKeySwitch(true, Key.F9, KeyTriggerMode.ON_DOWN);
 
         private static void Main(string[] args)
         {
@@ -21,5 +24,4 @@ namespace SuperBitBros
     }
 }
 
-//Todo Rendertiem / Updatetime to DebugView
 //TODO Performance 4 Fullscreen (Coll Chunks)

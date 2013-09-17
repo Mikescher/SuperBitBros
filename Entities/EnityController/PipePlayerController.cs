@@ -12,10 +12,12 @@ namespace SuperBitBros.Entities.EnityController
     public class PipePlayerController : AbstractEntityController
     {
         private const double PIPECORRECTION_SPEEDFACTOR = 0.5;
-        private const double PIPE_ENTER_SPEED = 0.01;
+        private const double PIPE_ENTER_SPEED = 2.0;
 
         private PipeDirection direction;
         private double speed = PIPE_ENTER_SPEED;
+
+        private Vec2d deltaCache = Vec2d.Zero;
 
         private bool hasConnected = false;
         private bool hasFinished = false;
@@ -63,6 +65,8 @@ namespace SuperBitBros.Entities.EnityController
             }
 
             ent.position += delta;
+
+            deltaCache = delta;
         }
 
         private PipeZone GetUnderlyingZone()
@@ -91,17 +95,33 @@ namespace SuperBitBros.Entities.EnityController
                     if (t is PipeZone)
                         return t as PipeZone;
 
+            blockpos = (Vec2i)(ent.GetBottomRight() / Block.BLOCK_SIZE);
+
+            triggerlist = owner.getTriggerList(blockpos.X, blockpos.Y);
+            if (triggerlist != null)
+                foreach (Trigger t in owner.getTriggerList(blockpos.X, blockpos.Y))
+                    if (t is PipeZone)
+                        return t as PipeZone;
+
+            blockpos = (Vec2i)(ent.GetTopLeft() / Block.BLOCK_SIZE);
+
+            triggerlist = owner.getTriggerList(blockpos.X, blockpos.Y);
+            if (triggerlist != null)
+                foreach (Trigger t in owner.getTriggerList(blockpos.X, blockpos.Y))
+                    if (t is PipeZone)
+                        return t as PipeZone;
+
             return null;
         }
 
         private double GetXCorrection()
         {
-            if (GetUnderlyingZone() == null) 
-                return 0;
-
             Vec2i blockPos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
             int lowest = blockPos.X;
             int highest = blockPos.X;
+
+            if (! ContainsPipeZone(owner.getTriggerList(blockPos.X, blockPos.Y)))
+                return 0;
 
             while (ContainsPipeZone(owner.getTriggerList(lowest - 1, blockPos.Y), direction))
                 lowest--;
@@ -118,12 +138,12 @@ namespace SuperBitBros.Entities.EnityController
 
         private double GetYCorrection()
         {
-            if (GetUnderlyingZone() == null)
-                return 0;
-
             Vec2i blockPos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
             int lowest = blockPos.Y;
             int highest = blockPos.Y;
+
+            if (!ContainsPipeZone(owner.getTriggerList(blockPos.X, blockPos.Y)))
+                return 0;
 
             while (ContainsPipeZone(owner.getTriggerList(blockPos.X, lowest - 1), direction))
                 lowest--;
@@ -147,6 +167,15 @@ namespace SuperBitBros.Entities.EnityController
             return false;
         }
 
+        private bool ContainsPipeZone(List<Trigger> list)
+        {
+            if (list != null)
+                foreach (Trigger t in list)
+                    if (t is PipeZone)
+                        return true;
+            return false;
+        }
+
         public override bool IsActive()
         {
             return !hasFinished;
@@ -155,6 +184,11 @@ namespace SuperBitBros.Entities.EnityController
         public override void OnIllegalIntersection(Entity other)
         {
             //ignore
+        }
+
+        public override Vec2d GetDelta()
+        {
+            return deltaCache;
         }
 
         public override void OnHide()

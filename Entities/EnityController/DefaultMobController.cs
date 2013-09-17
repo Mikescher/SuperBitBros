@@ -1,6 +1,7 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.EnityController
@@ -22,17 +23,17 @@ namespace SuperBitBros.Entities.EnityController
         {
             Vec2d delta = new Vec2d(0, 0);
 
+            Vec2i blockPos;
+            if (walkDirection < 0)
+                blockPos = (Vec2i)(new Vec2d(ent.position.X + ent.width, ent.position.Y) / Block.BLOCK_SIZE);
+            else
+                blockPos = (Vec2i)(ent.position / Block.BLOCK_SIZE);
+
+            int y = (int)blockPos.Y - 1;
+            int x = (int)blockPos.X + walkDirection;
+
             if (ent.IsOnGround())
             {
-                Vec2d blockPos;
-                if (walkDirection < 0)
-                    blockPos = new Vec2d((int)((ent.position.X + ent.width) / Block.BLOCK_WIDTH), (int)((ent.position.Y) / Block.BLOCK_HEIGHT));
-                else
-                    blockPos = new Vec2d((int)((ent.position.X) / Block.BLOCK_WIDTH), (int)((ent.position.Y) / Block.BLOCK_HEIGHT));
-
-                int y = (int)blockPos.Y - 1;
-                int x = (int)blockPos.X + walkDirection;
-
                 Block next = ent.owner.GetBlock(x, y);
                 if (next == null || !Entity.TestBlocking(next, ent))
                 {
@@ -50,7 +51,16 @@ namespace SuperBitBros.Entities.EnityController
                 delta.X = MOB_ACC * walkDirection;
             }
 
-            DoGravitationalMovement(delta);
+            if (walkDirection < 0) blockPos = (Vec2i)(new Vec2d(ent.position.X + ent.width, ent.position.Y) / Block.BLOCK_SIZE);
+            else blockPos = (Vec2i)(ent.position / Block.BLOCK_SIZE);
+            x = (int)blockPos.X + walkDirection;
+            y = (int)blockPos.Y - 1;
+            Block realnext = ent.owner.GetBlock(x, y);
+
+            if (realnext != null && Entity.TestBlocking(realnext, ent))
+            {
+                DoGravitationalMovement(delta);
+            }
         }
 
         public override bool IsActive()

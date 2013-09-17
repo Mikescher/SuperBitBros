@@ -162,5 +162,10 @@ namespace SuperBitBros.Entities.EnityController
             //if (e is DynamicEntity)
             //    ((DynamicEntity)e).physicPushForce = -force;
         }
+
+        public override Vec2d GetDelta()
+        {
+            return movementDelta;
+        }
     }
 }

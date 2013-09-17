@@ -2,6 +2,7 @@
 using System.Drawing;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Triggers
@@ -20,9 +21,9 @@ namespace SuperBitBros.Triggers
             {
                 Console.Out.WriteLine("DeathZone Triggered");
             }
-            else if (collider is Mob)
+            else if (collider is DynamicEntity)
             {
-                collider.Kill();
+                collider.KillLater();
             }
         }
 

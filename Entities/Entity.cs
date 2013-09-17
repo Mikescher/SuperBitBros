@@ -15,9 +15,14 @@ namespace SuperBitBros.Entities
         public const int DISTANCE_BLOCKS = 50;
         public const int DISTANCE_CORPSE = 45;
         public const int DISTANCE_MOBS = 40;
-        public const int DISTANCE_POWERUPS = 25;
+        public const int DISTANCE_STRUCTURES = 35;
         public const int DISTANCE_PLAYER = 30;
+        public const int DISTANCE_POWERUPS = 25;
         public const int DISTANCE_FOREGROUND = 10;
+
+        public const int DISTANCE_DEBUG_ZONE = 8;
+        public const int DISTANCE_DEBUG_MINIMAP = 6;
+        public const int DISTANCE_DEBUG_MARKER = 4;
 
         public GameModel owner;
 

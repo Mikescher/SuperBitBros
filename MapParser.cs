@@ -1,12 +1,15 @@
 ﻿using System.Drawing;
+using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
 
 namespace SuperBitBros
 {
-    public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN };
+    public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN, SPAWN };
 
     public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION };
 
@@ -24,6 +27,7 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_GOOMBA = Color.FromArgb(127, 0, 0);
         private static readonly Color COL_SPAWN_PIRANHAPLANT = Color.FromArgb(0, 127, 0);
         private static readonly Color COL_SPAWN_COIN = Color.FromArgb(100, 200, 100);
+        private static readonly Color COL_SPAWN_FLAG = Color.FromArgb(0, 255, 255);
 
         public readonly OpenRasterImage map;
 
@@ -47,7 +51,7 @@ namespace SuperBitBros
             return FindBlock(map.GetColor(LAYER_BLOCKS, x, y));
         }
 
-        public SpawnEntityType GetEntity(int x, int y)
+        public EntityTypeWrapper GetEntity(int x, int y)
         {
             return FindSpawnEntityType(map.GetColor(LAYER_ENTITIES, x, y));
         }
@@ -80,8 +84,6 @@ namespace SuperBitBros
                 return new PipeBlock();
             else if (c == CastleBlock.GetColor())
                 return new CastleBlock();
-            else if (c == FlagBlock.GetColor())
-                return new FlagBlock();
             else if (c == CrazyCoinBoxBlock.GetColor())
                 return new CrazyCoinBoxBlock();
             else if (c == EndlessCrazyCoinBoxBlock.GetColor())
@@ -90,18 +92,20 @@ namespace SuperBitBros
                 return null;
         }
 
-        private SpawnEntityType FindSpawnEntityType(Color c)
+        private EntityTypeWrapper FindSpawnEntityType(Color c)
         {
             if (c.A != 255)
-                return SpawnEntityType.NO_SPAWN;
+                return null;
             else if (c == COL_SPAWN_GOOMBA)
-                return SpawnEntityType.SPAWN_GOOMBA;
+                return new EntityTypeWrapper(typeof(Goomba));
             else if (c == COL_SPAWN_PIRANHAPLANT)
-                return SpawnEntityType.SPAWN_PIRANHAPLANT;
+                return new EntityTypeWrapper(typeof(PiranhaPlant));
             else if (c == COL_SPAWN_COIN)
-                return SpawnEntityType.SPAWN_COIN;
+                return new EntityTypeWrapper(typeof(CoinEntity));
+            else if (c == COL_SPAWN_FLAG)
+                return new EntityTypeWrapper(typeof(FlagEntity));
             else
-                return SpawnEntityType.UNKNOWN_SPAWN;
+                return new EntityTypeWrapper(null);
         }
 
         private AddTriggerType FindTriggerType(Color c)

@@ -44,7 +44,7 @@ namespace SuperBitBros.Entities.DynamicEntities
             AddController(new DefaultPlayerController(this));
         }
 
-        private bool IsInUserControlled()
+        private bool IsUserControlled()
         {
             return controllerStack.Count != 0 && controllerStack.Peek() is DefaultPlayerController;
         }
@@ -53,7 +53,7 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             base.Update(keyboard);
 
-            if (IsInUserControlled())
+            if (IsUserControlled())
             {
                 if (keyboard[Key.Down] && IsOnGround())
                     TestForPipe(PipeDirection.SOUTH);
@@ -120,6 +120,11 @@ namespace SuperBitBros.Entities.DynamicEntities
         protected override bool IsBlockingOther(Entity sender)
         {
             return true;
+        }
+
+        public void OnCollideNonStaticFlag(Vec2d flagpos)
+        {
+            AddController(new FlagPlayerController(this, flagpos));
         }
     }
 }

@@ -2,7 +2,7 @@
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
 
-namespace SuperBitBros.Entities.DynamicEntities
+namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
     public class Goomba : Mob
     {

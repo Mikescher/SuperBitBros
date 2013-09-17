@@ -10,5 +10,7 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             AddController(isBounce ? (new BouncingCoinController(this, spawnForce)) : (new CoinController(this, spawnForce)));
         }
+
+        public GravityCoinEntity() : this(Vec2d.Zero, false) { }
     }
 }

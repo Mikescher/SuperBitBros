@@ -263,10 +263,10 @@ namespace SuperBitBros.Entities
 
         public Vec2d GetMovement()
         {
-            if (!HasController() || !(controllerStack.Peek() is AbstractNewtonEntityController))
-                return Vec2d.Zero;
+            if (HasController())
+                return controllerStack.Peek().GetDelta();
             else
-                return (controllerStack.Peek() as AbstractNewtonEntityController).movementDelta;
+                return Vec2d.Zero;
         }
 
         protected void AddController(AbstractEntityController c)
@@ -277,9 +277,9 @@ namespace SuperBitBros.Entities
             controllerStack.Push(c);
         }
 
-        public void Kill()
+        public void KillLater()
         {
-            owner.RemoveEntity(this);
+            owner.KillLater(this);
         }
     }
 }

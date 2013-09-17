@@ -2,6 +2,7 @@
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
@@ -21,23 +22,12 @@ namespace SuperBitBros
         {
         }
 
-        public void SpawnEntityFromMapData(SpawnEntityType setype, double x, double y)
+        public void SpawnEntityFromMapData(EntityTypeWrapper setype, double x, double y)
         {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
-            if (setype == SpawnEntityType.SPAWN_GOOMBA)
-            {
-                AddEntity(new Goomba(), px, py);
-            }
-            else if (setype == SpawnEntityType.SPAWN_PIRANHAPLANT)
-            {
-                AddEntity(new PiranhaPlant(), px, py);
-            }
-            else if (setype == SpawnEntityType.SPAWN_COIN)
-            {
-                AddEntity(new CoinEntity(), px, py);
-            }
+            AddEntity(setype.Get(), px, py);
         }
 
         public void AddTriggerFromMapData(AddTriggerType triggertype, int x, int y)
@@ -81,7 +71,7 @@ namespace SuperBitBros
                     int imgY = parser.GetHeight() - (1 + y);
 
                     Block block = parser.GetBlock(imgX, imgY);
-                    SpawnEntityType set = parser.GetEntity(imgX, imgY);
+                    EntityTypeWrapper set = parser.GetEntity(imgX, imgY);
                     AddTriggerType att = parser.GetTrigger(imgX, imgY);
                     PipeZoneTypeWrapper pzt = parser.GetPipeZone(imgX, imgY);
 
@@ -90,9 +80,11 @@ namespace SuperBitBros
                     else
                         AddBlock(block, x, y);
 
-                    if (set == SpawnEntityType.UNKNOWN_SPAWN)
+                    if (set == null)
+                    { }  // No Entity
+                    else if (!set.IsSet())
                         Console.Error.WriteLine("Could not parse SpawnEntity-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_ENTITIES, imgX, imgY), x, y);
-                    else if (set != SpawnEntityType.NO_SPAWN)
+                    else
                         SpawnEntityFromMapData(set, x, y);
 
                     if (att == AddTriggerType.UNKNOWN_TRIGGER)
@@ -101,9 +93,7 @@ namespace SuperBitBros
                         AddTriggerFromMapData(att, x, y);
 
                     if (pzt == null)
-                    {
-                        // No Zone
-                    }
+                    { }  // No Zone
                     else if (!pzt.IsSet())
                         Console.Error.WriteLine("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY), x, y);
                     else

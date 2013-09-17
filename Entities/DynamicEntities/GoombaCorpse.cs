@@ -1,4 +1,5 @@
 ﻿using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities

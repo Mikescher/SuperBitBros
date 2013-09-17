@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenTK.Input;
 using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.EnityController
@@ -12,13 +13,28 @@ namespace SuperBitBros.Entities.EnityController
         public const double PLAYER_SPEED_MAX = 4.5;
         public const double PLAYER_JUMP_POWER = 9;
 
+        private BooleanKeySwitch debugFlySwitch = new BooleanKeySwitch(false, Key.LControl, KeyTriggerMode.WHILE_DOWN);
+        private BooleanKeySwitch debugFlyoverrideSwitch = new BooleanKeySwitch(false, Key.ShiftLeft, KeyTriggerMode.WHILE_DOWN);
+
         public DefaultPlayerController(Player e)
             : base(e)
         {
-            //---
+            debugFlySwitch.TurnOnEvent += delegate { Console.Out.WriteLine("DebugFlyMode enabled"); };
+            debugFlySwitch.TurnOffEvent += delegate { Console.Out.WriteLine("DebugFlyMode disabled"); };
+
+            debugFlyoverrideSwitch.TurnOnEvent += delegate { if (debugFlySwitch.Value) Console.Out.WriteLine("DebugFlyMode++ enabled"); };
+            debugFlyoverrideSwitch.TurnOffEvent += delegate { if (debugFlySwitch.Value) Console.Out.WriteLine("DebugFlyMode++ disabled"); };
         }
 
         public override void Update(KeyboardDevice keyboard)
+        {
+            debugFlySwitch.Update(keyboard);
+            debugFlyoverrideSwitch.Update(keyboard);
+
+            updateMovement(keyboard);
+        }
+
+        private void updateMovement(KeyboardDevice keyboard)
         {
             Vec2d delta = Vec2d.Zero;
 
@@ -39,7 +55,7 @@ namespace SuperBitBros.Entities.EnityController
                 delta.Y = PLAYER_JUMP_POWER + GRAVITY_ACCELERATION;
             }
 
-            if (Program.IS_DEBUG && keyboard[Key.ShiftLeft])
+            if (Program.debugViewSwitch.Value && debugFlySwitch.Value)
             {
                 delta = Vec2d.Zero;
                 if (keyboard[Key.Left])
@@ -50,7 +66,7 @@ namespace SuperBitBros.Entities.EnityController
                     delta.Y += PLAYER_SPEED_MAX;
                 if (keyboard[Key.Down])
                     delta.Y -= PLAYER_SPEED_MAX;
-                MoveBy(delta, false);
+                MoveBy(delta, !debugFlyoverrideSwitch.Value, !debugFlyoverrideSwitch.Value);
             }
             else
                 DoGravitationalMovement(delta);
