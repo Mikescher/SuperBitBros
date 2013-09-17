@@ -70,7 +70,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private void TestForPipe(PipeDirection d)
         {
-            Vec2i blockpos = (Vec2i)(position / Block.BLOCK_SIZE);
+            Vec2i blockpos = (Vec2i)(GetMiddle() / Block.BLOCK_SIZE);
 
             blockpos += PipeZone.GetVectorForDirection(d);
 

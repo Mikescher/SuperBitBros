@@ -11,9 +11,12 @@ namespace SuperBitBros.Entities.EnityController
 {
     public class PipePlayerController : AbstractEntityController
     {
-        public const double PIPECORRECTIONSPEED = 0.5;
+        private const double PIPECORRECTION_SPEEDFACTOR = 0.5;
+        private const double PIPE_ENTER_SPEED = 0.01;
 
         private PipeDirection direction;
+        private double speed = PIPE_ENTER_SPEED;
+
         private bool hasConnected = false;
         private bool hasFinished = false;
 
@@ -39,25 +42,25 @@ namespace SuperBitBros.Entities.EnityController
                 {
                     direction = zone.GetOneDirection();
                 }
+                speed = zone.GetSpeed();
             }
 
             Vec2d delta = PipeZone.GetVectorForDirection(direction);
+            delta.SetLength(speed);
 
             if (direction == PipeDirection.SOUTH || direction == PipeDirection.NORTH)
             {
                 double corr = GetXCorrection();
                 Console.Out.WriteLine("CorrX:" + corr);
-                delta.X += Math.Min(Math.Abs(corr), PIPECORRECTIONSPEED) * Math.Sign(corr);
+                delta.X += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR)) * Math.Sign(corr);
             }
 
             if (direction == PipeDirection.EAST || direction == PipeDirection.WEST)
             {
                 double corr = GetYCorrection();
                 Console.Out.WriteLine("CorrY:" + corr);
-                delta.Y += Math.Min(Math.Abs(corr), PIPECORRECTIONSPEED) * Math.Sign(corr);
+                delta.Y += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR)) * Math.Sign(corr);
             }
-
-            delta *= 3.3;
 
             ent.position += delta;
         }
@@ -93,6 +96,9 @@ namespace SuperBitBros.Entities.EnityController
 
         private double GetXCorrection()
         {
+            if (GetUnderlyingZone() == null) 
+                return 0;
+
             Vec2i blockPos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
             int lowest = blockPos.X;
             int highest = blockPos.X;
@@ -112,6 +118,9 @@ namespace SuperBitBros.Entities.EnityController
 
         private double GetYCorrection()
         {
+            if (GetUnderlyingZone() == null)
+                return 0;
+
             Vec2i blockPos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
             int lowest = blockPos.Y;
             int highest = blockPos.Y;

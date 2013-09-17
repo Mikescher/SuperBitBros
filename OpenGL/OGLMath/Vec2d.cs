@@ -52,7 +52,7 @@ namespace SuperBitBros.OpenGL.OGLMath
 
         public static Vec2d operator -(Vec2d v1, Vec2d v2)
         {
-            return new Vec2d(v1.X + v2.X, v1.Y + v2.Y);
+            return new Vec2d(v1.X - v2.X, v1.Y - v2.Y);
         }
 
         public static Vec2d operator -(Vec2d v1, double v2)

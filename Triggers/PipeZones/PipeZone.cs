@@ -8,7 +8,7 @@ namespace SuperBitBros.Triggers.PipeZones
 
     public abstract class PipeZone : Trigger
     {
-        public const double PIPESPEED_NORMAL = 5.0;
+        public const double PIPESPEED_NORMAL = 3.5;
 
         public PipeZone(Vec2i pos)
             : base(pos)
@@ -101,6 +101,11 @@ namespace SuperBitBros.Triggers.PipeZones
                     break;
             }
             return delta;
+        }
+
+        public virtual double GetSpeed()
+        {
+            return PIPESPEED_NORMAL;
         }
 
         public abstract bool CanEnter();
