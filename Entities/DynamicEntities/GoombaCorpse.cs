@@ -1,12 +1,14 @@
 ﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
 
-namespace SuperBitBros.Entities.DynamicEntities {
-
-    public class GoombaCorpse : DynamicEntity {
+namespace SuperBitBros.Entities.DynamicEntities
+{
+    public class GoombaCorpse : DynamicEntity
+    {
         public const double GOOMBA_CORPSE_FRICION = 0.05;
 
-        public GoombaCorpse(Goomba g) {
+        public GoombaCorpse(Goomba g)
+        {
             distance = Entity.DISTANCE_CORPSE;
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT;
@@ -18,7 +20,8 @@ namespace SuperBitBros.Entities.DynamicEntities {
             AddController(controller);
         }
 
-        protected override bool IsBlockingOther(Entity sender) {
+        protected override bool IsBlockingOther(Entity sender)
+        {
             return false;
         }
     }

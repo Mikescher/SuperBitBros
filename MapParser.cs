@@ -1,16 +1,17 @@
-﻿using SuperBitBros.Entities.Blocks;
+﻿using System.Drawing;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
-using System.Drawing;
 
-namespace SuperBitBros {
-
+namespace SuperBitBros
+{
     public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN };
 
     public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION };
 
-    public class ImageMapParser {
+    public class ImageMapParser
+    {
         public const string LAYER_PIPEZONES = "PipeNetwork";
         public const string LAYER_TRIGGER = "Trigger";
         public const string LAYER_ENTITIES = "Entities";
@@ -26,35 +27,43 @@ namespace SuperBitBros {
 
         public readonly OpenRasterImage map;
 
-        public ImageMapParser(OpenRasterImage map) {
+        public ImageMapParser(OpenRasterImage map)
+        {
             this.map = map;
         }
 
-        public int GetWidth() {
+        public int GetWidth()
+        {
             return map.Width;
         }
 
-        public int GetHeight() {
+        public int GetHeight()
+        {
             return map.Height;
         }
 
-        public Block GetBlock(int x, int y) {
+        public Block GetBlock(int x, int y)
+        {
             return FindBlock(map.GetColor(LAYER_BLOCKS, x, y));
         }
 
-        public SpawnEntityType GetEntity(int x, int y) {
+        public SpawnEntityType GetEntity(int x, int y)
+        {
             return FindSpawnEntityType(map.GetColor(LAYER_ENTITIES, x, y));
         }
 
-        public AddTriggerType GetTrigger(int x, int y) {
+        public AddTriggerType GetTrigger(int x, int y)
+        {
             return FindTriggerType(map.GetColor(LAYER_TRIGGER, x, y));
         }
 
-        public PipeZoneTypeWrapper GetPipeZone(int x, int y) {
+        public PipeZoneTypeWrapper GetPipeZone(int x, int y)
+        {
             return FindPipeZoneType(map.GetColor(LAYER_PIPEZONES, x, y));
         }
 
-        private Block FindBlock(Color c) {
+        private Block FindBlock(Color c)
+        {
             if (c == StandardGroundBlock.GetColor())
                 return new StandardGroundBlock();
             else if (c == StandardAirBlock.GetColor())
@@ -81,7 +90,8 @@ namespace SuperBitBros {
                 return null;
         }
 
-        private SpawnEntityType FindSpawnEntityType(Color c) {
+        private SpawnEntityType FindSpawnEntityType(Color c)
+        {
             if (c.A != 255)
                 return SpawnEntityType.NO_SPAWN;
             else if (c == COL_SPAWN_GOOMBA)
@@ -94,7 +104,8 @@ namespace SuperBitBros {
                 return SpawnEntityType.UNKNOWN_SPAWN;
         }
 
-        private AddTriggerType FindTriggerType(Color c) {
+        private AddTriggerType FindTriggerType(Color c)
+        {
             if (c.A != 255)
                 return AddTriggerType.NO_TRIGGER;
             else if (c == PlayerSpawnZone.GetColor())
@@ -105,7 +116,8 @@ namespace SuperBitBros {
                 return AddTriggerType.UNKNOWN_TRIGGER;
         }
 
-        private PipeZoneTypeWrapper FindPipeZoneType(Color c) {
+        private PipeZoneTypeWrapper FindPipeZoneType(Color c)
+        {
             if (c.A != 255)
                 return null;
             //MOVE N-E-S-W

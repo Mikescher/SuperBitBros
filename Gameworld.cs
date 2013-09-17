@@ -1,4 +1,5 @@
-﻿using SuperBitBros.Entities;
+﻿using System;
+using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
@@ -6,61 +7,76 @@ using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
-using System;
 
-namespace SuperBitBros {
-
-    public class GameWorld : GameModel {
+namespace SuperBitBros
+{
+    public class GameWorld : GameModel
+    {
         private Vec2d offset = Vec2d.Zero;
 
         public Player player;
 
         public GameWorld()
-            : base() {
+            : base()
+        {
         }
 
-        public void SpawnEntityFromMapData(SpawnEntityType setype, double x, double y) {
+        public void SpawnEntityFromMapData(SpawnEntityType setype, double x, double y)
+        {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
-            if (setype == SpawnEntityType.SPAWN_GOOMBA) {
+            if (setype == SpawnEntityType.SPAWN_GOOMBA)
+            {
                 AddEntity(new Goomba(), px, py);
-            } else if (setype == SpawnEntityType.SPAWN_PIRANHAPLANT) {
+            }
+            else if (setype == SpawnEntityType.SPAWN_PIRANHAPLANT)
+            {
                 AddEntity(new PiranhaPlant(), px, py);
-            } else if (setype == SpawnEntityType.SPAWN_COIN) {
+            }
+            else if (setype == SpawnEntityType.SPAWN_COIN)
+            {
                 AddEntity(new CoinEntity(), px, py);
             }
         }
 
-        public void AddTriggerFromMapData(AddTriggerType triggertype, int x, int y) {
+        public void AddTriggerFromMapData(AddTriggerType triggertype, int x, int y)
+        {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
-            if (triggertype == AddTriggerType.PLAYER_SPAWN_POSITION) {
+            if (triggertype == AddTriggerType.PLAYER_SPAWN_POSITION)
+            {
                 PlayerSpawnZone zone = new PlayerSpawnZone(new Vec2i(x, y));
                 AddTrigger(zone, x, y);
 
                 player = zone.SpawnPlayer();
 
                 offset.Set(player.position.X, player.position.Y);
-            } else if (triggertype == AddTriggerType.DEATH_ZONE) {
+            }
+            else if (triggertype == AddTriggerType.DEATH_ZONE)
+            {
                 AddTrigger(new DeathZone(new Vec2i(x, y)), x, y);
             }
         }
 
-        public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y) {
+        public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y)
+        {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
             AddTrigger(pipeZoneType.Get(new Vec2i(x, y)), x, y);
         }
 
-        public void LoadMapFromResources() {
+        public void LoadMapFromResources()
+        {
             ImageMapParser parser = new ImageMapParser(new OpenRasterImage(Resources.map_01_01));
             setSize(parser.GetWidth(), parser.GetHeight());
 
-            for (int x = 0; x < parser.GetWidth(); x++) {
-                for (int y = 0; y < parser.GetHeight(); y++) {
+            for (int x = 0; x < parser.GetWidth(); x++)
+            {
+                for (int y = 0; y < parser.GetHeight(); y++)
+                {
                     int imgX = x;
                     int imgY = parser.GetHeight() - (1 + y);
 
@@ -84,21 +100,25 @@ namespace SuperBitBros {
                     else if (att != AddTriggerType.NO_TRIGGER)
                         AddTriggerFromMapData(att, x, y);
 
-                    if (pzt == null) {
+                    if (pzt == null)
+                    {
                         // No Zone
-                    } else if (!pzt.IsSet())
+                    }
+                    else if (!pzt.IsSet())
                         Console.Error.WriteLine("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY), x, y);
                     else
                         AddPipeZoneFromMapData(pzt, x, y);
                 }
             }
 
-            foreach (DynamicEntity e in entityList) {
+            foreach (DynamicEntity e in entityList)
+            {
                 e.OnAfterMapGen();
             }
         }
 
-        public Rect2d GetOffsetBox(int window_width, int window_height) {
+        public Rect2d GetOffsetBox(int window_width, int window_height)
+        {
             Rect2d result = new Rect2d(offset, window_width, window_height);
 
             result.TrimNorth(window_height / 4.0);
@@ -109,7 +129,8 @@ namespace SuperBitBros {
             return result;
         }
 
-        public override Vec2d GetOffset(int window_width, int window_height) {
+        public override Vec2d GetOffset(int window_width, int window_height)
+        {
             Rect2d cameraBox = GetOffsetBox(window_width, window_height);
 
             Vec2d playerPos = player.GetPosition().bl;

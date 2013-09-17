@@ -1,14 +1,14 @@
-﻿using OpenTK;
+﻿using System;
+using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
-using System;
 
-namespace SuperBitBros.Entities {
-
-    public abstract class Entity {
-
+namespace SuperBitBros.Entities
+{
+    public abstract class Entity
+    {
         // 0 < DEPTH <= 100
         public const int DISTANCE_BACKRGOUND = 100;
 
@@ -29,61 +29,75 @@ namespace SuperBitBros.Entities {
 
         protected OGLTexture texture;
 
-        public Entity() {
+        public Entity()
+        {
             this.position = new Vec2d(-1, -1);
             this.distance = 1;
             this.width = 1;
             this.height = 1;
         }
 
-        public virtual Rect2d GetPosition() {
+        public virtual Rect2d GetPosition()
+        {
             return new Rect2d(position, width, height);
         }
 
-        public virtual Rect2d GetTexturePosition() {
+        public virtual Rect2d GetTexturePosition()
+        {
             return GetPosition();
         }
 
-        public virtual Vec2d GetTopLeft() {
+        public virtual Vec2d GetTopLeft()
+        {
             return new Vec2d(position.X, position.Y + height);
         }
 
-        public virtual Vec2d GetTopRight() {
+        public virtual Vec2d GetTopRight()
+        {
             return new Vec2d(position.X + width, position.Y + height);
         }
 
-        public virtual Vec2d GetBottomLeft() {
+        public virtual Vec2d GetBottomLeft()
+        {
             return new Vec2d(position.X, position.Y);
         }
 
-        public virtual Vec2d GetBottomRight() {
+        public virtual Vec2d GetBottomRight()
+        {
             return new Vec2d(position.X + width, position.Y);
         }
 
-        public virtual Vector3d GetBottomRightWithDistance() {
+        public virtual Vector3d GetBottomRightWithDistance()
+        {
             return new Vector3d(position.X + width, position.Y, distance);
         }
 
-        public virtual Vec2d GetMiddle() {
+        public virtual Vec2d GetMiddle()
+        {
             return new Vec2d(position.X + width / 2, position.Y + height / 2);
         }
 
-        public virtual void OnRemove() {
+        public virtual void OnRemove()
+        {
         }
 
-        public virtual OGLTexture GetCurrentTexture() {
+        public virtual OGLTexture GetCurrentTexture()
+        {
             return texture;
         }
 
-        public virtual void Update(KeyboardDevice keyboard) {
+        public virtual void Update(KeyboardDevice keyboard)
+        {
         }
 
         protected abstract bool IsBlockingOther(Entity sender);
 
-        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
+        public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
+        {
         }
 
-        public static bool TestBlocking(Entity e1, Entity e2) {
+        public static bool TestBlocking(Entity e1, Entity e2)
+        {
             if (e1 is DynamicEntity && e2 is DynamicEntity) // 2 DynEntities
                 return e1.IsBlockingOther(e1) && e2.IsBlockingOther(e2);
             else if (e1 is Block) // Der Block zählt

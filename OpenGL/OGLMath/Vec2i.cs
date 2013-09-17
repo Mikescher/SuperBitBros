@@ -1,125 +1,150 @@
-﻿using OpenTK;
-using System;
+﻿using System;
+using OpenTK;
 
-namespace SuperBitBros.OpenGL.OGLMath {
-
-    public class Vec2i {
-
+namespace SuperBitBros.OpenGL.OGLMath
+{
+    public class Vec2i
+    {
         public static Vec2i Zero { get { return new Vec2i(); } private set { } }
 
         public int X;
         public int Y;
 
-        public Vec2i() {
+        public Vec2i()
+        {
             X = 0;
             Y = 0;
         }
 
-        public Vec2i(int pX, int pY) {
+        public Vec2i(int pX, int pY)
+        {
             X = pX;
             Y = pY;
         }
 
-        public Vec2i(Vec2i v) {
+        public Vec2i(Vec2i v)
+        {
             X = v.X;
             Y = v.Y;
         }
 
         #region Operators
 
-        public static implicit operator Vector2d(Vec2i instance) {
+        public static implicit operator Vector2d(Vec2i instance)
+        {
             return new Vector2d(instance.X, instance.Y);
         }
 
-        public static implicit operator Vec2d(Vec2i instance) {
+        public static implicit operator Vec2d(Vec2i instance)
+        {
             return new Vec2d(instance.X, instance.Y);
         }
 
-        public static Vec2i operator +(Vec2i v1, Vec2i v2) {
+        public static Vec2i operator +(Vec2i v1, Vec2i v2)
+        {
             return new Vec2i(v1.X + v2.X, v1.Y + v2.Y);
         }
 
-        public static Vec2i operator +(Vec2i v1, int v2) {
+        public static Vec2i operator +(Vec2i v1, int v2)
+        {
             return new Vec2i(v1.X + v2, v1.Y + v2);
         }
 
-        public static Vec2i operator -(Vec2i v1, Vec2i v2) {
+        public static Vec2i operator -(Vec2i v1, Vec2i v2)
+        {
             return new Vec2i(v1.X + v2.X, v1.Y + v2.Y);
         }
 
-        public static Vec2i operator -(Vec2i v1, int v2) {
+        public static Vec2i operator -(Vec2i v1, int v2)
+        {
             return new Vec2i(v1.X - v2, v1.Y - v2);
         }
 
-        public static Vec2i operator *(Vec2i v1, Vec2i v2) {
+        public static Vec2i operator *(Vec2i v1, Vec2i v2)
+        {
             return new Vec2i(v1.X * v2.X, v1.Y * v2.Y);
         }
 
-        public static Vec2i operator *(Vec2i v1, int v2) {
+        public static Vec2i operator *(Vec2i v1, int v2)
+        {
             return new Vec2i(v1.X * v2, v1.Y * v2);
         }
 
-        public static Vec2i operator /(Vec2i v1, Vec2i v2) {
+        public static Vec2i operator /(Vec2i v1, Vec2i v2)
+        {
             return new Vec2i(v1.X / v2.X, v1.Y / v2.Y);
         }
 
-        public static Vec2i operator /(Vec2i v1, int v2) {
+        public static Vec2i operator /(Vec2i v1, int v2)
+        {
             return new Vec2i(v1.X / v2, v1.Y / v2);
         }
 
-        public static Vec2i operator -(Vec2i v) {
+        public static Vec2i operator -(Vec2i v)
+        {
             return new Vec2i(-v.X, -v.Y);
         }
 
-        public static bool operator ==(Vec2i mySizeA, Vec2i mySizeB) {
+        public static bool operator ==(Vec2i mySizeA, Vec2i mySizeB)
+        {
             return (mySizeA.X == mySizeB.X && mySizeA.Y == mySizeB.Y);
         }
 
-        public static bool operator !=(Vec2i mySizeA, Vec2i mySizeB) {
+        public static bool operator !=(Vec2i mySizeA, Vec2i mySizeB)
+        {
             return !(mySizeA == mySizeB);
         }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object obj)
+        {
             if (obj is Vec2d)
                 return this == (Vec2d)obj;
             return false;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return (X * 1024 + Y).GetHashCode();
         }
 
         #endregion Operators
 
-        public double GetLength() {
+        public double GetLength()
+        {
             return Math.Sqrt(X * X + Y * Y);
         }
 
-        public bool isZero() {
+        public bool isZero()
+        {
             return X == 0 && Y == 0;
         }
 
-        public void Normalize() {
-            if (!isZero()) {
+        public void Normalize()
+        {
+            if (!isZero())
+            {
                 double w = GetLength();
                 X = (int)(X / w);
                 Y = (int)(Y / w);
             }
         }
 
-        public void SetLength(int len) {
+        public void SetLength(int len)
+        {
             Normalize();
 
             X = X * len;
             Y = Y * len;
         }
 
-        public void Set(int px, int py) {
+        public void Set(int px, int py)
+        {
             X = px;
             Y = py;
         }
 
-        public void rotateAround(Vec2i centerPoint, double rads) {
+        public void rotateAround(Vec2i centerPoint, double rads)
+        {
             double cosTheta = Math.Cos(rads);
             double sinTheta = Math.Sin(rads);
 
@@ -130,7 +155,8 @@ namespace SuperBitBros.OpenGL.OGLMath {
             Y = (int)nY;
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return String.Format("({0}|{1})", X, Y);
         }
     }

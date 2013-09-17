@@ -1,15 +1,16 @@
-﻿using OpenTK.Input;
+﻿using System;
+using System.Collections.Generic;
+using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
-using System;
-using System.Collections.Generic;
 
-namespace SuperBitBros.Entities.EnityController {
-
-    public class PipePlayerController : AbstractEntityController {
+namespace SuperBitBros.Entities.EnityController
+{
+    public class PipePlayerController : AbstractEntityController
+    {
         public const double PIPECORRECTIONSPEED = 0.5;
 
         private PipeDirection direction;
@@ -17,32 +18,40 @@ namespace SuperBitBros.Entities.EnityController {
         private bool hasFinished = false;
 
         public PipePlayerController(Player p, PipeDirection initDirection)
-            : base(p) {
+            : base(p)
+        {
             this.direction = initDirection;
         }
 
-        public override void Update(KeyboardDevice keyboard) {
+        public override void Update(KeyboardDevice keyboard)
+        {
             PipeZone zone = GetUnderlyingZone();
 
-            if (zone == null) {
+            if (zone == null)
+            {
                 if (hasConnected)
                     hasFinished = true;
-            } else {
+            }
+            else
+            {
                 hasConnected = true;
-                if (!zone.IsDirection(direction)) {
+                if (!zone.IsDirection(direction))
+                {
                     direction = zone.GetOneDirection();
                 }
             }
 
             Vec2d delta = PipeZone.GetVectorForDirection(direction);
 
-            if (direction == PipeDirection.SOUTH || direction == PipeDirection.NORTH) {
+            if (direction == PipeDirection.SOUTH || direction == PipeDirection.NORTH)
+            {
                 double corr = GetXCorrection();
                 Console.Out.WriteLine("CorrX:" + corr);
                 delta.X += Math.Min(Math.Abs(corr), PIPECORRECTIONSPEED) * Math.Sign(corr);
             }
 
-            if (direction == PipeDirection.EAST || direction == PipeDirection.WEST) {
+            if (direction == PipeDirection.EAST || direction == PipeDirection.WEST)
+            {
                 double corr = GetYCorrection();
                 Console.Out.WriteLine("CorrY:" + corr);
                 delta.Y += Math.Min(Math.Abs(corr), PIPECORRECTIONSPEED) * Math.Sign(corr);
@@ -53,7 +62,8 @@ namespace SuperBitBros.Entities.EnityController {
             ent.position += delta;
         }
 
-        private PipeZone GetUnderlyingZone() {
+        private PipeZone GetUnderlyingZone()
+        {
             Vec2i blockpos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
 
             List<Trigger> triggerlist = owner.getTriggerList(blockpos.X, blockpos.Y);
@@ -81,7 +91,8 @@ namespace SuperBitBros.Entities.EnityController {
             return null;
         }
 
-        private double GetXCorrection() {
+        private double GetXCorrection()
+        {
             Vec2i blockPos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
             int lowest = blockPos.X;
             int highest = blockPos.X;
@@ -99,7 +110,8 @@ namespace SuperBitBros.Entities.EnityController {
             return pos - ent.GetMiddle().X;
         }
 
-        private double GetYCorrection() {
+        private double GetYCorrection()
+        {
             Vec2i blockPos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
             int lowest = blockPos.Y;
             int highest = blockPos.Y;
@@ -117,7 +129,8 @@ namespace SuperBitBros.Entities.EnityController {
             return pos - ent.GetMiddle().Y;
         }
 
-        private bool ContainsPipeZone(List<Trigger> list, PipeDirection d) {
+        private bool ContainsPipeZone(List<Trigger> list, PipeDirection d)
+        {
             if (list != null)
                 foreach (Trigger t in list)
                     if (t is PipeZone && (t as PipeZone).IsDirection(d))
@@ -125,20 +138,23 @@ namespace SuperBitBros.Entities.EnityController {
             return false;
         }
 
-        public override bool IsActive() {
+        public override bool IsActive()
+        {
             return !hasFinished;
         }
 
-        public override void OnIllegalIntersection(Entity other) {
+        public override void OnIllegalIntersection(Entity other)
+        {
             //ignore
         }
 
-
-        public override void OnHide() {
+        public override void OnHide()
+        {
             //empty
         }
 
-        public override void OnReshow() {
+        public override void OnReshow()
+        {
             //empty
         }
     }

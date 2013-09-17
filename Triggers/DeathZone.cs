@@ -1,33 +1,40 @@
-﻿using SuperBitBros.Entities;
+﻿using System;
+using System.Drawing;
+using SuperBitBros.Entities;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
-using System;
-using System.Drawing;
 
-namespace SuperBitBros.Triggers {
-
-    public class DeathZone : Trigger {
-
+namespace SuperBitBros.Triggers
+{
+    public class DeathZone : Trigger
+    {
         public DeathZone(Vec2i pos)
-            : base(pos) {
+            : base(pos)
+        {
             //--
         }
 
-        public override void OnCollide(DynamicEntity collider) {
-            if (collider is Player) {
+        public override void OnCollide(DynamicEntity collider)
+        {
+            if (collider is Player)
+            {
                 Console.Out.WriteLine("DeathZone Triggered");
-            } else if (collider is Mob) {
+            }
+            else if (collider is Mob)
+            {
                 collider.Kill();
             }
         }
 
         public static Color color = Color.FromArgb(128, 0, 64);
 
-        public static Color GetColor() {
+        public static Color GetColor()
+        {
             return color;
         }
 
-        public override Color GetTriggerColor() {
+        public override Color GetTriggerColor()
+        {
             return GetColor();
         }
     }

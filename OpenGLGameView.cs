@@ -1,4 +1,7 @@
-﻿using OpenTK.Graphics;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using SuperBitBros.Entities;
@@ -6,20 +9,19 @@ using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 
-namespace SuperBitBros {
-
-    public class OpenGLGameView : OpenGLView {
-
+namespace SuperBitBros
+{
+    public class OpenGLGameView : OpenGLView
+    {
         public OpenGLGameView(GameModel model)
-            : base(model) {
+            : base(model)
+        {
             //
         }
 
-        protected override void OnRender(object sender, EventArgs e) {
+        protected override void OnRender(object sender, EventArgs e)
+        {
             base.OnRender(sender, e);
 
             GL.ClearColor(Color.FromArgb(0, 0, 0));
@@ -36,41 +38,53 @@ namespace SuperBitBros {
             //Render from behind to nearest 100 = behindest
 
             double depthposition = 100;
-            while (depthposition > 0) {
+            while (depthposition > 0)
+            {
                 depthposition = renderInDepth(depthposition, bRange);
             }
 
-            if (Program.IS_DEBUG) {
+            if (Program.IS_DEBUG)
+            {
                 RenderDebug(offset);
             }
 
             EndRender();
         }
 
-        protected double renderInDepth(double depth, Rect2i blockRange) {
+        protected double renderInDepth(double depth, Rect2i blockRange)
+        {
             double nextDepth = 0;
 
-            for (int x = blockRange.bl.X; x <= blockRange.tr.X; x++) {
-                for (int y = blockRange.bl.Y; y <= blockRange.tr.Y; y++) {
+            for (int x = blockRange.bl.X; x <= blockRange.tr.X; x++)
+            {
+                for (int y = blockRange.bl.Y; y <= blockRange.tr.Y; y++)
+                {
                     Block block = model.GetBlock(x, y);
                     if (block == null)
                         continue;
 
-                    if (block.distance == depth) {
+                    if (block.distance == depth)
+                    {
                         if (block.RenderBackgroundAir())
                             RenderRectangle(block.GetTexturePosition(), Textures.texture_air, block.distance + 0.1);
 
                         RenderRectangle(block.GetPosition(), block.GetCurrentTexture(), block.distance);
-                    } else if (block.distance < depth && block.distance > nextDepth) {
+                    }
+                    else if (block.distance < depth && block.distance > nextDepth)
+                    {
                         nextDepth = block.distance;
                     }
                 }
             }
 
-            foreach (DynamicEntity entity in model.entityList) {
-                if (entity.distance == depth) {
+            foreach (DynamicEntity entity in model.entityList)
+            {
+                if (entity.distance == depth)
+                {
                     RenderRectangle(entity.GetTexturePosition(), entity.GetCurrentTexture(), entity.distance);
-                } else if (entity.distance < depth && entity.distance > nextDepth) {
+                }
+                else if (entity.distance < depth && entity.distance > nextDepth)
+                {
                     nextDepth = entity.distance;
                 }
             }
@@ -78,30 +92,38 @@ namespace SuperBitBros {
             return nextDepth;
         }
 
-        protected override void OnUpdate(object sender, EventArgs e) {
+        protected override void OnUpdate(object sender, EventArgs e)
+        {
             base.OnUpdate(sender, e);
-            if (window.Keyboard[Key.F10] && DateTime.Now.Millisecond < 10) {
+            if (window.Keyboard[Key.F10] && DateTime.Now.Millisecond < 10)
+            {
                 Console.Out.WriteLine("Change DEBUGMODE");
                 Program.IS_DEBUG = !Program.IS_DEBUG;
             }
         }
 
-        private void RenderDebug(Vec2i offset) {
+        private void RenderDebug(Vec2i offset)
+        {
             GL.Disable(EnableCap.Texture2D);
 
             //######################
             // RENDER TRIGGER
             //######################
 
-            for (int x = 0; x < model.mapBlockWidth; x++) {
-                for (int y = 0; y < model.mapBlockHeight; y++) {
+            for (int x = 0; x < model.mapBlockWidth; x++)
+            {
+                for (int y = 0; y < model.mapBlockHeight; y++)
+                {
                     List<Trigger> tlist = model.getTriggerList(x, y);
 
-                    if (tlist != null) {
-                        foreach (Trigger t in tlist) {
+                    if (tlist != null)
+                    {
+                        foreach (Trigger t in tlist)
+                        {
                             RenderColoredRectangle(t.GetPosition(), 0.15, Color.FromArgb(128, t.GetTriggerColor()));
 
-                            if (t is PipeZone) {
+                            if (t is PipeZone)
+                            {
                                 PipeZone z = t as PipeZone;
 
                                 RenderColoredBox(t.GetPosition(), 0.1, t.GetTriggerColor());
@@ -109,7 +131,8 @@ namespace SuperBitBros {
                                 Vec2d start = t.GetPosition().GetMiddle();
                                 Vec2d arr = Vec2d.Zero;
 
-                                switch (z.GetRealDirection()) {
+                                switch (z.GetRealDirection())
+                                {
                                     case PipeDirection.NORTH:
                                         start.Y -= Block.BLOCK_HEIGHT / 4.0;
                                         arr = new Vec2d(0, Block.BLOCK_HEIGHT / 2.0);
@@ -169,7 +192,8 @@ namespace SuperBitBros {
             // RENDER COLLSIIONBOXES && MOVEMNT VECTORS
             //############################################
 
-            foreach (DynamicEntity e in model.entityList) {
+            foreach (DynamicEntity e in model.entityList)
+            {
                 RenderColoredBox(e.GetPosition(), 0.1, Color.FromArgb(200, 0, 0, 255));
 
                 RenderArrow(e.GetMiddle(), e.GetMovement() * 8, 0.2, Color.FromArgb(200, 0, 0, 255));
@@ -202,11 +226,14 @@ namespace SuperBitBros {
             GL.Enable(EnableCap.Texture2D);
         }
 
-        private void RenderMinimap(Vec2i offset) {
+        private void RenderMinimap(Vec2i offset)
+        {
             Rect2d mapRect = new Rect2d(offset.X + window.Width - 5 - model.mapBlockWidth, offset.Y + window.Height - 5 - model.mapBlockHeight, model.mapBlockWidth, model.mapBlockHeight);
 
-            for (int x = 0; x < model.mapBlockWidth; x++) {
-                for (int y = 0; y < model.mapBlockHeight; y++) {
+            for (int x = 0; x < model.mapBlockWidth; x++)
+            {
+                for (int y = 0; y < model.mapBlockHeight; y++)
+                {
                     RenderPixel(mapRect.bl + new Vec2d(x, y), 0.3, model.GetBlockColor(x, y));
                 }
             }

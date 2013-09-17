@@ -1,20 +1,22 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Xml;
+using ICSharpCode.SharpZipLib.Zip;
 
-namespace SuperBitBros.OpenRasterFormat {
-
-    public class OpenRasterImage {
+namespace SuperBitBros.OpenRasterFormat
+{
+    public class OpenRasterImage
+    {
         public List<OpenRasterLayer> layers = new List<OpenRasterLayer>();
 
         public int Width { get; protected set; }
 
         public int Height { get; protected set; }
 
-        public OpenRasterImage(byte[] file) {
+        public OpenRasterImage(byte[] file)
+        {
             MemoryStream ms = new MemoryStream(file);
             ms.Write(file, 0, file.Length);
             ZipFile zfile = new ZipFile(ms);
@@ -25,12 +27,14 @@ namespace SuperBitBros.OpenRasterFormat {
             ms.Dispose();
         }
 
-        private string GetAttribute(XmlElement element, string attribute, string defValue) {
+        private string GetAttribute(XmlElement element, string attribute, string defValue)
+        {
             string ret = element.GetAttribute(attribute);
             return string.IsNullOrEmpty(ret) ? defValue : ret;
         }
 
-        private void Load(ZipFile file) {
+        private void Load(ZipFile file)
+        {
             XmlDocument stackXml = new XmlDocument();
 
             stackXml.Load(file.GetInputStream(file.GetEntry("stack.xml")));
@@ -45,7 +49,8 @@ namespace SuperBitBros.OpenRasterFormat {
             if (layerElements.Count == 0)
                 throw new XmlException("No layers found in OpenRaster file");
 
-            for (int i = 0; i < layerElements.Count; i++) {
+            for (int i = 0; i < layerElements.Count; i++)
+            {
                 XmlElement layerElement = (XmlElement)layerElements[i];
                 int x = int.Parse(GetAttribute(layerElement, "x", "0"));
                 int y = int.Parse(GetAttribute(layerElement, "y", "0"));
@@ -61,11 +66,13 @@ namespace SuperBitBros.OpenRasterFormat {
             }
         }
 
-        public OpenRasterLayer GetLayer(string name) {
+        public OpenRasterLayer GetLayer(string name)
+        {
             return layers.Find(x => (x.Name == name));
         }
 
-        public Color GetColor(string layer, int x, int y) {
+        public Color GetColor(string layer, int x, int y)
+        {
             if (x < 0 || y < 0 || x > Width || y > Height)
                 throw new ArgumentException(String.Format("Coordinates Out of Range ({0} | {1})", x, y));
 

@@ -1,9 +1,10 @@
 ﻿using SuperBitBros.OpenGL;
 using SuperBitBros.Properties;
 
-namespace SuperBitBros {
-
-    public class Textures {
+namespace SuperBitBros
+{
+    public class Textures
+    {
         public static OGLTextureSheet font_sheet;
         public static OGLTextureSheet mario_small_sheet;
         public static OGLTextureSheet piranhaplant_sheet;
@@ -26,7 +27,8 @@ namespace SuperBitBros {
         public static OGLTexture texture_goomba;
         public static OGLTexture texture_goomba_dead;
 
-        public static void Load() {
+        public static void Load()
+        {
             font_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.font_raster, 80, 4);
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
             piranhaplant_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.plant, 16, 1);

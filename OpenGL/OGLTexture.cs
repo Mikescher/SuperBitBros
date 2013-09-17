@@ -1,15 +1,16 @@
-﻿using OpenTK.Graphics.OpenGL;
-using SuperBitBros.OpenGL.OGLMath;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using OpenTK.Graphics.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 
-namespace SuperBitBros.OpenGL {
-
+namespace SuperBitBros.OpenGL
+{
     internal enum OGLTextureMode { TM_SINGLE, TM_REFERENCE_XY, TM_REFERENCE_POS };
 
-    public class OGLTexture {
+    public class OGLTexture
+    {
         private OGLSingleTexture texSingle;
 
         private OGLTextureSheet texSheet;
@@ -19,25 +20,29 @@ namespace SuperBitBros.OpenGL {
 
         private OGLTextureMode mode;
 
-        public OGLTexture(OGLSingleTexture tex) {
+        public OGLTexture(OGLSingleTexture tex)
+        {
             mode = OGLTextureMode.TM_SINGLE;
             texSingle = tex;
         }
 
-        public OGLTexture(OGLTextureSheet tex, int x, int y) {
+        public OGLTexture(OGLTextureSheet tex, int x, int y)
+        {
             mode = OGLTextureMode.TM_REFERENCE_XY;
             texSheet = tex;
             sheetX = x;
             sheetY = y;
         }
 
-        public OGLTexture(OGLTextureSheet tex, int pos) {
+        public OGLTexture(OGLTextureSheet tex, int pos)
+        {
             mode = OGLTextureMode.TM_REFERENCE_POS;
             texSheet = tex;
             sheetPos = pos;
         }
 
-        public static int LoadResourceIntoUID(string filename) {
+        public static int LoadResourceIntoUID(string filename)
+        {
             if (String.IsNullOrEmpty(filename))
                 throw new ArgumentException(filename);
 
@@ -57,7 +62,8 @@ namespace SuperBitBros.OpenGL {
             return id;
         }
 
-        public static int LoadResourceIntoUID(Bitmap bmp) {
+        public static int LoadResourceIntoUID(Bitmap bmp)
+        {
             if (bmp == null)
                 throw new ArgumentException();
 
@@ -76,8 +82,10 @@ namespace SuperBitBros.OpenGL {
             return id;
         }
 
-        public Rect2d GetCoordinates() {
-            switch (mode) {
+        public Rect2d GetCoordinates()
+        {
+            switch (mode)
+            {
                 case OGLTextureMode.TM_SINGLE:
                     return texSingle.GetCoordinates();
 
@@ -92,8 +100,10 @@ namespace SuperBitBros.OpenGL {
             }
         }
 
-        public void bind() {
-            switch (mode) {
+        public void bind()
+        {
+            switch (mode)
+            {
                 case OGLTextureMode.TM_SINGLE:
                     texSingle.bind();
                     return;

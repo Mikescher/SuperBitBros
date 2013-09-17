@@ -1,33 +1,40 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using System.Drawing;
+using OpenTK.Graphics.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
-using System.Drawing;
 
-namespace SuperBitBros.OpenGL {
-
-    public class OGLSingleTexture {
+namespace SuperBitBros.OpenGL
+{
+    public class OGLSingleTexture
+    {
         private int id;
 
-        private OGLSingleTexture(int id) {
+        private OGLSingleTexture(int id)
+        {
             this.id = id;
         }
 
-        public static OGLSingleTexture LoadTextureFromFile(string filename) {
+        public static OGLSingleTexture LoadTextureFromFile(string filename)
+        {
             return new OGLSingleTexture(OGLTexture.LoadResourceIntoUID(filename));
         }
 
-        public static OGLSingleTexture LoadTextureFromBitmap(Bitmap bmp) {
+        public static OGLSingleTexture LoadTextureFromBitmap(Bitmap bmp)
+        {
             return new OGLSingleTexture(OGLTexture.LoadResourceIntoUID(bmp));
         }
 
-        public void bind() {
+        public void bind()
+        {
             GL.BindTexture(TextureTarget.Texture2D, id);
         }
 
-        public Rect2d GetCoordinates() {
+        public Rect2d GetCoordinates()
+        {
             return new Rect2d(new Vec2d(0, 0), 1);
         }
 
-        public OGLTexture GetTextureWrapper() {
+        public OGLTexture GetTextureWrapper()
+        {
             return new OGLTexture(this);
         }
     }

@@ -1,14 +1,16 @@
-﻿using SuperBitBros.Entities.Blocks;
+﻿using System;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
-using System;
 
-namespace SuperBitBros.Entities.DynamicEntities {
-
-    public class Goomba : Mob {
+namespace SuperBitBros.Entities.DynamicEntities
+{
+    public class Goomba : Mob
+    {
         public const double GOOMBA_ACC = 0.2;
         public const double GOOMBA_SPEED = 1;
 
-        public Goomba() {
+        public Goomba()
+        {
             distance = Entity.DISTANCE_MOBS;
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT;
@@ -18,12 +20,14 @@ namespace SuperBitBros.Entities.DynamicEntities {
             AddController(new DefaultMobController(this));
         }
 
-        public override void OnHeadJump(Entity e) {
+        public override void OnHeadJump(Entity e)
+        {
             owner.RemoveEntity(this);
             owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
         }
 
-        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
+        {
             if (e.GetType() == typeof(Player))
                 Console.Out.WriteLine("DEAD");
         }

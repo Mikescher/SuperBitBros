@@ -1,17 +1,17 @@
-﻿using OpenTK.Graphics;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using OpenTK.Graphics;
 using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 
-namespace SuperBitBros {
-
-    public abstract class GameModel {
-
+namespace SuperBitBros
+{
+    public abstract class GameModel
+    {
         public List<DynamicEntity> entityList { get; protected set; }
 
         public List<Block> blockList { get; protected set; }
@@ -27,7 +27,8 @@ namespace SuperBitBros {
 
         public double mapRealHeight { get; protected set; }
 
-        public GameModel() {
+        public GameModel()
+        {
             mapBlockWidth = 0;
             mapBlockHeight = 0;
 
@@ -38,7 +39,8 @@ namespace SuperBitBros {
             blockList = new List<Block>();
         }
 
-        protected void AddBlock(Block b, int x, int y) {
+        protected void AddBlock(Block b, int x, int y)
+        {
             b.position.X = Block.BLOCK_WIDTH * x;
             b.position.Y = Block.BLOCK_HEIGHT * y;
             blockList.Add(b);
@@ -50,7 +52,8 @@ namespace SuperBitBros {
             b.OnAdd(this, x, y);
         }
 
-        public void ReplaceBlock(Block oldb, Block newb) {
+        public void ReplaceBlock(Block oldb, Block newb)
+        {
             int x = oldb.blockPos.X;
             int y = oldb.blockPos.Y;
 
@@ -59,27 +62,32 @@ namespace SuperBitBros {
             AddBlock(newb, x, y);
         }
 
-        protected void RemoveBlock(int x, int y) {
-            if (blockMap[x, y] != null) {
+        protected void RemoveBlock(int x, int y)
+        {
+            if (blockMap[x, y] != null)
+            {
                 blockList.Remove(blockMap[x, y]);
                 blockMap[x, y].OnRemove();
                 blockMap[x, y] = null;
             }
         }
 
-        public Block GetBlock(int x, int y) {
+        public Block GetBlock(int x, int y)
+        {
             if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
                 return null;
             return blockMap[x, y];
         }
 
-        public Color4 GetBlockColor(int x, int y) {
+        public Color4 GetBlockColor(int x, int y)
+        {
             if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
                 return Color.White;
             return blockMap[x, y].GetBlockColor();
         }
 
-        public virtual Entity AddEntity(DynamicEntity e, double x, double y) {
+        public virtual Entity AddEntity(DynamicEntity e, double x, double y)
+        {
             e.position.X = x;
             e.position.Y = y;
             entityList.Add(e);
@@ -87,29 +95,36 @@ namespace SuperBitBros {
             return e;
         }
 
-        public virtual bool RemoveEntity(DynamicEntity e) {
+        public virtual bool RemoveEntity(DynamicEntity e)
+        {
             e.OnRemove();
             return entityList.Remove(e);
         }
 
-        public virtual List<DynamicEntity> GetCurrentEntityList() {
+        public virtual List<DynamicEntity> GetCurrentEntityList()
+        {
             return new List<DynamicEntity>(entityList);
         }
 
-        public virtual List<Block> GetCurrentBlockList() {
+        public virtual List<Block> GetCurrentBlockList()
+        {
             return new List<Block>(blockList);
         }
 
-        public virtual void Update(KeyboardDevice keyboard) {
-            foreach (DynamicEntity e in GetCurrentEntityList()) {
+        public virtual void Update(KeyboardDevice keyboard)
+        {
+            foreach (DynamicEntity e in GetCurrentEntityList())
+            {
                 e.Update(keyboard);
             }
-            foreach (Block e in GetCurrentBlockList()) {
+            foreach (Block e in GetCurrentBlockList())
+            {
                 e.Update(keyboard);
             }
         }
 
-        public void setSize(int w, int h) {
+        public void setSize(int w, int h)
+        {
             blockMap = new Block[w, h];
             triggerMap = new List<Trigger>[w, h];
 
@@ -120,13 +135,15 @@ namespace SuperBitBros {
             mapRealHeight = Block.BLOCK_HEIGHT * h;
         }
 
-        public List<Trigger> getTriggerList(int x, int y) {
+        public List<Trigger> getTriggerList(int x, int y)
+        {
             if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
                 return null;
             return triggerMap[x, y];
         }
 
-        public void AddTrigger(Trigger t, int x, int y) {
+        public void AddTrigger(Trigger t, int x, int y)
+        {
             if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
                 return;
 

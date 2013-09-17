@@ -1,25 +1,30 @@
-﻿using SuperBitBros.Entities;
+﻿using System;
+using SuperBitBros.Entities;
 using SuperBitBros.OpenGL.OGLMath;
-using System;
 
-namespace SuperBitBros.Triggers.PipeZones {
-
+namespace SuperBitBros.Triggers.PipeZones
+{
     public enum PipeDirection { NORTH, EAST, SOUTH, WEST, NORTHSOUTH, EASTWEST, ANY }
 
-    public abstract class PipeZone : Trigger {
+    public abstract class PipeZone : Trigger
+    {
         public const double PIPESPEED_NORMAL = 5.0;
 
         public PipeZone(Vec2i pos)
-            : base(pos) {
+            : base(pos)
+        {
             //--
         }
 
-        public override void OnCollide(DynamicEntity collider) {
+        public override void OnCollide(DynamicEntity collider)
+        {
             //nothing
         }
 
-        public bool IsDirection(PipeDirection d) {
-            switch (GetDirection()) {
+        public bool IsDirection(PipeDirection d)
+        {
+            switch (GetDirection())
+            {
                 case PipeDirection.NORTH:
                     return d == PipeDirection.NORTH;
 
@@ -44,8 +49,10 @@ namespace SuperBitBros.Triggers.PipeZones {
             return false;
         }
 
-        public PipeDirection GetOneDirection() {
-            switch (GetDirection()) {
+        public PipeDirection GetOneDirection()
+        {
+            switch (GetDirection())
+            {
                 case PipeDirection.ANY:
                 case PipeDirection.NORTH:
                 case PipeDirection.NORTHSOUTH:
@@ -64,16 +71,19 @@ namespace SuperBitBros.Triggers.PipeZones {
             throw new Exception();
         }
 
-        public PipeDirection GetRealDirection() {
+        public PipeDirection GetRealDirection()
+        {
             return GetDirection();
         }
 
         protected abstract PipeDirection GetDirection();
 
-        public static Vec2i GetVectorForDirection(PipeDirection direction) {
+        public static Vec2i GetVectorForDirection(PipeDirection direction)
+        {
             Vec2i delta = Vec2i.Zero;
 
-            switch (direction) {
+            switch (direction)
+            {
                 case PipeDirection.NORTH:
                     delta.Y = 1;
                     break;

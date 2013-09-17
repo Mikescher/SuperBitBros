@@ -1,8 +1,9 @@
 ﻿using System.Drawing;
 
-namespace SuperBitBros.OpenRasterFormat {
-
-    public class OpenRasterLayer {
+namespace SuperBitBros.OpenRasterFormat
+{
+    public class OpenRasterLayer
+    {
         public readonly Bitmap Image;
         public readonly int X;
         public readonly int Y;
@@ -11,7 +12,8 @@ namespace SuperBitBros.OpenRasterFormat {
         public readonly int Width;
         public readonly int Height;
 
-        public OpenRasterLayer(Image pimage, string pname, int px, int py) {
+        public OpenRasterLayer(Image pimage, string pname, int px, int py)
+        {
             this.Image = new Bitmap(pimage);
             this.Name = pname;
             this.X = px;
@@ -21,11 +23,13 @@ namespace SuperBitBros.OpenRasterFormat {
             this.Height = Image.Height;
         }
 
-        public Color GetColor(int px_x, int px_y) {
+        public Color GetColor(int px_x, int px_y)
+        {
             px_x -= X;
             px_y -= Y;
 
-            if (px_x < 0 || px_y < 0 || px_x >= Width || px_y >= Height) {
+            if (px_x < 0 || px_y < 0 || px_x >= Width || px_y >= Height)
+            {
                 return Color.FromArgb(0, 0, 0, 0);
             }
 

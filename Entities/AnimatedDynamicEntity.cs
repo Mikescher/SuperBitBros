@@ -1,20 +1,24 @@
 ﻿using SuperBitBros.OpenGL;
 
-namespace SuperBitBros.Entities {
-
-    public abstract class AnimatedDynamicEntity : DynamicEntity {
+namespace SuperBitBros.Entities
+{
+    public abstract class AnimatedDynamicEntity : DynamicEntity
+    {
         protected AnimatedTexture atexture;
 
         public AnimatedDynamicEntity()
-            : base() {
+            : base()
+        {
             atexture = new AnimatedTexture();
         }
 
-        public void UpdateAnimation() {
+        public void UpdateAnimation()
+        {
             atexture.Update();
         }
 
-        public override OGLTexture GetCurrentTexture() {
+        public override OGLTexture GetCurrentTexture()
+        {
             return atexture.GetTexture();
         }
     }

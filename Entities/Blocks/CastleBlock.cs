@@ -1,24 +1,29 @@
 ﻿using System.Drawing;
 
-namespace SuperBitBros.Entities.Blocks {
-
-    public class CastleBlock : Block {
+namespace SuperBitBros.Entities.Blocks
+{
+    public class CastleBlock : Block
+    {
         public static Color color = Color.FromArgb(255, 0, 0);
 
         public CastleBlock()
-            : base() {
+            : base()
+        {
             texture = Textures.texture_castle;
         }
 
-        protected override bool IsBlockingOther(Entity sender) {
+        protected override bool IsBlockingOther(Entity sender)
+        {
             return false;
         }
 
-        public static Color GetColor() {
+        public static Color GetColor()
+        {
             return color;
         }
 
-        public override Color GetBlockColor() {
+        public override Color GetBlockColor()
+        {
             return color;
         }
     }

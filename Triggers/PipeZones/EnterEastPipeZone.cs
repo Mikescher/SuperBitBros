@@ -1,26 +1,30 @@
-﻿using SuperBitBros.OpenGL.OGLMath;
-using System.Drawing;
+﻿using System.Drawing;
+using SuperBitBros.OpenGL.OGLMath;
 
-namespace SuperBitBros.Triggers.PipeZones {
-
-    public class EnterEastPipeZone : MoveEastPipeZone {
-
+namespace SuperBitBros.Triggers.PipeZones
+{
+    public class EnterEastPipeZone : MoveEastPipeZone
+    {
         public EnterEastPipeZone(Vec2i pos)
-            : base(pos) {
+            : base(pos)
+        {
             //--
         }
 
         public new static Color color = Color.FromArgb(128, 0, 0);
 
-        public new static Color GetColor() {
+        public new static Color GetColor()
+        {
             return color;
         }
 
-        public override Color GetTriggerColor() {
+        public override Color GetTriggerColor()
+        {
             return GetColor();
         }
 
-        public override bool CanEnter() {
+        public override bool CanEnter()
+        {
             return true;
         }
     }

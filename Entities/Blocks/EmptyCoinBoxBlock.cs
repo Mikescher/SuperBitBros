@@ -1,20 +1,24 @@
 ﻿using System.Drawing;
 
-namespace SuperBitBros.Entities.Blocks {
-
-    public class EmptyCoinBoxBlock : Block {
+namespace SuperBitBros.Entities.Blocks
+{
+    public class EmptyCoinBoxBlock : Block
+    {
         public static Color color = Color.FromArgb(255, 255, 0);
 
         public EmptyCoinBoxBlock()
-            : base() {
+            : base()
+        {
             texture = Textures.texture_coinblock_empty;
         }
 
-        public static Color GetColor() {
+        public static Color GetColor()
+        {
             return color;
         }
 
-        public override Color GetBlockColor() {
+        public override Color GetBlockColor()
+        {
             return color;
         }
     }

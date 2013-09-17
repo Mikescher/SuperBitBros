@@ -1,17 +1,20 @@
-﻿namespace SuperBitBros.Entities.DynamicEntities {
-
-    public abstract class Mob : DynamicEntity {
-
+﻿namespace SuperBitBros.Entities.DynamicEntities
+{
+    public abstract class Mob : DynamicEntity
+    {
         public Mob()
-            : base() {
+            : base()
+        {
             //--
         }
 
-        protected override bool IsBlockingOther(Entity sender) {
+        protected override bool IsBlockingOther(Entity sender)
+        {
             return true;
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
+        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
+        {
             if (collidingEntity.GetBottomLeft().Y >= GetTopRight().Y && collidingEntity is DynamicEntity && ((DynamicEntity)collidingEntity).GetMovement().Y < 0 && isBlockingMovement)
                 OnHeadJump(collidingEntity);
             else if (isDirectCollision || isTouching)

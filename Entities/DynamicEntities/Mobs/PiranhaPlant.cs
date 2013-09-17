@@ -1,11 +1,12 @@
-﻿using OpenTK.Input;
+﻿using System;
+using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
-using System;
 
-namespace SuperBitBros.Entities.DynamicEntities {
-
-    public class PiranhaPlant : Mob {
+namespace SuperBitBros.Entities.DynamicEntities
+{
+    public class PiranhaPlant : Mob
+    {
         private const double SHRINK_WIDTH = 0.1;
         private const int UPDATE_SPEED = 5;
         private const int CYCLUS_SPEED = 60;
@@ -17,7 +18,8 @@ namespace SuperBitBros.Entities.DynamicEntities {
 
         private Rect2d pipeUnder = null;
 
-        public PiranhaPlant() {
+        public PiranhaPlant()
+        {
             distance = Entity.DISTANCE_MOBS;
             width = 2 * Block.BLOCK_WIDTH;
             height = 0;
@@ -25,20 +27,24 @@ namespace SuperBitBros.Entities.DynamicEntities {
             texture = Textures.piranhaplant_sheet.GetTextureWrapper(0);
         }
 
-        public override void OnAdd(GameModel owner) {
+        public override void OnAdd(GameModel owner)
+        {
             base.OnAdd(owner);
             position.X += SHRINK_WIDTH;
             width -= SHRINK_WIDTH * 2;
         }
 
-        public override Rect2d GetTexturePosition() {
+        public override Rect2d GetTexturePosition()
+        {
             return new Rect2d(position.X - SHRINK_WIDTH, position.Y, 2 * Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT * 2);
         }
 
-        public override void Update(KeyboardDevice keyboard) {
+        public override void Update(KeyboardDevice keyboard)
+        {
             base.Update(keyboard);
 
-            if (((state == 0 || state == STATE_COUNT - 1) && lastUpdate > CYCLUS_SPEED) || (!(state == 0 || state == STATE_COUNT - 1) && lastUpdate > UPDATE_SPEED)) {
+            if (((state == 0 || state == STATE_COUNT - 1) && lastUpdate > CYCLUS_SPEED) || (!(state == 0 || state == STATE_COUNT - 1) && lastUpdate > UPDATE_SPEED))
+            {
                 state = state + ((direction) ? (1) : (-1));
                 if (state == 0)
                     direction = true;
@@ -55,12 +61,14 @@ namespace SuperBitBros.Entities.DynamicEntities {
                 testPlayerBlocking();
         }
 
-        public override void OnAfterMapGen() {
+        public override void OnAfterMapGen()
+        {
             base.OnAfterMapGen();
             calcUnderlyingPipe();
         }
 
-        private void calcUnderlyingPipe() {
+        private void calcUnderlyingPipe()
+        {
             int minX = (int)(position.X / Block.BLOCK_WIDTH);
             int maxX = minX;
 
@@ -68,13 +76,15 @@ namespace SuperBitBros.Entities.DynamicEntities {
             int maxY = minY;
 
             Block blockUnder = owner.GetBlock(minX, maxY);
-            if (blockUnder == null) {
+            if (blockUnder == null)
+            {
                 pipeUnder = GetPosition();
                 return;
             }
             Type typeUnder = blockUnder.GetType();
 
-            for (; ; ) { // minX
+            for (; ; )
+            { // minX
                 Block b = owner.GetBlock(minX - 1, maxY);
                 if (b != null && b.GetType() == typeUnder)
                     minX--;
@@ -82,7 +92,8 @@ namespace SuperBitBros.Entities.DynamicEntities {
                     break;
             }
 
-            for (; ; ) { // maxX
+            for (; ; )
+            { // maxX
                 Block b = owner.GetBlock(maxX + 1, maxY);
                 if (b != null && b.GetType() == typeUnder)
                     maxX++;
@@ -90,7 +101,8 @@ namespace SuperBitBros.Entities.DynamicEntities {
                     break;
             }
 
-            for (; ; ) { // minY
+            for (; ; )
+            { // minY
                 Block b = owner.GetBlock(maxX, minY - 1);
                 if (b != null && b.GetType() == typeUnder)
                     minY--;
@@ -98,7 +110,8 @@ namespace SuperBitBros.Entities.DynamicEntities {
                     break;
             }
 
-            for (; ; ) { // maxY
+            for (; ; )
+            { // maxY
                 Block b = owner.GetBlock(maxX, maxY + 1);
                 if (b != null && b.GetType() == typeUnder)
                     maxY++;
@@ -112,21 +125,25 @@ namespace SuperBitBros.Entities.DynamicEntities {
             pipeUnder = new Rect2d(minX * Block.BLOCK_WIDTH, minY * Block.BLOCK_HEIGHT, width * Block.BLOCK_WIDTH, height * Block.BLOCK_HEIGHT);
         }
 
-        private void testPlayerBlocking() {
+        private void testPlayerBlocking()
+        {
             Player p = ((GameWorld)owner).player;
             Rect2d prect = p.GetPosition();
 
-            if (prect.IsTouching(pipeUnder)) {
+            if (prect.IsTouching(pipeUnder))
+            {
                 lastUpdate = 0;
             }
         }
 
-        public override void OnHeadJump(Entity e) {
+        public override void OnHeadJump(Entity e)
+        {
             if (e.GetType() == typeof(Player) && state != 0)
                 Console.Out.WriteLine("DEAD_PP_N00b");
         }
 
-        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching) {
+        public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
+        {
             if (e.GetType() == typeof(Player) && state != 0)
                 Console.Out.WriteLine("DEAD_PP");
         }
