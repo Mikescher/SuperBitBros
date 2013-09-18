@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 
 namespace SuperBitBros.OpenGL
 {
-    public enum KeyTriggerMode { ON_DOWN, ON_UP, WHILE_DOWN, WHILE_UP, NEVER, INSTANT }
+    public enum KeyTriggerMode { ON_DOWN, ON_UP, WHILE_DOWN, WHILE_UP, FLICKER_DOWN, FLICKER_UP, NEVER, INSTANT }
 
     public class BooleanKeySwitch
     {
-        public bool _Value;
-        public bool Value 
-        { 
-            get {
+        private bool _Value;
+
+        public bool Value
+        {
+            get
+            {
                 return _Value;
-            } 
-            private set 
+            }
+            private set
             {
                 if (_Value ^ value && value)
                     if (TurnOnEvent != null) TurnOnEvent();
@@ -32,6 +32,7 @@ namespace SuperBitBros.OpenGL
         public delegate void TurnEventDelegate();
 
         public event TurnEventDelegate TurnOnEvent;
+
         public event TurnEventDelegate TurnOffEvent;
 
         public BooleanKeySwitch(bool initial, Key actkey, KeyTriggerMode tmode)
@@ -42,9 +43,15 @@ namespace SuperBitBros.OpenGL
             mode = tmode;
         }
 
-        public BooleanKeySwitch(bool initial, Key actkey) : this(initial, actkey, KeyTriggerMode.ON_DOWN) { }
+        public BooleanKeySwitch(bool initial, Key actkey)
+            : this(initial, actkey, KeyTriggerMode.ON_DOWN)
+        {
+        }
 
-        public BooleanKeySwitch(Key actkey) : this(false, actkey, KeyTriggerMode.ON_DOWN) { }
+        public BooleanKeySwitch(Key actkey)
+            : this(false, actkey, KeyTriggerMode.ON_DOWN)
+        {
+        }
 
         public void Switch()
         {
@@ -65,17 +72,31 @@ namespace SuperBitBros.OpenGL
                 case KeyTriggerMode.ON_DOWN:
                     if (!lastState && newstate) Switch();
                     break;
+
                 case KeyTriggerMode.ON_UP:
                     if (lastState && !newstate) Switch();
                     break;
+
                 case KeyTriggerMode.WHILE_DOWN:
                     Turn(newstate);
                     break;
+
                 case KeyTriggerMode.WHILE_UP:
-                    Turn(! newstate);
+                    Turn(!newstate);
                     break;
+
+                case KeyTriggerMode.FLICKER_DOWN:
+                    Turn(!lastState && newstate);
+                    break;
+
+                case KeyTriggerMode.FLICKER_UP:
+                    Turn(lastState && !newstate);
+                    break;
+
                 case KeyTriggerMode.NEVER:
+                    //never
                     break;
+
                 case KeyTriggerMode.INSTANT:
                     if (newstate) Switch();
                     break;

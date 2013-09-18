@@ -103,7 +103,7 @@ namespace SuperBitBros
             return e;
         }
 
-        public virtual bool RemoveEntity(DynamicEntity e)
+        private bool RemoveEntity(DynamicEntity e)
         {
             e.OnRemove();
             return entityList.Remove(e);

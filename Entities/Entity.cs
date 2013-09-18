@@ -18,6 +18,7 @@ namespace SuperBitBros.Entities
         public const int DISTANCE_STRUCTURES = 35;
         public const int DISTANCE_PLAYER = 30;
         public const int DISTANCE_POWERUPS = 25;
+        public const int DISTANCE_PARTICLES = 15;
         public const int DISTANCE_FOREGROUND = 10;
 
         public const int DISTANCE_DEBUG_ZONE = 8;

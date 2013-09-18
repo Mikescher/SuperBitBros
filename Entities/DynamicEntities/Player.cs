@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.Entities.EnityController;
+using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
@@ -16,6 +18,12 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public const int PLAYER_WIDTH = Block.BLOCK_WIDTH;
         public const int PLAYER_HEIGHT = Block.BLOCK_HEIGHT;
+
+        private const int PLAYER_EXPLOSIONFRAGMENTS_X = 8;
+        private const int PLAYER_EXPLOSIONFRAGMENTS_Y = 8;
+        private const double PLAYER_EXPLOSIONFRAGMENTS_FORCE = 24.0;
+
+        private BooleanKeySwitch debugExplosionSwitch = new BooleanKeySwitch(false, Key.F8, KeyTriggerMode.FLICKER_DOWN);
 
         public Direction direction;
 
@@ -53,6 +61,8 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             base.Update(keyboard);
 
+            debugExplosionSwitch.Update(keyboard);
+
             if (IsUserControlled())
             {
                 if (keyboard[Key.Down] && IsOnGround())
@@ -64,6 +74,8 @@ namespace SuperBitBros.Entities.DynamicEntities
                 if (keyboard[Key.Down] && IsCollidingLeft())
                     TestForPipe(PipeDirection.WEST);
             }
+
+            if (debugExplosionSwitch.Value && Program.debugViewSwitch.Value) { Explode(); /*KillLater();*/ }
 
             UpdateTexture();
         }
@@ -125,6 +137,11 @@ namespace SuperBitBros.Entities.DynamicEntities
         public void OnCollideNonStaticFlag(Vec2d flagpos)
         {
             AddController(new FlagPlayerController(this, flagpos));
+        }
+
+        public void Explode()
+        {
+            DoExplosionEffect(PLAYER_EXPLOSIONFRAGMENTS_X, PLAYER_EXPLOSIONFRAGMENTS_Y, PLAYER_EXPLOSIONFRAGMENTS_FORCE);
         }
     }
 }

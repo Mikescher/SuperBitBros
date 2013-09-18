@@ -36,7 +36,7 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             if (collidingEntity.GetType() == typeof(Player) && isDirectCollision)
             {
-                owner.RemoveEntity(this);
+                KillLater();
             }
         }
     }

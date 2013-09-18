@@ -1,248 +1,297 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SuperBitBros.Entities.AnimatedDynamicEntity" Collapsed="true">
-    <Position X="11.5" Y="4.75" Width="1.5" />
+    <Position X="3.25" Y="3.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Entities\AnimatedDynamicEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.AnimatedTexture" Collapsed="true">
-    <Position X="24.75" Y="12.5" Width="1.5" />
+    <Position X="38.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BIYAAAQCAEAABAAAABAAAIAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Entities\AnimatedTexture.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.DynamicEntity" Collapsed="true">
-    <Position X="13.75" Y="3.25" Width="1.5" />
+    <Position X="9.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAgAEAAAAAQAAAIAICAAgAAAIIiAAAAAAIABCg=</HashCode>
+      <HashCode>AAQAAAAgAAAAgAAYAAAIAICAAgAAAIImAAAAAAIABCg=</HashCode>
       <FileName>Entities\DynamicEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Entity" Collapsed="true">
-    <Position X="19.25" Y="2" Width="1.5" />
+    <Position X="19" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>oAQAwCAAACAAgAQBQAEAIACAAEQAgiASAEJAGAEAAAA=</HashCode>
+      <HashCode>oASAwCAAACAAgAQBQAGAIACAAEQAgiASAEJAGAEAAAA=</HashCode>
       <FileName>Entities\Entity.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SuperBitBros.Entities.EntityTypeWrapper" Collapsed="true">
+    <Position X="43.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAABAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Entities\EntityTypeWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="SuperBitBros.Entities.Blocks.Block" Collapsed="true">
-    <Position X="31.5" Y="3.5" Width="1.5" />
+    <Position X="27.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQCAAAAEACAAAAAAQAAAAIIDIAAAAAAAAAAAACAAQAA=</HashCode>
       <FileName>Entities\Blocks\Block.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.CastleBlock" Collapsed="true">
-    <Position X="28.25" Y="4.75" Width="1.5" />
+    <Position X="28.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAIAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\CastleBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.CoinBoxBlock" Collapsed="true">
-    <Position X="32.75" Y="4.75" Width="1.5" />
+    <Position X="30.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAACAAAAAAAAIAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\CoinBoxBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.CrazyCoinBoxBlock" Collapsed="true">
-    <Position X="37.25" Y="4.75" Width="1.5" />
+    <Position X="33.25" Y="3.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAgCAAAAgECAAAAAAAABgAIAAABACAAAQAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\CrazyCoinBoxBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.EmptyCoinBoxBlock" Collapsed="true">
-    <Position X="39.5" Y="4.75" Width="1.5" />
+    <Position X="35.75" Y="3.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\EmptyCoinBoxBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.EndlessCrazyCoinBoxBlock" Collapsed="true">
-    <Position X="37.25" Y="6.25" Width="1.5" />
+    <Position X="33" Y="4.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\EndlessCrazyCoinBoxBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SuperBitBros.Entities.Blocks.FlagBlock" Collapsed="true">
-    <Position X="21.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAAAAQAAAAAAAIAAACACAAAAAAAAAAAA=</HashCode>
-      <FileName>Entities\Blocks\FlagBlock.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="SuperBitBros.Entities.Blocks.GroundAirBlock" Collapsed="true">
-    <Position X="30.5" Y="6.25" Width="1.5" />
+    <Position X="23.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\GroundAirBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.HillBlock" Collapsed="true">
-    <Position X="23.75" Y="4.75" Width="1.5" />
+    <Position X="19.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\HillBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.PipeBlock" Collapsed="true">
-    <Position X="26" Y="4.75" Width="1.5" />
+    <Position X="21.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\PipeBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.StandardAirBlock" Collapsed="true">
-    <Position X="30.5" Y="4.75" Width="1.5" />
+    <Position X="23.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAIAAAAACAAAAAAAAAQAA=</HashCode>
       <FileName>Entities\Blocks\StandardAirBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.Blocks.StandardGroundBlock" Collapsed="true">
-    <Position X="35" Y="4.75" Width="1.5" />
+    <Position X="26" Y="3.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Blocks\StandardGroundBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.DynamicEntities.CoinEntity" Collapsed="true">
-    <Position X="12.5" Y="6.25" Width="1.5" />
+    <Position X="4.5" Y="4.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\DynamicEntities\CoinEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SuperBitBros.Entities.DynamicEntities.FlagEntity" Collapsed="true">
+    <Position X="11.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAQAAAAAAoAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\DynamicEntities\FlagEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="SuperBitBros.Entities.DynamicEntities.GoombaCorpse" Collapsed="true">
-    <Position X="19.25" Y="4.75" Width="1.5" />
+    <Position X="17" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\DynamicEntities\GoombaCorpse.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.DynamicEntities.GravityCoinEntity" Collapsed="true">
-    <Position X="12.5" Y="7.75" Width="1.5" />
+    <Position X="4.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\DynamicEntities\GravityCoinEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SuperBitBros.Entities.DynamicEntities.Goomba" Collapsed="true">
-    <Position X="14.75" Y="6.25" Width="1.5" />
+  <Class Name="SuperBitBros.Entities.DynamicEntities.Player" Collapsed="true">
+    <Position X="2" Y="4.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAAAAAAAAQA=</HashCode>
+      <HashCode>AARAAAAAAAQAKAIAQAAAAAgAACAAAIBAAAAAAAAIAAA=</HashCode>
+      <FileName>Entities\DynamicEntities\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperBitBros.Entities.DynamicEntities.Mobs.Goomba" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAEAAAAIAAAEAAAAAAAAAQA=</HashCode>
       <FileName>Entities\DynamicEntities\Mobs\Goomba.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SuperBitBros.Entities.DynamicEntities.Mob" Collapsed="true">
-    <Position X="16" Y="4.75" Width="1.5" />
+  <Class Name="SuperBitBros.Entities.DynamicEntities.Mobs.Mob" Collapsed="true">
+    <Position X="8.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAAAAAAQA=</HashCode>
+      <HashCode>AAAAACAAAAAAAAAAQIAAAAgAAAAIAAAAAAACAAAAAQA=</HashCode>
       <FileName>Entities\DynamicEntities\Mobs\Mob.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SuperBitBros.Entities.DynamicEntities.PiranhaPlant" Collapsed="true">
-    <Position X="17" Y="6.25" Width="1.5" />
+  <Class Name="SuperBitBros.Entities.DynamicEntities.Mobs.PiranhaPlant" Collapsed="true">
+    <Position X="9.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQQAAAAAAABIAAAAAAgAIAAAAAIEIAEBEAABBAAAQA=</HashCode>
       <FileName>Entities\DynamicEntities\Mobs\PiranhaPlant.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SuperBitBros.Entities.DynamicEntities.Player" Collapsed="true">
-    <Position X="10.25" Y="6.25" Width="1.5" />
+  <Class Name="SuperBitBros.Entities.DynamicEntities.Particles.DynamicEntityExplosionParticle" Collapsed="true">
+    <Position X="13.75" Y="6.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAQAIAIAQAAAAAAAACAAAIBAAAAAgAAAAAA=</HashCode>
-      <FileName>Entities\DynamicEntities\Player.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperBitBros.Entities.DynamicEntities.Particles.FragmentParticle" Collapsed="true">
+    <Position X="14.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\DynamicEntities\Particles\ExplosionParticle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperBitBros.Entities.DynamicEntities.Particles.Particle" Collapsed="true">
+    <Position X="14.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Entities\DynamicEntities\Particles\Particle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.EnityController.AbstractEntityController" Collapsed="true">
-    <Position X="10.25" Y="15" Width="1.5" />
+    <Position X="9.75" Y="13.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAACAAAAgAAAEAAABACABAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Entities\EnityController\AbstractEntityController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.EnityController.AbstractNewtonEntityController" Collapsed="true">
-    <Position X="11.5" Y="16.25" Width="1.5" />
+    <Position X="10.75" Y="14.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAgAQAAAAAAAAAEARAAABACIBEAAAAAACAgAAAAAIAA=</HashCode>
       <FileName>Entities\EnityController\AbstractNewtonEntityController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.EnityController.BouncingCoinController" Collapsed="true">
-    <Position X="8" Y="19.25" Width="1.5" />
+    <Position X="3.75" Y="17.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\EnityController\BouncingCoinController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.EnityController.CoinController" Collapsed="true">
-    <Position X="8" Y="17.75" Width="1.5" />
+    <Position X="3.75" Y="16.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AASAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\EnityController\CoinController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.EnityController.DefaultMobController" Collapsed="true">
-    <Position X="10.25" Y="17.75" Width="1.5" />
+    <Position X="6.5" Y="16.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAwAAAAAAAAAAAAAEAAAAAAAAEAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Entities\EnityController\DefaultMobController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.EnityController.DefaultNewtonController" Collapsed="true">
-    <Position X="12.5" Y="17.75" Width="1.5" />
+    <Position X="9.25" Y="16.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\EnityController\DefaultNewtonController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Entities.EnityController.DefaultPlayerController" Collapsed="true">
-    <Position X="14.75" Y="17.75" Width="1.5" />
+    <Position X="12" Y="16.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAQAQAAAAAAAAAAAEAAAAAAAAAIAAAAQAAACAAAAAAA=</HashCode>
+      <HashCode>AAQAQAAEAAAAAAAAEAAAAgAAAAIAAACQAAACAAAAAAA=</HashCode>
       <FileName>Entities\EnityController\DefaultPlayerController.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SuperBitBros.Entities.EnityController.ExplosionParticleController" Collapsed="true">
+    <Position X="14.75" Y="16.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAEAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\EnityController\ExplosionParticleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperBitBros.Entities.EnityController.FlagPlayerController" Collapsed="true">
+    <Position X="17.75" Y="16.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAACAkAAAAACABAAAgBAAAggEAAAAAAA=</HashCode>
+      <FileName>Entities\EnityController\FlagPlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="SuperBitBros.Entities.EnityController.PipePlayerController" Collapsed="true">
-    <Position X="5.75" Y="16.25" Width="1.5" />
+    <Position X="1.25" Y="14.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAwAABEAAAAgIAAAMAAABACCFAAAAwAAAAgAAAAACAA=</HashCode>
       <FileName>Entities\EnityController\PipePlayerController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.GameModel" Collapsed="true">
-    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAQIAAgAAIAAiAiAAAABAAAAIAAAwgAAIIECAAAAAEQ=</HashCode>
+      <HashCode>EAQIAAgAAIAAiAiAAAABAAAAIAAAwgAAIIECAAAIAEQ=</HashCode>
       <FileName>GameModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.GameWorld" Collapsed="true">
-    <Position X="2.5" Y="1.75" Width="1.5" />
+    <Position X="0.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAgAAAAAIACAAAAAAAAhAAEAQAAAAAA=</HashCode>
+      <HashCode>AASAAAAAAAAAAAgAAAAAIACAAAAAAAAhAAAAQAAAAAA=</HashCode>
       <FileName>GameWorld.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.ImageMapParser" Collapsed="true">
-    <Position X="30" Y="9.5" Width="1.5" />
+    <Position X="38.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>kAAAEAACEAAAAIQAAAABAAlAACAAgAAAAAAAAEUAAAQ=</HashCode>
+      <HashCode>kAIAEAACEAAAAIQQAAABAA1AACAAgAAAAAAAAEWAAAQ=</HashCode>
       <FileName>MapParser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.MyGameWindow" Collapsed="true">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="40.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MyGameWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperBitBros.OffsetCalculator" Collapsed="true">
+    <Position X="42" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAARAAAAAAAAAAEAAACAIAAAAAAEgAAAAAAA=</HashCode>
+      <FileName>OffsetCalculator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGLGameView" Collapsed="true">
@@ -260,265 +309,293 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Program" Collapsed="true">
-    <Position X="19.25" Y="0.5" Width="1.5" />
+    <Position X="38.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAAg=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Textures" Collapsed="true">
-    <Position X="24.75" Y="9.5" Width="1.5" />
+    <Position X="45.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAgKiAAAADAACAAEBAAAAAAAABAAAIAAAAgqCAIAA=</HashCode>
       <FileName>Textures.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGL.AvgDurationWatch" Collapsed="true">
-    <Position X="22.75" Y="10.25" Width="1.5" />
+    <Position X="40.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACACAAgABAAAAAAAAAAAEBAAIAAAACAAAAA=</HashCode>
       <FileName>OpenGL\AvgDurationWatch.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SuperBitBros.OpenGL.BooleanKeySwitch" Collapsed="true">
+    <Position X="42" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwACAEAAAAAAJCAAAAGAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>OpenGL\BooleanKeySwitch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="SuperBitBros.OpenGL.FrequencyCounter" Collapsed="true">
-    <Position X="22.75" Y="11" Width="1.5" />
+    <Position X="45.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAgABAAAAAAAAIAAEAAAAAAAAAAAACA=</HashCode>
       <FileName>OpenGL\FrequencyCounter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGL.OGLSingleTexture" Collapsed="true">
-    <Position X="24.75" Y="11" Width="1.5" />
+    <Position X="43.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAIAAAAAAAAgAAAAAAEAAAAAgAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAABAAAIAAgAAAAAgAAAAAAEAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>OpenGL\OGLSingleTexture.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGL.OGLTexture" Collapsed="true">
-    <Position X="24.75" Y="10.25" Width="1.5" />
+    <Position X="45.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAYAAAACABEgAAAAAAAAAIAAAgAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAYAAAACABEgAgAAAAAAAIAAAgAAAAAAAAAA=</HashCode>
       <FileName>OpenGL\OGLTexture.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SuperBitBros.OpenGL.OGLTextureSheet" Collapsed="true">
-    <Position X="24.75" Y="11.75" Width="1.5" />
+  <Class Name="SuperBitBros.OpenGL.OGLTextureFragment" Collapsed="true">
+    <Position X="38.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAIAAAAQAQAgAAAAAAEAAAAAgAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAABAAAIAAgAAAAAgAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OpenGL\OGLTextureFragment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperBitBros.OpenGL.OGLTextureSheet" Collapsed="true">
+    <Position X="40.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAIAAgAQAQAgAAAAAAEAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>OpenGL\OGLTextureSheet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGL.OGLMath.Rect2d" Collapsed="true">
-    <Position X="26.5" Y="11" Width="1.5" />
+    <Position X="40.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAWAQAAAIACAAEQQAAAQAAAIAgQQCAA=</HashCode>
+      <HashCode>AAAgAAAABAAAAAGA4AUAIECAAEQQAIAQAAAIAgQQCiA=</HashCode>
       <FileName>OpenGL\OGLMath\Rect2d.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGL.OGLMath.Rect2i" Collapsed="true">
-    <Position X="26.5" Y="12.5" Width="1.5" />
+    <Position X="42" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAWAQAAAIACAAEQQAAAQAAAIAgQQCAA=</HashCode>
+      <HashCode>AAAAAAAABAAEAAGA4AUAIECAAEQQAIAQAAAIAgQQCiA=</HashCode>
       <FileName>OpenGL\OGLMath\Rect2i.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGL.OGLMath.Vec2d" Collapsed="true">
-    <Position X="26.5" Y="10.25" Width="1.5" />
+    <Position X="38.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAYAAAAAAARAAE9AUAAAAAAQAAEIAAAAAAAAAAYiA=</HashCode>
       <FileName>OpenGL\OGLMath\Vec2d.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenGL.OGLMath.Vec2i" Collapsed="true">
-    <Position X="26.5" Y="11.75" Width="1.5" />
+    <Position X="40.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAARAAE9AUAAAAAAQAAEIAAAAAAAAAAZiA=</HashCode>
       <FileName>OpenGL\OGLMath\Vec2i.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenRasterFormat.OpenRasterImage" Collapsed="true">
-    <Position X="30" Y="10.25" Width="1.5" />
+    <Position X="42" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAgAAABAAAAAAAAAAAAEAAAAAAAAKAAAAABAAAAAA=</HashCode>
       <FileName>OpenRasterFormat\OpenRasterImage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.OpenRasterFormat.OpenRasterLayer" Collapsed="true">
-    <Position X="30" Y="11" Width="1.5" />
+    <Position X="43.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAAEQAAAAAABCAAAAAAAAAYAA=</HashCode>
       <FileName>OpenRasterFormat\OpenRasterLayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Properties.Resources" Collapsed="true">
-    <Position X="31.75" Y="10.25" Width="1.5" />
+    <Position X="43.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAAAEAAAABEAAAAQAAAAAAAAAAAAAAkIA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.DeathZone" Collapsed="true">
-    <Position X="1.25" Y="10.25" Width="1.5" />
+    <Position X="19.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\DeathZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PlayerSpawnZone" Collapsed="true">
-    <Position X="19.25" Y="10.25" Width="1.5" />
+    <Position X="21.75" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAQAAAAAQA=</HashCode>
       <FileName>Triggers\PlayerSpawnZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.Trigger" Collapsed="true">
-    <Position X="10.25" Y="9" Width="1.5" />
+    <Position X="11.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAACAAgAAAAAAAIIAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\Trigger.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.EnterAnyPipeZone" Collapsed="true">
-    <Position X="3.5" Y="13.25" Width="1.5" />
+    <Position X="9.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\EnterAnyPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.EnterEastPipeZone" Collapsed="true">
-    <Position X="5.75" Y="13.25" Width="1.5" />
+    <Position X="11.75" Y="11.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\EnterEastPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.EnterEastWestPipeZone" Collapsed="true">
-    <Position X="8" Y="13.25" Width="1.5" />
+    <Position X="14.25" Y="11.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\EnterEastWestPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.EnterNorthPipeZone" Collapsed="true">
-    <Position X="10.25" Y="13.25" Width="1.5" />
+    <Position X="17" Y="11.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\EnterNorthPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.EnterNorthSouthPipeZone" Collapsed="true">
-    <Position X="12.5" Y="13.25" Width="1.5" />
+    <Position X="1.5" Y="11.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\EnterNorthSouthPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.EnterSouthPipeZone" Collapsed="true">
-    <Position X="14.75" Y="13.25" Width="1.5" />
+    <Position X="4.25" Y="11.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\EnterSouthPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.EnterWestPipeZone" Collapsed="true">
-    <Position X="17" Y="13.25" Width="1.5" />
+    <Position X="6.75" Y="11.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\EnterWestPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.MoveAnyPipeZone" Collapsed="true">
-    <Position X="3.5" Y="11.75" Width="1.5" />
+    <Position X="9.25" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\MoveAnyPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.MoveEastPipeZone" Collapsed="true">
-    <Position X="5.75" Y="11.75" Width="1.5" />
+    <Position X="11.75" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\MoveEastPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.MoveEastWestPipeZone" Collapsed="true">
-    <Position X="8" Y="11.75" Width="1.5" />
+    <Position X="14.25" Y="10.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\MoveEastWestPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.MoveNorthPipeZone" Collapsed="true">
-    <Position X="10.25" Y="11.75" Width="1.5" />
+    <Position X="17" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\MoveNorthPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.MoveNorthSouthPipeZone" Collapsed="true">
-    <Position X="12.5" Y="11.75" Width="1.5" />
+    <Position X="1.5" Y="10.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\MoveNorthSouthPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.MoveSouthPipeZone" Collapsed="true">
-    <Position X="14.75" Y="11.75" Width="1.5" />
+    <Position X="4.25" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\MoveSouthPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.MoveWestPipeZone" Collapsed="true">
-    <Position X="17" Y="11.75" Width="1.5" />
+    <Position X="6.75" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAACAAAAQAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\MoveWestPipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.PipeZone" Collapsed="true">
-    <Position X="10.25" Y="10.25" Width="1.5" />
+    <Position X="9.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IEAAEAAAAAAIAAAAAIAAAAAAAMEAACAAAAAAAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\PipeZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperBitBros.Triggers.PipeZones.PipeZoneTypeWrapper" Collapsed="true">
-    <Position X="28.25" Y="10.25" Width="1.5" />
+    <Position X="45.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAABAAAAACAAAAAAAAA=</HashCode>
       <FileName>Triggers\PipeZones\PipeZoneTypeWrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="SuperBitBros.Entities.DynamicEntities.Direction" Collapsed="true">
-    <Position X="28.25" Y="11.75" Width="1.5" />
+    <Position X="40.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>Entities\DynamicEntities\Player.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="SuperBitBros.SpawnEntityType" Collapsed="true">
-    <Position X="28.25" Y="14" Width="1.5" />
+  <Enum Name="SuperBitBros.Entities.EnityController.MovementSection" Collapsed="true">
+    <Position X="43.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAgAAAAAAAAAAAAABAAAACAAAAAEAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAQAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\EnityController\FlagPlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SuperBitBros.SpawnEntityType" Collapsed="true">
+    <Position X="40.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAgAAAAAAAQAAAAABAAAACAAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>MapParser.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="SuperBitBros.AddTriggerType" Collapsed="true">
-    <Position X="28.25" Y="11" Width="1.5" />
+    <Position X="38.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAABAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>MapParser.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="SuperBitBros.OpenGL.OGLTextureMode" Collapsed="true">
-    <Position X="28.25" Y="12.5" Width="1.5" />
+  <Enum Name="SuperBitBros.OpenGL.KeyTriggerMode" Collapsed="true">
+    <Position X="42" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAQBAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ADAAAEAAgAAAAQAAAIAAAAAAACAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OpenGL\BooleanKeySwitch.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SuperBitBros.OpenGL.OGLTextureMode" Collapsed="true">
+    <Position X="45.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAQBAAAAAAAIAAAAAAA=</HashCode>
       <FileName>OpenGL\OGLTexture.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="SuperBitBros.Triggers.PipeZones.PipeDirection" Collapsed="true">
-    <Position X="28.25" Y="13.25" Width="1.5" />
+    <Position X="38.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAABAAAQAAAAIAgAAAAAQAAAAAAEAAA=</HashCode>
       <FileName>Triggers\PipeZones\PipeZone.cs</FileName>

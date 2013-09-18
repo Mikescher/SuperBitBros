@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.Entities.EnityController;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
@@ -277,9 +278,40 @@ namespace SuperBitBros.Entities
             controllerStack.Push(c);
         }
 
+        protected virtual void OnKill()
+        {
+            //Override me (wird anders alls onRemove  nur bei echtem kill aufgerufen)
+        }
+
         public void KillLater()
         {
             owner.KillLater(this);
+            OnKill();
+        }
+
+        public void DoExplosionEffect(int fragmentsX, int fragmentsY, double force)
+        {
+            double forceMult = force / (Math.Sqrt(width * width + height * height) / 2.0);
+
+            double w = width / fragmentsX;
+            double h = height / fragmentsY;
+
+            for (int y = 0; y < fragmentsY; y++)
+            {
+                for (int x = 0; x < fragmentsX; x++)
+                {
+                    owner.AddEntity(
+                        new DynamicEntityExplosionParticle(
+                            this,
+                            x,
+                            y,
+                            fragmentsX,
+                            fragmentsY,
+                            forceMult),
+                        position.X + x * w,
+                        position.Y + y * h);
+                }
+            }
         }
     }
 }

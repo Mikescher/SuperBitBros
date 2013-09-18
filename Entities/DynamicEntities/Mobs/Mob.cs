@@ -2,6 +2,10 @@
 {
     public abstract class Mob : DynamicEntity
     {
+        private const int MOB_EXPLOSIONFRAGMENTS_X = 4;
+        private const int MOB_EXPLOSIONFRAGMENTS_Y = 4;
+        private const double MOB_EXPLOSIONFRAGMENTS_FORCE = 16;
+
         public Mob()
             : base()
         {
@@ -19,6 +23,11 @@
                 OnHeadJump(collidingEntity);
             else if (isDirectCollision || isTouching)
                 OnTouch(collidingEntity, isCollider, isBlockingMovement, isDirectCollision, isTouching);
+        }
+
+        public void Explode()
+        {
+            DoExplosionEffect(MOB_EXPLOSIONFRAGMENTS_X, MOB_EXPLOSIONFRAGMENTS_Y, MOB_EXPLOSIONFRAGMENTS_FORCE);
         }
 
         public abstract void OnHeadJump(Entity e);

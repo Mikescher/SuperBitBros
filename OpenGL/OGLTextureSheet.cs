@@ -7,7 +7,7 @@ namespace SuperBitBros.OpenGL
 {
     public class OGLTextureSheet
     {
-        private int id;
+        public int ID { get; private set; }
 
         private int width; // texturecount X-Axis
         private int height; // texturecount Y-Axis
@@ -16,7 +16,7 @@ namespace SuperBitBros.OpenGL
         {
             this.width = w;
             this.height = h;
-            this.id = id;
+            this.ID = id;
         }
 
         public static OGLTextureSheet LoadTextureFromFile(string filename, int width, int height)
@@ -50,7 +50,7 @@ namespace SuperBitBros.OpenGL
 
         public void bind()
         {
-            GL.BindTexture(TextureTarget.Texture2D, id);
+            GL.BindTexture(TextureTarget.Texture2D, ID);
         }
 
         public OGLTexture GetTextureWrapper(int pos)

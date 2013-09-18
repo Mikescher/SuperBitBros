@@ -6,11 +6,11 @@ namespace SuperBitBros.OpenGL
 {
     public class OGLSingleTexture
     {
-        private int id;
+        public int ID { get; private set; }
 
         private OGLSingleTexture(int id)
         {
-            this.id = id;
+            this.ID = id;
         }
 
         public static OGLSingleTexture LoadTextureFromFile(string filename)
@@ -25,7 +25,7 @@ namespace SuperBitBros.OpenGL
 
         public void bind()
         {
-            GL.BindTexture(TextureTarget.Texture2D, id);
+            GL.BindTexture(TextureTarget.Texture2D, ID);
         }
 
         public Rect2d GetCoordinates()

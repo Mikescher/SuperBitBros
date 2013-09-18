@@ -22,14 +22,21 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
         public override void OnHeadJump(Entity e)
         {
-            owner.RemoveEntity(this);
-            owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
+            KillLater();
         }
 
         public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
         {
             if (e.GetType() == typeof(Player))
                 Console.Out.WriteLine("DEAD");
+        }
+
+        protected override void OnKill()
+        {
+            base.OnKill();
+
+            //owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
+            Explode();
         }
     }
 }

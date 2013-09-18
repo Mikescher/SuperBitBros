@@ -7,7 +7,7 @@ using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.OpenGL
 {
-    internal enum OGLTextureMode { TM_SINGLE, TM_REFERENCE_XY, TM_REFERENCE_POS };
+    internal enum OGLTextureMode { TM_SINGLE, TM_REFERENCE_XY, TM_REFERENCE_POS, TM_FRAGMENT };
 
     public class OGLTexture
     {
@@ -17,6 +17,8 @@ namespace SuperBitBros.OpenGL
         private int sheetX;
         private int sheetY;
         private int sheetPos;
+
+        private OGLTextureFragment texFragment;
 
         private OGLTextureMode mode;
 
@@ -39,6 +41,12 @@ namespace SuperBitBros.OpenGL
             mode = OGLTextureMode.TM_REFERENCE_POS;
             texSheet = tex;
             sheetPos = pos;
+        }
+
+        public OGLTexture(OGLTextureFragment tex)
+        {
+            mode = OGLTextureMode.TM_FRAGMENT;
+            texFragment = tex;
         }
 
         public static int LoadResourceIntoUID(string filename)
@@ -95,6 +103,9 @@ namespace SuperBitBros.OpenGL
                 case OGLTextureMode.TM_REFERENCE_POS:
                     return texSheet.GetCoordinates(sheetPos);
 
+                case OGLTextureMode.TM_FRAGMENT:
+                    return texFragment.GetCoordinates();
+
                 default:
                     throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
             }
@@ -112,6 +123,29 @@ namespace SuperBitBros.OpenGL
                 case OGLTextureMode.TM_REFERENCE_POS:
                     texSheet.bind();
                     return;
+
+                case OGLTextureMode.TM_FRAGMENT:
+                    texFragment.bind();
+                    return;
+
+                default:
+                    throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
+            }
+        }
+
+        public int GetID()
+        {
+            switch (mode)
+            {
+                case OGLTextureMode.TM_SINGLE:
+                    return texSingle.ID;
+
+                case OGLTextureMode.TM_REFERENCE_XY:
+                case OGLTextureMode.TM_REFERENCE_POS:
+                    return texSheet.ID;
+
+                case OGLTextureMode.TM_FRAGMENT:
+                    return texFragment.ID;
 
                 default:
                     throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));
