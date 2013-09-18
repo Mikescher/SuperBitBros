@@ -75,7 +75,7 @@ namespace SuperBitBros.Entities.DynamicEntities
                     TestForPipe(PipeDirection.WEST);
             }
 
-            if (debugExplosionSwitch.Value && Program.debugViewSwitch.Value) { Explode(); /*KillLater();*/ }
+            if (debugExplosionSwitch.Value && Program.debugViewSwitch.Value) { Explode(); KillLater(); }
 
             UpdateTexture();
         }

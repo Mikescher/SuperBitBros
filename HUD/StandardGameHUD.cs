@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenTK.Input;
+using SuperBitBros.Entities.Blocks;
+using SuperBitBros.OpenGL;
+
+namespace SuperBitBros.HUD
+{
+    public class StandardGameHUD : HUDModel
+    {
+        private BooleanKeySwitch debugCoinCheatSwitch = new BooleanKeySwitch(false, Key.P, KeyTriggerMode.FLICKER_DOWN);
+
+        private HUDImage coinImage;
+        private HUDNumberDisplay coinNumberDisplay_1;
+        private HUDNumberDisplay coinNumberDisplay_2;
+
+        private HUDNumberCounter coinCounter;
+
+        public StandardGameHUD()
+            : base()
+        {
+
+        }
+
+        public override void Update(KeyboardDevice keyboard)
+        {
+            base.Update(keyboard);
+            debugCoinCheatSwitch.Update(keyboard);
+
+            if (debugCoinCheatSwitch.Value) 
+            { 
+                coinCounter.Value++; 
+            }
+        }
+
+        public override void CreateHUD()
+        {
+            Add(coinImage = new HUDImage(Textures.texture_coin_0, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 10, 10, HUDElementAlign.HEA_TL);
+            Add(coinNumberDisplay_1 = new HUDNumberDisplay(0, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 30, 10, HUDElementAlign.HEA_TL);
+            Add(coinNumberDisplay_2 = new HUDNumberDisplay(0, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 50, 10, HUDElementAlign.HEA_TL);
+
+            coinCounter = new HUDNumberCounter();
+            coinCounter.AddCounter(coinNumberDisplay_1);
+            coinCounter.AddCounter(coinNumberDisplay_2);
+        }
+    }
+}

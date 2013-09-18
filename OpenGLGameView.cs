@@ -6,6 +6,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.HUD;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
@@ -44,6 +45,11 @@ namespace SuperBitBros
                 depthposition = renderInDepth(depthposition, bRange);
             }
 
+            if (model.HUD != null)
+            {
+                RenderHUD(model.HUD, offset);
+            }
+
             if (Program.debugViewSwitch.Value)
             {
                 RenderDebug(offset);
@@ -52,7 +58,7 @@ namespace SuperBitBros
             EndRender();
         }
 
-        protected double renderInDepth(double depth, Rect2i blockRange)
+        private double renderInDepth(double depth, Rect2i blockRange)
         {
             double nextDepth = 0;
 
@@ -96,6 +102,19 @@ namespace SuperBitBros
         protected override void OnUpdate(object sender, EventArgs e)
         {
             base.OnUpdate(sender, e);
+        }
+
+        private void RenderHUD(HUDModel hud, Vec2d offset)
+        {
+            GL.PushMatrix();
+            GL.Translate(offset.X, offset.Y, 0); //undo offset
+
+            foreach (HUDElement hel in hud.elements)
+            {
+                RenderRectangle(hel.GetPosition(window.Width, window.Height), hel.GetCurrentTexture(), hel.GetDistance());
+            }
+
+            GL.PopMatrix();
         }
 
         private void RenderDebug(Vec2i offset)
@@ -212,7 +231,7 @@ namespace SuperBitBros
             //######################
             // RENDER DEBUG TEXTS
             //######################
-            int foy = 0;
+            int foy = 3;
             Color4 col = Color.FromArgb(0, 0, 0);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("FPS: {0} / {1}", (int)fps_counter.Frequency, window.TargetRenderFrequency), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("UPS: {0}", (int)ups_counter.Frequency), col);

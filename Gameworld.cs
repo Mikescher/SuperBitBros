@@ -4,6 +4,7 @@ using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.Entities.DynamicEntities.Mobs;
+using SuperBitBros.HUD;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
@@ -21,6 +22,15 @@ namespace SuperBitBros
         public GameWorld()
             : base()
         {
+            //
+        }
+
+        public override void Init()
+        {
+            base.Init();
+
+            HUD = new StandardGameHUD();
+            LoadMapFromResources();
         }
 
         public override void Update(KeyboardDevice keyboard, int window_width, int window_height)

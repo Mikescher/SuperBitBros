@@ -92,6 +92,12 @@
     <Compile Include="Entities\EnityController\DefaultMobController.cs" />
     <Compile Include="Entities\EnityController\DefaultPlayerController.cs" />
     <Compile Include="Entities\EnityController\PipePlayerController.cs" />
+    <Compile Include="HUD\HUDElement.cs" />
+    <Compile Include="HUD\HUDImage.cs" />
+    <Compile Include="HUD\HUDModel.cs" />
+    <Compile Include="HUD\HUDNumberCounter.cs" />
+    <Compile Include="HUD\HUDNumberDisplay.cs" />
+    <Compile Include="HUD\StandardGameHUD.cs" />
     <Compile Include="OffsetCalculator.cs" />
     <Compile Include="OpenGL\AvgDurationWatch.cs" />
     <Compile Include="OpenGL\BooleanKeySwitch.cs" />
@@ -167,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\font_raster.png" />
+    <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
     <None Include="Resources\plant.png" />
     <None Include="Resources\mario_small.png" />

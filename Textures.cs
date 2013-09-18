@@ -8,6 +8,7 @@ namespace SuperBitBros
         public static OGLTextureSheet font_sheet;
         public static OGLTextureSheet mario_small_sheet;
         public static OGLTextureSheet piranhaplant_sheet;
+        public static OGLTextureSheet number_sheet;
 
         public static OGLTexture texture_ground;
         public static OGLTexture texture_air;
@@ -32,6 +33,7 @@ namespace SuperBitBros
             font_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.font_raster, 80, 4);
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
             piranhaplant_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.plant, 16, 1);
+            number_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.number_raster, 16, 4);
 
             texture_ground = font_sheet.GetTextureWrapper(35);
             texture_air = font_sheet.GetTextureWrapper(0);

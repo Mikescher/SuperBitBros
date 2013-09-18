@@ -5,6 +5,7 @@ using OpenTK.Graphics;
 using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.HUD;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 
@@ -13,21 +14,20 @@ namespace SuperBitBros
     public abstract class GameModel
     {
         public List<DynamicEntity> entityList { get; protected set; }
-
         public List<Block> blockList { get; protected set; }
-
-        private List<DynamicEntity> killList;
 
         private Block[,] blockMap;
         private List<Trigger>[,] triggerMap;
 
-        public int mapBlockWidth { get; protected set; }
+        private List<DynamicEntity> killList;
 
+        public int mapBlockWidth { get; protected set; }
         public int mapBlockHeight { get; protected set; }
 
         public double mapRealWidth { get; protected set; }
-
         public double mapRealHeight { get; protected set; }
+
+        public HUDModel HUD = null;
 
         public GameModel()
         {
@@ -40,6 +40,11 @@ namespace SuperBitBros
             entityList = new List<DynamicEntity>();
             blockList = new List<Block>();
             killList = new List<DynamicEntity>();
+        }
+
+        public virtual void Init()
+        {
+            // Nothing to see here, officer
         }
 
         protected void AddBlock(Block b, int x, int y)
@@ -134,6 +139,10 @@ namespace SuperBitBros
             {
                 if (!RemoveEntity(e)) 
                     Console.Error.WriteLine("Could not KillLater Entity: " + e);
+            }
+            if (HUD != null)
+            {
+                HUD.Update(keyboard);
             }
             killList.Clear();
         }
