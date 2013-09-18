@@ -82,6 +82,7 @@
     <Compile Include="Entities\DynamicEntities\Particles\FragmentParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
+    <Compile Include="Entities\DynamicEntities\PersistentCoinEntity.cs" />
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
     <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Entities\EnityController\DefaultMobController.cs" />
     <Compile Include="Entities\EnityController\DefaultPlayerController.cs" />
     <Compile Include="Entities\EnityController\PipePlayerController.cs" />
+    <Compile Include="EntityCache.cs" />
     <Compile Include="HUD\HUDAnimatedImage.cs" />
     <Compile Include="HUD\HUDElement.cs" />
     <Compile Include="HUD\HUDImage.cs" />

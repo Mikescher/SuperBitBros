@@ -1,8 +1,8 @@
-﻿using System;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.HUD;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -16,12 +16,12 @@ namespace SuperBitBros.Entities.DynamicEntities
         private const int COINDEATH_EXPLOSIONFRAGMENTS_Y = 4;
         private const double COINDEATH_EXPLOSIONFRAGMENTS_FORCE = 16;
 
-        
+
         private const int COIN_LIFETIME = 60 * 10;
 
         private static Random random = new Random();
 
-        private int lifetime = COIN_LIFETIME;
+        protected int lifetime = COIN_LIFETIME;
 
         public CoinEntity()
             : base()
@@ -44,7 +44,8 @@ namespace SuperBitBros.Entities.DynamicEntities
 
             atexture.Update();
 
-            if (lifetime-- < 0) {
+            if (lifetime-- == 0)
+            {
                 KillLater();
                 DoExplosionEffect(COINDEATH_EXPLOSIONFRAGMENTS_X, COINDEATH_EXPLOSIONFRAGMENTS_Y, COINDEATH_EXPLOSIONFRAGMENTS_FORCE);
             }
@@ -69,7 +70,8 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             StandardGameHUD hud = owner.HUD as StandardGameHUD;
 
-            if (hud == null) return;
+            if (hud == null)
+                return;
 
             double forceMult = COIN_EXPLOSIONFRAGMENTS_FORCE / (Math.Sqrt(width * width + height * height) / 2.0);
 
@@ -87,7 +89,7 @@ namespace SuperBitBros.Entities.DynamicEntities
                             y,
                             COIN_EXPLOSIONFRAGMENTS_X,
                             COIN_EXPLOSIONFRAGMENTS_Y,
-                            forceMult + (random.NextDouble()*6-3),
+                            forceMult + (random.NextDouble() * 6 - 3),
                             hud),
                         position.X + x * w,
                         position.Y + y * h);

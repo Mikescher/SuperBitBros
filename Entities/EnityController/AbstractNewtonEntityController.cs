@@ -79,7 +79,7 @@ namespace SuperBitBros.Entities.EnityController
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
+            foreach (Entity e in owner.dynamicEntityList)
             {
                 if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition()))
                 {
@@ -115,7 +115,7 @@ namespace SuperBitBros.Entities.EnityController
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
+            foreach (Entity e in owner.dynamicEntityList)
             {
                 if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition()))
                 {

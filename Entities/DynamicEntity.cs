@@ -179,7 +179,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
+            foreach (Entity e in owner.dynamicEntityList)
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().Y < this.GetMiddle().Y)
                     return true;
 
@@ -207,7 +207,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
+            foreach (Entity e in owner.dynamicEntityList)
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().Y > this.GetMiddle().Y)
                     return true;
 
@@ -235,7 +235,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
+            foreach (Entity e in owner.dynamicEntityList)
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X > this.GetMiddle().X)
                     return true;
 
@@ -263,7 +263,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.entityList)
+            foreach (Entity e in owner.dynamicEntityList)
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X < this.GetMiddle().X)
                     return true;
 

@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using SuperBitBros.OpenGL.OGLMath;
+﻿using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
 {

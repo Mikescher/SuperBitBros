@@ -31,9 +31,9 @@ namespace SuperBitBros.Entities.DynamicEntities
             Player p = collidingEntity as Player;
             if (p != null && isDirectCollision && !IsStatic)
             {
-                for (int i = 0; i < owner.entityList.Count; i++)
+                for (int i = 0; i < owner.dynamicEntityList.Count; i++)
                 {
-                    FlagEntity fe = owner.entityList[i] as FlagEntity;
+                    FlagEntity fe = owner.dynamicEntityList[i] as FlagEntity;
 
                     if (fe != null && Math.Abs(fe.position.X - position.X) < OTHER_FLAG_DETECTIONRANGE)
                     {

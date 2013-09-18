@@ -11,7 +11,7 @@ namespace SuperBitBros
 {
     public class OffsetCalculator
     {
-        private const double MAX_CORRECTION_SPEED = 7.5;
+        private const double MAX_CORRECTION_SPEED = 15;
 
         public Vec2d Value { get; private set; }
 

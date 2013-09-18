@@ -124,7 +124,7 @@ namespace SuperBitBros
             //#############
 
             offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, false);
-            foreach (DynamicEntity e in entityList)
+            foreach (DynamicEntity e in dynamicEntityList)
             {
                 e.OnAfterMapGen();
             }

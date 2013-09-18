@@ -13,7 +13,7 @@ namespace SuperBitBros
 {
     public abstract class GameModel
     {
-        public List<DynamicEntity> entityList { get; protected set; }
+        public List<DynamicEntity> dynamicEntityList { get; protected set; }
         public List<Block> blockList { get; protected set; }
 
         private Block[,] blockMap;
@@ -40,7 +40,7 @@ namespace SuperBitBros
             mapRealWidth = 0;
             mapRealHeight = 0;
 
-            entityList = new List<DynamicEntity>();
+            dynamicEntityList = new List<DynamicEntity>();
             blockList = new List<Block>();
             killList = new List<DynamicEntity>();
         }
@@ -106,7 +106,7 @@ namespace SuperBitBros
         {
             e.position.X = x;
             e.position.Y = y;
-            entityList.Add(e);
+            dynamicEntityList.Add(e);
             e.OnAdd(this);
             return e;
         }
@@ -114,12 +114,12 @@ namespace SuperBitBros
         private bool RemoveEntity(DynamicEntity e)
         {
             e.OnRemove();
-            return entityList.Remove(e);
+            return dynamicEntityList.Remove(e);
         }
 
         public virtual List<DynamicEntity> GetCurrentEntityList()
         {
-            return new List<DynamicEntity>(entityList);
+            return new List<DynamicEntity>(dynamicEntityList);
         }
 
         public virtual List<Block> GetCurrentBlockList()

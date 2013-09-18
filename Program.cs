@@ -1,6 +1,6 @@
-﻿using System;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.OpenGL;
+using System;
 
 namespace SuperBitBros
 {
@@ -19,7 +19,7 @@ namespace SuperBitBros
 
             world.Init();
 
-            view.Start(60, 60);
+            view.Start(48, 60);
         }
     }
 }

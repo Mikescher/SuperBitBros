@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using SuperBitBros.Entities;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.Entities.DynamicEntities.Mobs;
@@ -9,6 +6,9 @@ using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace SuperBitBros
 {
@@ -105,7 +105,7 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_PIRANHAPLANT)
                 return new EntityTypeWrapper(typeof(PiranhaPlant));
             else if (c == COL_SPAWN_COIN)
-                return new EntityTypeWrapper(typeof(CoinEntity));
+                return new EntityTypeWrapper(typeof(PersistentCoinEntity));
             else if (c == COL_SPAWN_FLAG)
                 return new EntityTypeWrapper(typeof(FlagEntity));
             else
@@ -172,18 +172,19 @@ namespace SuperBitBros
             List<Rect2d> ls = new List<Rect2d>();
 
             for (int y = 0; y < GetHeight(); y++)
-			{
+            {
                 for (int x = 0; x < GetWidth(); x++)
-			    {
-			        Color c = map.GetColor(LAYER_PLAYERVISION, x, y);
-                    if (c.A == 255 && ! finished.Contains(c)) {
+                {
+                    Color c = map.GetColor(LAYER_PLAYERVISION, x, y);
+                    if (c.A == 255 && !finished.Contains(c))
+                    {
                         finished.Add(c);
                         Rect2d r = (Rect2d)FindVisionRect(c);
                         r *= Block.BLOCK_SIZE;
                         ls.Add(r);
                     }
-			    }
-			}
+                }
+            }
 
             return ls;
         }
@@ -202,9 +203,9 @@ namespace SuperBitBros
                     if (map.GetColor(LAYER_PLAYERVISION, x, y) == c)
                     {
                         minX = Math.Min(minX, x);
-                        maxX = Math.Max(maxX, x+1);
+                        maxX = Math.Max(maxX, x + 1);
                         minY = Math.Min(minY, y);
-                        maxY = Math.Max(maxY, y+1);
+                        maxY = Math.Max(maxY, y + 1);
                     }
                 }
             }

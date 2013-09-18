@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using OpenTK.Graphics;
+﻿using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.HUD;
-using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace SuperBitBros
 {
@@ -85,7 +83,7 @@ namespace SuperBitBros
                 }
             }
 
-            foreach (DynamicEntity entity in model.entityList)
+            foreach (DynamicEntity entity in model.dynamicEntityList)
             {
                 if (entity.distance == depth)
                 {
@@ -209,7 +207,7 @@ namespace SuperBitBros
             // RENDER COLLSIIONBOXES && MOVEMNT VECTORS
             //############################################
 
-            foreach (DynamicEntity e in model.entityList)
+            foreach (DynamicEntity e in model.dynamicEntityList)
             {
                 RenderColoredBox(e.GetPosition(), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 0, 0, 255));
 
@@ -236,7 +234,7 @@ namespace SuperBitBros
             Color4 col = Color.FromArgb(0, 0, 0);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("FPS: {0} / {1}", (int)fps_counter.Frequency, window.TargetRenderFrequency), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("UPS: {0}", (int)ups_counter.Frequency), col);
-            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Entities: {0}", model.entityList.Count), col);
+            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("dyn. Entities: {0}", model.dynamicEntityList.Count), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Optical Particles: {0}/{1}", Particle.GetGlobalParticleCount(), Particle.MAX_PARTICLE_COUNT), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player: [int] {0}", (Vec2i)((GameWorld)model).player.position), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Offset: [int] {0}", (Vec2i)offset), col);
@@ -259,7 +257,7 @@ namespace SuperBitBros
                 }
             }
 
-            RenderColoredBox(new Rect2d(offset / Block.BLOCK_SIZE + mapRect.bl, window.Width * 1.0 / Block.BLOCK_WIDTH, window.Height * 1.0 / Block.BLOCK_HEIGHT), distance-0.5, Color.FromArgb(255, 255, 0, 0));
+            RenderColoredBox(new Rect2d(offset / Block.BLOCK_SIZE + mapRect.bl, window.Width * 1.0 / Block.BLOCK_WIDTH, window.Height * 1.0 / Block.BLOCK_HEIGHT), distance - 0.5, Color.FromArgb(255, 255, 0, 0));
         }
     }
 }

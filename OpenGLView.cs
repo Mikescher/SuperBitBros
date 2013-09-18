@@ -1,11 +1,11 @@
-﻿using System;
-using System.Drawing;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using QuickFont;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
+using System.Drawing;
 
 namespace SuperBitBros
 {
@@ -51,7 +51,7 @@ namespace SuperBitBros
         private void OnInit()
         {
             GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.CullFace);
+            GL.Disable(EnableCap.CullFace);
 
             GL.Enable(EnableCap.Texture2D);
 
@@ -91,6 +91,9 @@ namespace SuperBitBros
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
             GL.Clear(ClearBufferMask.DepthBufferBit);
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat);
 
             GL.LoadIdentity();
             GL.Ortho(0, window.Width, 0, window.Height, 0, -100);
@@ -139,25 +142,33 @@ namespace SuperBitBros
         protected virtual void RenderRectangle(Rect2d rect, OGLTexture texture, double distance, double transparency)
         {
             Rect2d coords = texture.GetCoordinates();
-            texture.bind();
+            //texture.bind();
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat);
+            if (transparency < 1.0)
+                GL.Color4(1.0, 1.0, 1.0, transparency);
 
-            if (transparency < 1.0) GL.Color4(1.0, 1.0, 1.0, transparency);
-
+            //##########
             GL.Begin(BeginMode.Quads);
+            //##########
+
             GL.TexCoord2(coords.bl);
             GL.Vertex3(rect.tl.X, rect.tl.Y, distance);
+
             GL.TexCoord2(coords.tl);
             GL.Vertex3(rect.bl.X, rect.bl.Y, distance);
+
             GL.TexCoord2(coords.tr);
             GL.Vertex3(rect.br.X, rect.br.Y, distance);
+
             GL.TexCoord2(coords.br);
             GL.Vertex3(rect.tr.X, rect.tr.Y, distance);
-            GL.End();
 
-            if (transparency < 1.0) GL.Color4(1.0, 1.0, 1.0, 1.0);
+            //##########
+            GL.End();
+            //##########
+
+            if (transparency < 1.0)
+                GL.Color4(1.0, 1.0, 1.0, 1.0);
         }
 
         protected virtual void RenderColoredRectangle(Rect2d rect, double distance, Color4 col)
