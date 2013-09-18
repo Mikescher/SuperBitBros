@@ -1,6 +1,6 @@
-﻿using System;
-using SuperBitBros.Entities.Blocks;
+﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
@@ -37,6 +37,11 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
             //owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
             Explode();
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_GOOMBA;
         }
     }
 }

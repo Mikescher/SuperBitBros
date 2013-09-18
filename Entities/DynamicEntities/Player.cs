@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
-using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.Entities.EnityController;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
+using System.Collections.Generic;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -142,6 +141,11 @@ namespace SuperBitBros.Entities.DynamicEntities
         public void Explode()
         {
             DoExplosionEffect(PLAYER_EXPLOSIONFRAGMENTS_X, PLAYER_EXPLOSIONFRAGMENTS_Y, PLAYER_EXPLOSIONFRAGMENTS_FORCE);
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_MISC;
         }
     }
 }

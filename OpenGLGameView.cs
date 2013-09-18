@@ -33,16 +33,21 @@ namespace SuperBitBros
 
             Rect2i bRange = new Rect2i((int)(offset.X / Block.BLOCK_WIDTH) - 1,
                                                  (int)(offset.Y / Block.BLOCK_HEIGHT) - 1,
-                                                 (int)(window.Width / Block.BLOCK_WIDTH) + 2,
-                                                 (int)(window.Height / Block.BLOCK_HEIGHT) + 2);
+                                                 (int)(window.Width / Block.BLOCK_WIDTH) + 4,
+                                                 (int)(window.Height / Block.BLOCK_HEIGHT) + 4);
 
-            //Render from behind to nearest 100 = behindest
+            //#################################
+            //######### <RENDER> ##############
+            //#################################
 
-            double depthposition = 100;
-            while (depthposition > 0)
-            {
-                depthposition = renderInDepth(depthposition, bRange);
-            }
+            // Render PerDepth or PerTexture
+
+            //RenderPerDepth(bRange);
+            RenderPerTexture(model.entityCache, ((Rect2d)bRange) * Block.BLOCK_SIZE);
+
+            //#################################
+            //######### </RENDER> #############
+            //#################################
 
             if (model.HUD != null)
             {
@@ -57,6 +62,44 @@ namespace SuperBitBros
             EndRender();
         }
 
+        private void RenderPerTexture(EntityCache cache, Rect2d blockRange)
+        {
+            bool firstRender;
+
+            for (int depth = EntityCache.DISTANCE_COUNT - 1; depth >= 0; depth--)
+            {
+                for (int rtype = 0; rtype < EntityCache.RenderTypeCount; rtype++)
+                {
+                    firstRender = true;
+
+                    foreach (Entity e in cache.GetEntitiesAt(depth, rtype))
+                    {
+                        if (blockRange.Includes(e.position))
+                        {
+                            if (firstRender || rtype == (int)EntityRenderType.BRT_MISC)
+                            {
+                                e.GetCurrentTexture().bind();
+                                firstRender = false;
+                            }
+
+                            RenderNoBindRectangle(e.GetTexturePosition(), e.GetCurrentTexture(), e.GetDistance(), e.GetTransparency());
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RenderPerDepth(Rect2i blockRange)
+        {
+            //Render from behind to nearest 100 = behindest
+
+            double depthposition = 100;
+            while (depthposition > 0)
+            {
+                depthposition = renderInDepth(depthposition, blockRange);
+            }
+        }
+
         private double renderInDepth(double depth, Rect2i blockRange)
         {
             double nextDepth = 0;
@@ -69,29 +112,26 @@ namespace SuperBitBros
                     if (block == null)
                         continue;
 
-                    if (block.distance == depth)
+                    if (block.GetDistance() == depth)
                     {
-                        if (block.RenderBackgroundAir())
-                            RenderRectangle(block.GetTexturePosition(), Textures.texture_air, block.distance + 0.1, block.GetTransparency());
-
-                        RenderRectangle(block.GetPosition(), block.GetCurrentTexture(), block.distance, block.GetTransparency());
+                        RenderRectangle(block.GetPosition(), block.GetCurrentTexture(), block.GetDistance(), block.GetTransparency());
                     }
-                    else if (block.distance < depth && block.distance > nextDepth)
+                    else if (block.GetDistance() < depth && block.GetDistance() > nextDepth)
                     {
-                        nextDepth = block.distance;
+                        nextDepth = block.GetDistance();
                     }
                 }
             }
 
             foreach (DynamicEntity entity in model.dynamicEntityList)
             {
-                if (entity.distance == depth)
+                if (entity.GetDistance() == depth)
                 {
-                    RenderRectangle(entity.GetTexturePosition(), entity.GetCurrentTexture(), entity.distance, entity.GetTransparency());
+                    RenderRectangle(entity.GetTexturePosition(), entity.GetCurrentTexture(), entity.GetDistance(), entity.GetTransparency());
                 }
-                else if (entity.distance < depth && entity.distance > nextDepth)
+                else if (entity.GetDistance() < depth && entity.GetDistance() > nextDepth)
                 {
-                    nextDepth = entity.distance;
+                    nextDepth = entity.GetDistance();
                 }
             }
 

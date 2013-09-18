@@ -62,10 +62,5 @@ namespace SuperBitBros.Entities.Blocks
         }
 
         public abstract Color GetBlockColor();
-
-        public virtual bool RenderBackgroundAir()
-        {
-            return false;
-        }
     }
 }

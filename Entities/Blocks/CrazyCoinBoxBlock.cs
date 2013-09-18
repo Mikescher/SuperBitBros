@@ -1,8 +1,8 @@
-﻿using System;
-using System.Drawing;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
+using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
 {
@@ -73,6 +73,11 @@ namespace SuperBitBros.Entities.Blocks
         public override Color GetBlockColor()
         {
             return color;
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_MISC;
         }
     }
 }

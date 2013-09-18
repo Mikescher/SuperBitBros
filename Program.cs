@@ -4,6 +4,7 @@ using System;
 
 namespace SuperBitBros
 {
+
     public class Program
     {
         public static BooleanKeySwitch debugViewSwitch = new BooleanKeySwitch(true, Key.F10, KeyTriggerMode.ON_DOWN);

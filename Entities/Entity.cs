@@ -1,34 +1,36 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
 
 namespace SuperBitBros.Entities
 {
+    public enum EntityRenderType { BRT_MISC, BRT_STANDARDAIR, BRT_GROUNDAIR, BRT_STANDARDGROUND, BRT_HILL, BRT_PIPE, BRT_CASTLE, BRT_GOOMBA }
+
     public abstract class Entity
     {
-        // 0 < DEPTH <= 100
-        public const int DISTANCE_BACKRGOUND = 100;
+        // 0 < DEPTH <= 50
+        public const int DISTANCE_BACKRGOUND = 50;
 
-        public const int DISTANCE_BLOCKS = 50;
-        public const int DISTANCE_CORPSE = 45;
-        public const int DISTANCE_MOBS = 40;
-        public const int DISTANCE_STRUCTURES = 35;
-        public const int DISTANCE_PLAYER = 30;
-        public const int DISTANCE_POWERUPS = 25;
-        public const int DISTANCE_PARTICLES = 15;
+        public const int DISTANCE_BLOCKS = 38;
+        public const int DISTANCE_CORPSE = 34;
+        public const int DISTANCE_MOBS = 30;
+        public const int DISTANCE_STRUCTURES = 26;
+        public const int DISTANCE_PLAYER = 22;
+        public const int DISTANCE_POWERUPS = 18;
+        public const int DISTANCE_PARTICLES = 14;
         public const int DISTANCE_HUD = 10;
 
-        public const int DISTANCE_DEBUG_ZONE = 8;
-        public const int DISTANCE_DEBUG_MINIMAP = 6;
-        public const int DISTANCE_DEBUG_MARKER = 4;
+        public const int DISTANCE_DEBUG_ZONE = 6;
+        public const int DISTANCE_DEBUG_MINIMAP = 4;
+        public const int DISTANCE_DEBUG_MARKER = 2;
 
         public GameModel owner;
 
         public Vec2d position; // bottom left
-        public double distance;
+        protected int distance;
 
         public double width;
         public double height;
@@ -83,6 +85,11 @@ namespace SuperBitBros.Entities
             return new Vec2d(position.X + width / 2, position.Y + height / 2);
         }
 
+        public int GetDistance()
+        {
+            return distance;
+        }
+
         public virtual void OnRemove()
         {
         }
@@ -121,5 +128,7 @@ namespace SuperBitBros.Entities
         {
             return 1.0;
         }
+
+        public abstract EntityRenderType GetRenderType();
     }
 }

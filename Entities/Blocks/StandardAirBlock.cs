@@ -22,14 +22,14 @@ namespace SuperBitBros.Entities.Blocks
             return false;
         }
 
-        public override bool RenderBackgroundAir()
-        {
-            return false;
-        }
-
         public override Color GetBlockColor()
         {
             return color;
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_STANDARDAIR;
         }
     }
 }

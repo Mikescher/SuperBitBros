@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using OpenTK.Graphics;
+﻿using OpenTK.Graphics;
 using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.HUD;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace SuperBitBros
 {
     public abstract class GameModel
     {
+        public EntityCache entityCache;
+
         public List<DynamicEntity> dynamicEntityList { get; protected set; }
         public List<Block> blockList { get; protected set; }
 
@@ -47,7 +49,7 @@ namespace SuperBitBros
 
         public virtual void Init()
         {
-            // Nothing to see here, officer
+            entityCache = new EntityCache();
         }
 
         protected void AddBlock(Block b, int x, int y)
@@ -59,6 +61,8 @@ namespace SuperBitBros
             if (blockMap[x, y] != null)
                 Console.Error.WriteLine("Block overrides other block when added to Blockmap: X:{0}, Y:{1}, Block:{2}", x, y, b.ToString());
             blockMap[x, y] = b;
+
+            entityCache.AddEntity(b);
 
             b.OnAdd(this, x, y);
         }
@@ -78,6 +82,8 @@ namespace SuperBitBros
             if (blockMap[x, y] != null)
             {
                 blockList.Remove(blockMap[x, y]);
+                entityCache.RemoveEntity(blockMap[x, y]);
+
                 blockMap[x, y].OnRemove();
                 blockMap[x, y] = null;
             }
@@ -106,7 +112,10 @@ namespace SuperBitBros
         {
             e.position.X = x;
             e.position.Y = y;
+
             dynamicEntityList.Add(e);
+            entityCache.AddEntity(e);
+
             e.OnAdd(this);
             return e;
         }
@@ -114,6 +123,8 @@ namespace SuperBitBros
         private bool RemoveEntity(DynamicEntity e)
         {
             e.OnRemove();
+            entityCache.RemoveEntity(e);
+
             return dynamicEntityList.Remove(e);
         }
 
@@ -140,19 +151,21 @@ namespace SuperBitBros
 
             foreach (DynamicEntity e in killList)
             {
-                if (!RemoveEntity(e)) 
+                if (!RemoveEntity(e))
                     Console.Error.WriteLine("Could not KillLater Entity: " + e);
             }
+            killList.Clear();
+
             if (HUD != null)
             {
                 HUD.Update(keyboard);
             }
-            killList.Clear();
         }
 
         public void KillLater(DynamicEntity e)
         {
-            if (!killList.Contains(e)) killList.Add(e);
+            if (!killList.Contains(e))
+                killList.Add(e);
         }
 
         public void setSize(int w, int h)

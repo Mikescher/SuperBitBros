@@ -1,7 +1,7 @@
-﻿using System;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
@@ -146,6 +146,11 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             if (e.GetType() == typeof(Player) && state != 0)
                 Console.Out.WriteLine("DEAD_PP");
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_MISC;
         }
     }
 }

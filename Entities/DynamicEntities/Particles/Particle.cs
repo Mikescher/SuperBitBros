@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 
 namespace SuperBitBros.Entities.DynamicEntities.Particles
 {
@@ -49,7 +44,8 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
         {
             base.OnAdd(model);
 
-            if (doInstantKill) KillLater();
+            if (doInstantKill)
+                KillLater();
         }
 
         public override void OnRemove()
@@ -64,7 +60,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
 
         public static int GetGlobalParticleCount()
         {
-            return  GlobalParticleCount;
+            return GlobalParticleCount;
         }
 
         public override void Update(KeyboardDevice keyboard)
@@ -102,6 +98,11 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
         protected virtual bool IsPureOptical() // true := Wird bei zuviel Partikeln nicht angezeigt
         {
             return true;
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_MISC;
         }
     }
 }

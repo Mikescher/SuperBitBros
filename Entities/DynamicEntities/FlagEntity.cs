@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using SuperBitBros.Entities.Blocks;
+﻿using SuperBitBros.Entities.Blocks;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -48,6 +47,11 @@ namespace SuperBitBros.Entities.DynamicEntities
 
                 p.OnCollideNonStaticFlag(position);
             }
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_MISC;
         }
     }
 }

@@ -25,5 +25,10 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             return false;
         }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_MISC;
+        }
     }
 }
