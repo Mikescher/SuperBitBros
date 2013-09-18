@@ -24,4 +24,4 @@ namespace SuperBitBros
     }
 }
 
-//TODO Performance 4 Fullscreen (Coll Chunks)
+//TODO Performance 4 Fullscreen ==> RENDERING

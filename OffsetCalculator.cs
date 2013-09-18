@@ -43,7 +43,7 @@ namespace SuperBitBros
             Vec2d zoneCorrection = GetVisionZoneCorrection(Value + moveCorrection, playerPos, window_width, window_height);
             moveCorrection += zoneCorrection; // Korrigierte MoveCorrection (durch die Zone)
 
-            moveCorrection.SetLength(Math.Min(moveCorrection.GetLength(), MAX_CORRECTION_SPEED));
+            moveCorrection.DoMaxLength(MAX_CORRECTION_SPEED);
 
             Value += moveCorrection;
         }

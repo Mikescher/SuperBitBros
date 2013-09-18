@@ -14,11 +14,14 @@ namespace SuperBitBros.Entities
         public const double DETECTION_TOLERANCE = 0.005; // Touching Detection Tolerance
         public const int BLOCK_DETECTION_RANGE = 3;
 
+        public bool alive { get; private set; }
+
         protected Stack<AbstractEntityController> controllerStack = new Stack<AbstractEntityController>();
 
         public DynamicEntity()
             : base()
         {
+            alive = true;
         }
 
         public virtual void OnAdd(GameModel model)
@@ -59,6 +62,8 @@ namespace SuperBitBros.Entities
 
         public void DoCollisions()
         {
+            if (!alive) return;
+
             // Collide with Entities
 
             Rect2d nocollnewpos = new Rect2d(
@@ -69,7 +74,7 @@ namespace SuperBitBros.Entities
                 height + DETECTION_TOLERANCE * 2);
             Rect2d currPosition = GetPosition();
 
-            foreach (Entity e in owner.GetCurrentEntityList())
+            foreach (DynamicEntity e in owner.GetCurrentEntityList())
             {
                 if (nocollnewpos.IsColldingWith(e.GetPosition()) && e != this)
                 {
@@ -77,8 +82,11 @@ namespace SuperBitBros.Entities
                     bool isTouch = currPosition.IsTouching(e.GetPosition());
                     bool isBlock = Entity.TestBlocking(e, this);
 
-                    e.onCollide(this, false, isBlock, isColl, isTouch);
-                    this.onCollide(e, true, isBlock, isColl, isTouch);
+                    if (e.alive)
+                    {
+                        e.onCollide(this, false, isBlock, isColl, isTouch);
+                        this.onCollide(e, true, isBlock, isColl, isTouch);
+                    }
 
                     if (isBlock && isColl)
                     {
@@ -285,6 +293,7 @@ namespace SuperBitBros.Entities
 
         public void KillLater()
         {
+            alive = false;
             owner.KillLater(this);
             OnKill();
         }

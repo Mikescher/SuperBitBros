@@ -78,10 +78,12 @@
     <Compile Include="Entities\Blocks\HillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
     <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
-    <Compile Include="Entities\DynamicEntities\Particles\ExplosionParticle.cs" />
+    <Compile Include="Entities\DynamicEntities\Particles\CoinExplosionParticle.cs" />
+    <Compile Include="Entities\DynamicEntities\Particles\FragmentParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
-    <Compile Include="Entities\EnityController\ExplosionParticleController.cs" />
+    <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
+    <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
     <Compile Include="Entities\EntityTypeWrapper.cs" />
     <Compile Include="Entities\EnityController\AbstractEntityController.cs" />

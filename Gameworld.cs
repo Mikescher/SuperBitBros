@@ -29,15 +29,15 @@ namespace SuperBitBros
         {
             base.Init();
 
-            HUD = new StandardGameHUD();
+            HUD = new StandardGameHUD(this);
             LoadMapFromResources();
         }
 
-        public override void Update(KeyboardDevice keyboard, int window_width, int window_height)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, window_width, window_height);
+            base.Update(keyboard);
 
-            offset.Calculate(player.GetPosition(), window_width, window_height, mapRealWidth, mapRealHeight);
+            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight);
         }
 
         public void SpawnEntityFromMapData(EntityTypeWrapper setype, double x, double y)

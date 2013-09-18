@@ -27,7 +27,7 @@ namespace SuperBitBros
 
         public OpenGLView(GameModel model)
         {
-            window = new MyGameWindow(INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT);
+            window = new MyGameWindow(this, INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT);
             this.model = model;
 
             window.RenderFrame += new EventHandler<FrameEventArgs>(OnRender);
@@ -77,7 +77,7 @@ namespace SuperBitBros
             ups_counter.Inc();
             update_watch.Start();
 
-            model.Update(window.Keyboard, window.Width, window.Height);
+            model.Update(window.Keyboard);
 
             Program.debugViewSwitch.Update(window.Keyboard);
             Program.minimapViewSwitch.Update(window.Keyboard);
@@ -101,6 +101,12 @@ namespace SuperBitBros
             window.SwapBuffers();
 
             render_watch.Stop();
+        }
+
+        public void OnResize()
+        {
+            model.viewPortWidth = window.Width;
+            model.viewPortHeight = window.Height;
         }
 
         protected virtual void RenderRectangle(Vec2d tl, Vec2d bl, Vec2d br, Vec2d tr, double distance)
@@ -130,13 +136,15 @@ namespace SuperBitBros
             GL.End();
         }
 
-        protected virtual void RenderRectangle(Rect2d rect, OGLTexture texture, double distance)
+        protected virtual void RenderRectangle(Rect2d rect, OGLTexture texture, double distance, double transparency)
         {
             Rect2d coords = texture.GetCoordinates();
             texture.bind();
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat);
+
+            if (transparency < 1.0) GL.Color4(1.0, 1.0, 1.0, transparency);
 
             GL.Begin(BeginMode.Quads);
             GL.TexCoord2(coords.bl);
@@ -148,6 +156,8 @@ namespace SuperBitBros
             GL.TexCoord2(coords.br);
             GL.Vertex3(rect.tr.X, rect.tr.Y, distance);
             GL.End();
+
+            if (transparency < 1.0) GL.Color4(1.0, 1.0, 1.0, 1.0);
         }
 
         protected virtual void RenderColoredRectangle(Rect2d rect, double distance, Color4 col)

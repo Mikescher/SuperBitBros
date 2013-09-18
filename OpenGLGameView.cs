@@ -73,9 +73,9 @@ namespace SuperBitBros
                     if (block.distance == depth)
                     {
                         if (block.RenderBackgroundAir())
-                            RenderRectangle(block.GetTexturePosition(), Textures.texture_air, block.distance + 0.1);
+                            RenderRectangle(block.GetTexturePosition(), Textures.texture_air, block.distance + 0.1, block.GetTransparency());
 
-                        RenderRectangle(block.GetPosition(), block.GetCurrentTexture(), block.distance);
+                        RenderRectangle(block.GetPosition(), block.GetCurrentTexture(), block.distance, block.GetTransparency());
                     }
                     else if (block.distance < depth && block.distance > nextDepth)
                     {
@@ -88,7 +88,7 @@ namespace SuperBitBros
             {
                 if (entity.distance == depth)
                 {
-                    RenderRectangle(entity.GetTexturePosition(), entity.GetCurrentTexture(), entity.distance);
+                    RenderRectangle(entity.GetTexturePosition(), entity.GetCurrentTexture(), entity.distance, entity.GetTransparency());
                 }
                 else if (entity.distance < depth && entity.distance > nextDepth)
                 {
@@ -111,7 +111,7 @@ namespace SuperBitBros
 
             foreach (HUDElement hel in hud.elements)
             {
-                RenderRectangle(hel.GetPosition(window.Width, window.Height), hel.GetCurrentTexture(), hel.GetDistance());
+                RenderRectangle(hel.GetPosition(window.Width, window.Height), hel.GetCurrentTexture(), hel.GetDistance(), 1.0);
             }
 
             GL.PopMatrix();

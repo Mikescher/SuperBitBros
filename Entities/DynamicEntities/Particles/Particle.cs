@@ -9,28 +9,59 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
 {
     public abstract class Particle : DynamicEntity
     {
-        public int Lifetime { get; protected set; }
+        private int lifetime = -1;
+        private int fadetime_max = 0;
+        private int fadetime = 0;
+
+        private double transparency = 1.0;
 
         public Particle()
             : base()
         {
             distance = DISTANCE_PARTICLES;
+        }
 
-            Lifetime = -1;
+        protected void SetLifetime(int t)
+        {
+            lifetime = t;
+        }
+
+        protected void SetFadetime(int t)
+        {
+            fadetime = t;
+            fadetime_max = t;
         }
 
         public override void Update(KeyboardDevice keyboard)
         {
             base.Update(keyboard);
 
-            if (Lifetime > 0)
+            if (lifetime > 0)
             {
-                Lifetime--;
+                lifetime--;
             }
-            else if (Lifetime == 0)
+            else if (lifetime == 0)
             {
-                KillLater();
+                if (fadetime > 0)
+                {
+                    fadetime--;
+                    transparency = fadetime * 1.0 / fadetime_max;
+                }
+                else
+                {
+                    KillLater();
+                }
             }
+        }
+
+        protected override bool IsBlockingOther(Entity sender)
+        {
+            return false;
+        }
+
+        public override double GetTransparency()
+        {
+            return transparency;
         }
     }
 }

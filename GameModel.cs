@@ -27,6 +27,9 @@ namespace SuperBitBros
         public double mapRealWidth { get; protected set; }
         public double mapRealHeight { get; protected set; }
 
+        public int viewPortWidth = 1;
+        public int viewPortHeight = 1;
+
         public HUDModel HUD = null;
 
         public GameModel()
@@ -124,7 +127,7 @@ namespace SuperBitBros
             return new List<Block>(blockList);
         }
 
-        public virtual void Update(KeyboardDevice keyboard, int window_width, int window_height)
+        public virtual void Update(KeyboardDevice keyboard)
         {
             foreach (DynamicEntity e in GetCurrentEntityList())
             {

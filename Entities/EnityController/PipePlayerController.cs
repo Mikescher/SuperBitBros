@@ -53,14 +53,12 @@ namespace SuperBitBros.Entities.EnityController
             if (direction == PipeDirection.SOUTH || direction == PipeDirection.NORTH)
             {
                 double corr = GetXCorrection();
-                Console.Out.WriteLine("CorrX:" + corr);
                 delta.X += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR)) * Math.Sign(corr);
             }
 
             if (direction == PipeDirection.EAST || direction == PipeDirection.WEST)
             {
                 double corr = GetYCorrection();
-                Console.Out.WriteLine("CorrY:" + corr);
                 delta.Y += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR)) * Math.Sign(corr);
             }
 

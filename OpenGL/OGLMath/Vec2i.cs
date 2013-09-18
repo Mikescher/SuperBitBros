@@ -135,12 +135,24 @@ namespace SuperBitBros.OpenGL.OGLMath
             }
         }
 
-        public void SetLength(int len)
+        public void SetLength(double len)
         {
-            Normalize();
+            if (!isZero())
+            {
+                double w = GetLength();
+                X = (int)((X / w)*len);
+                Y = (int)((Y / w)*len);
+            }
+        }
 
-            X = X * len;
-            Y = Y * len;
+        public void DoMaxLength(double max)
+        {
+            SetLength(Math.Min(max, GetLength()));
+        }
+
+        public void DoMinLength(double min)
+        {
+            SetLength(Math.Max(min, GetLength()));
         }
 
         public void Set(int px, int py)

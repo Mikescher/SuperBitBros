@@ -116,5 +116,10 @@ namespace SuperBitBros.Entities
                 return true;
             }
         }
+
+        public virtual double GetTransparency()
+        {
+            return 1.0;
+        }
     }
 }

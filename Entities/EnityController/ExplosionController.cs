@@ -5,11 +5,11 @@ using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.EnityController
 {
-    public class ExplosionParticleController : AbstractNewtonEntityController
+    public class ExplosionController : AbstractNewtonEntityController
     {
         public const double FRICTION = 0.1;
 
-        public ExplosionParticleController(Particle e, Vec2d spawnForce)
+        public ExplosionController(Particle e, Vec2d spawnForce)
             : base(e)
         {
             movementDelta = spawnForce;

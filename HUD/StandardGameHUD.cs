@@ -5,13 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.HUD
 {
     public class StandardGameHUD : HUDModel
-    {
+    {   
+        private const int COIN_PARTICLE_COMPLETIONCOUNT = CoinEntity.COIN_EXPLOSIONFRAGMENTS_X * CoinEntity.COIN_EXPLOSIONFRAGMENTS_Y;
+
         private BooleanKeySwitch debugCoinCheatSwitch = new BooleanKeySwitch(false, Key.P, KeyTriggerMode.FLICKER_DOWN);
+
+        private int coinParticleCount = 0;
 
         private HUDImage coinImage;
         private HUDNumberDisplay coinNumberDisplay_1;
@@ -19,10 +25,25 @@ namespace SuperBitBros.HUD
 
         private HUDNumberCounter coinCounter;
 
-        public StandardGameHUD()
-            : base()
+        public StandardGameHUD(GameWorld model)
+            : base(model)
         {
 
+        }
+
+        public Vec2d GetCoinTarget()
+        {
+            return new Vec2d(10 + Block.BLOCK_WIDTH / 2, owner.viewPortHeight - 10 - Block.BLOCK_HEIGHT / 2);
+        }
+
+        public void AddCoinParticle()
+        {
+            coinParticleCount++;
+            if (coinParticleCount >= COIN_PARTICLE_COMPLETIONCOUNT)
+            {
+                coinParticleCount = 0;
+                coinCounter.Value++; 
+            }
         }
 
         public override void Update(KeyboardDevice keyboard)

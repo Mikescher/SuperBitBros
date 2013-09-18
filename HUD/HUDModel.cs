@@ -11,8 +11,12 @@ namespace SuperBitBros.HUD
     {
         public List<HUDElement> elements { get; private set; }
 
-        public HUDModel()
+        protected GameModel owner;
+
+        public HUDModel(GameModel model)
         {
+            owner = model;
+
             elements = new List<HUDElement>();
 
             CreateHUD();
