@@ -11,8 +11,8 @@ namespace SuperBitBros
 {
     public abstract class OpenGLView
     {
-        protected const int INIT_RESOLUTION_WIDTH = 540;
-        protected const int INIT_RESOLUTION_HEIGHT = 280;
+        public const int INIT_RESOLUTION_WIDTH = 540;
+        public const int INIT_RESOLUTION_HEIGHT = 280;
 
         protected MyGameWindow window;
         protected GameModel model;

@@ -94,6 +94,7 @@
     <Compile Include="Entities\EnityController\DefaultMobController.cs" />
     <Compile Include="Entities\EnityController\DefaultPlayerController.cs" />
     <Compile Include="Entities\EnityController\PipePlayerController.cs" />
+    <Compile Include="HUD\HUDAnimatedImage.cs" />
     <Compile Include="HUD\HUDElement.cs" />
     <Compile Include="HUD\HUDImage.cs" />
     <Compile Include="HUD\HUDModel.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="OpenGL\AvgDurationWatch.cs" />
     <Compile Include="OpenGL\BooleanKeySwitch.cs" />
     <Compile Include="OpenGL\OGLTextureFragment.cs" />
+    <Compile Include="StaticStopWatch.cs" />
     <Compile Include="Triggers\DeathZone.cs" />
     <Compile Include="Triggers\PipeZones\EnterAnyPipeZone.cs" />
     <Compile Include="Triggers\PipeZones\MoveAnyPipeZone.cs" />

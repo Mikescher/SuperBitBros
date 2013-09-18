@@ -10,9 +10,18 @@ namespace SuperBitBros.Entities.DynamicEntities
     {
         public const int COIN_EXPLOSIONFRAGMENTS_X = 3;
         public const int COIN_EXPLOSIONFRAGMENTS_Y = 3;
-        private const double COIN_EXPLOSIONFRAGMENTS_FORCE = 24.0;
+        public const double COIN_EXPLOSIONFRAGMENTS_FORCE = 24.0;
+
+        private const int COINDEATH_EXPLOSIONFRAGMENTS_X = 4;
+        private const int COINDEATH_EXPLOSIONFRAGMENTS_Y = 4;
+        private const double COINDEATH_EXPLOSIONFRAGMENTS_FORCE = 16;
+
+        
+        private const int COIN_LIFETIME = 60 * 10;
 
         private static Random random = new Random();
+
+        private int lifetime = COIN_LIFETIME;
 
         public CoinEntity()
             : base()
@@ -34,6 +43,12 @@ namespace SuperBitBros.Entities.DynamicEntities
             base.Update(keyboard);
 
             atexture.Update();
+
+            if (lifetime-- < 0) {
+                KillLater();
+                DoExplosionEffect(COINDEATH_EXPLOSIONFRAGMENTS_X, COINDEATH_EXPLOSIONFRAGMENTS_Y, COINDEATH_EXPLOSIONFRAGMENTS_FORCE);
+            }
+
         }
 
         protected override bool IsBlockingOther(Entity sender)

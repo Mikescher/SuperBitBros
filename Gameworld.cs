@@ -59,8 +59,6 @@ namespace SuperBitBros
                 AddTrigger(zone, x, y);
 
                 player = zone.SpawnPlayer();
-
-                offset.Change(player.position);
             }
             else if (triggertype == AddTriggerType.DEATH_ZONE)
             {
@@ -121,6 +119,11 @@ namespace SuperBitBros
 
             offset.AddVisionBoxes(parser.GetVisionZones());
 
+            //#############
+            //AFTER MAP GEN
+            //#############
+
+            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, false);
             foreach (DynamicEntity e in entityList)
             {
                 e.OnAfterMapGen();

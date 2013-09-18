@@ -27,8 +27,8 @@ namespace SuperBitBros
         public double mapRealWidth { get; protected set; }
         public double mapRealHeight { get; protected set; }
 
-        public int viewPortWidth = 1;
-        public int viewPortHeight = 1;
+        public int viewPortWidth = OpenGLView.INIT_RESOLUTION_WIDTH;
+        public int viewPortHeight = OpenGLView.INIT_RESOLUTION_HEIGHT;
 
         public HUDModel HUD = null;
 

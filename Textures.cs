@@ -10,6 +10,8 @@ namespace SuperBitBros
         public static OGLTextureSheet piranhaplant_sheet;
         public static OGLTextureSheet number_sheet;
 
+        public static OGLTexture[] array_coin;
+
         public static OGLTexture texture_ground;
         public static OGLTexture texture_air;
         public static OGLTexture texture_ground_air;
@@ -52,6 +54,8 @@ namespace SuperBitBros
 
             texture_goomba = font_sheet.GetTextureWrapper(110);
             texture_goomba_dead = font_sheet.GetTextureWrapper(95);
+
+            array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }
     }
 }

@@ -9,16 +9,29 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
 {
     public abstract class Particle : DynamicEntity
     {
+        public const int MAX_PARTICLE_COUNT = 100;
+
+        protected static int GlobalParticleCount = 0;
+
         private int lifetime = -1;
         private int fadetime_max = 0;
         private int fadetime = 0;
 
         private double transparency = 1.0;
 
+        private bool doInstantKill = false;
+
         public Particle()
             : base()
         {
             distance = DISTANCE_PARTICLES;
+
+            if (IsPureOptical())
+            {
+                GlobalParticleCount++;
+                if (GlobalParticleCount > MAX_PARTICLE_COUNT)
+                    doInstantKill = true;
+            }
         }
 
         protected void SetLifetime(int t)
@@ -30,6 +43,28 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
         {
             fadetime = t;
             fadetime_max = t;
+        }
+
+        public override void OnAdd(GameModel model)
+        {
+            base.OnAdd(model);
+
+            if (doInstantKill) KillLater();
+        }
+
+        public override void OnRemove()
+        {
+            base.OnRemove();
+
+            if (IsPureOptical())
+            {
+                GlobalParticleCount--;
+            }
+        }
+
+        public static int GetGlobalParticleCount()
+        {
+            return  GlobalParticleCount;
         }
 
         public override void Update(KeyboardDevice keyboard)
@@ -62,6 +97,11 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
         public override double GetTransparency()
         {
             return transparency;
+        }
+
+        protected virtual bool IsPureOptical() // true := Wird bei zuviel Partikeln nicht angezeigt
+        {
+            return true;
         }
     }
 }

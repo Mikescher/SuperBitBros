@@ -19,7 +19,7 @@ namespace SuperBitBros.HUD
 
         private int coinParticleCount = 0;
 
-        private HUDImage coinImage;
+        private HUDAnimatedImage coinImage;
         private HUDNumberDisplay coinNumberDisplay_1;
         private HUDNumberDisplay coinNumberDisplay_2;
 
@@ -59,7 +59,7 @@ namespace SuperBitBros.HUD
 
         public override void CreateHUD()
         {
-            Add(coinImage = new HUDImage(Textures.texture_coin_0, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 10, 10, HUDElementAlign.HEA_TL);
+            Add(coinImage = new HUDAnimatedImage(15, Textures.array_coin, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 10, 10, HUDElementAlign.HEA_TL);
             Add(coinNumberDisplay_1 = new HUDNumberDisplay(0, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 30, 10, HUDElementAlign.HEA_TL);
             Add(coinNumberDisplay_2 = new HUDNumberDisplay(0, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 50, 10, HUDElementAlign.HEA_TL);
 

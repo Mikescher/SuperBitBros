@@ -26,5 +26,10 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
 
             AddController(new CoinExplosionController(this, force, hud, (c.owner as GameWorld).offset));
         }
+
+        protected override bool IsPureOptical() 
+        {
+            return false; // Wird bei zuviel Partikeln nicht angezeigt
+        }
     }
 }

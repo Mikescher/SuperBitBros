@@ -7,7 +7,7 @@ namespace SuperBitBros
     public class Program
     {
         public static BooleanKeySwitch debugViewSwitch = new BooleanKeySwitch(true, Key.F10, KeyTriggerMode.ON_DOWN);
-        public static BooleanKeySwitch minimapViewSwitch = new BooleanKeySwitch(true, Key.F9, KeyTriggerMode.ON_DOWN);
+        public static BooleanKeySwitch minimapViewSwitch = new BooleanKeySwitch(false, Key.F9, KeyTriggerMode.ON_DOWN);
 
         private static void Main(string[] args)
         {
