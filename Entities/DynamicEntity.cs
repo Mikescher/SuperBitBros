@@ -11,8 +11,10 @@ namespace SuperBitBros.Entities
 {
     public abstract class DynamicEntity : Entity
     {
-        public const double DETECTION_TOLERANCE = 0.005; // Touching Detection Tolerance
+        public const double DETECTION_TOLERANCE = 0.00001; // Touching Detection Tolerance
         public const int BLOCK_DETECTION_RANGE = 3;
+
+        private const int MAX_MAP_DISTANCE = 1024;
 
         public bool alive { get; private set; }
 
@@ -34,7 +36,19 @@ namespace SuperBitBros.Entities
             base.Update(keyboard);
 
             CallControllerStack(keyboard);
+
+            TestForOutOfMapBounds();
         }
+
+        private void TestForOutOfMapBounds()
+        {
+            if (position.X < -MAX_MAP_DISTANCE || position.Y < -MAX_MAP_DISTANCE || position.X > owner.mapRealWidth + MAX_MAP_DISTANCE || position.Y > owner.mapRealHeight + MAX_MAP_DISTANCE)
+            {
+                Console.Out.WriteLine("Out of Bounds Kill: " + GetType().Name);
+                KillLater();
+            }
+        }
+
 
         public bool HasController()
         {
@@ -53,6 +67,10 @@ namespace SuperBitBros.Entities
                     if (HasController())
                         controllerStack.Peek().OnReshow();
                 }
+            }
+            else
+            {
+                Console.Out.WriteLine("ERROR: STACK IS EMPTY::" + GetType().Name);
             }
         }
 
@@ -84,13 +102,12 @@ namespace SuperBitBros.Entities
 
                     if (e.alive)
                     {
-                        e.onCollide(this, false, isBlock, isColl, isTouch);
+                        //e.onCollide(this, false, isBlock, isColl, isTouch);
                         this.onCollide(e, true, isBlock, isColl, isTouch);
                     }
 
                     if (isBlock && isColl)
                     {
-                        Console.Error.WriteLine("Entity PUSHBACK !!!");
                         OnIllegalIntersection(e);
                     }
                 }
@@ -119,7 +136,6 @@ namespace SuperBitBros.Entities
 
                         if (isBlock && isColl)
                         {
-                            Console.Error.WriteLine("Block PUSHBACK !!!");
                             OnIllegalIntersection(b);
                         }
                     }

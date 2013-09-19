@@ -21,6 +21,8 @@ namespace SuperBitBros
         public static OGLTexture texture_pipe;
         public static OGLTexture texture_castle;
         public static OGLTexture texture_flag;
+        public static OGLTexture texture_koopa;
+        public static OGLTexture texture_koopashell;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
@@ -54,6 +56,8 @@ namespace SuperBitBros
 
             texture_goomba = font_sheet.GetTextureWrapper(110);
             texture_goomba_dead = font_sheet.GetTextureWrapper(95);
+            texture_koopa = font_sheet.GetTextureWrapper(109);
+            texture_koopashell = font_sheet.GetTextureWrapper(127);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }

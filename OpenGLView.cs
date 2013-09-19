@@ -79,9 +79,6 @@ namespace SuperBitBros
 
             model.Update(window.Keyboard);
 
-            Program.debugViewSwitch.Update(window.Keyboard);
-            Program.minimapViewSwitch.Update(window.Keyboard);
-
             update_watch.Stop();
         }
 

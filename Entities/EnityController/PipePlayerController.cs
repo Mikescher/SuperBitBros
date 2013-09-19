@@ -63,6 +63,7 @@ namespace SuperBitBros.Entities.EnityController
             }
 
             ent.position += delta;
+            ent.DoCollisions();
 
             deltaCache = delta;
         }

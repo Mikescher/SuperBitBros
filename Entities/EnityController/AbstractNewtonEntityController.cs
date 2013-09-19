@@ -147,6 +147,8 @@ namespace SuperBitBros.Entities.EnityController
 
         public override void OnIllegalIntersection(Entity other)
         {
+            Console.Error.WriteLine("PUSHBACK {0} <-> {1} !!!", ent.GetType().Name, other.GetType().Name);
+
             PushBackFrom(other);
         }
 

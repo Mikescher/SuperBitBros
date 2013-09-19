@@ -2,6 +2,7 @@
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
@@ -19,12 +20,15 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         private Rect2d pipeUnder = null;
 
         public PiranhaPlant()
+            : base()
         {
             distance = Entity.DISTANCE_MOBS;
             width = 2 * Block.BLOCK_WIDTH;
             height = 0;
 
             texture = Textures.piranhaplant_sheet.GetTextureWrapper(0);
+
+            AddController(new StaticEntityController(this));
         }
 
         public override void OnAdd(GameModel owner)
@@ -138,14 +142,16 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
         public override void OnHeadJump(Entity e)
         {
-            if (e.GetType() == typeof(Player) && state != 0)
-                Console.Out.WriteLine("DEAD_PP_N00b");
+            Player p = e as Player;
+            if (state != 0 && p != null)
+                p.DoDeath(this);
         }
 
         public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
         {
-            if (e.GetType() == typeof(Player) && state != 0)
-                Console.Out.WriteLine("DEAD_PP");
+            Player p = e as Player;
+            if (state != 0 && p != null)
+                p.DoDeath(this);
         }
 
         public override EntityRenderType GetRenderType()

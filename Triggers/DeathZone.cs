@@ -17,9 +17,10 @@ namespace SuperBitBros.Triggers
 
         public override void OnCollide(DynamicEntity collider)
         {
-            if (collider is Player)
+            Player p = collider as Player;
+            if (p != null)
             {
-                Console.Out.WriteLine("DeathZone Triggered");
+                p.DoDeath(this);
             }
             else if (collider is DynamicEntity)
             {

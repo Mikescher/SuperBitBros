@@ -58,15 +58,15 @@ namespace SuperBitBros.Triggers.PipeZones
                 case PipeDirection.NORTHSOUTH:
                     return PipeDirection.NORTH;
 
-                case PipeDirection.EAST:
+                case PipeDirection.WEST:
                 case PipeDirection.EASTWEST:
-                    return PipeDirection.EAST;
+                    return PipeDirection.WEST;
 
                 case PipeDirection.SOUTH:
                     return PipeDirection.SOUTH;
 
-                case PipeDirection.WEST:
-                    return PipeDirection.WEST;
+                case PipeDirection.EAST:
+                    return PipeDirection.EAST;
             }
             throw new Exception();
         }

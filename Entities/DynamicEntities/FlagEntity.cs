@@ -1,5 +1,6 @@
 ﻿using SuperBitBros.Entities.Blocks;
 using System;
+using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -18,6 +19,8 @@ namespace SuperBitBros.Entities.DynamicEntities
             height = Block.BLOCK_HEIGHT;
 
             texture = Textures.texture_flag;
+
+            AddController(new StaticEntityController(this));
         }
 
         protected override bool IsBlockingOther(Entity sender)

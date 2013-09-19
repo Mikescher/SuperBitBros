@@ -65,6 +65,8 @@ namespace SuperBitBros.Entities.EnityController
             ent.position += movementDelta;
 
             movementDelta.DoMaxLength(MAX_SPEED);
+
+            //ent.DoCollisions(); // No Collisions with C-Particles
         }
 
         public override void OnIllegalIntersection(Entity other)

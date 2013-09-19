@@ -9,6 +9,7 @@ namespace SuperBitBros.Entities.DynamicEntities
         public const double GOOMBA_CORPSE_FRICION = 0.05;
 
         public GoombaCorpse(Goomba g)
+            : base()
         {
             distance = Entity.DISTANCE_CORPSE;
             width = Block.BLOCK_WIDTH;

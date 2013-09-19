@@ -7,7 +7,7 @@ using System;
 
 namespace SuperBitBros.Entities
 {
-    public enum EntityRenderType { BRT_MISC, BRT_STANDARDAIR, BRT_GROUNDAIR, BRT_STANDARDGROUND, BRT_HILL, BRT_PIPE, BRT_CASTLE, BRT_GOOMBA }
+    public enum EntityRenderType { BRT_MISC, BRT_STANDARDAIR, BRT_GROUNDAIR, BRT_STANDARDGROUND, BRT_HILL, BRT_PIPE, BRT_CASTLE, BRT_GOOMBA, BRT_KOOPA }
 
     public abstract class Entity
     {

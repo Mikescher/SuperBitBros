@@ -6,6 +6,8 @@ using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
 using System.Collections.Generic;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -26,7 +28,8 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public Direction direction;
 
-        public Player()
+        public Player() 
+            : base()
         {
             direction = Direction.RIGHT;
             distance = Entity.DISTANCE_PLAYER;
@@ -59,8 +62,6 @@ namespace SuperBitBros.Entities.DynamicEntities
         public override void Update(KeyboardDevice keyboard)
         {
             base.Update(keyboard);
-
-            debugExplosionSwitch.Update(keyboard);
 
             if (IsUserControlled())
             {
@@ -146,6 +147,32 @@ namespace SuperBitBros.Entities.DynamicEntities
         public override EntityRenderType GetRenderType()
         {
             return EntityRenderType.BRT_MISC;
+        }
+
+        public void OnMobHeadJump(Mob m)
+        {
+            if (HasController()) {
+                DefaultPlayerController con = controllerStack.Peek() as DefaultPlayerController;
+                if (con != null) {
+                    con.DoMobKillPushback();
+                }
+            }
+        }
+
+        public void DoDeath(Mob m)
+        {
+            Console.Out.WriteLine("Death by Mob: " + m.GetType().Name);
+
+            //Explode();
+            //KillLater();
+        }
+
+        public void DoDeath(Trigger t)
+        {
+            Console.Out.WriteLine("Death by Zone: " + t.GetType().Name);
+
+            //Explode();
+            //KillLater();
         }
     }
 }

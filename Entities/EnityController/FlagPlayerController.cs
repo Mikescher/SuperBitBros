@@ -43,6 +43,9 @@ namespace SuperBitBros.Entities.EnityController
                     DoGravitationalMovement(new Vec2d(SPEED_WALK - movementDelta.X, 0));
                     TestFinish();
                     break;
+                default:
+                    ent.DoCollisions();
+                    break;
             }
         }
 

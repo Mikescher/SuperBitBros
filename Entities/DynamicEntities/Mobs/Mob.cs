@@ -20,7 +20,11 @@
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
         {
             if (collidingEntity.GetBottomLeft().Y >= GetTopRight().Y && collidingEntity is DynamicEntity && ((DynamicEntity)collidingEntity).GetMovement().Y < 0 && isBlockingMovement)
+            {
+                Player p = collidingEntity as Player;
+                if (p != null) p.OnMobHeadJump(this);
                 OnHeadJump(collidingEntity);
+            }
             else if (isDirectCollision || isTouching)
                 OnTouch(collidingEntity, isCollider, isBlockingMovement, isDirectCollision, isTouching);
         }

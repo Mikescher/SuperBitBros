@@ -16,7 +16,7 @@ namespace SuperBitBros.Triggers.PipeZones
             return PipeDirection.EASTWEST;
         }
 
-        public static Color color = Color.FromArgb(255, 64, 0);
+        public static Color color = Color.FromArgb(128, 0, 64);
 
         public static Color GetColor()
         {

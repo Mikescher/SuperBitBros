@@ -8,6 +8,7 @@ using SuperBitBros.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using SuperBitBros.OpenGL;
 
 namespace SuperBitBros
 {
@@ -140,6 +141,8 @@ namespace SuperBitBros
 
         public virtual void Update(KeyboardDevice keyboard)
         {
+            BooleanKeySwitch.UpdateAll(keyboard);
+
             foreach (DynamicEntity e in GetCurrentEntityList())
             {
                 e.Update(keyboard);

@@ -78,6 +78,8 @@
     <Compile Include="Entities\Blocks\HillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
     <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\KoopaShell.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\Koopa.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\CoinExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\FragmentParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
@@ -86,6 +88,8 @@
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
     <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
+    <Compile Include="Entities\EnityController\KoopaShellController.cs" />
+    <Compile Include="Entities\EnityController\StaticEntityController.cs" />
     <Compile Include="Entities\EntityTypeWrapper.cs" />
     <Compile Include="Entities\EnityController\AbstractEntityController.cs" />
     <Compile Include="Entities\EnityController\AbstractNewtonEntityController.cs" />

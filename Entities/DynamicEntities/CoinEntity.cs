@@ -3,6 +3,7 @@ using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.HUD;
 using System;
+using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -36,6 +37,8 @@ namespace SuperBitBros.Entities.DynamicEntities
             atexture.Add(0, Textures.texture_coin_1);
             atexture.Add(0, Textures.texture_coin_2);
             atexture.Add(0, Textures.texture_coin_3);
+
+            AddController(new StaticEntityController(this));
         }
 
         public override void Update(KeyboardDevice keyboard)

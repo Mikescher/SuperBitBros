@@ -1,4 +1,6 @@
-﻿using OpenTK.Input;
+﻿using System;
+using System.Collections.Generic;
+using OpenTK.Input;
 
 namespace SuperBitBros.OpenGL
 {
@@ -6,6 +8,9 @@ namespace SuperBitBros.OpenGL
 
     public class BooleanKeySwitch
     {
+        private static List<BooleanKeySwitch> switchList = new List<BooleanKeySwitch>();
+
+
         private bool _Value;
 
         public bool Value
@@ -41,6 +46,9 @@ namespace SuperBitBros.OpenGL
             key = actkey;
 
             mode = tmode;
+
+            Console.Out.WriteLine("Register Boolean KeySwitch [{0}] on {1}", actkey, tmode);
+            switchList.Add(this);
         }
 
         public BooleanKeySwitch(bool initial, Key actkey)
@@ -63,7 +71,11 @@ namespace SuperBitBros.OpenGL
             Value = state;
         }
 
-        public void Update(KeyboardDevice keyboard)
+        public static void UpdateAll(KeyboardDevice keyboard) {
+            switchList.ForEach( x => x.Update(keyboard));
+        }
+
+        private void Update(KeyboardDevice keyboard)
         {
             bool newstate = keyboard[key];
 

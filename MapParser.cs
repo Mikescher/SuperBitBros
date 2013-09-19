@@ -32,6 +32,7 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_PIRANHAPLANT = Color.FromArgb(0, 127, 0);
         private static readonly Color COL_SPAWN_COIN = Color.FromArgb(100, 200, 100);
         private static readonly Color COL_SPAWN_FLAG = Color.FromArgb(0, 255, 255);
+        private static readonly Color COL_SPAWN_KOOPA = Color.FromArgb(0, 192, 128);
 
         public readonly OpenRasterImage map;
 
@@ -108,6 +109,8 @@ namespace SuperBitBros
                 return new EntityTypeWrapper(typeof(PersistentCoinEntity));
             else if (c == COL_SPAWN_FLAG)
                 return new EntityTypeWrapper(typeof(FlagEntity));
+            else if (c == COL_SPAWN_KOOPA)
+                return new EntityTypeWrapper(typeof(Koopa));
             else
                 return new EntityTypeWrapper(null);
         }

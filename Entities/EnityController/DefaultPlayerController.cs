@@ -13,6 +13,8 @@ namespace SuperBitBros.Entities.EnityController
         public const double PLAYER_SPEED_MAX = 4.5;
         public const double PLAYER_JUMP_POWER = 9;
 
+        public const double PLAYER_MOB_KILL_JUMP = 4.5;
+
         private BooleanKeySwitch debugFlySwitch = new BooleanKeySwitch(false, Key.LControl, KeyTriggerMode.WHILE_DOWN);
         private BooleanKeySwitch debugFlyoverrideSwitch = new BooleanKeySwitch(false, Key.ShiftLeft, KeyTriggerMode.WHILE_DOWN);
 
@@ -28,9 +30,6 @@ namespace SuperBitBros.Entities.EnityController
 
         public override void Update(KeyboardDevice keyboard)
         {
-            debugFlySwitch.Update(keyboard);
-            debugFlyoverrideSwitch.Update(keyboard);
-
             updateMovement(keyboard);
         }
 
@@ -52,7 +51,11 @@ namespace SuperBitBros.Entities.EnityController
 
             if (keyboard[Key.Space] && ent.IsOnGround())
             {
-                delta.Y = PLAYER_JUMP_POWER + GRAVITY_ACCELERATION;
+                if (movementDelta.Y >= 0)
+                {
+                    delta.Y = Math.Max((PLAYER_JUMP_POWER + GRAVITY_ACCELERATION) - movementDelta.Y, 0);
+                } else
+                    delta.Y = PLAYER_JUMP_POWER + GRAVITY_ACCELERATION;
             }
 
             if (Program.debugViewSwitch.Value && debugFlySwitch.Value)
@@ -75,6 +78,14 @@ namespace SuperBitBros.Entities.EnityController
         public override bool IsActive()
         {
             return true;
+        }
+
+        public void DoMobKillPushback()
+        {
+            if (movementDelta.Y <= 0)
+            {
+                movementDelta.Y = PLAYER_MOB_KILL_JUMP;
+            }
         }
     }
 }

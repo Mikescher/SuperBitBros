@@ -4,26 +4,30 @@ using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
-    public class Goomba : Mob
+    public class Koopa : Mob
     {
-        public const double GOOMBA_ACC = 0.2;
-        public const double GOOMBA_SPEED = 1;
+        public const double KOOPA_ACC = 0.2;
+        public const double KOOPA_SPEED = 1;
 
-        public Goomba()
+        private bool suppressExplosion = false;
+
+        public Koopa()
             : base()
         {
             distance = Entity.DISTANCE_MOBS;
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT;
 
-            texture = Textures.texture_goomba;
+            texture = Textures.texture_koopa;
 
             AddController(new DefaultMobController(this));
         }
 
         public override void OnHeadJump(Entity e)
         {
+            suppressExplosion = true;
             KillLater();
+            owner.AddEntity(new KoopaShell(this), position.X, position.Y);
         }
 
         public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
@@ -37,13 +41,13 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             base.OnKill();
 
-            //owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
-            Explode();
+            if (!suppressExplosion)
+                Explode();
         }
 
         public override EntityRenderType GetRenderType()
         {
-            return EntityRenderType.BRT_GOOMBA;
+            return EntityRenderType.BRT_KOOPA;
         }
     }
 }

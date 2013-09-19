@@ -49,7 +49,6 @@ namespace SuperBitBros.HUD
         public override void Update(KeyboardDevice keyboard)
         {
             base.Update(keyboard);
-            debugCoinCheatSwitch.Update(keyboard);
 
             if (debugCoinCheatSwitch.Value) 
             { 

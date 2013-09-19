@@ -61,6 +61,10 @@ namespace SuperBitBros.Entities.EnityController
             {
                 DoGravitationalMovement(delta);
             }
+            else
+            {
+                DoGravitationalMovement(Vec2d.Zero);
+            }
         }
 
         public override bool IsActive()
