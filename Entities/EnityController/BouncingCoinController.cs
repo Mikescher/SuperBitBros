@@ -13,9 +13,9 @@ namespace SuperBitBros.Entities.EnityController
             //--
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
-            base.Update(keyboard);
+            base.Update(keyboard, ucorrection);
 
             if (ent.IsOnCeiling())
                 movementDelta.Y = Math.Min(movementDelta.Y, 0);

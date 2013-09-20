@@ -18,7 +18,7 @@ namespace SuperBitBros.HUD
             height = h;
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
 
         }

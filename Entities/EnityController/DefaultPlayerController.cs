@@ -28,12 +28,12 @@ namespace SuperBitBros.Entities.EnityController
             debugFlyoverrideSwitch.TurnOffEvent += delegate { if (debugFlySwitch.Value) Console.Out.WriteLine("DebugFlyMode++ disabled"); };
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
-            updateMovement(keyboard);
+            updateMovement(keyboard, ucorrection);
         }
 
-        private void updateMovement(KeyboardDevice keyboard)
+        private void updateMovement(KeyboardDevice keyboard, double ucorrection)
         {
             Vec2d delta = Vec2d.Zero;
 
@@ -72,7 +72,7 @@ namespace SuperBitBros.Entities.EnityController
                 MoveBy(delta, !debugFlyoverrideSwitch.Value, !debugFlyoverrideSwitch.Value);
             }
             else
-                DoGravitationalMovement(delta);
+                DoGravitationalMovement(delta, ucorrection);
         }
 
         public override bool IsActive()

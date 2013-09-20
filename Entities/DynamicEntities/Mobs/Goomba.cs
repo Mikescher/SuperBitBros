@@ -43,7 +43,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
         public override EntityRenderType GetRenderType()
         {
-            return EntityRenderType.BRT_GOOMBA;
+            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

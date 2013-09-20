@@ -46,9 +46,9 @@ namespace SuperBitBros.HUD
             }
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
-            base.Update(keyboard);
+            base.Update(keyboard, ucorrection);
 
             if (debugCoinCheatSwitch.Value) 
             { 

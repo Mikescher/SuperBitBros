@@ -15,7 +15,7 @@ namespace SuperBitBros.Entities.EnityController
             movementDelta = spawnForce;
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
             Vec2d delta = new Vec2d(0, 0);
 
@@ -24,7 +24,7 @@ namespace SuperBitBros.Entities.EnityController
                 delta.X = -Math.Sign(movementDelta.X) * Math.Min(FRICTION, Math.Abs(movementDelta.X));
             }
 
-            DoGravitationalMovement(delta);
+            DoGravitationalMovement(delta, ucorrection);
         }
 
         public override bool IsActive()

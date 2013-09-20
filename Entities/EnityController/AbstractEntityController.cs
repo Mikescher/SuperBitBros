@@ -14,7 +14,7 @@ namespace SuperBitBros.Entities.EnityController
             this.ent = e;
         }
 
-        public abstract void Update(KeyboardDevice keyboard);
+        public abstract void Update(KeyboardDevice keyboard, double ucorrection);
 
         public abstract bool IsActive();
 

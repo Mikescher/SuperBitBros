@@ -31,5 +31,10 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
         {
             return false; // Wird bei zuviel Partikeln nicht angezeigt
         }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_BLOCKTEXTURES;
+        }
     }
 }

@@ -59,9 +59,9 @@ namespace SuperBitBros.Entities.DynamicEntities
             return controllerStack.Count != 0 && controllerStack.Peek() is DefaultPlayerController;
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
-            base.Update(keyboard);
+            base.Update(keyboard, ucorrection);
 
             if (IsUserControlled())
             {
@@ -77,7 +77,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
             if (debugExplosionSwitch.Value) { Explode(); KillLater(); }
 
-            UpdateTexture();
+            UpdateTexture(ucorrection);
         }
 
         private void TestForPipe(PipeDirection d)
@@ -93,20 +93,20 @@ namespace SuperBitBros.Entities.DynamicEntities
                         AddController(new PipePlayerController(this, d));
         }
 
-        private void UpdateTexture()
+        private void UpdateTexture(double ucorrection)
         {
             if (IsOnGround())
             {
                 if (GetMovement().X > 0)
                 {
                     atexture.SetLayer(1);
-                    UpdateAnimation();
+                    UpdateAnimation(ucorrection);
                     direction = Direction.RIGHT;
                 }
                 else if (GetMovement().X < 0)
                 {
                     atexture.SetLayer(0);
-                    UpdateAnimation();
+                    UpdateAnimation(ucorrection);
                     direction = Direction.LEFT;
                 }
                 else
@@ -146,7 +146,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public override EntityRenderType GetRenderType()
         {
-            return EntityRenderType.BRT_MISC;
+            return EntityRenderType.BRT_MARIO;
         }
 
         public void OnMobHeadJump(Mob m)

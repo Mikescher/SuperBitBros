@@ -29,7 +29,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public override EntityRenderType GetRenderType()
         {
-            return EntityRenderType.BRT_MISC;
+            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

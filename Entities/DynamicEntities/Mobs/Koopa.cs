@@ -47,7 +47,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
         public override EntityRenderType GetRenderType()
         {
-            return EntityRenderType.BRT_KOOPA;
+            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

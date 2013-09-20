@@ -24,7 +24,7 @@ namespace SuperBitBros.Entities.EnityController
             flagPos = p_flagPos;
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
             switch (mode)
             {
@@ -40,7 +40,7 @@ namespace SuperBitBros.Entities.EnityController
                     break;
 
                 case MovementSection.WALK:
-                    DoGravitationalMovement(new Vec2d(SPEED_WALK - movementDelta.X, 0));
+                    DoGravitationalMovement(new Vec2d(SPEED_WALK - movementDelta.X, 0), ucorrection);
                     TestFinish();
                     break;
                 default:

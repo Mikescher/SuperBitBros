@@ -12,7 +12,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         public const double KOOPASHELL_ACC = 0.2;
         public const double KOOPASHELL_SPEED = 1;
 
-        private int timeUntilReinc;
+        private double timeUntilReinc;
 
         private bool suppressExplosion = false;
 
@@ -30,14 +30,15 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             AddController(new KoopaShellController(this));
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
-            base.Update(keyboard);
+            base.Update(keyboard, ucorrection);
 
             if (! (controllerStack.Peek() as KoopaShellController).isStill())
                 timeUntilReinc = REINCARNATION_TIME;
 
-            if (timeUntilReinc-- == 0)
+            timeUntilReinc -= ucorrection;
+            if (timeUntilReinc <= 0)
             {
                 suppressExplosion = true;
                 KillLater();
@@ -90,7 +91,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
         public override EntityRenderType GetRenderType()
         {
-            return EntityRenderType.BRT_KOOPA;
+            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private static Random random = new Random();
 
-        protected int lifetime = COIN_LIFETIME;
+        protected double lifetime = COIN_LIFETIME;
 
         public CoinEntity()
             : base()
@@ -41,13 +41,15 @@ namespace SuperBitBros.Entities.DynamicEntities
             AddController(new StaticEntityController(this));
         }
 
-        public override void Update(KeyboardDevice keyboard)
+        public override void Update(KeyboardDevice keyboard, double ucorrection)
         {
-            base.Update(keyboard);
+            base.Update(keyboard, ucorrection);
 
-            atexture.Update();
+            atexture.Update(ucorrection);
 
-            if (lifetime-- == 0)
+            lifetime -= ucorrection;
+
+            if (lifetime <= 0)
             {
                 KillLater();
                 DoExplosionEffect(COINDEATH_EXPLOSIONFRAGMENTS_X, COINDEATH_EXPLOSIONFRAGMENTS_Y, COINDEATH_EXPLOSIONFRAGMENTS_FORCE);
@@ -102,7 +104,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public override EntityRenderType GetRenderType()
         {
-            return EntityRenderType.BRT_MISC;
+            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

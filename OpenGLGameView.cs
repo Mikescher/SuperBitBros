@@ -281,7 +281,7 @@ namespace SuperBitBros
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player -> : [int] {0}", (Vec2i)((GameWorld)model).player.GetMovement()), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg R-Time: {0}", ((int)(render_watch.Duration * 10)) / 10.0), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg U-Time: {0}", ((int)(update_watch.Duration * 10)) / 10.0), col);
-            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("U-Correction: {0}", ((int)((window.UpdatePeriod / target_updatetime) * 100)) / 100.0), col);
+            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("U-Correction: {0}", ((int)((lastRenderPeriod / target_updatetime) * 100)) / 100.0), col);
 
             GL.Enable(EnableCap.Texture2D);
         }
