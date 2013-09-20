@@ -5,7 +5,7 @@ namespace SuperBitBros
 {
     public class Textures
     {
-        public static OGLTextureSheet font_sheet;
+        public static OGLTextureSheet block_textures;
         public static OGLTextureSheet mario_small_sheet;
         public static OGLTextureSheet piranhaplant_sheet;
         public static OGLTextureSheet number_sheet;
@@ -34,30 +34,30 @@ namespace SuperBitBros
 
         public static void Load()
         {
-            font_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.font_raster, 80, 4);
+            block_textures = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 80, 4);
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
             piranhaplant_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.plant, 16, 1);
             number_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.number_raster, 16, 4);
 
-            texture_ground = font_sheet.GetTextureWrapper(35);
-            texture_air = font_sheet.GetTextureWrapper(0);
-            texture_ground_air = font_sheet.GetTextureWrapper(7);
-            texture_coinblock_full = font_sheet.GetTextureWrapper(88);
-            texture_coinblock_empty = font_sheet.GetTextureWrapper(79);
-            texture_hill = font_sheet.GetTextureWrapper(77);
-            texture_pipe = font_sheet.GetTextureWrapper(72);
-            texture_castle = font_sheet.GetTextureWrapper(177);
-            texture_flag = font_sheet.GetTextureWrapper(179);
+            texture_ground = block_textures.GetTextureWrapper(35);
+            texture_air = block_textures.GetTextureWrapper(0);
+            texture_ground_air = block_textures.GetTextureWrapper(7);
+            texture_coinblock_full = block_textures.GetTextureWrapper(88);
+            texture_coinblock_empty = block_textures.GetTextureWrapper(79);
+            texture_hill = block_textures.GetTextureWrapper(77);
+            texture_pipe = block_textures.GetTextureWrapper(72);
+            texture_castle = block_textures.GetTextureWrapper(177);
+            texture_flag = block_textures.GetTextureWrapper(179);
 
-            texture_coin_0 = font_sheet.GetTextureWrapper(40);
-            texture_coin_1 = font_sheet.GetTextureWrapper(48);
-            texture_coin_2 = font_sheet.GetTextureWrapper(41);
-            texture_coin_3 = font_sheet.GetTextureWrapper(124);
+            texture_coin_0 = block_textures.GetTextureWrapper(40);
+            texture_coin_1 = block_textures.GetTextureWrapper(48);
+            texture_coin_2 = block_textures.GetTextureWrapper(41);
+            texture_coin_3 = block_textures.GetTextureWrapper(124);
 
-            texture_goomba = font_sheet.GetTextureWrapper(110);
-            texture_goomba_dead = font_sheet.GetTextureWrapper(95);
-            texture_koopa = font_sheet.GetTextureWrapper(109);
-            texture_koopashell = font_sheet.GetTextureWrapper(127);
+            texture_goomba = block_textures.GetTextureWrapper(110);
+            texture_goomba_dead = block_textures.GetTextureWrapper(95);
+            texture_koopa = block_textures.GetTextureWrapper(109);
+            texture_koopashell = block_textures.GetTextureWrapper(127);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }

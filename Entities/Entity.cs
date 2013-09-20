@@ -7,7 +7,7 @@ using System;
 
 namespace SuperBitBros.Entities
 {
-    public enum EntityRenderType { BRT_MISC, BRT_STANDARDAIR, BRT_GROUNDAIR, BRT_STANDARDGROUND, BRT_HILL, BRT_PIPE, BRT_CASTLE, BRT_GOOMBA, BRT_KOOPA }
+    public enum EntityRenderType { BRT_DYNAMIC, BRT_BLOCKTEXTURES, BRT_MARIO, BRT_NUMBER, BRT_PLANT }
 
     public abstract class Entity
     {
@@ -99,7 +99,7 @@ namespace SuperBitBros.Entities
             return texture;
         }
 
-        public virtual void Update(KeyboardDevice keyboard)
+        public virtual void Update(KeyboardDevice keyboard, double ucorrection)
         {
         }
 

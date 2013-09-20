@@ -182,6 +182,7 @@
     <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\block_textures.png" />
     <Content Include="Resources\font_raster.png" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />

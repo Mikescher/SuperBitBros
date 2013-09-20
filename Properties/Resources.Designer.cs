@@ -63,9 +63,9 @@ namespace SuperBitBros.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap font_raster {
+        internal static System.Drawing.Bitmap block_textures {
             get {
-                object obj = ResourceManager.GetObject("font_raster", resourceCulture);
+                object obj = ResourceManager.GetObject("block_textures", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
