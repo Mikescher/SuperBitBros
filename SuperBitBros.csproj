@@ -67,20 +67,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelayedAction.cs" />
     <Compile Include="Entities\AnimatedDynamicEntity.cs" />
     <Compile Include="Entities\AnimatedTexture.cs" />
     <Compile Include="Entities\Blocks\Block.cs" />
     <Compile Include="Entities\Blocks\CastleBlock.cs" />
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\CrazyCoinBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\DarkCeilingBlock.cs" />
+    <Compile Include="Entities\Blocks\DarkGroundBlock.cs" />
+    <Compile Include="Entities\Blocks\DarkHillBlock.cs" />
     <Compile Include="Entities\Blocks\EmptyCoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\EndlessCrazyCoinBoxBlock.cs" />
-    <Compile Include="Entities\Blocks\HillBlock.cs" />
+    <Compile Include="Entities\Blocks\StandardHillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
     <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\KoopaShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Koopa.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\CoinExplosionParticle.cs" />
+    <Compile Include="Entities\DynamicEntities\Particles\BlockExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\FragmentParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
@@ -89,6 +94,7 @@
     <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
     <Compile Include="Entities\EnityController\KoopaShellController.cs" />
+    <Compile Include="Entities\EnityController\SimpleExplosionController.cs" />
     <Compile Include="Entities\EnityController\StaticEntityController.cs" />
     <Compile Include="Entities\EntityTypeWrapper.cs" />
     <Compile Include="Entities\EnityController\AbstractEntityController.cs" />
@@ -183,7 +189,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\block_textures.png" />
-    <Content Include="Resources\font_raster.png" />
+    <None Include="Resources\map_01-02.ora" />
+    <None Include="Resources\map_debug.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
     <None Include="Resources\plant.png" />

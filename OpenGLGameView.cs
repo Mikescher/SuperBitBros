@@ -160,116 +160,121 @@ namespace SuperBitBros
         {
             GL.Disable(EnableCap.Texture2D);
 
-            //######################
-            // RENDER TRIGGER
-            //######################
-
-            for (int x = 0; x < model.mapBlockWidth; x++)
+            if (Program.vectorDebugViewSwitch.Value)
             {
-                for (int y = 0; y < model.mapBlockHeight; y++)
+                #region Render Trigger
+
+                for (int x = 0; x < model.mapBlockWidth; x++)
                 {
-                    List<Trigger> tlist = model.getTriggerList(x, y);
-
-                    if (tlist != null)
+                    for (int y = 0; y < model.mapBlockHeight; y++)
                     {
-                        foreach (Trigger t in tlist)
+                        List<Trigger> tlist = model.getTriggerList(x, y);
+
+                        if (tlist != null)
                         {
-                            RenderColoredRectangle(t.GetPosition(), Entity.DISTANCE_DEBUG_ZONE, Color.FromArgb(128, t.GetTriggerColor()));
-
-                            if (t is PipeZone)
+                            foreach (Trigger t in tlist)
                             {
-                                PipeZone z = t as PipeZone;
+                                RenderColoredRectangle(t.GetPosition(), Entity.DISTANCE_DEBUG_ZONE, Color.FromArgb(128, t.GetTriggerColor()));
 
-                                RenderColoredBox(t.GetPosition(), Entity.DISTANCE_DEBUG_ZONE, t.GetTriggerColor());
-
-                                Vec2d start = t.GetPosition().GetMiddle();
-                                Vec2d arr = Vec2d.Zero;
-                                const int arrlen = 5;
-                                Color4 arrcolor = z.CanEnter() ? Color.Red : Color.Black;
-                                switch (z.GetRealDirection())
+                                if (t is PipeZone)
                                 {
-                                    case PipeDirection.NORTH:
-                                        start.Y -= Block.BLOCK_HEIGHT / 4.0;
-                                        arr = new Vec2d(0, Block.BLOCK_HEIGHT / 2.0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        break;
+                                    PipeZone z = t as PipeZone;
 
-                                    case PipeDirection.EAST:
-                                        start.X -= Block.BLOCK_HEIGHT / 4.0;
-                                        arr = new Vec2d(Block.BLOCK_WIDTH / 2.0, 0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        break;
+                                    RenderColoredBox(t.GetPosition(), Entity.DISTANCE_DEBUG_ZONE, t.GetTriggerColor());
 
-                                    case PipeDirection.SOUTH:
-                                        start.Y += Block.BLOCK_WIDTH / 4.0;
-                                        arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 2.0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        break;
+                                    Vec2d start = t.GetPosition().GetMiddle();
+                                    Vec2d arr = Vec2d.Zero;
+                                    const int arrlen = 5;
+                                    Color4 arrcolor = z.CanEnter() ? Color.Red : Color.Black;
+                                    switch (z.GetRealDirection())
+                                    {
+                                        case PipeDirection.NORTH:
+                                            start.Y -= Block.BLOCK_HEIGHT / 4.0;
+                                            arr = new Vec2d(0, Block.BLOCK_HEIGHT / 2.0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            break;
 
-                                    case PipeDirection.WEST:
-                                        start.X += Block.BLOCK_WIDTH / 4.0;
-                                        arr = new Vec2d(-Block.BLOCK_WIDTH / 2.0, 0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        break;
+                                        case PipeDirection.EAST:
+                                            start.X -= Block.BLOCK_HEIGHT / 4.0;
+                                            arr = new Vec2d(Block.BLOCK_WIDTH / 2.0, 0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            break;
 
-                                    case PipeDirection.NORTHSOUTH:
-                                        arr = new Vec2d(0, Block.BLOCK_HEIGHT / 4.0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 4.0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        break;
+                                        case PipeDirection.SOUTH:
+                                            start.Y += Block.BLOCK_WIDTH / 4.0;
+                                            arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 2.0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            break;
 
-                                    case PipeDirection.EASTWEST:
-                                        arr = new Vec2d(Block.BLOCK_WIDTH / 4.0, 0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        arr = new Vec2d(-Block.BLOCK_WIDTH / 4.0, 0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        break;
+                                        case PipeDirection.WEST:
+                                            start.X += Block.BLOCK_WIDTH / 4.0;
+                                            arr = new Vec2d(-Block.BLOCK_WIDTH / 2.0, 0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            break;
 
-                                    case PipeDirection.ANY:
-                                        arr = new Vec2d(0, Block.BLOCK_HEIGHT / 4.0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 4.0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        arr = new Vec2d(Block.BLOCK_WIDTH / 4.0, 0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        arr = new Vec2d(-Block.BLOCK_WIDTH / 4.0, 0);
-                                        RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
-                                        break;
+                                        case PipeDirection.NORTHSOUTH:
+                                            arr = new Vec2d(0, Block.BLOCK_HEIGHT / 4.0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 4.0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            break;
+
+                                        case PipeDirection.EASTWEST:
+                                            arr = new Vec2d(Block.BLOCK_WIDTH / 4.0, 0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            arr = new Vec2d(-Block.BLOCK_WIDTH / 4.0, 0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            break;
+
+                                        case PipeDirection.ANY:
+                                            arr = new Vec2d(0, Block.BLOCK_HEIGHT / 4.0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            arr = new Vec2d(0, -Block.BLOCK_HEIGHT / 4.0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            arr = new Vec2d(Block.BLOCK_WIDTH / 4.0, 0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            arr = new Vec2d(-Block.BLOCK_WIDTH / 4.0, 0);
+                                            RenderArrow(start, arr, Entity.DISTANCE_DEBUG_ZONE - 1, arrlen, arrcolor);
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+                #endregion Render Trigger
+
+                #region CollsionBoxes && MovementVectors
+
+                foreach (DynamicEntity e in model.dynamicEntityList)
+                {
+                    RenderColoredBox(e.GetPosition(), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 0, 0, 255));
+
+                    RenderArrow(e.GetMiddle(), e.GetMovement() * 8, Entity.DISTANCE_DEBUG_MARKER, 7, Color.FromArgb(200, 0, 0, 255));
+                }
+
+                #endregion CollsionBoxes && MovementVectors
+
+                #region OffsetBox
+
+                RenderColoredBox(((GameWorld)model).offset.GetOffsetBox(window.Width, window.Height), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 255, 0, 0));
+
+                #endregion OffsetBox
             }
-
-            //############################################
-            // RENDER COLLSIIONBOXES && MOVEMNT VECTORS
-            //############################################
-
-            foreach (DynamicEntity e in model.dynamicEntityList)
-            {
-                RenderColoredBox(e.GetPosition(), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 0, 0, 255));
-
-                RenderArrow(e.GetMiddle(), e.GetMovement() * 8, Entity.DISTANCE_DEBUG_MARKER, 7, Color.FromArgb(200, 0, 0, 255));
-            }
-
-            //######################
-            // RENDER OFFSET BOX
-            //######################
-
-            RenderColoredBox(((GameWorld)model).offset.GetOffsetBox(window.Width, window.Height), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 255, 0, 0));
-
-            //######################
-            // RENDER MINIMAP
-            //######################
 
             if (Program.minimapViewSwitch.Value)
+            {
+                #region Minimap
+
+
                 RenderMinimap(offset, Entity.DISTANCE_DEBUG_MINIMAP);
 
-            //######################
-            // RENDER DEBUG TEXTS
-            //######################
+                #endregion Minimap
+            }
+
+            #region DebugTexts
+
             int foy = 3;
             Color4 col = Color.FromArgb(0, 0, 0);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("FPS: {0} / {1}", (int)fps_counter.Frequency, window.TargetRenderFrequency), col);
@@ -281,6 +286,8 @@ namespace SuperBitBros
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player -> : [int] {0}", (Vec2i)((GameWorld)model).player.GetMovement()), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg R-Time: {0}", ((int)(render_watch.Duration * 10)) / 10.0), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg U-Time: {0}", ((int)(update_watch.Duration * 10)) / 10.0), col);
+
+            #endregion DebugTexts
 
             GL.Enable(EnableCap.Texture2D);
         }

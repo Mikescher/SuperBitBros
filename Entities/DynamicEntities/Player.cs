@@ -24,7 +24,7 @@ namespace SuperBitBros.Entities.DynamicEntities
         private const int PLAYER_EXPLOSIONFRAGMENTS_Y = 8;
         private const double PLAYER_EXPLOSIONFRAGMENTS_FORCE = 24.0;
 
-        private BooleanKeySwitch debugExplosionSwitch = new BooleanKeySwitch(false, Key.F8, KeyTriggerMode.FLICKER_DOWN);
+        private BooleanKeySwitch debugExplosionSwitch = new BooleanKeySwitch(false, Key.F5, KeyTriggerMode.FLICKER_DOWN);
 
         public Direction direction;
 

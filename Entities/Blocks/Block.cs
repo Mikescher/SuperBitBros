@@ -1,4 +1,6 @@
-﻿using SuperBitBros.OpenGL.OGLMath;
+﻿using SuperBitBros.Entities.DynamicEntities.Particles;
+using SuperBitBros.OpenGL.OGLMath;
+using System;
 using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
@@ -12,6 +14,8 @@ namespace SuperBitBros.Entities.Blocks
         public Vec2i blockPos = Vec2i.Zero;
 
         public Rect2d position2dCache = null;
+
+        public int explosionCountDown = -1;
 
         public Block()
             : base()
@@ -62,5 +66,32 @@ namespace SuperBitBros.Entities.Blocks
         }
 
         public abstract Color GetBlockColor();
+
+        public void Explode(int fragmentsX, int fragmentsY, double force)
+        {
+            double forceMult = force / (Math.Sqrt(width * width + height * height) / 2.0);
+
+            double w = width / fragmentsX;
+            double h = height / fragmentsY;
+
+            for (int y = 0; y < fragmentsY; y++)
+            {
+                for (int x = 0; x < fragmentsX; x++)
+                {
+                    owner.AddEntity(
+                        new BlockExposionParticle(
+                            this,
+                            x,
+                            y,
+                            fragmentsX,
+                            fragmentsY,
+                            forceMult),
+                        position.X + x * w,
+                        position.Y + y * h);
+                }
+            }
+
+            owner.ReplaceBlock(this, null);
+        }
     }
 }

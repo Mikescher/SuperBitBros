@@ -1,20 +1,22 @@
-﻿using System;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
-using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.HUD;
+using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Properties;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
+using System;
 
 namespace SuperBitBros
 {
     public class GameWorld : GameModel
     {
+        private BooleanKeySwitch debugMapExplosionSwitch = new BooleanKeySwitch(false, Key.F6, KeyTriggerMode.FLICKER_DOWN);
+
         public OffsetCalculator offset = new OffsetCalculator();
 
         public Player player;
@@ -38,6 +40,9 @@ namespace SuperBitBros
             base.Update(keyboard);
 
             offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight);
+
+            if (debugMapExplosionSwitch.Value)
+                Explode();
         }
 
         public void SpawnEntityFromMapData(EntityTypeWrapper setype, double x, double y)
@@ -76,7 +81,7 @@ namespace SuperBitBros
 
         public void LoadMapFromResources()
         {
-            ImageMapParser parser = new ImageMapParser(new OpenRasterImage(Resources.map_01_01));
+            ImageMapParser parser = new ImageMapParser(new OpenRasterImage(Resources.map_01_02));
             setSize(parser.GetWidth(), parser.GetHeight());
 
             for (int x = 0; x < parser.GetWidth(); x++)
@@ -133,6 +138,30 @@ namespace SuperBitBros
         public override Vec2d GetOffset()
         {
             return offset.Value;
+        }
+
+        public void Explode()
+        {
+            Random r = new Random();
+
+            Rect2i viewBox = (Rect2i)(new Rect2d(offset.Value, viewPortWidth, viewPortHeight) / Block.BLOCK_SIZE);
+
+            viewBox.Trim(-2);
+
+            for (int y = 0; y < viewBox.Height; y++)
+            {
+                for (int x = 0; x < viewBox.Width; x++)
+                {
+                    Block b = GetBlock(viewBox.bl.X + x, viewBox.bl.Y + y);
+
+                    if (b != null)
+                    {
+                        AddDelayedAction(
+                            (int)(r.NextDouble() * 60 * 5),
+                            (() => b.Explode(3, 3, 2.5 + r.NextDouble() * 2)));
+                    }
+                }
+            }
         }
     }
 }

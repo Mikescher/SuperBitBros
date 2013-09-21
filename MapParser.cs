@@ -75,6 +75,8 @@ namespace SuperBitBros
         {
             if (c == StandardGroundBlock.GetColor())
                 return new StandardGroundBlock();
+            else if (c == DarkGroundBlock.GetColor())
+                return new DarkGroundBlock();
             else if (c == StandardAirBlock.GetColor())
                 return new StandardAirBlock();
             else if (c == GroundAirBlock.GetColor())
@@ -83,8 +85,10 @@ namespace SuperBitBros
                 return new CoinBoxBlock();
             else if (c == EmptyCoinBoxBlock.GetColor())
                 return new EmptyCoinBoxBlock();
-            else if (c == HillBlock.GetColor())
-                return new HillBlock();
+            else if (c == StandardHillBlock.GetColor())
+                return new StandardHillBlock();
+            else if (c == DarkHillBlock.GetColor())
+                return new DarkHillBlock();
             else if (c == PipeBlock.GetColor())
                 return new PipeBlock();
             else if (c == CastleBlock.GetColor())
@@ -93,6 +97,8 @@ namespace SuperBitBros
                 return new CrazyCoinBoxBlock();
             else if (c == EndlessCrazyCoinBoxBlock.GetColor())
                 return new EndlessCrazyCoinBoxBlock();
+            else if (c == DarkCeilingBlock.GetColor())
+                return new DarkCeilingBlock();
             else
                 return null;
         }

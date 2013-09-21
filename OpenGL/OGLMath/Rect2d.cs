@@ -98,10 +98,10 @@
 
         public static bool operator ==(Rect2d a, Rect2d b)
         {
-            if ((object)a == null && (object)b == null) 
+            if ((object)a == null && (object)b == null)
                 return true;
 
-            if ((object)a == null || (object)b == null) 
+            if ((object)a == null || (object)b == null)
                 return false;
 
             return (a.position == b.position && a.Width == b.Width && a.Height == b.Height);
@@ -186,6 +186,24 @@
         {
             position.X += len;
             Width -= len;
+        }
+
+        public void TrimHorizontal(double len)
+        {
+            TrimEast(len);
+            TrimWest(len);
+        }
+
+        public void TrimVertical(double len)
+        {
+            TrimNorth(len);
+            TrimSouth(len);
+        }
+
+        public void Trim(double len)
+        {
+            TrimHorizontal(len);
+            TrimVertical(len);
         }
 
         public bool Includes(Vec2d vec)

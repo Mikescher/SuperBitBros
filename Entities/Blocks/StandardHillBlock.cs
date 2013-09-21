@@ -2,11 +2,11 @@
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class HillBlock : Block
+    public class StandardHillBlock : Block
     {
         public static Color color = Color.FromArgb(255, 0, 255);
 
-        public HillBlock()
+        public StandardHillBlock()
             : base()
         {
             texture = Textures.texture_hill;

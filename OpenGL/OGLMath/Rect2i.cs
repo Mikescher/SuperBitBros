@@ -188,6 +188,24 @@
             Height -= len;
         }
 
+        public void TrimHorizontal(int len)
+        {
+            TrimEast(len);
+            TrimWest(len);
+        }
+
+        public void TrimVertical(int len)
+        {
+            TrimNorth(len);
+            TrimSouth(len);
+        }
+
+        public void Trim(int len)
+        {
+            TrimHorizontal(len);
+            TrimVertical(len);
+        }
+
         public bool Includes(Vec2i vec)
         {
             return (vec.X > position.X && vec.Y > position.Y && vec.X < tl.X && vec.Y < tl.Y);

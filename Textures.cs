@@ -21,8 +21,9 @@ namespace SuperBitBros
         public static OGLTexture texture_pipe;
         public static OGLTexture texture_castle;
         public static OGLTexture texture_flag;
-        public static OGLTexture texture_koopa;
-        public static OGLTexture texture_koopashell;
+        public static OGLTexture texture_darkGround;
+        public static OGLTexture texture_darkCeiling;
+        public static OGLTexture texture_darkHill;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
@@ -31,6 +32,8 @@ namespace SuperBitBros
 
         public static OGLTexture texture_goomba;
         public static OGLTexture texture_goomba_dead;
+        public static OGLTexture texture_koopa;
+        public static OGLTexture texture_koopashell;
 
         public static void Load()
         {
@@ -48,6 +51,10 @@ namespace SuperBitBros
             texture_pipe = block_textures.GetTextureWrapper(72);
             texture_castle = block_textures.GetTextureWrapper(177);
             texture_flag = block_textures.GetTextureWrapper(179);
+
+            texture_darkGround = block_textures.GetTextureWrapper(178);
+            texture_darkCeiling = block_textures.GetTextureWrapper(4);
+            texture_darkHill = block_textures.GetTextureWrapper(255);
 
             texture_coin_0 = block_textures.GetTextureWrapper(40);
             texture_coin_1 = block_textures.GetTextureWrapper(48);

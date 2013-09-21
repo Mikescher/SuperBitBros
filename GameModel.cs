@@ -3,12 +3,12 @@ using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.HUD;
+using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using SuperBitBros.OpenGL;
 
 namespace SuperBitBros
 {
@@ -23,6 +23,8 @@ namespace SuperBitBros
         private List<Trigger>[,] triggerMap;
 
         private List<DynamicEntity> killList;
+
+        private List<DelayedAction> delayedActionList;
 
         public int mapBlockWidth { get; protected set; }
         public int mapBlockHeight { get; protected set; }
@@ -46,6 +48,7 @@ namespace SuperBitBros
             dynamicEntityList = new List<DynamicEntity>();
             blockList = new List<Block>();
             killList = new List<DynamicEntity>();
+            delayedActionList = new List<DelayedAction>();
         }
 
         public virtual void Init()
@@ -75,7 +78,13 @@ namespace SuperBitBros
 
             RemoveBlock(x, y);
 
-            AddBlock(newb, x, y);
+            if (newb != null)
+                AddBlock(newb, x, y);
+        }
+
+        protected void RemoveBlock(Vec2i pos)
+        {
+            RemoveBlock(pos.X, pos.Y);
         }
 
         protected void RemoveBlock(int x, int y)
@@ -141,6 +150,12 @@ namespace SuperBitBros
 
         public virtual void Update(KeyboardDevice keyboard)
         {
+            for (int i = delayedActionList.Count - 1; i >= 0; i--)
+            {
+                if (delayedActionList[i].DecInvoke())
+                    delayedActionList.RemoveAt(i);
+            }
+
             BooleanKeySwitch.UpdateAll(keyboard);
 
             foreach (DynamicEntity e in GetCurrentEntityList())
@@ -201,6 +216,11 @@ namespace SuperBitBros
             triggerMap[x, y].Add(t);
 
             t.OnAdd(this);
+        }
+
+        public void AddDelayedAction(int delay, Action a)
+        {
+            delayedActionList.Add(new DelayedAction(delay, a));
         }
 
         public abstract Vec2d GetOffset();
