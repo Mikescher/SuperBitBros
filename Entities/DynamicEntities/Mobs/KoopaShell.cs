@@ -1,7 +1,6 @@
-﻿using SuperBitBros.Entities.Blocks;
+﻿using OpenTK.Input;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
-using System;
-using OpenTK.Input;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
@@ -24,7 +23,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             height = Block.BLOCK_HEIGHT;
 
             timeUntilReinc = REINCARNATION_TIME;
-            
+
             texture = Textures.texture_koopashell;
 
             AddController(new KoopaShellController(this));
@@ -34,7 +33,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             base.Update(keyboard, ucorrection);
 
-            if (! (controllerStack.Peek() as KoopaShellController).isStill())
+            if (!(controllerStack.Peek() as KoopaShellController).isStill())
                 timeUntilReinc = REINCARNATION_TIME;
 
             timeUntilReinc -= ucorrection;

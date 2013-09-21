@@ -15,8 +15,8 @@ namespace SuperBitBros.Entities.Blocks
         private const int COIN_SPAWN_TIME = 7;
         private const int COIN_SPAWN_LIFETIME = 180;
 
-        protected double timeUntilDried = COIN_SPAWN_LIFETIME;
-        protected double timeUntilSpawn = 0;
+        protected int timeUntilDried = COIN_SPAWN_LIFETIME;
+        protected int timeUntilSpawn = 0;
         protected bool isActive = false;
 
         public static Color color = Color.FromArgb(0, 128, 255);
@@ -32,14 +32,14 @@ namespace SuperBitBros.Entities.Blocks
             return color;
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
             if (isActive)
             {
-                timeUntilDried -= ucorrection;
-                timeUntilSpawn -= ucorrection;
+                timeUntilDried--;
+                timeUntilSpawn--;
 
                 if (timeUntilSpawn <= 0 && timeUntilDried > 0)
                 {
@@ -50,7 +50,8 @@ namespace SuperBitBros.Entities.Blocks
                     CoinEntity ce = new GravityCoinEntity(new Vec2d(Math.Sin(angle) * force, Math.Cos(angle) * force), true);
                     owner.AddEntity(ce, GetTopLeft().X, GetTopLeft().Y);
 
-                    timeUntilSpawn += COIN_SPAWN_TIME;
+                    timeUntilSpawn = COIN_SPAWN_TIME;
+                    timeUntilDried--;
                 }
 
                 if (timeUntilDried <= 0)
@@ -72,6 +73,11 @@ namespace SuperBitBros.Entities.Blocks
         public override Color GetBlockColor()
         {
             return color;
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

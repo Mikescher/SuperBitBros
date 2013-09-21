@@ -273,7 +273,7 @@ namespace SuperBitBros
             int foy = 3;
             Color4 col = Color.FromArgb(0, 0, 0);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("FPS: {0} / {1}", (int)fps_counter.Frequency, window.TargetRenderFrequency), col);
-            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("UPS: {0}", (int)ups_counter.Frequency), col);
+            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("UPS: {0} / {1}", (int)ups_counter.Frequency, window.TargetUpdateFrequency), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("dyn. Entities: {0}", model.dynamicEntityList.Count), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Optical Particles: {0}/{1}", Particle.GetGlobalParticleCount(), Particle.MAX_PARTICLE_COUNT), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player: [int] {0}", (Vec2i)((GameWorld)model).player.position), col);
@@ -281,7 +281,6 @@ namespace SuperBitBros
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player -> : [int] {0}", (Vec2i)((GameWorld)model).player.GetMovement()), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg R-Time: {0}", ((int)(render_watch.Duration * 10)) / 10.0), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg U-Time: {0}", ((int)(update_watch.Duration * 10)) / 10.0), col);
-            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("U-Correction: {0}", ((int)((lastRenderPeriod / target_updatetime) * 100)) / 100.0), col);
 
             GL.Enable(EnableCap.Texture2D);
         }

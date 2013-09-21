@@ -7,19 +7,19 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
     {
         private static BooleanKeySwitch debugParticleSwitch = new BooleanKeySwitch(false, Key.F7, KeyTriggerMode.ON_DOWN);
 
-        public static int MAX_PARTICLE_COUNT 
-        { 
-            get 
+        public static int MAX_PARTICLE_COUNT
+        {
+            get
             {
                 return debugParticleSwitch.Value ? 0 : 100;
-            } 
+            }
         }
 
         protected static int GlobalParticleCount = 0;
 
-        private double lifetime = -1;
+        private int lifetime = -1;
         private int fadetime_max = 0;
-        private double fadetime = 0;
+        private int fadetime = 0;
 
         private double transparency = 1.0;
 
@@ -72,20 +72,20 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
             return GlobalParticleCount;
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
             if (lifetime > 0)
             {
-                lifetime -= ucorrection;
+                lifetime--;
             }
             else if (lifetime == 0)
             {
                 if (fadetime > 0)
                 {
-                    fadetime -= ucorrection;
-                    transparency = fadetime / fadetime_max;
+                    fadetime--;
+                    transparency = fadetime * 1.0 / fadetime_max;
                 }
                 else
                 {
@@ -107,6 +107,11 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
         protected virtual bool IsPureOptical() // true := Wird bei zuviel Partikeln nicht angezeigt
         {
             return true;
+        }
+
+        public override EntityRenderType GetRenderType()
+        {
+            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

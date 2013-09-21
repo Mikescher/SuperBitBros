@@ -1,9 +1,9 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Particles;
+using SuperBitBros.Entities.EnityController;
 using SuperBitBros.HUD;
 using System;
-using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {

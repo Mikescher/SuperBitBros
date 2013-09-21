@@ -1,8 +1,8 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.EnityController;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
-using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {

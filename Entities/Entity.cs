@@ -99,7 +99,7 @@ namespace SuperBitBros.Entities
             return texture;
         }
 
-        public virtual void Update(KeyboardDevice keyboard, double ucorrection)
+        public virtual void Update(KeyboardDevice keyboard)
         {
         }
 
