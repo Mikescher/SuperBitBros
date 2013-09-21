@@ -29,9 +29,9 @@ namespace SuperBitBros.HUD
             return atexture.GetTexture();
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            atexture.Update(ucorrection);
+            atexture.Update();
         }
     }
 }

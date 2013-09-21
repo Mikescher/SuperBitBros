@@ -1,13 +1,13 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.Entities.EnityController;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
-using System.Collections.Generic;
-using SuperBitBros.Entities.DynamicEntities.Mobs;
 using System;
+using System.Collections.Generic;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -28,7 +28,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public Direction direction;
 
-        public Player() 
+        public Player()
             : base()
         {
             direction = Direction.RIGHT;
@@ -59,9 +59,9 @@ namespace SuperBitBros.Entities.DynamicEntities
             return controllerStack.Count != 0 && controllerStack.Peek() is DefaultPlayerController;
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
             if (IsUserControlled())
             {
@@ -77,7 +77,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
             if (debugExplosionSwitch.Value) { Explode(); KillLater(); }
 
-            UpdateTexture(ucorrection);
+            UpdateTexture();
         }
 
         private void TestForPipe(PipeDirection d)
@@ -93,20 +93,20 @@ namespace SuperBitBros.Entities.DynamicEntities
                         AddController(new PipePlayerController(this, d));
         }
 
-        private void UpdateTexture(double ucorrection)
+        private void UpdateTexture()
         {
             if (IsOnGround())
             {
                 if (GetMovement().X > 0)
                 {
                     atexture.SetLayer(1);
-                    UpdateAnimation(ucorrection);
+                    UpdateAnimation();
                     direction = Direction.RIGHT;
                 }
                 else if (GetMovement().X < 0)
                 {
                     atexture.SetLayer(0);
-                    UpdateAnimation(ucorrection);
+                    UpdateAnimation();
                     direction = Direction.LEFT;
                 }
                 else
@@ -151,9 +151,11 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public void OnMobHeadJump(Mob m)
         {
-            if (HasController()) {
+            if (HasController())
+            {
                 DefaultPlayerController con = controllerStack.Peek() as DefaultPlayerController;
-                if (con != null) {
+                if (con != null)
+                {
                     con.DoMobKillPushback();
                 }
             }

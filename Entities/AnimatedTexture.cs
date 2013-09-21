@@ -8,7 +8,7 @@ namespace SuperBitBros.Entities
         private int pos;
         private int layer;
         private List<List<OGLTexture>> textureList;
-        private double updateCount;
+        private int updateCount;
 
         public int animation_speed; // updates between Frames
 
@@ -29,13 +29,13 @@ namespace SuperBitBros.Entities
             return textureList[layer][pos];
         }
 
-        public void Update(double ucorrection)
+        public void Update()
         {
-            updateCount += ucorrection;
+            updateCount++;
             if (updateCount >= animation_speed)
             {
                 pos = (pos + 1) % GetCount();
-                updateCount -= animation_speed;
+                updateCount = 0;
             }
         }
 

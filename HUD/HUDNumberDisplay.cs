@@ -41,7 +41,7 @@ namespace SuperBitBros.HUD
             texture = Textures.number_sheet.GetTextureWrapper(Value, Layer);
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
 
         }

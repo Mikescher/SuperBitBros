@@ -28,11 +28,11 @@ namespace SuperBitBros.HUD
             elements.Add(el);
         }
 
-        public virtual void Update(KeyboardDevice keyboard, double ucorrection)
+        public virtual void Update(KeyboardDevice keyboard)
         {
             foreach (HUDElement e in elements)
             {
-                e.Update(keyboard, ucorrection);
+                e.Update(keyboard);
             }
         }
 

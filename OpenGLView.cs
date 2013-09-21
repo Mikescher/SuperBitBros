@@ -6,7 +6,6 @@ using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Drawing;
-using System.Diagnostics;
 
 namespace SuperBitBros
 {
@@ -24,17 +23,11 @@ namespace SuperBitBros
         protected AvgDurationWatch render_watch = new AvgDurationWatch();
         protected AvgDurationWatch update_watch = new AvgDurationWatch();
 
-        protected Stopwatch updateperiod_watch = new Stopwatch();
-        protected double lastRenderPeriod = 1;
-
         protected QFont DebugFont;
-
-        protected double target_updatetime; // in ms
 
         public OpenGLView(GameModel model)
         {
             window = new MyGameWindow(this, INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT);
-            updateperiod_watch.Start();
             this.model = model;
 
             window.RenderFrame += new EventHandler<FrameEventArgs>(OnRender);
@@ -47,7 +40,6 @@ namespace SuperBitBros
 
         public virtual void Start(int fps, int ups)
         {
-            target_updatetime = 1.0 / ups;
             window.Run(ups, fps);
         }
 
@@ -69,7 +61,7 @@ namespace SuperBitBros
             GL.ClearColor(Color4.Black);
 
             QFontBuilderConfiguration builderConfig = new QFontBuilderConfiguration(true);
-            builderConfig.ShadowConfig.blurRadius = 10; //reduce blur radius because font is very small
+            builderConfig.ShadowConfig.blurRadius = 1; //reduce blur radius because font is very small
             builderConfig.TextGenerationRenderHint = TextGenerationRenderHint.ClearTypeGridFit; //best render hint for this font
             DebugFont = new QFont(new Font("Arial", 8));
             DebugFont.Options.DropShadowActive = true;
@@ -85,10 +77,7 @@ namespace SuperBitBros
             ups_counter.Inc();
             update_watch.Start();
 
-            lastRenderPeriod = 1.0 / 60; //TOD RE-ADD uCorrection //updateperiod_watch.ElapsedMilliseconds / 1000.0;
-            updateperiod_watch.Restart();
-
-            model.Update(window.Keyboard, lastRenderPeriod / target_updatetime);
+            model.Update(window.Keyboard);
 
             update_watch.Stop();
         }

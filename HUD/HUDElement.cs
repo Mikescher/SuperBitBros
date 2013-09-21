@@ -67,6 +67,6 @@ namespace SuperBitBros.HUD
             return Entity.DISTANCE_HUD;
         }
 
-        public abstract void Update(KeyboardDevice keyboard, double ucorrection);
+        public abstract void Update(KeyboardDevice keyboard);
     }
 }

@@ -43,13 +43,13 @@ namespace SuperBitBros.Entities.EnityController
             //
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
             Vec2d rtarg = (offset.Value + target);
             Vec2d delta = rtarg - ent.position;
             delta.SetLength(SEEK_SPEED);
 
-            MoveBy(delta, ucorrection);
+            MoveBy(delta);
 
             if ((rtarg - ent.position).GetLength() < KILL_DISTANCE)
             {
@@ -58,11 +58,11 @@ namespace SuperBitBros.Entities.EnityController
             }
         }
 
-        private void MoveBy(Vec2d delta, double ucorrection)
+        private void MoveBy(Vec2d delta)
         {
             movementDelta += delta;
 
-            ent.position += movementDelta * ucorrection;
+            ent.position += movementDelta;
 
             movementDelta.DoMaxLength(MAX_SPEED);
 

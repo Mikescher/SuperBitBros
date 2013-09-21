@@ -24,7 +24,7 @@ namespace SuperBitBros.Entities.EnityController
             //---
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
             Vec2d delta = new Vec2d(0, 0);
 
@@ -41,7 +41,7 @@ namespace SuperBitBros.Entities.EnityController
             if (!doSlide) 
                 delta.X = -movementDelta.X;
 
-            DoGravitationalMovement(delta, ucorrection);
+            DoGravitationalMovement(delta);
         }
 
         public void ToogleSlide()

@@ -13,7 +13,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         private const int CYCLUS_SPEED = 60;
         private const int STATE_COUNT = 13;
 
-        private double lastUpdate = 0;
+        private int lastUpdate = 0;
         private bool direction = true;
         private int state = 0;
 
@@ -43,11 +43,11 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             return new Rect2d(position.X - SHRINK_WIDTH, position.Y, 2 * Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT * 2);
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
-            if (((state == 0 || state == STATE_COUNT - 1) && lastUpdate > CYCLUS_SPEED) || (!(state == 0 || state == STATE_COUNT - 1) && lastUpdate >= UPDATE_SPEED))
+            if (((state == 0 || state == STATE_COUNT - 1) && lastUpdate > CYCLUS_SPEED) || (!(state == 0 || state == STATE_COUNT - 1) && lastUpdate > UPDATE_SPEED))
             {
                 state = state + ((direction) ? (1) : (-1));
                 if (state == 0)
@@ -57,9 +57,9 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
                 texture = Textures.piranhaplant_sheet.GetTextureWrapper(state);
                 height = (Block.BLOCK_HEIGHT * 2.0) * (state * 1.0 / (STATE_COUNT - 1));
-                lastUpdate -= UPDATE_SPEED;
+                lastUpdate = 0;
             }
-            lastUpdate += ucorrection;
+            lastUpdate++;
 
             if (state == 0)
                 testPlayerBlocking();

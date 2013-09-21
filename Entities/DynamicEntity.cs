@@ -31,11 +31,11 @@ namespace SuperBitBros.Entities
             owner = model;
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
-            CallControllerStack(keyboard, ucorrection);
+            CallControllerStack(keyboard);
 
             TestForOutOfMapBounds();
         }
@@ -55,11 +55,11 @@ namespace SuperBitBros.Entities
             return controllerStack.Count > 0;
         }
 
-        private void CallControllerStack(KeyboardDevice keyboard, double ucorrection)
+        private void CallControllerStack(KeyboardDevice keyboard)
         {
             if (controllerStack.Count != 0)
             {
-                controllerStack.Peek().Update(keyboard, ucorrection);
+                controllerStack.Peek().Update(keyboard);
 
                 if (!controllerStack.Peek().IsActive())
                 {

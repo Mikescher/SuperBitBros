@@ -139,17 +139,17 @@ namespace SuperBitBros
             return new List<Block>(blockList);
         }
 
-        public virtual void Update(KeyboardDevice keyboard, double ucorrection)
+        public virtual void Update(KeyboardDevice keyboard)
         {
             BooleanKeySwitch.UpdateAll(keyboard);
 
             foreach (DynamicEntity e in GetCurrentEntityList())
             {
-                e.Update(keyboard, ucorrection);
+                e.Update(keyboard);
             }
             foreach (Block e in GetCurrentBlockList())
             {
-                e.Update(keyboard, ucorrection);
+                e.Update(keyboard);
             }
 
             foreach (DynamicEntity e in killList)
@@ -161,7 +161,7 @@ namespace SuperBitBros
 
             if (HUD != null)
             {
-                HUD.Update(keyboard, ucorrection);
+                HUD.Update(keyboard);
             }
         }
 

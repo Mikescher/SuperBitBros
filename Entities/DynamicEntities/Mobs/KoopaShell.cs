@@ -1,6 +1,7 @@
-﻿using OpenTK.Input;
-using SuperBitBros.Entities.Blocks;
+﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
+using System;
+using OpenTK.Input;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
@@ -11,7 +12,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         public const double KOOPASHELL_ACC = 0.2;
         public const double KOOPASHELL_SPEED = 1;
 
-        private double timeUntilReinc;
+        private int timeUntilReinc;
 
         private bool suppressExplosion = false;
 
@@ -23,21 +24,20 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             height = Block.BLOCK_HEIGHT;
 
             timeUntilReinc = REINCARNATION_TIME;
-
+            
             texture = Textures.texture_koopashell;
 
             AddController(new KoopaShellController(this));
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
-            if (!(controllerStack.Peek() as KoopaShellController).isStill())
+            if (! (controllerStack.Peek() as KoopaShellController).isStill())
                 timeUntilReinc = REINCARNATION_TIME;
 
-            timeUntilReinc -= ucorrection;
-            if (timeUntilReinc <= 0)
+            if (timeUntilReinc-- == 0)
             {
                 suppressExplosion = true;
                 KillLater();

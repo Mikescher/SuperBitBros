@@ -1,9 +1,9 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Particles;
-using SuperBitBros.Entities.EnityController;
 using SuperBitBros.HUD;
 using System;
+using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -22,7 +22,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private static Random random = new Random();
 
-        protected double lifetime = COIN_LIFETIME;
+        protected int lifetime = COIN_LIFETIME;
 
         public CoinEntity()
             : base()
@@ -41,15 +41,13 @@ namespace SuperBitBros.Entities.DynamicEntities
             AddController(new StaticEntityController(this));
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
-            atexture.Update(ucorrection);
+            atexture.Update();
 
-            lifetime -= ucorrection;
-
-            if (lifetime <= 0)
+            if (lifetime-- == 0)
             {
                 KillLater();
                 DoExplosionEffect(COINDEATH_EXPLOSIONFRAGMENTS_X, COINDEATH_EXPLOSIONFRAGMENTS_Y, COINDEATH_EXPLOSIONFRAGMENTS_FORCE);

@@ -33,11 +33,11 @@ namespace SuperBitBros
             LoadMapFromResources();
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
-            base.Update(keyboard, ucorrection);
+            base.Update(keyboard);
 
-            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, ucorrection);
+            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight);
         }
 
         public void SpawnEntityFromMapData(EntityTypeWrapper setype, double x, double y)
@@ -123,7 +123,7 @@ namespace SuperBitBros
             //AFTER MAP GEN
             //#############
 
-            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, 1.0, false);
+            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, false);
             foreach (DynamicEntity e in dynamicEntityList)
             {
                 e.OnAfterMapGen();

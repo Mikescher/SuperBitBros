@@ -19,7 +19,7 @@ namespace SuperBitBros.Entities.EnityController
             //---
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
             Vec2d delta = new Vec2d(0, 0);
 
@@ -59,11 +59,11 @@ namespace SuperBitBros.Entities.EnityController
 
             if (realnext != null && Entity.TestBlocking(realnext, ent))
             {
-                DoGravitationalMovement(delta, ucorrection);
+                DoGravitationalMovement(delta);
             }
             else
             {
-                DoGravitationalMovement(Vec2d.Zero, ucorrection);
+                DoGravitationalMovement(Vec2d.Zero);
             }
         }
 

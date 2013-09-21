@@ -28,7 +28,7 @@ namespace SuperBitBros.Entities.EnityController
             this.direction = initDirection;
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
             PipeZone zone = GetUnderlyingZone();
 
@@ -48,18 +48,18 @@ namespace SuperBitBros.Entities.EnityController
             }
 
             Vec2d delta = PipeZone.GetVectorForDirection(direction);
-            delta.SetLength(speed * ucorrection);
+            delta.SetLength(speed);
 
             if (direction == PipeDirection.SOUTH || direction == PipeDirection.NORTH)
             {
                 double corr = GetXCorrection();
-                delta.X += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR * ucorrection)) * Math.Sign(corr);
+                delta.X += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR)) * Math.Sign(corr);
             }
 
             if (direction == PipeDirection.EAST || direction == PipeDirection.WEST)
             {
                 double corr = GetYCorrection();
-                delta.Y += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR * ucorrection)) * Math.Sign(corr);
+                delta.Y += Math.Min(Math.Abs(corr), Math.Abs(speed * PIPECORRECTION_SPEEDFACTOR)) * Math.Sign(corr);
             }
 
             ent.position += delta;

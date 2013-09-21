@@ -16,7 +16,7 @@ namespace SuperBitBros.Entities.EnityController
 
         }
 
-        public override void Update(KeyboardDevice keyboard, double ucorrection)
+        public override void Update(KeyboardDevice keyboard)
         {
             ent.DoCollisions();
         }

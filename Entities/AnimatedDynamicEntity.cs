@@ -12,9 +12,9 @@ namespace SuperBitBros.Entities
             atexture = new AnimatedTexture();
         }
 
-        public void UpdateAnimation(double ucorrection)
+        public void UpdateAnimation()
         {
-            atexture.Update(ucorrection);
+            atexture.Update();
         }
 
         public override OGLTexture GetCurrentTexture()
