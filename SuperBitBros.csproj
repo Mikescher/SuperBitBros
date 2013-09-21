@@ -117,8 +117,10 @@
     <Compile Include="OpenGL\AvgDurationWatch.cs" />
     <Compile Include="OpenGL\BooleanKeySwitch.cs" />
     <Compile Include="OpenGL\OGLTextureFragment.cs" />
+    <Compile Include="ResourceAccessor.cs" />
     <Compile Include="StaticStopWatch.cs" />
     <Compile Include="Triggers\DeathZone.cs" />
+    <Compile Include="Triggers\LevelWrapZone.cs" />
     <Compile Include="Triggers\PipeZones\EnterAnyPipeZone.cs" />
     <Compile Include="Triggers\PipeZones\MoveAnyPipeZone.cs" />
     <Compile Include="Triggers\PipeZones\EnterNorthSouthPipeZone.cs" />

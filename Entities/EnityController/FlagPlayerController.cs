@@ -1,8 +1,7 @@
-﻿using System;
-using OpenTK.Input;
-using SuperBitBros.Entities.Blocks;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
 
 namespace SuperBitBros.Entities.EnityController
 {
@@ -41,21 +40,10 @@ namespace SuperBitBros.Entities.EnityController
 
                 case MovementSection.WALK:
                     DoGravitationalMovement(new Vec2d(SPEED_WALK - movementDelta.X, 0));
-                    TestFinish();
                     break;
                 default:
                     ent.DoCollisions();
                     break;
-            }
-        }
-
-        private void TestFinish()
-        {
-            Vec2i blockPos = (Vec2i)(ent.GetMiddle() / Block.BLOCK_SIZE);
-
-            if (owner.GetBlock(blockPos) is CastleBlock)
-            {
-                mode = MovementSection.FINSIHED;
             }
         }
 

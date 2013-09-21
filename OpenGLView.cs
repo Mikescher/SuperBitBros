@@ -28,7 +28,7 @@ namespace SuperBitBros
         public OpenGLView(GameModel model)
         {
             window = new MyGameWindow(this, INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT);
-            this.model = model;
+            SetModel(model);
 
             window.RenderFrame += new EventHandler<FrameEventArgs>(OnRender);
             window.UpdateFrame += new EventHandler<FrameEventArgs>(OnUpdate);
@@ -36,6 +36,12 @@ namespace SuperBitBros
             window.Load += new EventHandler<EventArgs>(OnLoad);
 
             OnInit();
+        }
+
+        private void SetModel(GameModel w)
+        {
+            this.model = w;
+            model.ownerView = this;
         }
 
         public virtual void Start(int fps, int ups)
@@ -293,6 +299,13 @@ namespace SuperBitBros
             GL.Vertex3(end.X, end.Y, distance);
             GL.Color3(1.0, 1.0, 1.0);
             GL.End();
+        }
+
+        public void ChangeWorld(int world, int level)
+        {
+            GameWorld g;
+            SetModel(g = new GameWorld(world, level));
+            g.Init();
         }
     }
 }

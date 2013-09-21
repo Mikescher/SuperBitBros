@@ -6,25 +6,31 @@ using SuperBitBros.HUD;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
-using SuperBitBros.Properties;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
 using System;
+using System.Drawing;
 
 namespace SuperBitBros
 {
     public class GameWorld : GameModel
     {
-        private BooleanKeySwitch debugMapExplosionSwitch = new BooleanKeySwitch(false, Key.F6, KeyTriggerMode.FLICKER_DOWN);
+        private const int LEVEL_END_ANIMATION_DURATION = 5 * 60;
+
+        private BooleanKeySwitch debugMapExplosionSwitch = new BooleanKeySwitch(false, Key.F6, KeyTriggerMode.COOLDOWN_DOWN);
 
         public OffsetCalculator offset = new OffsetCalculator();
 
         public Player player;
 
-        public GameWorld()
+        private int mapWorld;
+        private int mapLevel;
+
+        public GameWorld(int world, int level)
             : base()
         {
-            //
+            mapWorld = world;
+            mapLevel = level;
         }
 
         public override void Init()
@@ -42,7 +48,7 @@ namespace SuperBitBros
             offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight);
 
             if (debugMapExplosionSwitch.Value)
-                Explode();
+                StartChangeWorld(0, 0);
         }
 
         public void SpawnEntityFromMapData(EntityTypeWrapper setype, double x, double y)
@@ -53,7 +59,7 @@ namespace SuperBitBros
             AddEntity(setype.Get(), px, py);
         }
 
-        public void AddTriggerFromMapData(AddTriggerType triggertype, int x, int y)
+        public void AddTriggerFromMapData(AddTriggerType triggertype, Color c, int x, int y)
         {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
@@ -69,6 +75,10 @@ namespace SuperBitBros
             {
                 AddTrigger(new DeathZone(new Vec2i(x, y)), x, y);
             }
+            else if (triggertype == AddTriggerType.LEVEL_WRAP)
+            {
+                AddTrigger(new LevelWrapZone(new Vec2i(x, y), c.B), x, y);
+            }
         }
 
         public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y)
@@ -81,7 +91,7 @@ namespace SuperBitBros
 
         public void LoadMapFromResources()
         {
-            ImageMapParser parser = new ImageMapParser(new OpenRasterImage(Resources.map_01_02));
+            ImageMapParser parser = new ImageMapParser(new OpenRasterImage(ResourceAccessor.GetMap(mapWorld, mapLevel)));
             setSize(parser.GetWidth(), parser.GetHeight());
 
             for (int x = 0; x < parser.GetWidth(); x++)
@@ -111,7 +121,7 @@ namespace SuperBitBros
                     if (att == AddTriggerType.UNKNOWN_TRIGGER)
                         Console.Error.WriteLine("Could not parse Trigger-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y);
                     else if (att != AddTriggerType.NO_TRIGGER)
-                        AddTriggerFromMapData(att, x, y);
+                        AddTriggerFromMapData(att, parser.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y);
 
                     if (pzt == null)
                     { }  // No Zone
@@ -157,11 +167,44 @@ namespace SuperBitBros
                     if (b != null)
                     {
                         AddDelayedAction(
-                            (int)(r.NextDouble() * 60 * 5),
+                            (int)(r.NextDouble() * LEVEL_END_ANIMATION_DURATION),
                             (() => b.Explode(3, 3, 2.5 + r.NextDouble() * 2)));
                     }
                 }
             }
+        }
+
+        public void StartChangeWorld(int target_world, int target_level)
+        {
+            player.MakeStatic();
+
+            for (int i = 0; i < dynamicEntityList.Count; i++)
+            {
+                if (dynamicEntityList[i] != player)
+                    dynamicEntityList[i].KillLater();
+            }
+
+            Explode();
+
+            AddDelayedAction(
+                (int)(LEVEL_END_ANIMATION_DURATION + 30),
+                (() =>
+                    {
+                        player.Explode();
+                        player.KillLater();
+                    }
+                ));
+
+            AddDelayedAction(
+                            (int)(LEVEL_END_ANIMATION_DURATION + 120),
+                            (() => ChangeWorld(target_world, target_level)));
+        }
+
+        public void ChangeWorld(int world, int level)
+        {
+            Console.Out.WriteLine("Change World to {0}:{1}", world, level);
+
+            ownerView.ChangeWorld(world, level);
         }
     }
 }

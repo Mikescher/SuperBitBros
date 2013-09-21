@@ -1,15 +1,18 @@
-﻿using System;
+﻿using OpenTK.Input;
+using System;
 using System.Collections.Generic;
-using OpenTK.Input;
 
 namespace SuperBitBros.OpenGL
 {
-    public enum KeyTriggerMode { ON_DOWN, ON_UP, WHILE_DOWN, WHILE_UP, FLICKER_DOWN, FLICKER_UP, NEVER, INSTANT }
+    public enum KeyTriggerMode { ON_DOWN, ON_UP, WHILE_DOWN, WHILE_UP, FLICKER_DOWN, FLICKER_UP, COOLDOWN_DOWN, COOLDOWN_UP, NEVER, INSTANT }
 
     public class BooleanKeySwitch
     {
+        private const int COOLDOWNTIME = 240;
+
         private static List<BooleanKeySwitch> switchList = new List<BooleanKeySwitch>();
 
+        private int timeSinceLastSwitch = 10000;
 
         private bool _Value;
 
@@ -22,9 +25,11 @@ namespace SuperBitBros.OpenGL
             private set
             {
                 if (_Value ^ value && value)
-                    if (TurnOnEvent != null) TurnOnEvent();
+                    if (TurnOnEvent != null)
+                        TurnOnEvent();
                 if (_Value ^ value && !value)
-                    if (TurnOnEvent != null) TurnOffEvent();
+                    if (TurnOnEvent != null)
+                        TurnOffEvent();
                 _Value = value;
             }
         }
@@ -63,16 +68,22 @@ namespace SuperBitBros.OpenGL
 
         public void Switch()
         {
+            timeSinceLastSwitch = 0;
             Value = !Value;
         }
 
         public void Turn(bool state)
         {
-            Value = state;
+            if (Value ^ state)
+            {
+                timeSinceLastSwitch = 0;
+                Value = state;
+            }
         }
 
-        public static void UpdateAll(KeyboardDevice keyboard) {
-            switchList.ForEach( x => x.Update(keyboard));
+        public static void UpdateAll(KeyboardDevice keyboard)
+        {
+            switchList.ForEach(x => x.Update(keyboard));
         }
 
         private void Update(KeyboardDevice keyboard)
@@ -82,11 +93,13 @@ namespace SuperBitBros.OpenGL
             switch (mode)
             {
                 case KeyTriggerMode.ON_DOWN:
-                    if (!lastState && newstate) Switch();
+                    if (!lastState && newstate)
+                        Switch();
                     break;
 
                 case KeyTriggerMode.ON_UP:
-                    if (lastState && !newstate) Switch();
+                    if (lastState && !newstate)
+                        Switch();
                     break;
 
                 case KeyTriggerMode.WHILE_DOWN:
@@ -105,15 +118,25 @@ namespace SuperBitBros.OpenGL
                     Turn(lastState && !newstate);
                     break;
 
+                case KeyTriggerMode.COOLDOWN_DOWN:
+                    Turn(!lastState && newstate && timeSinceLastSwitch > COOLDOWNTIME);
+                    break;
+
+                case KeyTriggerMode.COOLDOWN_UP:
+                    Turn(lastState && !newstate && timeSinceLastSwitch > COOLDOWNTIME);
+                    break;
+
                 case KeyTriggerMode.NEVER:
                     //never
                     break;
 
                 case KeyTriggerMode.INSTANT:
-                    if (newstate) Switch();
+                    if (newstate)
+                        Switch();
                     break;
             }
 
+            timeSinceLastSwitch++;
             lastState = newstate;
         }
     }

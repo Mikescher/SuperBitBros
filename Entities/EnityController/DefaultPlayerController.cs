@@ -62,13 +62,13 @@ namespace SuperBitBros.Entities.EnityController
             {
                 delta = Vec2d.Zero;
                 if (keyboard[Key.Left])
-                    delta.X -= PLAYER_SPEED_MAX * 2;
+                    delta.X -= PLAYER_SPEED_MAX * 3;
                 if (keyboard[Key.Right])
-                    delta.X += PLAYER_SPEED_MAX * 2;
+                    delta.X += PLAYER_SPEED_MAX * 3;
                 if (keyboard[Key.Space] || keyboard[Key.Up])
-                    delta.Y += PLAYER_SPEED_MAX;
+                    delta.Y += PLAYER_SPEED_MAX * 2;
                 if (keyboard[Key.Down])
-                    delta.Y -= PLAYER_SPEED_MAX;
+                    delta.Y -= PLAYER_SPEED_MAX * 2;
                 MoveBy(delta, !debugFlyoverrideSwitch.Value, !debugFlyoverrideSwitch.Value);
             }
             else

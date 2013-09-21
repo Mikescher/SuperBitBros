@@ -185,7 +185,7 @@
         public void TrimWest(int len)
         {
             position.X += len;
-            Height -= len;
+            Width -= len;
         }
 
         public void TrimHorizontal(int len)

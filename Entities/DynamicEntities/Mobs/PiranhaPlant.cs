@@ -10,18 +10,21 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
     {
         private const double SHRINK_WIDTH = 0.1;
         private const int UPDATE_SPEED = 5;
+        private const int FAST_DOWN_SPEED = 1;
         private const int CYCLUS_SPEED = 60;
         private const int STATE_COUNT = 13;
 
         private int lastUpdate = 0;
         private bool direction = true;
-        private int state = 0;
+        public int state { get; private set; }
 
         private Rect2d pipeUnder = null;
 
         public PiranhaPlant()
             : base()
         {
+            state = 0;
+
             distance = Entity.DISTANCE_MOBS;
             width = 2 * Block.BLOCK_WIDTH;
             height = 0;
@@ -47,7 +50,12 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             base.Update(keyboard);
 
-            if (((state == 0 || state == STATE_COUNT - 1) && lastUpdate > CYCLUS_SPEED) || (!(state == 0 || state == STATE_COUNT - 1) && lastUpdate > UPDATE_SPEED))
+            if (state == 0 && (owner as GameWorld).player.IsInPipe())
+            {
+                lastUpdate = 0;
+            }
+
+            if (((state == 0 || state == STATE_COUNT - 1) && lastUpdate > CYCLUS_SPEED) || (!(state == 0 || state == STATE_COUNT - 1) && lastUpdate > UPDATE_SPEED) || ((owner as GameWorld).player.IsInPipe() && lastUpdate > FAST_DOWN_SPEED))
             {
                 state = state + ((direction) ? (1) : (-1));
                 if (state == 0)

@@ -156,6 +156,8 @@ namespace SuperBitBros.Entities.DynamicEntities
                 DefaultPlayerController con = controllerStack.Peek() as DefaultPlayerController;
                 if (con != null)
                 {
+                    if (m is PiranhaPlant && (m as PiranhaPlant).state == 0)
+                        return;
                     con.DoMobKillPushback();
                 }
             }
@@ -175,6 +177,16 @@ namespace SuperBitBros.Entities.DynamicEntities
 
             //Explode();
             //KillLater();
+        }
+
+        public bool IsInPipe()
+        {
+            return HasController() && controllerStack.Peek() is PipePlayerController;
+        }
+
+        public void MakeStatic()
+        {
+            AddController(new StaticEntityController(this));
         }
     }
 }

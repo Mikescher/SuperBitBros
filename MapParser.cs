@@ -14,7 +14,7 @@ namespace SuperBitBros
 {
     public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN, SPAWN };
 
-    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION };
+    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION, LEVEL_WRAP };
 
     public class ImageMapParser
     {
@@ -64,6 +64,11 @@ namespace SuperBitBros
         public AddTriggerType GetTrigger(int x, int y)
         {
             return FindTriggerType(map.GetColor(LAYER_TRIGGER, x, y));
+        }
+
+        public Color GetColor(string layer, int x, int y)
+        {
+            return map.GetColor(layer, x, y);
         }
 
         public PipeZoneTypeWrapper GetPipeZone(int x, int y)
@@ -129,6 +134,8 @@ namespace SuperBitBros
                 return AddTriggerType.PLAYER_SPAWN_POSITION;
             else if (c == DeathZone.GetColor())
                 return AddTriggerType.DEATH_ZONE;
+            else if (c.R == LevelWrapZone.GetColor().R && c.G == LevelWrapZone.GetColor().G)
+                return AddTriggerType.LEVEL_WRAP;
             else
                 return AddTriggerType.UNKNOWN_TRIGGER;
         }

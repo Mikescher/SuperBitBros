@@ -35,6 +35,8 @@ namespace SuperBitBros
         public int viewPortWidth = OpenGLView.INIT_RESOLUTION_WIDTH;
         public int viewPortHeight = OpenGLView.INIT_RESOLUTION_HEIGHT;
 
+        public OpenGLView ownerView;
+
         public HUDModel HUD = null;
 
         public GameModel()
