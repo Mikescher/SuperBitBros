@@ -67,6 +67,35 @@ namespace SuperBitBros.Entities.Blocks
 
         public abstract Color GetBlockColor();
 
+        public void DestroyExplode()
+        {
+            int fragmentsX = 4;
+            int fragmentsY = 4;
+            double force = 40.0;
+
+            double forceMult = force / (Math.Sqrt(width * width + height * height) / 2.0);
+
+            double w = width / fragmentsX;
+            double h = height / fragmentsY;
+
+            for (int y = 0; y < fragmentsY; y++)
+            {
+                for (int x = 0; x < fragmentsX; x++)
+                {
+                    owner.AddEntity(
+                        new BlockDestroyParticle(
+                            this,
+                            x,
+                            y,
+                            fragmentsX,
+                            fragmentsY,
+                            forceMult),
+                        position.X + x * w,
+                        position.Y + y * h);
+                }
+            }
+        }
+
         public void Explode(int fragmentsX, int fragmentsY, double force)
         {
             double forceMult = force / (Math.Sqrt(width * width + height * height) / 2.0);

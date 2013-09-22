@@ -2,6 +2,7 @@
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.Entities.EnityController;
+using SuperBitBros.MarioPower;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
@@ -15,10 +16,12 @@ namespace SuperBitBros.Entities.DynamicEntities
 
     public class Player : AnimatedDynamicEntity
     {
-        public const double PLAYER_SCALE = 0.9;
+        private const int INVINCIBLE_TIME = 45;
+
+        public const double PLAYER_SCALE = 1.25;
 
         public const int PLAYER_WIDTH = Block.BLOCK_WIDTH;
-        public const int PLAYER_HEIGHT = Block.BLOCK_HEIGHT;
+        public const int PLAYER_HEIGHT = Block.BLOCK_WIDTH;
 
         private const int PLAYER_EXPLOSIONFRAGMENTS_X = 8;
         private const int PLAYER_EXPLOSIONFRAGMENTS_Y = 8;
@@ -28,6 +31,10 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public Direction direction;
 
+        public AbstractMarioPower power { get; private set; }
+
+        private int invincTime = 0;
+
         public Player()
             : base()
         {
@@ -36,20 +43,7 @@ namespace SuperBitBros.Entities.DynamicEntities
             width = PLAYER_WIDTH * PLAYER_SCALE;
             height = PLAYER_HEIGHT * PLAYER_SCALE;
 
-            atexture.animation_speed = 5;
-
-            atexture.Add(0, Textures.mario_small_sheet.GetTextureWrapper(2, 0));
-            atexture.Add(0, Textures.mario_small_sheet.GetTextureWrapper(3, 0));
-            atexture.Add(0, Textures.mario_small_sheet.GetTextureWrapper(4, 0));
-
-            atexture.Add(1, Textures.mario_small_sheet.GetTextureWrapper(2, 1));
-            atexture.Add(1, Textures.mario_small_sheet.GetTextureWrapper(3, 1));
-            atexture.Add(1, Textures.mario_small_sheet.GetTextureWrapper(4, 1));
-
-            atexture.Add(2, Textures.mario_small_sheet.GetTextureWrapper(5, 0));
-            atexture.Add(2, Textures.mario_small_sheet.GetTextureWrapper(5, 1));
-            atexture.Add(2, Textures.mario_small_sheet.GetTextureWrapper(0, 0));
-            atexture.Add(2, Textures.mario_small_sheet.GetTextureWrapper(0, 1));
+            ChangePower(new StandardMarioPower());
 
             AddController(new DefaultPlayerController(this));
         }
@@ -76,6 +70,9 @@ namespace SuperBitBros.Entities.DynamicEntities
             }
 
             if (debugExplosionSwitch.Value) { Explode(); KillLater(); }
+
+            if (invincTime > 0)
+                invincTime--;
 
             UpdateTexture();
         }
@@ -167,16 +164,32 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             Console.Out.WriteLine("Death by Mob: " + m.GetType().Name);
 
-            //Explode();
-            //KillLater();
+            DoDeath();
         }
 
         public void DoDeath(Trigger t)
         {
             Console.Out.WriteLine("Death by Zone: " + t.GetType().Name);
 
-            //Explode();
-            //KillLater();
+            DoDeath();
+        }
+
+        private void DoDeath()
+        {
+            if (invincTime == 0 || !Program.debugViewSwitch.Value)
+            {
+                AbstractMarioPower sub = power.GetSubPower();
+                if (sub == null)
+                {
+                    Explode();
+                    KillLater();
+                }
+                else
+                {
+                    ChangePower(sub);
+                    invincTime = INVINCIBLE_TIME;
+                }
+            }
         }
 
         public bool IsInPipe()
@@ -187,6 +200,24 @@ namespace SuperBitBros.Entities.DynamicEntities
         public void MakeStatic()
         {
             AddController(new StaticEntityController(this));
+        }
+
+        public void ChangePower(AbstractMarioPower p)
+        {
+            power = p;
+            height = PLAYER_HEIGHT * PLAYER_SCALE * p.GetHeightMultiplier();
+            atexture = p.GetTexture();
+        }
+
+        public void growToBigPlayer()
+        {
+            if (power is StandardMarioPower)
+                ChangePower(new BigMarioPower());
+        }
+
+        public bool IsBig()
+        {
+            return !(power is StandardMarioPower);
         }
     }
 }

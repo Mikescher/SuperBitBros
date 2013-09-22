@@ -2,11 +2,11 @@
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class GroundAirBlock : StandardAirBlock
+    public class DarkAirBlock : StandardAirBlock
     {
         public new static Color color = Color.FromArgb(192, 192, 192);
 
-        public GroundAirBlock()
+        public DarkAirBlock()
             : base()
         {
             texture = Textures.texture_ground_air;

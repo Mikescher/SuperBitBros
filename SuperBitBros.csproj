@@ -73,6 +73,8 @@
     <Compile Include="Entities\Blocks\Block.cs" />
     <Compile Include="Entities\Blocks\CastleBlock.cs" />
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\StandardCeilingBlock.cs" />
+    <Compile Include="Entities\Blocks\MushroomBoxBlock.cs" />
     <Compile Include="Entities\Blocks\CrazyCoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\DarkCeilingBlock.cs" />
     <Compile Include="Entities\Blocks\DarkGroundBlock.cs" />
@@ -84,8 +86,10 @@
     <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\KoopaShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Koopa.cs" />
+    <Compile Include="Entities\DynamicEntities\MushroomEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\CoinExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\BlockExplosionParticle.cs" />
+    <Compile Include="Entities\DynamicEntities\Particles\BlockDestroyParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\FragmentParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
     <Compile Include="Entities\EnityController\KoopaShellController.cs" />
+    <Compile Include="Entities\EnityController\MushroomController.cs" />
     <Compile Include="Entities\EnityController\SimpleExplosionController.cs" />
     <Compile Include="Entities\EnityController\StaticEntityController.cs" />
     <Compile Include="Entities\EntityTypeWrapper.cs" />
@@ -113,6 +118,9 @@
     <Compile Include="HUD\HUDNumberCounter.cs" />
     <Compile Include="HUD\HUDNumberDisplay.cs" />
     <Compile Include="HUD\StandardGameHUD.cs" />
+    <Compile Include="MarioPower\BigMarioPower.cs" />
+    <Compile Include="MarioPower\AbstractMarioPower.cs" />
+    <Compile Include="MarioPower\StandardMarioPower.cs" />
     <Compile Include="OffsetCalculator.cs" />
     <Compile Include="OpenGL\AvgDurationWatch.cs" />
     <Compile Include="OpenGL\BooleanKeySwitch.cs" />
@@ -148,7 +156,7 @@
     <Compile Include="Entities\DynamicEntities\GravityCoinEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Mob.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\PiranhaPlant.cs" />
-    <Compile Include="Entities\Blocks\GroundAirBlock.cs" />
+    <Compile Include="Entities\Blocks\DarkAirBlock.cs" />
     <Compile Include="GameModel.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Entities\Blocks\StandardGroundBlock.cs" />
@@ -215,7 +223,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\mario_big.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

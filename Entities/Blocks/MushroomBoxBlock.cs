@@ -1,16 +1,15 @@
 ﻿using SuperBitBros.Entities.DynamicEntities;
-using SuperBitBros.OpenGL.OGLMath;
 using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class CoinBoxBlock : Block
+    public class MushroomBoxBlock : Block
     {
         private const double COIN_SPAWN_FORCE = 3;
 
-        public static Color color = Color.FromArgb(0, 0, 255);
+        public static Color color = Color.FromArgb(0, 128, 128);
 
-        public CoinBoxBlock()
+        public MushroomBoxBlock()
             : base()
         {
             texture = Textures.texture_coinblock_full;
@@ -25,7 +24,7 @@ namespace SuperBitBros.Entities.Blocks
         {
             if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0)
             {
-                owner.AddEntity(new GravityCoinEntity(new Vec2d(0, COIN_SPAWN_FORCE)), GetTopLeft().X, GetTopLeft().Y);
+                owner.AddEntity(new MushroomEntity(), GetTopLeft().X, GetTopLeft().Y);
                 ((GameWorld)owner).ReplaceBlock(this, new EmptyBoxBlock());
             }
         }

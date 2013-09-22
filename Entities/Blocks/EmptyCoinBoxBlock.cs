@@ -2,11 +2,11 @@
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class EmptyCoinBoxBlock : Block
+    public class EmptyBoxBlock : Block
     {
         public static Color color = Color.FromArgb(255, 255, 0);
 
-        public EmptyCoinBoxBlock()
+        public EmptyBoxBlock()
             : base()
         {
             texture = Textures.texture_coinblock_empty;

@@ -3,14 +3,14 @@ using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class DarkCeilingBlock : StandardCeilingBlock
+    public class StandardCeilingBlock : Block
     {
-        public new static Color color = Color.FromArgb(64, 128, 64);
+        public static Color color = Color.FromArgb(255, 128, 0);
 
-        public DarkCeilingBlock()
+        public StandardCeilingBlock()
             : base()
         {
-            texture = Textures.texture_darkCeiling;
+            texture = Textures.texture_ceiling;
         }
 
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
@@ -18,11 +18,11 @@ namespace SuperBitBros.Entities.Blocks
             if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && (collidingEntity as Player).IsBig() && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0)
             {
                 DestroyExplode();
-                ((GameWorld)owner).ReplaceBlock(this, new DarkAirBlock());
+                ((GameWorld)owner).ReplaceBlock(this, new StandardAirBlock());
             }
         }
 
-        public new static Color GetColor()
+        public static Color GetColor()
         {
             return color;
         }

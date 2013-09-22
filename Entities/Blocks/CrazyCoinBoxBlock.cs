@@ -57,7 +57,7 @@ namespace SuperBitBros.Entities.Blocks
                 if (timeUntilDried <= 0)
                 {
                     isActive = false;
-                    ((GameWorld)owner).ReplaceBlock(this, new EmptyCoinBoxBlock());
+                    ((GameWorld)owner).ReplaceBlock(this, new EmptyBoxBlock());
                 }
             }
         }

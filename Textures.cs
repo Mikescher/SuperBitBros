@@ -6,15 +6,20 @@ namespace SuperBitBros
     public class Textures
     {
         public static OGLTextureSheet block_textures;
-        public static OGLTextureSheet mario_small_sheet;
-        public static OGLTextureSheet piranhaplant_sheet;
         public static OGLTextureSheet number_sheet;
+
+        public static OGLTextureSheet mario_small_sheet;
+        public static OGLTextureSheet mario_big_sheet;
+
+        public static OGLTextureSheet piranhaplant_sheet;
+
 
         public static OGLTexture[] array_coin;
 
         public static OGLTexture texture_ground;
         public static OGLTexture texture_air;
         public static OGLTexture texture_ground_air;
+        public static OGLTexture texture_ceiling;
         public static OGLTexture texture_coinblock_full;
         public static OGLTexture texture_coinblock_empty;
         public static OGLTexture texture_hill;
@@ -30,6 +35,8 @@ namespace SuperBitBros
         public static OGLTexture texture_coin_2;
         public static OGLTexture texture_coin_3;
 
+        public static OGLTexture texture_mushroom;
+
         public static OGLTexture texture_goomba;
         public static OGLTexture texture_goomba_dead;
         public static OGLTexture texture_koopa;
@@ -38,9 +45,11 @@ namespace SuperBitBros
         public static void Load()
         {
             block_textures = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 80, 4);
-            mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
             piranhaplant_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.plant, 16, 1);
             number_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.number_raster, 16, 4);
+
+            mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
+            mario_big_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_big, 16, 2);
 
             texture_ground = block_textures.GetTextureWrapper(35);
             texture_air = block_textures.GetTextureWrapper(0);
@@ -51,6 +60,7 @@ namespace SuperBitBros
             texture_pipe = block_textures.GetTextureWrapper(72);
             texture_castle = block_textures.GetTextureWrapper(177);
             texture_flag = block_textures.GetTextureWrapper(179);
+            texture_ceiling = block_textures.GetTextureWrapper(256);
 
             texture_darkGround = block_textures.GetTextureWrapper(178);
             texture_darkCeiling = block_textures.GetTextureWrapper(4);
@@ -60,6 +70,8 @@ namespace SuperBitBros
             texture_coin_1 = block_textures.GetTextureWrapper(48);
             texture_coin_2 = block_textures.GetTextureWrapper(41);
             texture_coin_3 = block_textures.GetTextureWrapper(124);
+
+            texture_mushroom = block_textures.GetTextureWrapper(6);
 
             texture_goomba = block_textures.GetTextureWrapper(110);
             texture_goomba_dead = block_textures.GetTextureWrapper(95);
