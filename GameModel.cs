@@ -2,6 +2,7 @@
 using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.HUD;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
@@ -46,6 +47,8 @@ namespace SuperBitBros
 
             mapRealWidth = 0;
             mapRealHeight = 0;
+
+            Particle.GlobalParticleCount = 0;
 
             dynamicEntityList = new List<DynamicEntity>();
             blockList = new List<Block>();

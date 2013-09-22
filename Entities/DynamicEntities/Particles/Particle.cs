@@ -15,7 +15,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
             }
         }
 
-        protected static int GlobalParticleCount = 0;
+        public static int GlobalParticleCount = 0;
 
         private int lifetime = -1;
         private int fadetime_max = 0;

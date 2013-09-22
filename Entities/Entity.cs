@@ -16,10 +16,10 @@ namespace SuperBitBros.Entities
 
         public const int DISTANCE_BLOCKS = 38;
         public const int DISTANCE_CORPSE = 34;
-        public const int DISTANCE_MOBS = 30;
+        public const int DISTANCE_POWERUPS = 30;
         public const int DISTANCE_STRUCTURES = 26;
+        public const int DISTANCE_MOBS = 24;
         public const int DISTANCE_PLAYER = 22;
-        public const int DISTANCE_POWERUPS = 18;
         public const int DISTANCE_PARTICLES = 14;
         public const int DISTANCE_HUD = 10;
 
@@ -112,9 +112,9 @@ namespace SuperBitBros.Entities
         public static bool TestBlocking(Entity e1, Entity e2)
         {
             if (e1 is DynamicEntity && e2 is DynamicEntity) // 2 DynEntities
-                return e1.IsBlockingOther(e1) && e2.IsBlockingOther(e2);
+                return e1.IsBlockingOther(e2) && e2.IsBlockingOther(e1);
             else if (e1 is Block) // Der Block zählt
-                return e1.IsBlockingOther(e1);
+                return e1.IsBlockingOther(e2);
             else if (e2 is Block) // Der Block zählt
                 return e2.IsBlockingOther(e1);
             else // Wad Wad Wad ???

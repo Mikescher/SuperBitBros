@@ -33,6 +33,7 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_COIN = Color.FromArgb(100, 200, 100);
         private static readonly Color COL_SPAWN_FLAG = Color.FromArgb(0, 255, 255);
         private static readonly Color COL_SPAWN_KOOPA = Color.FromArgb(0, 192, 128);
+        private static readonly Color COL_SPAWN_PARATROOPA = Color.FromArgb(0, 0, 255);
 
         public readonly OpenRasterImage map;
 
@@ -78,56 +79,36 @@ namespace SuperBitBros
 
         private Block FindBlock(Color c)
         {
-            if (c == StandardGroundBlock.GetColor())
-                return new StandardGroundBlock();
-            else if (c == DarkGroundBlock.GetColor())
-                return new DarkGroundBlock();
-            else if (c == StandardAirBlock.GetColor())
-                return new StandardAirBlock();
-            else if (c == DarkAirBlock.GetColor())
-                return new DarkAirBlock();
-            else if (c == CoinBoxBlock.GetColor())
-                return new CoinBoxBlock();
-            else if (c == MushroomBoxBlock.GetColor())
-                return new MushroomBoxBlock();
-            else if (c == EmptyBoxBlock.GetColor())
-                return new EmptyBoxBlock();
-            else if (c == StandardHillBlock.GetColor())
-                return new StandardHillBlock();
-            else if (c == DarkHillBlock.GetColor())
-                return new DarkHillBlock();
-            else if (c == PipeBlock.GetColor())
-                return new PipeBlock();
-            else if (c == CastleBlock.GetColor())
-                return new CastleBlock();
-            else if (c == CrazyCoinBoxBlock.GetColor())
-                return new CrazyCoinBoxBlock();
-            else if (c == EndlessCrazyCoinBoxBlock.GetColor())
-                return new EndlessCrazyCoinBoxBlock();
-            else if (c == StandardCeilingBlock.GetColor())
-                return new StandardCeilingBlock();
-            else if (c == DarkCeilingBlock.GetColor())
-                return new DarkCeilingBlock();
-            else
-                return null;
+            if (c == StandardGroundBlock.GetColor()) { return new StandardGroundBlock(); }
+            else if (c == DarkGroundBlock.GetColor()) { return new DarkGroundBlock(); }
+            else if (c == StandardAirBlock.GetColor()) { return new StandardAirBlock(); }
+            else if (c == DarkAirBlock.GetColor()) { return new DarkAirBlock(); }
+            else if (c == CoinBoxBlock.GetColor()) { return new CoinBoxBlock(); }
+            else if (c == MushroomBoxBlock.GetColor()) { return new MushroomBoxBlock(); }
+            else if (c == EmptyBoxBlock.GetColor()) { return new EmptyBoxBlock(); }
+            else if (c == StandardHillBlock.GetColor()) { return new StandardHillBlock(); }
+            else if (c == DarkHillBlock.GetColor()) { return new DarkHillBlock(); }
+            else if (c == PipeBlock.GetColor()) { return new PipeBlock(); }
+            else if (c == CastleBlock.GetColor()) { return new CastleBlock(); }
+            else if (c == CrazyCoinBoxBlock.GetColor()) { return new CrazyCoinBoxBlock(); }
+            else if (c == EndlessCrazyCoinBoxBlock.GetColor()) { return new EndlessCrazyCoinBoxBlock(); }
+            else if (c == StandardCeilingBlock.GetColor()) { return new StandardCeilingBlock(); }
+            else if (c == DarkCeilingBlock.GetColor()) { return new DarkCeilingBlock(); }
+            else if (c == StandardPillarBlock.GetColor()) { return new StandardPillarBlock(); }
+            else if (c == MushroomPlatformBlock.GetColor()) { return new MushroomPlatformBlock(); }
+            else { return null; }
         }
 
         private EntityTypeWrapper FindSpawnEntityType(Color c)
         {
-            if (c.A != 255)
-                return null;
-            else if (c == COL_SPAWN_GOOMBA)
-                return new EntityTypeWrapper(typeof(Goomba));
-            else if (c == COL_SPAWN_PIRANHAPLANT)
-                return new EntityTypeWrapper(typeof(PiranhaPlant));
-            else if (c == COL_SPAWN_COIN)
-                return new EntityTypeWrapper(typeof(PersistentCoinEntity));
-            else if (c == COL_SPAWN_FLAG)
-                return new EntityTypeWrapper(typeof(FlagEntity));
-            else if (c == COL_SPAWN_KOOPA)
-                return new EntityTypeWrapper(typeof(Koopa));
-            else
-                return new EntityTypeWrapper(null);
+            if (c.A != 255) { return null; }
+            else if (c == COL_SPAWN_GOOMBA) { return new EntityTypeWrapper(typeof(Goomba)); }
+            else if (c == COL_SPAWN_PIRANHAPLANT) { return new EntityTypeWrapper(typeof(PiranhaPlant)); }
+            else if (c == COL_SPAWN_COIN) { return new EntityTypeWrapper(typeof(PersistentCoinEntity)); }
+            else if (c == COL_SPAWN_FLAG) { return new EntityTypeWrapper(typeof(FlagEntity)); }
+            else if (c == COL_SPAWN_KOOPA) { return new EntityTypeWrapper(typeof(Koopa)); }
+            else if (c == COL_SPAWN_PARATROOPA) { return new EntityTypeWrapper(typeof(Paratroopa)); }
+            else { return new EntityTypeWrapper(null); }
         }
 
         private AddTriggerType FindTriggerType(Color c)
@@ -149,40 +130,25 @@ namespace SuperBitBros
             if (c.A != 255)
                 return null;
             //MOVE N-E-S-W
-            else if (c == MoveNorthPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(MoveNorthPipeZone));
-            else if (c == MoveEastPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(MoveEastPipeZone));
-            else if (c == MoveSouthPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(MoveSouthPipeZone));
-            else if (c == MoveWestPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(MoveWestPipeZone));
+            else if (c == MoveNorthPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(MoveNorthPipeZone)); }
+            else if (c == MoveEastPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(MoveEastPipeZone)); }
+            else if (c == MoveSouthPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(MoveSouthPipeZone)); }
+            else if (c == MoveWestPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(MoveWestPipeZone)); }
             //MOVE Multi
-            else if (c == MoveEastWestPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(MoveEastWestPipeZone));
-            else if (c == MoveNorthSouthPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(MoveNorthSouthPipeZone));
-            else if (c == MoveAnyPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(MoveAnyPipeZone));
+            else if (c == MoveEastWestPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(MoveEastWestPipeZone)); }
+            else if (c == MoveNorthSouthPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(MoveNorthSouthPipeZone)); }
+            else if (c == MoveAnyPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(MoveAnyPipeZone)); }
             //ENTER N-E-S-W
-            else if (c == EnterNorthPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(EnterNorthPipeZone));
-            else if (c == EnterEastPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(EnterEastPipeZone));
-            else if (c == EnterSouthPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(EnterSouthPipeZone));
-            else if (c == EnterWestPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(EnterWestPipeZone));
+            else if (c == EnterNorthPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(EnterNorthPipeZone)); }
+            else if (c == EnterEastPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(EnterEastPipeZone)); }
+            else if (c == EnterSouthPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(EnterSouthPipeZone)); }
+            else if (c == EnterWestPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(EnterWestPipeZone)); }
             // Enter Multi
-            else if (c == EnterEastWestPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(EnterEastWestPipeZone));
-            else if (c == EnterNorthSouthPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(EnterNorthSouthPipeZone));
-            else if (c == EnterAnyPipeZone.GetColor())
-                return new PipeZoneTypeWrapper(typeof(EnterAnyPipeZone));
+            else if (c == EnterEastWestPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(EnterEastWestPipeZone)); }
+            else if (c == EnterNorthSouthPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(EnterNorthSouthPipeZone)); }
+            else if (c == EnterAnyPipeZone.GetColor()) { return new PipeZoneTypeWrapper(typeof(EnterAnyPipeZone)); }
             // Unknown
-            else
-                return new PipeZoneTypeWrapper(null);
+            else { return new PipeZoneTypeWrapper(null); }
         }
 
         public List<Rect2d> GetVisionZones()

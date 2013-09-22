@@ -20,6 +20,7 @@ namespace SuperBitBros
         public static OGLTexture texture_air;
         public static OGLTexture texture_ground_air;
         public static OGLTexture texture_ceiling;
+        public static OGLTexture texture_pillar;
         public static OGLTexture texture_coinblock_full;
         public static OGLTexture texture_coinblock_empty;
         public static OGLTexture texture_hill;
@@ -29,6 +30,7 @@ namespace SuperBitBros
         public static OGLTexture texture_darkGround;
         public static OGLTexture texture_darkCeiling;
         public static OGLTexture texture_darkHill;
+        public static OGLTexture texture_mshroomplatform;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
@@ -41,6 +43,7 @@ namespace SuperBitBros
         public static OGLTexture texture_goomba_dead;
         public static OGLTexture texture_koopa;
         public static OGLTexture texture_koopashell;
+        public static OGLTexture texture_paratroopa;
 
         public static void Load()
         {
@@ -61,6 +64,8 @@ namespace SuperBitBros
             texture_castle = block_textures.GetTextureWrapper(177);
             texture_flag = block_textures.GetTextureWrapper(179);
             texture_ceiling = block_textures.GetTextureWrapper(256);
+            texture_pillar = block_textures.GetTextureWrapper(176);
+            texture_mshroomplatform = block_textures.GetTextureWrapper(84);
 
             texture_darkGround = block_textures.GetTextureWrapper(178);
             texture_darkCeiling = block_textures.GetTextureWrapper(4);
@@ -77,6 +82,7 @@ namespace SuperBitBros
             texture_goomba_dead = block_textures.GetTextureWrapper(95);
             texture_koopa = block_textures.GetTextureWrapper(109);
             texture_koopashell = block_textures.GetTextureWrapper(127);
+            texture_paratroopa = block_textures.GetTextureWrapper(257);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }
