@@ -11,7 +11,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
         {
             get
             {
-                return debugParticleSwitch.Value ? 0 : 100;
+                return debugParticleSwitch.Value ? 0 : 250;
             }
         }
 

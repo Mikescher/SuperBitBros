@@ -171,15 +171,15 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             Console.Out.WriteLine("Death by Zone: " + t.GetType().Name);
 
-            DoDeath();
+            DoDeath(true);
         }
 
-        private void DoDeath()
+        private void DoDeath(bool direct = false)
         {
-            if (invincTime == 0 || !Program.debugViewSwitch.Value)
+            if (invincTime == 0 && !Program.debugViewSwitch.Value)
             {
                 AbstractMarioPower sub = power.GetSubPower();
-                if (sub == null)
+                if (sub == null || direct)
                 {
                     Explode();
                     KillLater();
