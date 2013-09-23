@@ -1,10 +1,10 @@
 ﻿using SuperBitBros.Entities.Blocks;
-using System;
 using SuperBitBros.Entities.EnityController;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
-    internal class FlagEntity : DynamicEntity
+    public class FlagEntity : DynamicEntity
     {
         private const double OTHER_FLAG_DETECTIONRANGE = 5.0;
 

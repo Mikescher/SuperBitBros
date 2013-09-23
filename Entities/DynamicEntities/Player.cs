@@ -160,6 +160,13 @@ namespace SuperBitBros.Entities.DynamicEntities
             }
         }
 
+        public void DoDeath(DynamicEntity e)
+        {
+            Console.Out.WriteLine("Death by Entity: " + e.GetType().Name);
+
+            DoDeath();
+        }
+
         public void DoDeath(Mob m)
         {
             Console.Out.WriteLine("Death by Mob: " + m.GetType().Name);
@@ -218,6 +225,11 @@ namespace SuperBitBros.Entities.DynamicEntities
         public bool IsBig()
         {
             return !(power is StandardMarioPower);
+        }
+
+        public void WalkToLevelEnd()
+        {
+            AddController(new LevelEndWalkPlayerController(this));
         }
     }
 }

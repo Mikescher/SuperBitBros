@@ -47,7 +47,7 @@ namespace SuperBitBros
 
             offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight);
 
-            if (debugMapExplosionSwitch.Value)
+            if (Program.debugViewSwitch.Value && debugMapExplosionSwitch.Value)
                 StartChangeWorld(0, 0);
         }
 
@@ -78,6 +78,10 @@ namespace SuperBitBros
             else if (triggertype == AddTriggerType.LEVEL_WRAP)
             {
                 AddTrigger(new LevelWrapZone(new Vec2i(x, y), c.B), x, y);
+            }
+            else if (triggertype == AddTriggerType.BRIDGE_DESTROY)
+            {
+                AddTrigger(new BridgeDestroyZone(new Vec2i(x, y)), x, y);
             }
         }
 

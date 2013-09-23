@@ -13,10 +13,8 @@ namespace SuperBitBros
 
         private static void Main(string[] args)
         {
-
-
             Console.Out.WriteLine("START");
-            GameModel world = new GameWorld(1, 1);
+            GameModel world = new GameWorld(1, 4);
             OpenGLView view = new OpenGLGameView(world);
 
             Textures.Load();
@@ -27,6 +25,3 @@ namespace SuperBitBros
         }
     }
 }
-
-//TODO Add Mushroom / Star
-//Dont walk out of X-Level bounds

@@ -14,7 +14,7 @@ namespace SuperBitBros
 {
     public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN, SPAWN };
 
-    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION, LEVEL_WRAP };
+    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION, LEVEL_WRAP, BRIDGE_DESTROY };
 
     public class ImageMapParser
     {
@@ -34,6 +34,10 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_FLAG = Color.FromArgb(0, 255, 255);
         private static readonly Color COL_SPAWN_KOOPA = Color.FromArgb(0, 192, 128);
         private static readonly Color COL_SPAWN_PARATROOPA = Color.FromArgb(0, 0, 255);
+        private static readonly Color COL_SPAWN_BRIDGE = Color.FromArgb(255, 255, 0);
+        private static readonly Color COL_SPAWN_LEVER = Color.FromArgb(0, 255, 128);
+        private static readonly Color COL_SPAWN_TOAD = Color.FromArgb(255, 0, 255);
+        private static readonly Color COL_SPAWN_BOWSER = Color.FromArgb(255, 128, 0);
 
         public readonly OpenRasterImage map;
 
@@ -96,6 +100,9 @@ namespace SuperBitBros
             else if (c == DarkCeilingBlock.GetColor()) { return new DarkCeilingBlock(); }
             else if (c == StandardPillarBlock.GetColor()) { return new StandardPillarBlock(); }
             else if (c == MushroomPlatformBlock.GetColor()) { return new MushroomPlatformBlock(); }
+            else if (c == CastleGroundBlock.GetColor()) { return new CastleGroundBlock(); }
+            else if (c == LavaBlock.GetColor()) { return new LavaBlock(); }
+            else if (c == FireBoxBlock.GetColor()) { return new FireBoxBlock(); }
             else { return null; }
         }
 
@@ -108,21 +115,21 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_FLAG) { return new EntityTypeWrapper(typeof(FlagEntity)); }
             else if (c == COL_SPAWN_KOOPA) { return new EntityTypeWrapper(typeof(Koopa)); }
             else if (c == COL_SPAWN_PARATROOPA) { return new EntityTypeWrapper(typeof(Paratroopa)); }
+            else if (c == COL_SPAWN_BRIDGE) { return new EntityTypeWrapper(typeof(BridgeEntity)); }
+            else if (c == COL_SPAWN_LEVER) { return new EntityTypeWrapper(typeof(LeverEntity)); }
+            else if (c == COL_SPAWN_TOAD) { return new EntityTypeWrapper(typeof(ToadEntity)); }
+            else if (c == COL_SPAWN_BOWSER) { return new EntityTypeWrapper(typeof(Bowser)); }
             else { return new EntityTypeWrapper(null); }
         }
 
         private AddTriggerType FindTriggerType(Color c)
         {
-            if (c.A != 255)
-                return AddTriggerType.NO_TRIGGER;
-            else if (c == PlayerSpawnZone.GetColor())
-                return AddTriggerType.PLAYER_SPAWN_POSITION;
-            else if (c == DeathZone.GetColor())
-                return AddTriggerType.DEATH_ZONE;
-            else if (c.R == LevelWrapZone.GetColor().R && c.G == LevelWrapZone.GetColor().G)
-                return AddTriggerType.LEVEL_WRAP;
-            else
-                return AddTriggerType.UNKNOWN_TRIGGER;
+            if (c.A != 255) { return AddTriggerType.NO_TRIGGER; }
+            else if (c == PlayerSpawnZone.GetColor()) { return AddTriggerType.PLAYER_SPAWN_POSITION; }
+            else if (c == DeathZone.GetColor()) { return AddTriggerType.DEATH_ZONE; }
+            else if (c.R == LevelWrapZone.GetColor().R && c.G == LevelWrapZone.GetColor().G) { return AddTriggerType.LEVEL_WRAP; }
+            else if (c == BridgeDestroyZone.GetColor()) { return AddTriggerType.BRIDGE_DESTROY; }
+            else { return AddTriggerType.UNKNOWN_TRIGGER; }
         }
 
         private PipeZoneTypeWrapper FindPipeZoneType(Color c)

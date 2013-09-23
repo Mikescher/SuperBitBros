@@ -58,6 +58,14 @@ namespace SuperBitBros.OpenGL
             return new OGLTexture(this, pos);
         }
 
+        public OGLTexture GetCombinedTextureWrapper(int x, int y, int w, int h)
+        {
+            double tw = 1.0 / width;
+            double th = 1.0 / height;
+
+            return new OGLTextureFragment(ID, x * tw, x * th, w * tw, h * th).GetTextureWrapper();
+        }
+
         public OGLTexture GetTextureWrapper(int x, int y)
         {
             return new OGLTexture(this, x, y);

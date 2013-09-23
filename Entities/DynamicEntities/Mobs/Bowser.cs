@@ -1,29 +1,35 @@
 ﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
-using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
-    public class Goomba : Mob
+    public class Bowser : Mob
     {
-        public const double GOOMBA_ACC = 0.2;
-        public const double GOOMBA_SPEED = 1;
+        public const double BOWSER_SCALE = 1.5;
 
-        public Goomba()
+        public Bowser()
             : base()
         {
             distance = Entity.DISTANCE_MOBS;
-            width = Block.BLOCK_WIDTH;
-            height = Block.BLOCK_HEIGHT;
+            width = Block.BLOCK_WIDTH * 2 * BOWSER_SCALE;
+            height = Block.BLOCK_HEIGHT * BOWSER_SCALE;
 
-            texture = Textures.texture_goomba;
+            texture = Textures.texture_bowser;
 
-            AddController(new DefaultMobController(this));
+            AddController(new BowserController(this));
+        }
+
+        public override void OnAfterMapGen()
+        {
+            base.OnAfterMapGen();
+            (controllerStack.Peek() as BowserController).OnAfterMapGen();
         }
 
         public override void OnHeadJump(Entity e)
         {
-            KillLater();
+            Player p = e as Player;
+            if (p != null)
+                p.DoDeath(this);
         }
 
         public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
@@ -37,7 +43,6 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             base.OnKill();
 
-            owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
             Explode();
         }
 

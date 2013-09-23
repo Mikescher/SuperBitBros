@@ -72,7 +72,15 @@ namespace SuperBitBros.Entities.EnityController
                 MoveBy(delta, !debugFlyoverrideSwitch.Value, !debugFlyoverrideSwitch.Value);
             }
             else
+            {
+                if ((ent.position.X <= 0 && delta.X < 0) || ((ent.position.X + ent.width) >= ent.owner.mapRealWidth && delta.X > 0))
+                {
+                    delta.X = 0;
+                    movementDelta.X = 0;
+                }
+
                 DoGravitationalMovement(delta);
+            }
         }
 
         public override bool IsActive()

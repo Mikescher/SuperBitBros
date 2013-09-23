@@ -31,6 +31,10 @@ namespace SuperBitBros
         public static OGLTexture texture_darkCeiling;
         public static OGLTexture texture_darkHill;
         public static OGLTexture texture_mshroomplatform;
+        public static OGLTexture texture_castleGround;
+        public static OGLTexture texture_lava;
+        public static OGLTexture texture_bridge;
+        public static OGLTexture texture_lever;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
@@ -39,11 +43,15 @@ namespace SuperBitBros
 
         public static OGLTexture texture_mushroom;
 
+        public static OGLTexture texture_fireball;
+
         public static OGLTexture texture_goomba;
         public static OGLTexture texture_goomba_dead;
         public static OGLTexture texture_koopa;
         public static OGLTexture texture_koopashell;
         public static OGLTexture texture_paratroopa;
+        public static OGLTexture texture_bowser;
+        public static OGLTexture texture_toad;
 
         public static void Load()
         {
@@ -66,6 +74,10 @@ namespace SuperBitBros
             texture_ceiling = block_textures.GetTextureWrapper(256);
             texture_pillar = block_textures.GetTextureWrapper(176);
             texture_mshroomplatform = block_textures.GetTextureWrapper(84);
+            texture_castleGround = block_textures.GetTextureWrapper(206);
+            texture_lava = block_textures.GetTextureWrapper(94);
+            texture_bridge = block_textures.GetTextureWrapper(205);
+            texture_lever = block_textures.GetTextureWrapper(11);
 
             texture_darkGround = block_textures.GetTextureWrapper(178);
             texture_darkCeiling = block_textures.GetTextureWrapper(4);
@@ -78,11 +90,15 @@ namespace SuperBitBros
 
             texture_mushroom = block_textures.GetTextureWrapper(6);
 
+            texture_fireball = block_textures.GetTextureWrapper(248);
+
             texture_goomba = block_textures.GetTextureWrapper(110);
             texture_goomba_dead = block_textures.GetTextureWrapper(95);
             texture_koopa = block_textures.GetTextureWrapper(109);
             texture_koopashell = block_textures.GetTextureWrapper(127);
             texture_paratroopa = block_textures.GetTextureWrapper(257);
+            texture_toad = block_textures.GetTextureWrapper(258);
+            texture_bowser = block_textures.GetCombinedTextureWrapper(19, 3, 2, 1);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }

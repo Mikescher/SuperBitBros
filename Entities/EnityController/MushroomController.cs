@@ -9,7 +9,7 @@ namespace SuperBitBros.Entities.EnityController
     {
         protected int walkDirection = -1; // +1 ||-1 || 0
 
-        public const double SHROOM_ACC = 0.2;
+        public const double SHROOM_ACC = 0.01;
         public const double SHROOM_SPEED = 1;
         public const double SHROOM_SPAWNFORCE = 3;
 

@@ -19,6 +19,7 @@ namespace SuperBitBros
 
         public List<DynamicEntity> dynamicEntityList { get; protected set; }
         public List<Block> blockList { get; protected set; }
+        public List<Trigger> triggerList { get; protected set; }
 
         private Block[,] blockMap;
         private List<Trigger>[,] triggerMap;
@@ -53,6 +54,7 @@ namespace SuperBitBros
             dynamicEntityList = new List<DynamicEntity>();
             blockList = new List<Block>();
             killList = new List<DynamicEntity>();
+            triggerList = new List<Trigger>();
             delayedActionList = new List<DelayedAction>();
         }
 
@@ -219,6 +221,7 @@ namespace SuperBitBros
                 triggerMap[x, y] = new List<Trigger>();
 
             triggerMap[x, y].Add(t);
+            triggerList.Add(t);
 
             t.OnAdd(this);
         }

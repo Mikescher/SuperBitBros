@@ -1,7 +1,6 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.OpenGL.OGLMath;
-using System;
 
 namespace SuperBitBros.Entities.EnityController
 {
@@ -26,7 +25,6 @@ namespace SuperBitBros.Entities.EnityController
         {
             if ((direction > 0 && ent.IsCollidingRight()) || (direction < 0 && ent.IsCollidingLeft()) || timeUntilChange <= 0)
             {
-                Console.Out.WriteLine("ch");
                 direction *= -1;
                 timeUntilChange = CHANGETIME;
             }

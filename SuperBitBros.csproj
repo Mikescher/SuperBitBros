@@ -72,7 +72,10 @@
     <Compile Include="Entities\AnimatedTexture.cs" />
     <Compile Include="Entities\Blocks\Block.cs" />
     <Compile Include="Entities\Blocks\CastleBlock.cs" />
+    <Compile Include="Entities\Blocks\CastleGroundBlock.cs" />
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\FireBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\LavaBlock.cs" />
     <Compile Include="Entities\Blocks\MushroomPlatformBlock.cs" />
     <Compile Include="Entities\Blocks\StandardCeilingBlock.cs" />
     <Compile Include="Entities\Blocks\MushroomBoxBlock.cs" />
@@ -80,11 +83,15 @@
     <Compile Include="Entities\Blocks\DarkCeilingBlock.cs" />
     <Compile Include="Entities\Blocks\DarkGroundBlock.cs" />
     <Compile Include="Entities\Blocks\DarkHillBlock.cs" />
-    <Compile Include="Entities\Blocks\EmptyCoinBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\EmptyBoxBlock.cs" />
     <Compile Include="Entities\Blocks\EndlessCrazyCoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\StandardHillBlock.cs" />
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
     <Compile Include="Entities\Blocks\StandardPillarBlock.cs" />
+    <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\Bowser.cs" />
+    <Compile Include="Entities\DynamicEntities\LeverEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\FireballEntity.cs" />
     <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Paratroopa.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\KoopaShell.cs" />
@@ -97,7 +104,11 @@
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\PersistentCoinEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\ToadEntity.cs" />
+    <Compile Include="Entities\EnityController\BowserController.cs" />
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
+    <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
+    <Compile Include="Entities\EnityController\FireballEntityController.cs" />
     <Compile Include="Entities\EnityController\ParatroopaController.cs" />
     <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
@@ -131,6 +142,7 @@
     <Compile Include="OpenGL\OGLTextureFragment.cs" />
     <Compile Include="ResourceAccessor.cs" />
     <Compile Include="StaticStopWatch.cs" />
+    <Compile Include="Triggers\BridgeDestroyZone.cs" />
     <Compile Include="Triggers\DeathZone.cs" />
     <Compile Include="Triggers\LevelWrapZone.cs" />
     <Compile Include="Triggers\PipeZones\EnterAnyPipeZone.cs" />
@@ -205,6 +217,7 @@
     <None Include="Resources\block_textures.png" />
     <None Include="Resources\map_01-02.ora" />
     <None Include="Resources\map_01-03.ora" />
+    <None Include="Resources\map_01-04.ora" />
     <None Include="Resources\map_debug.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
