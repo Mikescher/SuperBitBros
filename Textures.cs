@@ -13,8 +13,8 @@ namespace SuperBitBros
 
         public static OGLTextureSheet piranhaplant_sheet;
 
-
         public static OGLTexture[] array_coin;
+        public static OGLTexture texture_mariohead;
 
         public static OGLTexture texture_ground;
         public static OGLTexture texture_air;
@@ -61,6 +61,8 @@ namespace SuperBitBros
 
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
             mario_big_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_big, 16, 2);
+
+            texture_mariohead = block_textures.GetTextureWrapper(261);
 
             texture_ground = block_textures.GetTextureWrapper(35);
             texture_air = block_textures.GetTextureWrapper(0);

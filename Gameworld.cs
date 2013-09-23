@@ -210,5 +210,38 @@ namespace SuperBitBros
 
             ownerView.ChangeWorld(world, level);
         }
+
+        private PlayerSpawnZone FindSpawnZone()
+        {
+            foreach (Trigger t in triggerList)
+            {
+                if (t is PlayerSpawnZone)
+                    return t as PlayerSpawnZone;
+            }
+            return null;
+        }
+
+        public void OnPlayerDeath()
+        {
+            if ((HUD as StandardGameHUD).headCounter.Value > 0)
+            {
+                Console.Out.WriteLine("Resuscitate Player");
+
+                (HUD as StandardGameHUD).headCounter.Value--;
+
+                player.isAlive = false;
+                player.Explode();
+                player.KillLater();
+
+                player = FindSpawnZone().SpawnPlayer();
+            }
+            else
+            {
+                Console.Out.WriteLine("Restart Game");
+
+                (HUD as StandardGameHUD).Reset();
+                StartChangeWorld(1, 1);
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SuperBitBros.HUD
 {
-    class HUDNumberCounter
+    public class HUDNumberCounter
     {
         private int _Value = 0;
         public int Value 

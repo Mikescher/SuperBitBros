@@ -24,5 +24,19 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
             height = e.height / (fullH * 1.0);
             texture = new OGLTextureFragment(baseTex.GetID(), x, y, w, h).GetTextureWrapper();
         }
+
+        public FragmentParticle(OGLTexture baseTex, int entw, int enth, int texX, int texY, int fullW, int fullH)
+            : base()
+        {
+            Rect2d coords = baseTex.GetCoordinates();
+            double w = coords.Width / (fullW * 1.0);
+            double h = coords.Height / (fullH * 1.0);
+            double x = coords.bl.X + w * texX;
+            double y = coords.tl.Y - h * texY - h;
+
+            width = entw / (fullW * 1.0);
+            height = enth / (fullH * 1.0);
+            texture = new OGLTextureFragment(baseTex.GetID(), x, y, w, h).GetTextureWrapper();
+        }
     }
 }

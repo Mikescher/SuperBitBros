@@ -100,6 +100,7 @@
     <Compile Include="Entities\DynamicEntities\Particles\CoinExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\BlockExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\BlockDestroyParticle.cs" />
+    <Compile Include="Entities\DynamicEntities\Particles\HUDHeadExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\FragmentParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Entities\DynamicEntities\ToadEntity.cs" />
     <Compile Include="Entities\EnityController\BowserController.cs" />
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
+    <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\FireballEntityController.cs" />
     <Compile Include="Entities\EnityController\ParatroopaController.cs" />

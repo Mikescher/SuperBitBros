@@ -6,10 +6,10 @@ using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.Entities.EnityController
 {
-    class CoinExplosionController : AbstractEntityController
+    class HUDHeadExplosionController : AbstractEntityController
     {
-        private const double SEEK_SPEED = 0.5;
-        private const double MAX_SPEED = 3.5;
+        private const double SEEK_SPEED = 0.2;
+        private const double MAX_SPEED = 2.0;
 
         private const double KILL_DISTANCE = Block.BLOCK_WIDTH;
 
@@ -19,12 +19,12 @@ namespace SuperBitBros.Entities.EnityController
 
         public Vec2d movementDelta = Vec2d.Zero;
 
-        public CoinExplosionController(CoinExplosionParticle e, Vec2d spawnForce, StandardGameHUD pHud, OffsetCalculator pOffset)
+        public HUDHeadExplosionController(HUDHeadExplosionParticle e, Vec2d spawnForce, StandardGameHUD pHud, OffsetCalculator pOffset)
             : base(e)
         {
             hud = pHud;
             movementDelta = spawnForce;
-            target = pHud.GetCoinTarget();
+            target = pHud.GetHeadTarget();
             offset = pOffset;
         }
 

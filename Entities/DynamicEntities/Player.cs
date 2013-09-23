@@ -35,6 +35,8 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private int invincTime = 0;
 
+        public bool isAlive = true;
+
         public Player()
             : base()
         {
@@ -162,6 +164,9 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public void DoDeath(DynamicEntity e)
         {
+            if (!isAlive)
+                return;
+
             Console.Out.WriteLine("Death by Entity: " + e.GetType().Name);
 
             DoDeath();
@@ -169,6 +174,9 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public void DoDeath(Mob m)
         {
+            if (!alive)
+                return;
+
             Console.Out.WriteLine("Death by Mob: " + m.GetType().Name);
 
             DoDeath();
@@ -176,6 +184,9 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public void DoDeath(Trigger t)
         {
+            if (!alive)
+                return;
+
             Console.Out.WriteLine("Death by Zone: " + t.GetType().Name);
 
             DoDeath(true);
@@ -183,13 +194,15 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private void DoDeath(bool direct = false)
         {
+            if (!alive)
+                return;
+
             if (invincTime == 0 && !Program.debugViewSwitch.Value)
             {
                 AbstractMarioPower sub = power.GetSubPower();
                 if (sub == null || direct)
                 {
-                    Explode();
-                    KillLater();
+                    (owner as GameWorld).OnPlayerDeath();
                 }
                 else
                 {
