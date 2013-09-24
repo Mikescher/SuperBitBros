@@ -212,6 +212,13 @@ namespace SuperBitBros
             return triggerMap[x, y];
         }
 
+        public List<Trigger> getReliableTriggerList(int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
+                return new List<Trigger>();
+            return triggerMap[x, y];
+        }
+
         public void AddTrigger(Trigger t, int x, int y)
         {
             if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)

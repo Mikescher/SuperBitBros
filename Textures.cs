@@ -35,6 +35,8 @@ namespace SuperBitBros
         public static OGLTexture texture_lava;
         public static OGLTexture texture_bridge;
         public static OGLTexture texture_lever;
+        public static OGLTexture texture_solidcloud;
+        public static OGLTexture texture_beanstalk;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
@@ -80,6 +82,8 @@ namespace SuperBitBros
             texture_lava = block_textures.GetTextureWrapper(94);
             texture_bridge = block_textures.GetTextureWrapper(205);
             texture_lever = block_textures.GetTextureWrapper(11);
+            texture_solidcloud = block_textures.GetTextureWrapper(1);
+            texture_beanstalk = block_textures.GetTextureWrapper(21);
 
             texture_darkGround = block_textures.GetTextureWrapper(178);
             texture_darkCeiling = block_textures.GetTextureWrapper(4);

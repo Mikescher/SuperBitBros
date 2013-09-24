@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class CrazyCoinBoxBlock : Block
+    public class CrazyCoinBoxBlock : BoxBlock
     {
         private Random random = new Random();
 
@@ -20,12 +20,6 @@ namespace SuperBitBros.Entities.Blocks
         protected bool isActive = false;
 
         public static Color color = Color.FromArgb(0, 128, 255);
-
-        public CrazyCoinBoxBlock()
-            : base()
-        {
-            texture = Textures.texture_coinblock_full;
-        }
 
         public static Color GetColor()
         {
@@ -57,27 +51,19 @@ namespace SuperBitBros.Entities.Blocks
                 if (timeUntilDried <= 0)
                 {
                     isActive = false;
-                    ((GameWorld)owner).ReplaceBlock(this, new EmptyBoxBlock());
+                    Deactivate();
                 }
             }
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
+        public override void OnActivate(Player p)
         {
-            if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0)
-            {
-                isActive = true;
-            }
+            isActive = true;
         }
 
         public override Color GetBlockColor()
         {
             return color;
-        }
-
-        public override EntityRenderType GetRenderType()
-        {
-            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

@@ -18,9 +18,9 @@ namespace SuperBitBros.Entities.Blocks
             return color;
         }
 
-        public override EntityRenderType GetRenderType()
+        public override Color GetBlockColor()
         {
-            return EntityRenderType.BRT_BLOCKTEXTURES;
+            return color;
         }
     }
 }

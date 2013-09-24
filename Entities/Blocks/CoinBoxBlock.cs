@@ -4,40 +4,26 @@ using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class CoinBoxBlock : Block
+    public class CoinBoxBlock : BoxBlock
     {
         private const double COIN_SPAWN_FORCE = 3;
 
         public static Color color = Color.FromArgb(0, 0, 255);
-
-        public CoinBoxBlock()
-            : base()
-        {
-            texture = Textures.texture_coinblock_full;
-        }
 
         public static Color GetColor()
         {
             return color;
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
+        public override void OnActivate(Player p)
         {
-            if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0)
-            {
-                owner.AddEntity(new GravityCoinEntity(new Vec2d(0, COIN_SPAWN_FORCE)), GetTopLeft().X, GetTopLeft().Y);
-                ((GameWorld)owner).ReplaceBlock(this, new EmptyBoxBlock());
-            }
+            owner.AddEntity(new GravityCoinEntity(new Vec2d(0, COIN_SPAWN_FORCE)), GetTopLeft().X, GetTopLeft().Y);
+            Deactivate();
         }
 
         public override Color GetBlockColor()
         {
             return color;
-        }
-
-        public override EntityRenderType GetRenderType()
-        {
-            return EntityRenderType.BRT_BLOCKTEXTURES;
         }
     }
 }

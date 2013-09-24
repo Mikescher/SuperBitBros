@@ -83,6 +83,10 @@ namespace SuperBitBros
             {
                 AddTrigger(new BridgeDestroyZone(new Vec2i(x, y)), x, y);
             }
+            else if (triggertype == AddTriggerType.BEANSTALK_SPAWN)
+            {
+                AddTrigger(new BeanStalkSpawnZone(new Vec2i(x, y)), x, y);
+            }
         }
 
         public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y)

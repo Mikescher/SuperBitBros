@@ -71,12 +71,15 @@
     <Compile Include="Entities\AnimatedDynamicEntity.cs" />
     <Compile Include="Entities\AnimatedTexture.cs" />
     <Compile Include="Entities\Blocks\Block.cs" />
+    <Compile Include="Entities\Blocks\BoxBlock.cs" />
     <Compile Include="Entities\Blocks\CastleBlock.cs" />
     <Compile Include="Entities\Blocks\CastleGroundBlock.cs" />
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\BeanStalkBoxBlock.cs" />
     <Compile Include="Entities\Blocks\FireBoxBlock.cs" />
     <Compile Include="Entities\Blocks\LavaBlock.cs" />
     <Compile Include="Entities\Blocks\MushroomPlatformBlock.cs" />
+    <Compile Include="Entities\Blocks\SolidCloudBlock.cs" />
     <Compile Include="Entities\Blocks\StandardCeilingBlock.cs" />
     <Compile Include="Entities\Blocks\MushroomBoxBlock.cs" />
     <Compile Include="Entities\Blocks\CrazyCoinBoxBlock.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Entities\Blocks\PipeBlock.cs" />
     <Compile Include="Entities\Blocks\StandardPillarBlock.cs" />
     <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Bowser.cs" />
     <Compile Include="Entities\DynamicEntities\LeverEntity.cs" />
     <Compile Include="Entities\DynamicEntities\FireballEntity.cs" />
@@ -145,6 +149,7 @@
     <Compile Include="ResourceAccessor.cs" />
     <Compile Include="StaticStopWatch.cs" />
     <Compile Include="Triggers\BridgeDestroyZone.cs" />
+    <Compile Include="Triggers\BeanStalkSpawnZone.cs" />
     <Compile Include="Triggers\DeathZone.cs" />
     <Compile Include="Triggers\LevelWrapZone.cs" />
     <Compile Include="Triggers\PipeZones\EnterAnyPipeZone.cs" />
@@ -220,6 +225,7 @@
     <None Include="Resources\map_01-02.ora" />
     <None Include="Resources\map_01-03.ora" />
     <None Include="Resources\map_01-04.ora" />
+    <None Include="Resources\map_02-01.ora" />
     <None Include="Resources\map_debug.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />

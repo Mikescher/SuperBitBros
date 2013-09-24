@@ -14,7 +14,7 @@ namespace SuperBitBros
 {
     public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN, SPAWN };
 
-    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION, LEVEL_WRAP, BRIDGE_DESTROY };
+    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION, LEVEL_WRAP, BRIDGE_DESTROY, BEANSTALK_SPAWN };
 
     public class ImageMapParser
     {
@@ -38,6 +38,7 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_LEVER = Color.FromArgb(0, 255, 128);
         private static readonly Color COL_SPAWN_TOAD = Color.FromArgb(255, 0, 255);
         private static readonly Color COL_SPAWN_BOWSER = Color.FromArgb(255, 128, 0);
+        private static readonly Color COL_SPAWN_BEANSTALK = Color.FromArgb(255, 128, 255);
 
         public readonly OpenRasterImage map;
 
@@ -103,6 +104,8 @@ namespace SuperBitBros
             else if (c == CastleGroundBlock.GetColor()) { return new CastleGroundBlock(); }
             else if (c == LavaBlock.GetColor()) { return new LavaBlock(); }
             else if (c == FireBoxBlock.GetColor()) { return new FireBoxBlock(); }
+            else if (c == SolidCloudBlock.GetColor()) { return new SolidCloudBlock(); }
+            else if (c == BeanStalkBoxBlock.GetColor()) { return new BeanStalkBoxBlock(); }
             else { return null; }
         }
 
@@ -119,6 +122,7 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_LEVER) { return new EntityTypeWrapper(typeof(LeverEntity)); }
             else if (c == COL_SPAWN_TOAD) { return new EntityTypeWrapper(typeof(ToadEntity)); }
             else if (c == COL_SPAWN_BOWSER) { return new EntityTypeWrapper(typeof(Bowser)); }
+            else if (c == COL_SPAWN_BEANSTALK) { return new EntityTypeWrapper(typeof(BeanStalkEntity)); }
             else { return new EntityTypeWrapper(null); }
         }
 
@@ -129,6 +133,7 @@ namespace SuperBitBros
             else if (c == DeathZone.GetColor()) { return AddTriggerType.DEATH_ZONE; }
             else if (c.R == LevelWrapZone.GetColor().R && c.G == LevelWrapZone.GetColor().G) { return AddTriggerType.LEVEL_WRAP; }
             else if (c == BridgeDestroyZone.GetColor()) { return AddTriggerType.BRIDGE_DESTROY; }
+            else if (c == BeanStalkSpawnZone.GetColor()) { return AddTriggerType.BEANSTALK_SPAWN; }
             else { return AddTriggerType.UNKNOWN_TRIGGER; }
         }
 
