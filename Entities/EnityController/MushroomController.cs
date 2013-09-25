@@ -27,6 +27,11 @@ namespace SuperBitBros.Entities.EnityController
             if (Math.Abs(movementDelta.X) < SHROOM_SPEED)
                 delta.X = walkDirection * SHROOM_ACC;
 
+            if ((walkDirection > 0 && ent.IsCollidingRight()) || (walkDirection < 0 && ent.IsCollidingLeft()))
+            {
+                walkDirection *= -1;
+            }
+
             DoGravitationalMovement(delta);
         }
 

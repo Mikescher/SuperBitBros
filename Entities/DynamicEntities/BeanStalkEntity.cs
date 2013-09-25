@@ -28,7 +28,7 @@ namespace SuperBitBros.Entities.DynamicEntities
             Player p = collidingEntity as Player;
             if (p != null && isDirectCollision)
             {
-                //
+                p.AddBeanStalkController();
             }
         }
 

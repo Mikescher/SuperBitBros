@@ -17,6 +17,7 @@ namespace SuperBitBros.Entities.Blocks
         {
             if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && (collidingEntity as Player).IsBig() && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0)
             {
+                (collidingEntity as Player).StopYMovement();
                 DestroyExplode();
                 ((GameWorld)owner).ReplaceBlock(this, new StandardAirBlock());
             }

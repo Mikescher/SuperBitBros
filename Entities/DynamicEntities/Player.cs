@@ -244,5 +244,17 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             AddController(new LevelEndWalkPlayerController(this));
         }
+
+        public void AddBeanStalkController()
+        {
+            if (!HasController() || !(controllerStack.Peek() is BeanStalkPlayerController))
+                AddController(new BeanStalkPlayerController(this));
+        }
+
+        public void StopYMovement()
+        {
+            if (HasController() && controllerStack.Peek() is AbstractNewtonEntityController)
+                (controllerStack.Peek() as AbstractNewtonEntityController).movementDelta.Y = 0;
+        }
     }
 }

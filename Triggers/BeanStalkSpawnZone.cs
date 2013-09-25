@@ -1,4 +1,5 @@
 ﻿using SuperBitBros.Entities;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
 using System.Drawing;
@@ -12,7 +13,6 @@ namespace SuperBitBros.Triggers
         public BeanStalkSpawnZone(Vec2i pos)
             : base(pos)
         {
-
         }
 
         public void DoSpawn()
@@ -21,7 +21,7 @@ namespace SuperBitBros.Triggers
             {
                 active = false;
 
-                owner.AddEntity(new BeanStalkEntity(), position.X, position.Y);
+                owner.AddEntity(new BeanStalkEntity(), position.X * Block.BLOCK_WIDTH, position.Y * Block.BLOCK_HEIGHT);
             }
         }
 

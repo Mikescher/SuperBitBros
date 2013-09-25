@@ -112,6 +112,7 @@
     <Compile Include="Entities\DynamicEntities\ToadEntity.cs" />
     <Compile Include="Entities\EnityController\BowserController.cs" />
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
+    <Compile Include="Entities\EnityController\BeanStalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\FireballEntityController.cs" />

@@ -17,7 +17,7 @@ namespace SuperBitBros.Entities.Blocks
         {
             int i = 0;
 
-            for (int yy = blockPos.Y; yy < owner.mapRealHeight; yy++)
+            for (int yy = blockPos.Y + 1; yy < owner.mapRealHeight; yy++)
             {
                 bool found = false;
                 foreach (Trigger t in owner.getReliableTriggerList(blockPos.X, yy))

@@ -216,6 +216,8 @@ namespace SuperBitBros
         {
             if (x < 0 || y < 0 || x >= mapBlockWidth || y >= mapBlockHeight)
                 return new List<Trigger>();
+            if (triggerMap[x, y] == null)
+                return new List<Trigger>();
             return triggerMap[x, y];
         }
 
