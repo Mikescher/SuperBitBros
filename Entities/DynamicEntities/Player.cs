@@ -94,7 +94,24 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private void UpdateTexture()
         {
-            if (IsOnGround())
+            if (IsInPipe())
+            {
+                if (GetMovement().X > 0)
+                {
+                    atexture.Set(3, 1);
+                    direction = Direction.RIGHT;
+                }
+                else if (GetMovement().X < 0)
+                {
+                    atexture.Set(3, 0);
+                    direction = Direction.LEFT;
+                }
+                else
+                {
+                    atexture.Set(3, (direction == Direction.LEFT) ? 1 : 0);
+                }
+            }
+            else if (IsOnGround())
             {
                 if (GetMovement().X > 0)
                 {

@@ -73,6 +73,16 @@ namespace SuperBitBros.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] map_00_01 {
+            get {
+                object obj = ResourceManager.GetObject("map_00_01", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] map_01_01 {
             get {
                 object obj = ResourceManager.GetObject("map_01_01", resourceCulture);

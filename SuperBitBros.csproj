@@ -151,6 +151,8 @@
     <Compile Include="StaticStopWatch.cs" />
     <Compile Include="Triggers\BridgeDestroyZone.cs" />
     <Compile Include="Triggers\BeanStalkSpawnZone.cs" />
+    <Compile Include="Triggers\TeleportExitZone.cs" />
+    <Compile Include="Triggers\TeleportEntryZone.cs" />
     <Compile Include="Triggers\DeathZone.cs" />
     <Compile Include="Triggers\LevelWrapZone.cs" />
     <Compile Include="Triggers\PipeZones\EnterAnyPipeZone.cs" />
@@ -219,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Resources\map_00-01.ora" />
     <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
   <ItemGroup>

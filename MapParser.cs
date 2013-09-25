@@ -14,7 +14,7 @@ namespace SuperBitBros
 {
     public enum SpawnEntityType { NO_SPAWN, UNKNOWN_SPAWN, SPAWN_GOOMBA, SPAWN_PIRANHAPLANT, SPAWN_COIN, SPAWN };
 
-    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION, LEVEL_WRAP, BRIDGE_DESTROY, BEANSTALK_SPAWN };
+    public enum AddTriggerType { NO_TRIGGER, UNKNOWN_TRIGGER, DEATH_ZONE, PLAYER_SPAWN_POSITION, LEVEL_WRAP, BRIDGE_DESTROY, BEANSTALK_SPAWN, TELEPORT_ENTRY, TELEPORT_EXIT };
 
     public class ImageMapParser
     {
@@ -134,6 +134,8 @@ namespace SuperBitBros
             else if (c.R == LevelWrapZone.GetColor().R && c.G == LevelWrapZone.GetColor().G) { return AddTriggerType.LEVEL_WRAP; }
             else if (c == BridgeDestroyZone.GetColor()) { return AddTriggerType.BRIDGE_DESTROY; }
             else if (c == BeanStalkSpawnZone.GetColor()) { return AddTriggerType.BEANSTALK_SPAWN; }
+            else if (c.G == TeleportEntryZone.GetColor().G && c.B == TeleportEntryZone.GetColor().B) { return AddTriggerType.TELEPORT_ENTRY; }
+            else if (c.G == TeleportExitZone.GetColor().G && c.B == TeleportExitZone.GetColor().B) { return AddTriggerType.TELEPORT_EXIT; }
             else { return AddTriggerType.UNKNOWN_TRIGGER; }
         }
 

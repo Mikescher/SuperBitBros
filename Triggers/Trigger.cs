@@ -1,7 +1,8 @@
-﻿using System.Drawing;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.Triggers
 {
@@ -25,6 +26,10 @@ namespace SuperBitBros.Triggers
         {
             owner = model;
         }
+
+        public virtual void Update(KeyboardDevice keyboard) { /**/ }
+
+        public virtual void OnAfterMapGen() { /**/ }
 
         public abstract void OnCollide(DynamicEntity collider);
 

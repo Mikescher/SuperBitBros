@@ -1,8 +1,8 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using QuickFont;
+using System;
 
 namespace SuperBitBros
 {
@@ -11,9 +11,10 @@ namespace SuperBitBros
         private OpenGLView owner;
 
         public MyGameWindow(OpenGLView v, int resX, int resY)
-            : base(resX, resY, GraphicsMode.Default, "tite")
+            : base(resX, resY, GraphicsMode.Default, "title")
         {
             owner = v;
+            WindowBorder = WindowBorder.Fixed;
         }
 
         protected override void OnResize(EventArgs e)

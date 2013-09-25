@@ -87,6 +87,14 @@ namespace SuperBitBros
             {
                 AddTrigger(new BeanStalkSpawnZone(new Vec2i(x, y)), x, y);
             }
+            else if (triggertype == AddTriggerType.TELEPORT_ENTRY)
+            {
+                AddTrigger(new TeleportEntryZone(new Vec2i(x, y), c.R), x, y);
+            }
+            else if (triggertype == AddTriggerType.TELEPORT_EXIT)
+            {
+                AddTrigger(new TeleportExitZone(new Vec2i(x, y), c.R), x, y);
+            }
         }
 
         public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y)
@@ -150,6 +158,11 @@ namespace SuperBitBros
             foreach (DynamicEntity e in dynamicEntityList)
             {
                 e.OnAfterMapGen();
+            }
+
+            foreach (Trigger t in triggerList)
+            {
+                t.OnAfterMapGen();
             }
         }
 
@@ -246,6 +259,12 @@ namespace SuperBitBros
                 (HUD as StandardGameHUD).Reset();
                 StartChangeWorld(1, 1);
             }
+        }
+
+        public void TeleportPlayer(Vec2d deltaTeleportation)
+        {
+            player.position += deltaTeleportation;
+            offset.Change(offset.Value + deltaTeleportation);
         }
     }
 }

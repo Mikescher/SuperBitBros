@@ -1,5 +1,5 @@
-﻿using System;
-using OpenTK;
+﻿using OpenTK;
+using System;
 
 namespace SuperBitBros.OpenGL.OGLMath
 {
@@ -52,7 +52,7 @@ namespace SuperBitBros.OpenGL.OGLMath
 
         public static Vec2i operator -(Vec2i v1, Vec2i v2)
         {
-            return new Vec2i(v1.X + v2.X, v1.Y + v2.Y);
+            return new Vec2i(v1.X - v2.X, v1.Y - v2.Y);
         }
 
         public static Vec2i operator -(Vec2i v1, int v2)
@@ -140,8 +140,8 @@ namespace SuperBitBros.OpenGL.OGLMath
             if (!isZero())
             {
                 double w = GetLength();
-                X = (int)((X / w)*len);
-                Y = (int)((Y / w)*len);
+                X = (int)((X / w) * len);
+                Y = (int)((Y / w) * len);
             }
         }
 

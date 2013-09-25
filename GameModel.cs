@@ -169,9 +169,15 @@ namespace SuperBitBros
             {
                 e.Update(keyboard);
             }
+
             foreach (Block e in GetCurrentBlockList())
             {
                 e.Update(keyboard);
+            }
+
+            foreach (Trigger t in triggerList)
+            {
+                t.Update(keyboard);
             }
 
             foreach (DynamicEntity e in killList)
