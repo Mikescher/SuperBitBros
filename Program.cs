@@ -14,6 +14,12 @@ namespace SuperBitBros
         public static BooleanKeySwitch debugFlySwitch = new BooleanKeySwitch(false, Key.LControl, KeyTriggerMode.WHILE_DOWN);
         public static BooleanKeySwitch debugFlyoverrideSwitch = new BooleanKeySwitch(false, Key.ShiftLeft, KeyTriggerMode.WHILE_DOWN);
 
+        public static BooleanKeySwitch debugPlayerUpgrade = new BooleanKeySwitch(false, Key.F3, KeyTriggerMode.FLICKER_DOWN);
+        public static BooleanKeySwitch debugCoinCheatSwitch = new BooleanKeySwitch(false, Key.F4, KeyTriggerMode.FLICKER_DOWN);
+        public static BooleanKeySwitch debugExplosionSwitch = new BooleanKeySwitch(false, Key.F5, KeyTriggerMode.FLICKER_DOWN);
+        public static BooleanKeySwitch debugMapExplosionSwitch = new BooleanKeySwitch(false, Key.F6, KeyTriggerMode.COOLDOWN_DOWN);
+        public static BooleanKeySwitch debugParticleSwitch = new BooleanKeySwitch(false, Key.F7, KeyTriggerMode.ON_DOWN);
+
         private static void Main(string[] args)
         {
             debugFlySwitch.TurnOnEvent += delegate { Console.Out.WriteLine("DebugFlyMode enabled"); };

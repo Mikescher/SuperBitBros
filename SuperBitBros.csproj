@@ -101,6 +101,7 @@
     <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\CheepCheep.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Blooper.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\AirCheepCheep.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Paratroopa.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\KoopaShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Koopa.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
     <Compile Include="Entities\EnityController\BeanStalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\BlooperController.cs" />
+    <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
     <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\FireballEntityController.cs" />
@@ -240,6 +242,7 @@
     <None Include="Resources\map_01-04.ora" />
     <None Include="Resources\map_02-01.ora" />
     <None Include="Resources\map_02-02.ora" />
+    <None Include="Resources\map_02-03.ora" />
     <None Include="Resources\map_debug.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />

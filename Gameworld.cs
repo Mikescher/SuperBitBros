@@ -17,8 +17,6 @@ namespace SuperBitBros
     {
         private const int LEVEL_END_ANIMATION_DURATION = 5 * 60;
 
-        private BooleanKeySwitch debugMapExplosionSwitch = new BooleanKeySwitch(false, Key.F6, KeyTriggerMode.COOLDOWN_DOWN);
-
         public OffsetCalculator offset = new OffsetCalculator();
 
         public Player player;
@@ -47,7 +45,7 @@ namespace SuperBitBros
 
             offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight);
 
-            if (Program.debugViewSwitch.Value && debugMapExplosionSwitch.Value)
+            if (Program.debugViewSwitch.Value && Program.debugMapExplosionSwitch.Value)
                 StartChangeWorld(0, 0);
         }
 

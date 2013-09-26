@@ -49,7 +49,6 @@ namespace SuperBitBros.Entities
             }
         }
 
-
         public bool HasController()
         {
             return controllerStack.Count > 0;
@@ -76,6 +75,11 @@ namespace SuperBitBros.Entities
 
         public virtual void OnAfterMapGen()
         {
+        }
+
+        public virtual bool IsKillZoneImmune()
+        {
+            return false;
         }
 
         public void DoCollisions()

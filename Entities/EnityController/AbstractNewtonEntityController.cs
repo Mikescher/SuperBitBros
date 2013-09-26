@@ -34,11 +34,11 @@ namespace SuperBitBros.Entities.EnityController
             physicPushForce = Vec2d.Zero;
         }
 
-        public void DoGravitationalMovement(Vec2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true)
+        public void DoGravitationalMovement(Vec2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true, bool doCollision = true, bool doPhysicPush = true)
         {
             //movementDelta.X = 0;
             movementDelta.Y -= Gravity_Acc;
-            if (ent.IsOnGround())
+            if (doCollision && ent.IsOnGround())
                 movementDelta.Y = Math.Max(movementDelta.Y, 0);
 
             if (movementDelta.Y < -Gravity_Max)
@@ -55,7 +55,7 @@ namespace SuperBitBros.Entities.EnityController
             if (ent.IsCollidingRight() && resetXOnCollision)
                 movementDelta.X = Math.Min(movementDelta.X, 0);
 
-            MoveBy(movementDelta);
+            MoveBy(movementDelta, doCollision, doPhysicPush);
         }
 
         public void MoveBy(Vec2d vec, bool doCollision = true, bool doPhysicPush = true)

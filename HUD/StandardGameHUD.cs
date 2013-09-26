@@ -2,7 +2,6 @@
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.Entities.DynamicEntities.Particles;
-using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 
@@ -16,8 +15,6 @@ namespace SuperBitBros.HUD
 
         private const int COIN_PARTICLE_COMPLETIONCOUNT = CoinEntity.COIN_EXPLOSIONFRAGMENTS_X * CoinEntity.COIN_EXPLOSIONFRAGMENTS_Y;
         private const int HEAD_PARTICLE_COMPLETIONCOUNT = HEAD_EXPLOSIONFRAGMENTS_X * HEAD_EXPLOSIONFRAGMENTS_Y;
-
-        private BooleanKeySwitch debugCoinCheatSwitch = new BooleanKeySwitch(false, Key.F4, KeyTriggerMode.FLICKER_DOWN);
 
         private Random random = new Random();
 
@@ -91,7 +88,7 @@ namespace SuperBitBros.HUD
         {
             base.Update(keyboard);
 
-            if (Program.debugViewSwitch.Value && debugCoinCheatSwitch.Value)
+            if (Program.debugViewSwitch.Value && Program.debugCoinCheatSwitch.Value)
             {
                 for (int i = 0; i < 10; i++)
                     AddCoin();

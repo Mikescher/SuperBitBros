@@ -44,8 +44,20 @@ namespace SuperBitBros.MarioPower
             atexture.Add(2, Textures.mario_big_sheet.GetTextureWrapper(0, 1));
 
             //PIPE
-            atexture.Add(3, Textures.mario_small_sheet.GetTextureWrapper(13, 0));
-            atexture.Add(3, Textures.mario_small_sheet.GetTextureWrapper(13, 1));
+            atexture.Add(3, Textures.mario_big_sheet.GetTextureWrapper(13, 0));
+            atexture.Add(3, Textures.mario_big_sheet.GetTextureWrapper(13, 1));
+
+            // SWIM LEFT
+            atexture.Add(4, Textures.mario_big_sheet.GetTextureWrapper(8, 0));
+            atexture.Add(4, Textures.mario_big_sheet.GetTextureWrapper(9, 0));
+            atexture.Add(4, Textures.mario_big_sheet.GetTextureWrapper(10, 0));
+            atexture.Add(4, Textures.mario_big_sheet.GetTextureWrapper(11, 0));
+
+            // SWIM RIGHT
+            atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(8, 1));
+            atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(9, 1));
+            atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(10, 1));
+            atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(11, 1));
 
             return atexture;
         }

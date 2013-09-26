@@ -3,7 +3,6 @@ using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.Entities.EnityController;
 using SuperBitBros.MarioPower;
-using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
@@ -26,8 +25,6 @@ namespace SuperBitBros.Entities.DynamicEntities
         private const int PLAYER_EXPLOSIONFRAGMENTS_X = 8;
         private const int PLAYER_EXPLOSIONFRAGMENTS_Y = 8;
         private const double PLAYER_EXPLOSIONFRAGMENTS_FORCE = 24.0;
-
-        private BooleanKeySwitch debugExplosionSwitch = new BooleanKeySwitch(false, Key.F5, KeyTriggerMode.FLICKER_DOWN);
 
         public Direction direction;
 
@@ -71,7 +68,8 @@ namespace SuperBitBros.Entities.DynamicEntities
                     TestForPipe(PipeDirection.WEST);
             }
 
-            if (debugExplosionSwitch.Value) { Explode(); KillLater(); }
+            if (Program.debugViewSwitch.Value && Program.debugExplosionSwitch.Value) { Explode(); KillLater(); }
+            if (Program.debugViewSwitch.Value && Program.debugPlayerUpgrade.Value) { growToBigPlayer(); }
 
             if (invincTime > 0)
                 invincTime--;
@@ -109,6 +107,25 @@ namespace SuperBitBros.Entities.DynamicEntities
                 else
                 {
                     atexture.Set(3, (direction == Direction.LEFT) ? 1 : 0);
+                }
+            }
+            else if (IsSwimming())
+            {
+                if (GetMovement().X > 0)
+                {
+                    atexture.SetLayer(5);
+                    UpdateAnimation();
+                    direction = Direction.RIGHT;
+                }
+                else if (GetMovement().X < 0)
+                {
+                    atexture.SetLayer(4);
+                    UpdateAnimation();
+                    direction = Direction.LEFT;
+                }
+                else
+                {
+                    atexture.Set(2, (direction == Direction.LEFT) ? 0 : 1);
                 }
             }
             else if (IsOnGround())
@@ -232,6 +249,11 @@ namespace SuperBitBros.Entities.DynamicEntities
         public bool IsInPipe()
         {
             return HasController() && controllerStack.Peek() is PipePlayerController;
+        }
+
+        public bool IsSwimming()
+        {
+            return HasController() && controllerStack.Peek() is UnderwaterPlayerController;
         }
 
         public void MakeStatic()

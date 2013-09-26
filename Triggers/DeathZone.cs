@@ -1,9 +1,7 @@
-﻿using System;
-using System.Drawing;
-using SuperBitBros.Entities;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.Entities.DynamicEntities;
-using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.Triggers
 {
@@ -22,7 +20,7 @@ namespace SuperBitBros.Triggers
             {
                 p.DoDeath(this);
             }
-            else if (collider is DynamicEntity)
+            else if (collider is DynamicEntity && !(collider as DynamicEntity).IsKillZoneImmune())
             {
                 collider.KillLater();
             }

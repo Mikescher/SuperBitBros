@@ -1,17 +1,14 @@
 ﻿using OpenTK.Input;
-using SuperBitBros.OpenGL;
 
 namespace SuperBitBros.Entities.DynamicEntities.Particles
 {
     public abstract class Particle : DynamicEntity
     {
-        private static BooleanKeySwitch debugParticleSwitch = new BooleanKeySwitch(false, Key.F7, KeyTriggerMode.ON_DOWN);
-
         public static int MAX_PARTICLE_COUNT
         {
             get
             {
-                return debugParticleSwitch.Value ? 0 : 250;
+                return Program.debugParticleSwitch.Value ? 0 : 250;
             }
         }
 
