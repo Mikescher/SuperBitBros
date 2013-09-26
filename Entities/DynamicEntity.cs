@@ -33,6 +33,9 @@ namespace SuperBitBros.Entities
 
         public override void Update(KeyboardDevice keyboard)
         {
+            if (old_position != position && old_position != null && position != null)
+                owner.MoveEntityInCollisionMap(this, GetCollisionMapPosition(old_position), GetCollisionMapPosition(position));
+
             base.Update(keyboard);
 
             CallControllerStack(keyboard);
@@ -77,6 +80,28 @@ namespace SuperBitBros.Entities
         {
         }
 
+        public virtual bool IsInCollisionMap()
+        {
+            return true;
+        }
+
+        public Vec2i GetCollisionMapPosition()
+        {
+            return GetCollisionMapPosition(position);
+        }
+
+        public Vec2i GetCollisionMapPosition(Vec2d v)
+        {
+            Vec2i r = (Vec2i)(v / Block.BLOCK_SIZE);
+            r.X = Math.Max(0, r.X);
+            r.Y = Math.Max(0, r.Y);
+
+            r.X = Math.Min(owner.mapBlockWidth - 1, r.X);
+            r.Y = Math.Min(owner.mapBlockHeight - 1, r.Y);
+
+            return r;
+        }
+
         public virtual bool IsKillZoneImmune()
         {
             return false;
@@ -100,7 +125,7 @@ namespace SuperBitBros.Entities
                 height + DETECTION_TOLERANCE * 2);
             Rect2d currPosition = GetPosition();
 
-            foreach (DynamicEntity e in owner.GetCurrentEntityList())
+            foreach (DynamicEntity e in owner.GetSurroundingEntityList(GetCollisionMapPosition()))
             {
                 if (nocollnewpos.IsColldingWith(e.GetPosition()) && e != this)
                 {
@@ -211,7 +236,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.dynamicEntityList)
+            foreach (Entity e in owner.GetSurroundingEntityList(GetCollisionMapPosition()))
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().Y < this.GetMiddle().Y)
                     return true;
 
@@ -239,7 +264,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.dynamicEntityList)
+            foreach (Entity e in owner.GetSurroundingEntityList(GetCollisionMapPosition()))
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().Y > this.GetMiddle().Y)
                     return true;
 
@@ -267,7 +292,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.dynamicEntityList)
+            foreach (Entity e in owner.GetSurroundingEntityList(GetCollisionMapPosition()))
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X > this.GetMiddle().X)
                     return true;
 
@@ -295,7 +320,7 @@ namespace SuperBitBros.Entities
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.dynamicEntityList)
+            foreach (Entity e in owner.GetSurroundingEntityList(GetCollisionMapPosition()))
                 if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X < this.GetMiddle().X)
                     return true;
 

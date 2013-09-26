@@ -82,7 +82,7 @@ namespace SuperBitBros.Entities.EnityController
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.dynamicEntityList)
+            foreach (Entity e in owner.GetSurroundingEntityList(ent.GetCollisionMapPosition()))
             {
                 if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition()))
                 {
@@ -118,7 +118,7 @@ namespace SuperBitBros.Entities.EnityController
 
             // TEST ENTITIES
 
-            foreach (Entity e in owner.dynamicEntityList)
+            foreach (Entity e in owner.GetSurroundingEntityList(ent.GetCollisionMapPosition()))
             {
                 if (e != ent && Entity.TestBlocking(e, ent) && newpos.IsColldingWith(e.GetPosition()))
                 {

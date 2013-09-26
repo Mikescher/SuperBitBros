@@ -101,6 +101,11 @@ namespace SuperBitBros.Entities.DynamicEntities.Particles
             return transparency;
         }
 
+        public override bool IsInCollisionMap()
+        {
+            return !IsPureOptical();
+        }
+
         protected virtual bool IsPureOptical() // true := Wird bei zuviel Partikeln nicht angezeigt
         {
             return true;

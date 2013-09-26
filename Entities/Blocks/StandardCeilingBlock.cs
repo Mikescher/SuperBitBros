@@ -19,8 +19,13 @@ namespace SuperBitBros.Entities.Blocks
             {
                 (collidingEntity as Player).StopYMovement();
                 DestroyExplode();
-                ((GameWorld)owner).ReplaceBlock(this, new StandardAirBlock());
+                ((GameWorld)owner).ReplaceBlock(this, GetReplacementAir());
             }
+        }
+
+        public virtual StandardAirBlock GetReplacementAir()
+        {
+            return new StandardAirBlock();
         }
 
         public static Color GetColor()

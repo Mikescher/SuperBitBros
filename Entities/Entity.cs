@@ -29,7 +29,9 @@ namespace SuperBitBros.Entities
 
         public GameModel owner;
 
+        protected Vec2d old_position;
         public Vec2d position; // bottom left
+
         protected int distance;
 
         public double width;
@@ -101,6 +103,7 @@ namespace SuperBitBros.Entities
 
         public virtual void Update(KeyboardDevice keyboard)
         {
+            old_position = new Vec2d(position);
         }
 
         protected abstract bool IsBlockingOther(Entity sender);

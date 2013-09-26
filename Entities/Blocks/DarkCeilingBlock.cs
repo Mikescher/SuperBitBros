@@ -13,13 +13,9 @@ namespace SuperBitBros.Entities.Blocks
             texture = Textures.texture_darkCeiling;
         }
 
-        public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
+        public override StandardAirBlock GetReplacementAir()
         {
-            if (isBlockingMovement && collidingEntity.GetType() == typeof(Player) && (collidingEntity as Player).IsBig() && collidingEntity.GetTopLeft().Y <= GetBottomRight().Y && ((Player)collidingEntity).GetMovement().Y > 0)
-            {
-                DestroyExplode();
-                ((GameWorld)owner).ReplaceBlock(this, new DarkAirBlock());
-            }
+            return new DarkAirBlock();
         }
 
         public new static Color GetColor()
