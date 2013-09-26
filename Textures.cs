@@ -50,6 +50,7 @@ namespace SuperBitBros
         public static OGLTexture texture_flower;
 
         public static OGLTexture texture_fireball;
+        public static OGLTexture texture_lavaball;
 
         public static OGLTexture texture_goomba;
         public static OGLTexture texture_goomba_dead;
@@ -107,6 +108,7 @@ namespace SuperBitBros
             texture_flower = block_textures.GetTextureWrapper(12);
 
             texture_fireball = block_textures.GetTextureWrapper(248);
+            texture_lavaball = block_textures.GetTextureWrapper(264);
 
             texture_goomba = block_textures.GetTextureWrapper(110);
             texture_goomba_dead = block_textures.GetTextureWrapper(95);

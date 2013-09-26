@@ -8,23 +8,29 @@ using System.Threading.Tasks;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
-    public class FireballEntity : DynamicEntity
+    public class LavaBallEntity : DynamicEntity
     {
-        public FireballEntity(FireBoxBlock block, double fbdistance)
+        public LavaBallEntity()
             : base()
         {
-            distance = Entity.DISTANCE_STRUCTURES;
-            width = 8;
-            height = 8;
+            distance = Entity.DISTANCE_HUD;
+            width = Block.BLOCK_WIDTH;
+            height = Block.BLOCK_HEIGHT;
 
-            texture = Textures.texture_fireball;
+            texture = Textures.texture_lavaball;
 
-            AddController(new FireballController(this, block, fbdistance));
+            AddController(new LavaballController(this));
         }
 
         protected override bool IsBlockingOther(Entity sender)
         {
             return false;
+        }
+
+
+        public override bool IsKillZoneImmune()
+        {
+            return true;
         }
 
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)

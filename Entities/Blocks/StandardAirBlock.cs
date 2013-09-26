@@ -9,6 +9,7 @@ namespace SuperBitBros.Entities.Blocks
         public StandardAirBlock()
             : base()
         {
+            distance = Entity.DISTANCE_AIR;
             texture = Textures.texture_air;
         }
 

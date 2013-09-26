@@ -6,7 +6,7 @@ using System;
 
 namespace SuperBitBros.Entities.EnityController
 {
-    public class FireballEntityController : AbstractEntityController
+    public class FireballController : AbstractEntityController
     {
         private const double ANGLESPEED = (2 * Math.PI) / 150.0;
 
@@ -16,7 +16,7 @@ namespace SuperBitBros.Entities.EnityController
         private Vec2d deltaCache;
         private double angle = 0;
 
-        public FireballEntityController(FireballEntity e, FireBoxBlock b, double fbdistance)
+        public FireballController(FireballEntity e, FireBoxBlock b, double fbdistance)
             : base(e)
         {
             midPos = new Vec2d(b.GetMiddle());

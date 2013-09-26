@@ -96,6 +96,7 @@
     <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
     <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
     <Compile Include="Entities\DynamicEntities\FlowerEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\LavaBallEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Bowser.cs" />
     <Compile Include="Entities\DynamicEntities\LeverEntity.cs" />
     <Compile Include="Entities\DynamicEntities\FireballEntity.cs" />
@@ -123,10 +124,11 @@
     <Compile Include="Entities\EnityController\BeanStalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\BlooperController.cs" />
     <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
+    <Compile Include="Entities\EnityController\LavaballController.cs" />
     <Compile Include="Entities\EnityController\ShootingFireballController.cs" />
     <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
-    <Compile Include="Entities\EnityController\FireballEntityController.cs" />
+    <Compile Include="Entities\EnityController\FireballController.cs" />
     <Compile Include="Entities\EnityController\ParatroopaController.cs" />
     <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
@@ -247,6 +249,7 @@
     <None Include="Resources\map_02-01.ora" />
     <None Include="Resources\map_02-02.ora" />
     <None Include="Resources\map_02-03.ora" />
+    <None Include="Resources\map_02-04.ora" />
     <None Include="Resources\map_debug.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />

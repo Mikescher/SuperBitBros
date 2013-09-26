@@ -14,6 +14,8 @@ namespace SuperBitBros.Entities
         // 0 < DEPTH <= 50
         public const int DISTANCE_BACKRGOUND = 50;
 
+        public const int DISTANCE_AIR = 45;
+        public const int DISTANCE_BEHIND_BLOCKS = 40;
         public const int DISTANCE_BLOCKS = 38;
         public const int DISTANCE_CORPSE = 34;
         public const int DISTANCE_POWERUPS = 30;

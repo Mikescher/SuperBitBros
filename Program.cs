@@ -30,7 +30,7 @@ namespace SuperBitBros
 
 
             Console.Out.WriteLine("START");
-            GameModel world = new GameWorld(0, 0);
+            GameModel world = new GameWorld(2, 4);
             OpenGLView view = new OpenGLGameView(world);
 
             Textures.Load();
@@ -41,3 +41,5 @@ namespace SuperBitBros
         }
     }
 }
+
+//TODO Add BigMario Crouching
