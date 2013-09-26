@@ -10,6 +10,7 @@ namespace SuperBitBros
 
         public static OGLTextureSheet mario_small_sheet;
         public static OGLTextureSheet mario_big_sheet;
+        public static OGLTextureSheet mario_fire_sheet;
 
         public static OGLTextureSheet piranhaplant_sheet;
 
@@ -46,6 +47,7 @@ namespace SuperBitBros
         public static OGLTexture texture_coin_3;
 
         public static OGLTexture texture_mushroom;
+        public static OGLTexture texture_flower;
 
         public static OGLTexture texture_fireball;
 
@@ -67,6 +69,7 @@ namespace SuperBitBros
 
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
             mario_big_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_big, 16, 2);
+            mario_fire_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_fire, 16, 2);
 
             texture_mariohead = block_textures.GetTextureWrapper(261);
 
@@ -101,6 +104,7 @@ namespace SuperBitBros
             texture_coin_3 = block_textures.GetTextureWrapper(124);
 
             texture_mushroom = block_textures.GetTextureWrapper(6);
+            texture_flower = block_textures.GetTextureWrapper(12);
 
             texture_fireball = block_textures.GetTextureWrapper(248);
 

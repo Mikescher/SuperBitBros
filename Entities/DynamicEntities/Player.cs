@@ -3,6 +3,7 @@ using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.Entities.EnityController;
 using SuperBitBros.MarioPower;
+using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
 using SuperBitBros.Triggers.PipeZones;
@@ -28,6 +29,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public Direction direction;
 
+        private BooleanKeySwitch actionSwitch = new BooleanKeySwitch(false, Key.D, KeyTriggerMode.FLICKER_DOWN);
         public AbstractMarioPower power { get; private set; }
 
         private int invincTime = 0;
@@ -56,6 +58,8 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             base.Update(keyboard);
 
+            power.Update(keyboard);
+
             if (IsUserControlled())
             {
                 if (keyboard[Key.Down] && IsOnGround())
@@ -66,10 +70,12 @@ namespace SuperBitBros.Entities.DynamicEntities
                     TestForPipe(PipeDirection.NORTH);
                 if (keyboard[Key.Down] && IsCollidingLeft())
                     TestForPipe(PipeDirection.WEST);
+                if (actionSwitch.Value)
+                    power.DoAction(this);
             }
 
             if (Program.debugViewSwitch.Value && Program.debugExplosionSwitch.Value) { Explode(); KillLater(); }
-            if (Program.debugViewSwitch.Value && Program.debugPlayerUpgrade.Value) { growToBigPlayer(); }
+            if (Program.debugViewSwitch.Value && Program.debugPlayerUpgrade.Value) { if (IsBig())  GrowToShootingPlayer(); else GrowToBigPlayer(); }
 
             if (invincTime > 0)
                 invincTime--;
@@ -268,10 +274,14 @@ namespace SuperBitBros.Entities.DynamicEntities
             atexture = p.GetTexture();
         }
 
-        public void growToBigPlayer()
+        public void GrowToBigPlayer()
         {
-            if (power is StandardMarioPower)
-                ChangePower(new BigMarioPower());
+            ChangePower(new BigMarioPower());
+        }
+
+        public void GrowToShootingPlayer()
+        {
+            ChangePower(new ShootingMarioPower());
         }
 
         public bool IsBig()

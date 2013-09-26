@@ -125,6 +125,18 @@ namespace SuperBitBros
             return blockMap[x, y].GetBlockColor();
         }
 
+        public virtual Entity TestAddEntity(DynamicEntity e, double x, double y)
+        {
+            e.position.X = x;
+            e.position.Y = y;
+            e.owner = this;
+
+            if (e.DoCollisions(true))
+                return null;
+            else
+                return AddEntity(e, x, y);
+        }
+
         public virtual Entity AddEntity(DynamicEntity e, double x, double y)
         {
             e.position.X = x;

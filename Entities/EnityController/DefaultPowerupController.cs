@@ -1,11 +1,10 @@
 ﻿using OpenTK.Input;
-using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 
 namespace SuperBitBros.Entities.EnityController
 {
-    public class MushroomController : AbstractNewtonEntityController
+    public class DefaultPowerupController : AbstractNewtonEntityController
     {
         protected int walkDirection = -1; // +1 ||-1 || 0
 
@@ -13,7 +12,7 @@ namespace SuperBitBros.Entities.EnityController
         public const double SHROOM_SPEED = 1;
         public const double SHROOM_SPAWNFORCE = 3;
 
-        public MushroomController(MushroomEntity m)
+        public DefaultPowerupController(DynamicEntity m)
             : base(m)
         {
             movementDelta = new Vec2d(0, SHROOM_SPAWNFORCE);

@@ -3,16 +3,16 @@ using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
-    public class MushroomEntity : DynamicEntity
+    public class FlowerEntity : DynamicEntity
     {
-        public MushroomEntity()
+        public FlowerEntity()
             : base()
         {
             distance = Entity.DISTANCE_POWERUPS;
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT;
 
-            texture = Textures.texture_mushroom;
+            texture = Textures.texture_flower;
 
             AddController(new DefaultPowerupController(this));
         }
@@ -21,7 +21,7 @@ namespace SuperBitBros.Entities.DynamicEntities
         {
             if (collidingEntity.GetType() == typeof(Player) && isDirectCollision)
             {
-                (owner as GameWorld).player.GrowToBigPlayer();
+                (owner as GameWorld).player.GrowToShootingPlayer();
                 KillLater();
             }
         }

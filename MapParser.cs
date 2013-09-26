@@ -92,7 +92,7 @@ namespace SuperBitBros
             else if (c == StandardAirBlock.GetColor()) { return new StandardAirBlock(); }
             else if (c == DarkAirBlock.GetColor()) { return new DarkAirBlock(); }
             else if (c == CoinBoxBlock.GetColor()) { return new CoinBoxBlock(); }
-            else if (c == MushroomBoxBlock.GetColor()) { return new MushroomBoxBlock(); }
+            else if (c == PowerUpgradeBoxBlock.GetColor()) { return new PowerUpgradeBoxBlock(); }
             else if (c == EmptyBoxBlock.GetColor()) { return new EmptyBoxBlock(); }
             else if (c == StandardHillBlock.GetColor()) { return new StandardHillBlock(); }
             else if (c == DarkHillBlock.GetColor()) { return new DarkHillBlock(); }

@@ -1,15 +1,19 @@
 ﻿using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.MarioPower;
 using System.Drawing;
 
 namespace SuperBitBros.Entities.Blocks
 {
-    public class MushroomBoxBlock : BoxBlock
+    public class PowerUpgradeBoxBlock : BoxBlock
     {
         public static Color color = Color.FromArgb(0, 128, 128);
 
         public override void OnActivate(Player p)
         {
-            owner.AddEntity(new MushroomEntity(), GetTopLeft().X, GetTopLeft().Y);
+            if (p.power is StandardMarioPower)
+                owner.AddEntity(new MushroomEntity(), GetTopLeft().X, GetTopLeft().Y);
+            else
+                owner.AddEntity(new FlowerEntity(), GetTopLeft().X, GetTopLeft().Y);
             Deactivate();
         }
 

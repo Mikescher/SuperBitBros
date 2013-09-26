@@ -82,10 +82,13 @@ namespace SuperBitBros.Entities
             return false;
         }
 
-        public void DoCollisions()
+        /// <returns> Wether an illegal pushback happened</returns>
+        public bool DoCollisions(bool ignoreIllegalPushback = false)
         {
             if (!alive)
-                return;
+                return false;
+
+            bool result = false;
 
             // Collide with Entities
 
@@ -113,7 +116,10 @@ namespace SuperBitBros.Entities
 
                     if (isBlock && isColl)
                     {
-                        OnIllegalIntersection(e);
+                        result = true;
+
+                        if (!ignoreIllegalPushback)
+                            OnIllegalIntersection(e);
                     }
                 }
             }
@@ -141,7 +147,10 @@ namespace SuperBitBros.Entities
 
                         if (isBlock && isColl)
                         {
-                            OnIllegalIntersection(b);
+                            result = true;
+
+                            if (!ignoreIllegalPushback)
+                                OnIllegalIntersection(b);
                         }
                     }
                 }
@@ -169,6 +178,8 @@ namespace SuperBitBros.Entities
                     }
                 }
             }
+
+            return result;
         }
 
         private void OnIllegalIntersection(Entity other)

@@ -1,5 +1,6 @@
 ﻿
 using SuperBitBros.Entities;
+using SuperBitBros.Entities.DynamicEntities;
 namespace SuperBitBros.MarioPower
 {
     public class BigMarioPower : AbstractMarioPower
@@ -60,6 +61,11 @@ namespace SuperBitBros.MarioPower
             atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(11, 1));
 
             return atexture;
+        }
+
+        public override void DoAction(Player p)
+        {
+            //
         }
     }
 }

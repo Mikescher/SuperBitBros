@@ -83,7 +83,7 @@
     <Compile Include="Entities\Blocks\MushroomPlatformBlock.cs" />
     <Compile Include="Entities\Blocks\SolidCloudBlock.cs" />
     <Compile Include="Entities\Blocks\StandardCeilingBlock.cs" />
-    <Compile Include="Entities\Blocks\MushroomBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\PowerUpgradeBoxBlock.cs" />
     <Compile Include="Entities\Blocks\CrazyCoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\DarkCeilingBlock.cs" />
     <Compile Include="Entities\Blocks\DarkGroundBlock.cs" />
@@ -95,6 +95,7 @@
     <Compile Include="Entities\Blocks\StandardPillarBlock.cs" />
     <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
     <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\FlowerEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Bowser.cs" />
     <Compile Include="Entities\DynamicEntities\LeverEntity.cs" />
     <Compile Include="Entities\DynamicEntities\FireballEntity.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\PersistentCoinEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\ShootingFireballEntity.cs" />
     <Compile Include="Entities\DynamicEntities\ToadEntity.cs" />
     <Compile Include="Entities\EnityController\BowserController.cs" />
     <Compile Include="Entities\EnityController\CheepCheepController.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Entities\EnityController\BeanStalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\BlooperController.cs" />
     <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
+    <Compile Include="Entities\EnityController\ShootingFireballController.cs" />
     <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\FireballEntityController.cs" />
@@ -128,7 +131,7 @@
     <Compile Include="Entities\EnityController\ExplosionController.cs" />
     <Compile Include="Entities\EnityController\FlagPlayerController.cs" />
     <Compile Include="Entities\EnityController\KoopaShellController.cs" />
-    <Compile Include="Entities\EnityController\MushroomController.cs" />
+    <Compile Include="Entities\EnityController\DefaultPowerupController.cs" />
     <Compile Include="Entities\EnityController\SimpleExplosionController.cs" />
     <Compile Include="Entities\EnityController\StaticEntityController.cs" />
     <Compile Include="Entities\EnityController\UnderwaterNewtonEntityController.cs" />
@@ -152,6 +155,7 @@
     <Compile Include="HUD\StandardGameHUD.cs" />
     <Compile Include="MarioPower\BigMarioPower.cs" />
     <Compile Include="MarioPower\AbstractMarioPower.cs" />
+    <Compile Include="MarioPower\ShootingMarioPower.cs" />
     <Compile Include="MarioPower\StandardMarioPower.cs" />
     <Compile Include="OffsetCalculator.cs" />
     <Compile Include="OpenGL\AvgDurationWatch.cs" />
@@ -268,6 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mario_big.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mario_fire.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
