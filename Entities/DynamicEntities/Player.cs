@@ -52,7 +52,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private bool IsUserControlled()
         {
-            return controllerStack.Count != 0 && controllerStack.Peek() is DefaultPlayerController;
+            return controllerStack.Count != 0 && (controllerStack.Peek() is DefaultPlayerController || controllerStack.Peek() is UnderwaterPlayerController);
         }
 
         public override void Update(KeyboardDevice keyboard)
@@ -264,14 +264,23 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public void AddBeanStalkController()
         {
-            if (!HasController() || !(controllerStack.Peek() is BeanStalkPlayerController))
-                AddController(new BeanStalkPlayerController(this));
+            AddController(new BeanStalkPlayerController(this));
         }
 
         public void StopYMovement()
         {
             if (HasController() && controllerStack.Peek() is AbstractNewtonEntityController)
                 (controllerStack.Peek() as AbstractNewtonEntityController).movementDelta.Y = 0;
+        }
+
+        public void AddWaterController()
+        {
+            AddController(new UnderwaterPlayerController(this));
+        }
+
+        public Stack<AbstractEntityController> GetControllerStack()
+        {
+            return controllerStack;
         }
     }
 }

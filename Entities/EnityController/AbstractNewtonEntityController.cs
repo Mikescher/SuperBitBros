@@ -1,17 +1,20 @@
-﻿using System;
-using SuperBitBros.Entities.Blocks;
+﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
 
 namespace SuperBitBros.Entities.EnityController
 {
     public abstract class AbstractNewtonEntityController : AbstractEntityController
     {
         public const double PUSH_BACK_FORCE = 2;
-        public const double GRAVITY_ACCELERATION = 0.4;
-        public const double MAX_GRAVITY = 20;
+        private const double STANDARD_GRAVITY_ACCELERATION = 0.4;
+        private const double STANDARD_MAX_GRAVITY = 20;
 
         public Vec2d movementDelta = Vec2d.Zero;
         protected Vec2d physicPushForce = Vec2d.Zero;
+
+        protected double Gravity_Acc = STANDARD_GRAVITY_ACCELERATION;
+        protected double Gravity_Max = STANDARD_MAX_GRAVITY;
 
         public AbstractNewtonEntityController(DynamicEntity e)
             : base(e)
@@ -34,12 +37,12 @@ namespace SuperBitBros.Entities.EnityController
         public void DoGravitationalMovement(Vec2d additionalForce, bool resetXOnCollision = true, bool resetYOnCollision = true)
         {
             //movementDelta.X = 0;
-            movementDelta.Y -= GRAVITY_ACCELERATION;
+            movementDelta.Y -= Gravity_Acc;
             if (ent.IsOnGround())
                 movementDelta.Y = Math.Max(movementDelta.Y, 0);
 
-            if (movementDelta.Y < -MAX_GRAVITY)
-                movementDelta.Y = -MAX_GRAVITY;
+            if (movementDelta.Y < -Gravity_Max)
+                movementDelta.Y = -Gravity_Max;
 
             movementDelta += additionalForce;
 

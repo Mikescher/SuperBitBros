@@ -14,6 +14,11 @@ namespace SuperBitBros.Entities.EnityController
             this.ent = e;
         }
 
+        public virtual bool IsSingleTon()
+        {
+            return true;
+        }
+
         public abstract void Update(KeyboardDevice keyboard);
 
         public abstract bool IsActive();

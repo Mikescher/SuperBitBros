@@ -13,7 +13,7 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 0:
-                            return Resources.map_debug;
+                            return Resources.map_00_00; // Debug Map
                         case 1:
                             return Resources.map_00_01; // LevelChooseMap
                         case 2:
@@ -45,10 +45,12 @@ namespace SuperBitBros
                         case 1:
                             return Resources.map_02_01;
                         case 2:
-                            throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
+                            return Resources.map_02_02;
                         case 3:
+                            //return Resources.map_02_03;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:
+                            //return Resources.map_02_04;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         default:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
@@ -57,12 +59,16 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 1:
+                            //return Resources.map_03_01;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 2:
+                            //return Resources.map_03_02;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 3:
+                            //return Resources.map_03_03;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:
+                            //return Resources.map_03_04;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         default:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
@@ -71,12 +77,16 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 1:
+                            //return Resources.map_04_01;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 2:
+                            //return Resources.map_04_02;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 3:
+                            //return Resources.map_04_03;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:
+                            //return Resources.map_04_04;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         default:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
@@ -85,12 +95,16 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 1:
+                            //return Resources.map_05_01;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 2:
+                            //return Resources.map_05_02;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 3:
+                            //return Resources.map_05_03;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:
+                            //return Resources.map_05_04;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         default:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
@@ -99,12 +113,16 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 1:
+                            //return Resources.map_06_01;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 2:
+                            //return Resources.map_06_02;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 3:
+                            //return Resources.map_06_03;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:
+                            //return Resources.map_06_04;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         default:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
@@ -113,12 +131,16 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 1:
+                            //return Resources.map_07_01;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 2:
+                            //return Resources.map_07_02;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 3:
+                            //return Resources.map_07_03;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:
+                            //return Resources.map_07_04;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         default:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
@@ -127,12 +149,16 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 1:
+                            //return Resources.map_08_01;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 2:
+                            //return Resources.map_08_02;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 3:
+                            //return Resources.map_08_03;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:
+                            //return Resources.map_08_04;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         default:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));

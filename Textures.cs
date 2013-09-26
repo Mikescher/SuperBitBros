@@ -37,6 +37,8 @@ namespace SuperBitBros
         public static OGLTexture texture_lever;
         public static OGLTexture texture_solidcloud;
         public static OGLTexture texture_beanstalk;
+        public static OGLTexture texture_underwater_water;
+        public static OGLTexture texture_underwater_ground;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
@@ -54,6 +56,8 @@ namespace SuperBitBros
         public static OGLTexture texture_paratroopa;
         public static OGLTexture texture_bowser;
         public static OGLTexture texture_toad;
+        public static OGLTexture texture_cheepcheep;
+        public static OGLTexture texture_blooper;
 
         public static void Load()
         {
@@ -84,6 +88,8 @@ namespace SuperBitBros
             texture_lever = block_textures.GetTextureWrapper(11);
             texture_solidcloud = block_textures.GetTextureWrapper(1);
             texture_beanstalk = block_textures.GetTextureWrapper(21);
+            texture_underwater_water = block_textures.GetTextureWrapper(263);
+            texture_underwater_ground = block_textures.GetTextureWrapper(262);
 
             texture_darkGround = block_textures.GetTextureWrapper(178);
             texture_darkCeiling = block_textures.GetTextureWrapper(4);
@@ -105,6 +111,8 @@ namespace SuperBitBros
             texture_paratroopa = block_textures.GetTextureWrapper(257);
             texture_toad = block_textures.GetTextureWrapper(258);
             texture_bowser = block_textures.GetCombinedTextureWrapper(19, 3, 2, 1);
+            texture_cheepcheep = block_textures.GetTextureWrapper(29);
+            texture_blooper = block_textures.GetTextureWrapper(30);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }

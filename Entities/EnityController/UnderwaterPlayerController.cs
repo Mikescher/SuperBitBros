@@ -1,4 +1,5 @@
 ﻿using OpenTK.Input;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
@@ -6,16 +7,21 @@ using System;
 
 namespace SuperBitBros.Entities.EnityController
 {
-    public class DefaultPlayerController : AbstractNewtonEntityController
+    public class UnderwaterPlayerController : UnderwaterNewtonEntityController
     {
+        public const int SWIM_UP_COOLDOWN = 15;
+
         public const double PLAYER_SPEED_FRICTION = 0.15;
         public const double PLAYER_SPEED_ACC = PLAYER_SPEED_FRICTION + 0.1;
-        public const double PLAYER_SPEED_MAX = 4.5;
-        public const double PLAYER_JUMP_POWER = 9;
+        public const double PLAYER_SPEED_MAX = 2.5;
+        public const double PLAYER_JUMP_POWER = 5;
 
-        public const double PLAYER_MOB_KILL_JUMP = 4.5;
+        private int canSwimUp = 0;
+        private bool lastSpaceState = false;
 
-        public DefaultPlayerController(Player e)
+        private int is_active = 5;
+
+        public UnderwaterPlayerController(Player e)
             : base(e)
         {
         }
@@ -23,6 +29,9 @@ namespace SuperBitBros.Entities.EnityController
         public override void Update(KeyboardDevice keyboard)
         {
             updateMovement(keyboard);
+
+            if (canSwimUp > 0)
+                canSwimUp--;
         }
 
         private void updateMovement(KeyboardDevice keyboard)
@@ -41,15 +50,12 @@ namespace SuperBitBros.Entities.EnityController
                 delta.X += PLAYER_SPEED_ACC;
             }
 
-            if (keyboard[Key.Space] && ent.IsOnGround())
+            if (keyboard[Key.Space] && !lastSpaceState && canSwimUp == 0)
             {
-                if (movementDelta.Y >= 0)
-                {
-                    delta.Y = Math.Max((PLAYER_JUMP_POWER + Gravity_Acc) - movementDelta.Y, 0);
-                }
-                else
-                    delta.Y = PLAYER_JUMP_POWER + Gravity_Acc;
+                delta.Y = PLAYER_JUMP_POWER + Gravity_Acc;
+                canSwimUp = SWIM_UP_COOLDOWN;
             }
+            lastSpaceState = keyboard[Key.Space];
 
             if (Program.debugViewSwitch.Value && Program.debugFlySwitch.Value)
             {
@@ -74,19 +80,16 @@ namespace SuperBitBros.Entities.EnityController
 
                 DoGravitationalMovement(delta);
             }
+
+            if (!(owner.GetBlock((Vec2i)(ent.position / Block.BLOCK_SIZE)) is WaterBlock))
+                is_active--;
+            else
+                is_active = 5;
         }
 
         public override bool IsActive()
         {
-            return true;
-        }
-
-        public void DoMobKillPushback()
-        {
-            if (movementDelta.Y <= 0)
-            {
-                movementDelta.Y = PLAYER_MOB_KILL_JUMP;
-            }
+            return is_active > 0;
         }
     }
 }

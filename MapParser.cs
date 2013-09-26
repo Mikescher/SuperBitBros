@@ -39,6 +39,8 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_TOAD = Color.FromArgb(255, 0, 255);
         private static readonly Color COL_SPAWN_BOWSER = Color.FromArgb(255, 128, 0);
         private static readonly Color COL_SPAWN_BEANSTALK = Color.FromArgb(255, 128, 255);
+        private static readonly Color COL_SPAWN_CHEEPCHEEP = Color.FromArgb(255, 0, 0);
+        private static readonly Color COL_SPAWN_BLOOPER = Color.FromArgb(128, 0, 128);
 
         public readonly OpenRasterImage map;
 
@@ -106,6 +108,8 @@ namespace SuperBitBros
             else if (c == FireBoxBlock.GetColor()) { return new FireBoxBlock(); }
             else if (c == SolidCloudBlock.GetColor()) { return new SolidCloudBlock(); }
             else if (c == BeanStalkBoxBlock.GetColor()) { return new BeanStalkBoxBlock(); }
+            else if (c == UnderwaterGroundBlock.GetColor()) { return new UnderwaterGroundBlock(); }
+            else if (c == WaterBlock.GetColor()) { return new WaterBlock(); }
             else { return null; }
         }
 
@@ -123,6 +127,8 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_TOAD) { return new EntityTypeWrapper(typeof(ToadEntity)); }
             else if (c == COL_SPAWN_BOWSER) { return new EntityTypeWrapper(typeof(Bowser)); }
             else if (c == COL_SPAWN_BEANSTALK) { return new EntityTypeWrapper(typeof(BeanStalkEntity)); }
+            else if (c == COL_SPAWN_CHEEPCHEEP) { return new EntityTypeWrapper(typeof(CheepCheep)); }
+            else if (c == COL_SPAWN_BLOOPER) { return new EntityTypeWrapper(typeof(Blooper)); }
             else { return new EntityTypeWrapper(null); }
         }
 

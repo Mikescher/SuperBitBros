@@ -76,6 +76,8 @@
     <Compile Include="Entities\Blocks\CastleGroundBlock.cs" />
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\BeanStalkBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\WaterBlock.cs" />
+    <Compile Include="Entities\Blocks\UnderwaterGroundBlock.cs" />
     <Compile Include="Entities\Blocks\FireBoxBlock.cs" />
     <Compile Include="Entities\Blocks\LavaBlock.cs" />
     <Compile Include="Entities\Blocks\MushroomPlatformBlock.cs" />
@@ -97,6 +99,8 @@
     <Compile Include="Entities\DynamicEntities\LeverEntity.cs" />
     <Compile Include="Entities\DynamicEntities\FireballEntity.cs" />
     <Compile Include="Entities\DynamicEntities\FlagEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\CheepCheep.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\Blooper.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Paratroopa.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\KoopaShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Koopa.cs" />
@@ -111,8 +115,10 @@
     <Compile Include="Entities\DynamicEntities\PersistentCoinEntity.cs" />
     <Compile Include="Entities\DynamicEntities\ToadEntity.cs" />
     <Compile Include="Entities\EnityController\BowserController.cs" />
+    <Compile Include="Entities\EnityController\CheepCheepController.cs" />
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
     <Compile Include="Entities\EnityController\BeanStalkPlayerController.cs" />
+    <Compile Include="Entities\EnityController\BlooperController.cs" />
     <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\FireballEntityController.cs" />
@@ -123,6 +129,8 @@
     <Compile Include="Entities\EnityController\MushroomController.cs" />
     <Compile Include="Entities\EnityController\SimpleExplosionController.cs" />
     <Compile Include="Entities\EnityController\StaticEntityController.cs" />
+    <Compile Include="Entities\EnityController\UnderwaterNewtonEntityController.cs" />
+    <Compile Include="Entities\EnityController\UnderwaterPlayerController.cs" />
     <Compile Include="Entities\EntityTypeWrapper.cs" />
     <Compile Include="Entities\EnityController\AbstractEntityController.cs" />
     <Compile Include="Entities\EnityController\AbstractNewtonEntityController.cs" />
@@ -221,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Resources\map_00-00.ora" />
     <None Include="Resources\map_00-01.ora" />
     <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
@@ -230,6 +239,7 @@
     <None Include="Resources\map_01-03.ora" />
     <None Include="Resources\map_01-04.ora" />
     <None Include="Resources\map_02-01.ora" />
+    <None Include="Resources\map_02-02.ora" />
     <None Include="Resources\map_debug.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />

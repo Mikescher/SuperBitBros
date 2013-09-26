@@ -2,6 +2,7 @@
 using OpenTK.Graphics.OpenGL;
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.HUD;
 using SuperBitBros.OpenGL.OGLMath;
@@ -277,15 +278,17 @@ namespace SuperBitBros
 
             int foy = 3;
             Color4 col = Color.FromArgb(0, 0, 0);
+            Player pl = ((GameWorld)model).player;
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("FPS: {0} / {1}", (int)fps_counter.Frequency, window.TargetRenderFrequency), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("UPS: {0} / {1}", (int)ups_counter.Frequency, window.TargetUpdateFrequency), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("dyn. Entities: {0}", model.dynamicEntityList.Count), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Optical Particles: {0}/{1}", Particle.GetGlobalParticleCount(), Particle.MAX_PARTICLE_COUNT), col);
-            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player: [int] {0}", (Vec2i)((GameWorld)model).player.position), col);
+            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player: [int] {0}", (Vec2i)pl.position), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Offset: [int] {0}", (Vec2i)offset), col);
-            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player -> : [int] {0}", (Vec2i)((GameWorld)model).player.GetMovement()), col);
+            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Player -> : [int] {0}", (Vec2i)pl.GetMovement()), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg R-Time: {0}", ((int)(render_watch.Duration * 10)) / 10.0), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg U-Time: {0}", ((int)(update_watch.Duration * 10)) / 10.0), col);
+            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Controller ({0}): {1}", pl.GetControllerStack().Count, pl.GetControllerStack().Count > 0 ? pl.GetControllerStack().Peek().GetType().Name : "null"), col);
 
             #endregion DebugTexts
 

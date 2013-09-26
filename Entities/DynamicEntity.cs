@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenTK.Input;
+﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.Entities.EnityController;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
+using System;
+using System.Collections.Generic;
 
 namespace SuperBitBros.Entities
 {
@@ -80,7 +80,8 @@ namespace SuperBitBros.Entities
 
         public void DoCollisions()
         {
-            if (!alive) return;
+            if (!alive)
+                return;
 
             // Collide with Entities
 
@@ -294,12 +295,22 @@ namespace SuperBitBros.Entities
                 return Vec2d.Zero;
         }
 
-        protected void AddController(AbstractEntityController c)
+        protected bool AddController(AbstractEntityController c)
         {
+            if (c.IsSingleTon())
+            {
+                foreach (AbstractEntityController aec in controllerStack)
+                {
+                    if (aec.GetType() == c.GetType())
+                        return false;
+                }
+            }
+
             if (HasController())
                 controllerStack.Peek().OnHide();
 
             controllerStack.Push(c);
+            return true;
         }
 
         protected virtual void OnKill()
