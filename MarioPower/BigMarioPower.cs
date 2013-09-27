@@ -15,6 +15,11 @@ namespace SuperBitBros.MarioPower
             return 2.0;
         }
 
+        public override double GetCrouchMultiplier()
+        {
+            return 0.5;
+        }
+
         public override AbstractMarioPower GetSubPower()
         {
             return new StandardMarioPower();
@@ -59,6 +64,10 @@ namespace SuperBitBros.MarioPower
             atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(9, 1));
             atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(10, 1));
             atexture.Add(5, Textures.mario_big_sheet.GetTextureWrapper(11, 1));
+
+            // CROUCHING
+            atexture.Add(6, Textures.mario_big_sheet.GetTextureWrapper(14, 0));
+            atexture.Add(6, Textures.mario_big_sheet.GetTextureWrapper(14, 1));
 
             return atexture;
         }

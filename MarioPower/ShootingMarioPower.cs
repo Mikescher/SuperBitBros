@@ -20,6 +20,11 @@ namespace SuperBitBros.MarioPower
             return 2.0;
         }
 
+        public override double GetCrouchMultiplier()
+        {
+            return 0.5;
+        }
+
         public override AbstractMarioPower GetSubPower()
         {
             return new BigMarioPower();
@@ -65,6 +70,10 @@ namespace SuperBitBros.MarioPower
             atexture.Add(5, Textures.mario_fire_sheet.GetTextureWrapper(10, 1));
             atexture.Add(5, Textures.mario_fire_sheet.GetTextureWrapper(11, 1));
 
+            // CROUCHING
+            atexture.Add(6, Textures.mario_fire_sheet.GetTextureWrapper(14, 0));
+            atexture.Add(6, Textures.mario_fire_sheet.GetTextureWrapper(14, 1));
+
             return atexture;
         }
 
@@ -76,7 +85,7 @@ namespace SuperBitBros.MarioPower
 
         public override void DoAction(Player p)
         {
-            if (fireCooldown == 0)
+            if (fireCooldown == 0 && ! p.IsCrouching)
             {
                 if (p.direction == Direction.LEFT)
                 {

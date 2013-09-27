@@ -33,6 +33,7 @@ namespace SuperBitBros.Entities.DynamicEntities
         public AbstractMarioPower power { get; private set; }
 
         private int invincTime = 0;
+        public bool IsCrouching { get; private set; }
 
         public bool isAlive = true;
 
@@ -62,6 +63,9 @@ namespace SuperBitBros.Entities.DynamicEntities
 
             if (IsUserControlled())
             {
+                IsCrouching = keyboard[Key.Down] && IsOnGround();
+                UpdateHeight();
+
                 if (keyboard[Key.Down] && IsOnGround())
                     TestForPipe(PipeDirection.SOUTH);
                 if (keyboard[Key.Right] && IsCollidingRight())
@@ -134,6 +138,10 @@ namespace SuperBitBros.Entities.DynamicEntities
                     atexture.Set(2, (direction == Direction.LEFT) ? 0 : 1);
                 }
             }
+            else if (IsCrouching)
+            {
+                atexture.Set(6, (direction == Direction.LEFT) ? 0 : 1);
+            }
             else if (IsOnGround())
             {
                 if (GetMovement().X > 0)
@@ -166,6 +174,11 @@ namespace SuperBitBros.Entities.DynamicEntities
 
                 atexture.Set(2, (direction == Direction.LEFT) ? 2 : 3);
             }
+        }
+
+        public override Rect2d GetTexturePosition()
+        {
+            return new Rect2d(position, width, PLAYER_HEIGHT * PLAYER_SCALE * power.GetHeightMultiplier());
         }
 
         protected override bool IsBlockingOther(Entity sender)
@@ -270,8 +283,13 @@ namespace SuperBitBros.Entities.DynamicEntities
         public void ChangePower(AbstractMarioPower p)
         {
             power = p;
-            height = PLAYER_HEIGHT * PLAYER_SCALE * p.GetHeightMultiplier();
+            UpdateHeight();
             atexture = p.GetTexture();
+        }
+
+        private void UpdateHeight()
+        {
+            height = PLAYER_HEIGHT * PLAYER_SCALE * power.GetHeightMultiplier() * ((IsCrouching) ? (power.GetCrouchMultiplier()) : (1.0));
         }
 
         public void GrowToBigPlayer()

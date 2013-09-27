@@ -50,5 +50,10 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             return EntityRenderType.BRT_BLOCKTEXTURES;
         }
+
+        public override bool IsInvincible()
+        {
+            return true;
+        }
     }
 }

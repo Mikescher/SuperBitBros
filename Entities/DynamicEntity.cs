@@ -389,5 +389,13 @@ namespace SuperBitBros.Entities
                 }
             }
         }
+
+        /// <summary>
+        /// Invincible to Fireballs, Lavaballs etc (not DeathZones / OutOfBounds)
+        /// </summary>
+        public virtual bool IsInvincible()
+        {
+            return false;
+        }
     }
 }

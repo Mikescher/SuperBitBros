@@ -14,6 +14,7 @@ namespace SuperBitBros.MarioPower
         public virtual void Update(KeyboardDevice keyboard) { /**/ }
 
         public abstract double GetHeightMultiplier();
+        public abstract double GetCrouchMultiplier();
         public abstract AbstractMarioPower GetSubPower();
         public abstract AnimatedTexture GetTexture();
         public abstract void DoAction(Player p);

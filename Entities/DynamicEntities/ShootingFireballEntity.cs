@@ -32,7 +32,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
         {
-            if (collidingEntity is Mob && isDirectCollision)
+            if (collidingEntity is Mob && isDirectCollision && !(collidingEntity as Mob).IsInvincible())
             {
                 (collidingEntity as DynamicEntity).KillLater();
             }

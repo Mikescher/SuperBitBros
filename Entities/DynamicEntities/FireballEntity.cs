@@ -1,10 +1,6 @@
 ﻿using SuperBitBros.Entities.Blocks;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.Entities.EnityController;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -33,6 +29,14 @@ namespace SuperBitBros.Entities.DynamicEntities
             if (p != null)
             {
                 p.DoDeath(this);
+            }
+            else
+            {
+                Mob d = collidingEntity as Mob;
+                if (d != null && !d.IsInvincible())
+                {
+                    d.KillLater();
+                }
             }
         }
 

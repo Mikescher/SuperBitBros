@@ -41,6 +41,13 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             width -= SHRINK_WIDTH * 2;
         }
 
+        protected override void OnKill()
+        {
+            base.OnKill();
+
+            Explode();
+        }
+
         public override Rect2d GetTexturePosition()
         {
             return new Rect2d(position.X - SHRINK_WIDTH, position.Y, 2 * Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT * 2);
