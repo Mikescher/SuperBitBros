@@ -53,6 +53,7 @@ namespace SuperBitBros
 
         public static OGLTexture texture_fireball;
         public static OGLTexture texture_lavaball;
+        public static OGLTexture texture_hammer;
 
         public static OGLTexture texture_goomba;
         public static OGLTexture texture_goomba_dead;
@@ -63,6 +64,7 @@ namespace SuperBitBros
         public static OGLTexture texture_toad;
         public static OGLTexture texture_cheepcheep;
         public static OGLTexture texture_blooper;
+        public static OGLTexture texture_hammerbro;
 
         public static void Load()
         {
@@ -111,6 +113,7 @@ namespace SuperBitBros
 
             texture_fireball = block_textures.GetTextureWrapper(248);
             texture_lavaball = block_textures.GetTextureWrapper(264);
+            texture_hammer = block_textures.GetTextureWrapper(15);
 
             texture_goomba = block_textures.GetTextureWrapper(110);
             texture_goomba_dead = block_textures.GetTextureWrapper(95);
@@ -121,6 +124,7 @@ namespace SuperBitBros
             texture_bowser = block_textures.GetCombinedTextureWrapper(19, 3, 2, 1);
             texture_cheepcheep = block_textures.GetTextureWrapper(29);
             texture_blooper = block_textures.GetTextureWrapper(30);
+            texture_hammerbro = block_textures.GetTextureWrapper(190);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }

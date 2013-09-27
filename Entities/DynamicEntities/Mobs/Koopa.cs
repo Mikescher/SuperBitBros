@@ -1,14 +1,10 @@
 ﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
-using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
     public class Koopa : Mob
     {
-        public const double KOOPA_ACC = 0.2;
-        public const double KOOPA_SPEED = 1;
-
         private bool suppressExplosion = false;
 
         public Koopa()

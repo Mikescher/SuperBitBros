@@ -110,6 +110,11 @@ namespace SuperBitBros.Entities
 
         protected abstract bool IsBlockingOther(Entity sender);
 
+        protected virtual bool IsNeverBlocking()
+        {
+            return false;
+        }
+
         public virtual void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
         {
         }
@@ -119,9 +124,9 @@ namespace SuperBitBros.Entities
             if (e1 is DynamicEntity && e2 is DynamicEntity) // 2 DynEntities
                 return e1.IsBlockingOther(e2) && e2.IsBlockingOther(e1);
             else if (e1 is Block) // Der Block zählt
-                return e1.IsBlockingOther(e2);
+                return !e2.IsNeverBlocking() && e1.IsBlockingOther(e2);
             else if (e2 is Block) // Der Block zählt
-                return e2.IsBlockingOther(e1);
+                return !e1.IsNeverBlocking() && e2.IsBlockingOther(e1);
             else // Wad Wad Wad ???
             {
                 Console.Error.WriteLine("2 Block Collision ???? {0} <-> {1}", e1, e2);

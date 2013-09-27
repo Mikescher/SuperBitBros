@@ -95,6 +95,7 @@
     <Compile Include="Entities\Blocks\StandardPillarBlock.cs" />
     <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
     <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\ShootingHammer.cs" />
     <Compile Include="Entities\DynamicEntities\FlowerEntity.cs" />
     <Compile Include="Entities\DynamicEntities\LavaBallEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Bowser.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="Entities\DynamicEntities\Mobs\CheepCheep.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Blooper.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\AirCheepCheep.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\Hammerbro.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\JumpingParatroopa.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Paratroopa.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\KoopaShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Koopa.cs" />
@@ -125,6 +128,9 @@
     <Compile Include="Entities\EnityController\BeanStalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\BlooperController.cs" />
     <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
+    <Compile Include="Entities\EnityController\ShootingHammerController.cs" />
+    <Compile Include="Entities\EnityController\HammerbroController.cs" />
+    <Compile Include="Entities\EnityController\JumpingParatroopaController.cs" />
     <Compile Include="Entities\EnityController\LavaballController.cs" />
     <Compile Include="Entities\EnityController\ShootingFireballController.cs" />
     <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />

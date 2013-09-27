@@ -1,20 +1,40 @@
-﻿using SuperBitBros.Entities.Blocks;
+﻿using OpenTK.Input;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
-    public class Goomba : Mob
+    public class Hammerbro : Mob
     {
-        public Goomba()
+        private const int HAMMERCOOLDOWN = 25;
+
+        private static Random rand = new Random();
+
+        private int hammerCooldown = 0;
+
+        public Hammerbro()
             : base()
         {
             distance = Entity.DISTANCE_MOBS;
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT;
 
-            texture = Textures.texture_goomba;
+            texture = Textures.texture_hammerbro;
 
-            AddController(new DefaultMobController(this));
+            AddController(new HammerbroController(this));
+        }
+
+        public override void Update(KeyboardDevice keyboard)
+        {
+            base.Update(keyboard);
+
+            if (hammerCooldown-- < 0)
+            {
+                hammerCooldown = HAMMERCOOLDOWN + (int)(rand.NextDouble() * 10);
+
+                owner.AddEntity(new ShootingHammer(), position.X - 4, position.Y + height);
+            }
         }
 
         public override void OnHeadJump(Entity e)
@@ -33,7 +53,6 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             base.OnKill();
 
-            owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
             Explode();
         }
 

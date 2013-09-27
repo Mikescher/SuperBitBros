@@ -4,18 +4,18 @@ using SuperBitBros.Entities.EnityController;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
-    public class LavaBallEntity : DynamicEntity
+    public class ShootingHammer : DynamicEntity
     {
-        public LavaBallEntity()
+        public ShootingHammer()
             : base()
         {
-            distance = Entity.DISTANCE_BEHIND_BLOCKS;
-            width = Block.BLOCK_WIDTH;
-            height = Block.BLOCK_HEIGHT;
+            distance = Entity.DISTANCE_STRUCTURES;
+            width = 16;
+            height = 16;
 
-            texture = Textures.texture_lavaball;
+            texture = Textures.texture_hammer;
 
-            AddController(new LavaballController(this));
+            AddController(new ShootingHammerController(this));
         }
 
         protected override bool IsBlockingOther(Entity sender)
@@ -24,11 +24,6 @@ namespace SuperBitBros.Entities.DynamicEntities
         }
 
         protected override bool IsNeverBlocking()
-        {
-            return true;
-        }
-
-        public override bool IsKillZoneImmune()
         {
             return true;
         }
@@ -43,7 +38,7 @@ namespace SuperBitBros.Entities.DynamicEntities
             else
             {
                 Mob d = collidingEntity as Mob;
-                if (d != null && !d.IsInvincible())
+                if (d != null && !d.IsInvincible() && !(d is Hammerbro))
                 {
                     d.KillLater();
                 }

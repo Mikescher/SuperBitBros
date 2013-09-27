@@ -10,13 +10,14 @@ namespace SuperBitBros.Entities.EnityController
         public const double PLAYER_SPEED_FRICTION = 0.15;
         public const double PLAYER_SPEED_ACC = PLAYER_SPEED_FRICTION + 0.1;
         public const double PLAYER_SPEED_MAX = 4.5;
-        public const double PLAYER_JUMP_POWER = 9;
+        public const double PLAYER_JUMP_POWER = 9.5;
 
         public const double PLAYER_MOB_KILL_JUMP = 4.5;
 
         public DefaultPlayerController(Player e)
             : base(e)
         {
+            Gravity_Max = OffsetCalculator.MAX_CORRECTION_SPEED;
         }
 
         public override void Update(KeyboardDevice keyboard)

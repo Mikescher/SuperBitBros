@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SuperBitBros.Entities.Blocks;
+﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
+using System.Collections.Generic;
 
 namespace SuperBitBros
 {
     public class OffsetCalculator
     {
-        private const double MAX_CORRECTION_SPEED = 15;
+        public const double MAX_CORRECTION_SPEED = 15;
 
         public Vec2d Value { get; private set; }
 
@@ -93,7 +90,7 @@ namespace SuperBitBros
 
             result.TrimNorth(Block.BLOCK_HEIGHT * 2);
             result.TrimEast(Block.BLOCK_WIDTH * 8);
-            result.TrimSouth(Block.BLOCK_HEIGHT * 2 + Player.PLAYER_HEIGHT/2.0);
+            result.TrimSouth(Block.BLOCK_HEIGHT * 2 + Player.PLAYER_HEIGHT / 2.0);
             result.TrimWest(Block.BLOCK_WIDTH * 8);
 
             return result;
