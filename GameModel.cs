@@ -4,6 +4,7 @@ using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.HUD;
+using SuperBitBros.MarioPower;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.Triggers;
@@ -59,7 +60,7 @@ namespace SuperBitBros
             delayedActionList = new List<DelayedAction>();
         }
 
-        public virtual void Init()
+        public virtual void Init(AbstractMarioPower p)
         {
             entityCache = new EntityCache();
         }
@@ -200,6 +201,7 @@ namespace SuperBitBros
             foreach (DynamicEntity e in GetCurrentEntityList())
             {
                 e.Update(keyboard);
+                e.UpdateCollisionMapPosition();
             }
 
             foreach (Block e in GetCurrentBlockList())
@@ -305,7 +307,8 @@ namespace SuperBitBros
             if (collisionMap[x, y] == null)
                 collisionMap[x, y] = new List<DynamicEntity>();
 
-            collisionMap[x, y].Remove(e);
+            if (!collisionMap[x, y].Remove(e))
+                Console.Out.WriteLine("Could not rem Entity {0} from CollisionMap {1}:{2}", e.GetType().Name, x, y);
         }
 
         public void MoveEntityInCollisionMap(DynamicEntity e, Vec2i p, Vec2i n)

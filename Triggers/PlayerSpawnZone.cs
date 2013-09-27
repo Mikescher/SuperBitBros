@@ -1,8 +1,9 @@
-﻿using System.Drawing;
-using SuperBitBros.Entities;
+﻿using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.MarioPower;
 using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.Triggers
 {
@@ -19,9 +20,9 @@ namespace SuperBitBros.Triggers
             //nothing
         }
 
-        public Player SpawnPlayer()
+        public Player SpawnPlayer(AbstractMarioPower pw = null)
         {
-            Player p = new Player();
+            Player p = new Player(pw);
             owner.AddEntity(p, position.X * Block.BLOCK_WIDTH, position.Y * Block.BLOCK_HEIGHT);
             return p;
         }

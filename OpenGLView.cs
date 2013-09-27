@@ -2,6 +2,7 @@
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using QuickFont;
+using SuperBitBros.MarioPower;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
@@ -301,11 +302,11 @@ namespace SuperBitBros
             GL.End();
         }
 
-        public void ChangeWorld(int world, int level)
+        public void ChangeWorld(int world, int level, AbstractMarioPower power)
         {
             GameWorld g;
             SetModel(g = new GameWorld(world, level));
-            g.Init();
+            g.Init(power);
         }
     }
 }

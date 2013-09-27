@@ -43,6 +43,7 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_BLOOPER = Color.FromArgb(128, 0, 128);
         private static readonly Color COL_SPAWN_AIRCHEEPCHEEP = Color.FromArgb(192, 0, 0);
         private static readonly Color COL_SPAWN_LAVABALL = Color.FromArgb(64, 0, 128);
+        private static readonly Color COL_SPAWN_TRAMPOLINE = Color.FromArgb(128, 128, 0);
 
         public readonly OpenRasterImage map;
 
@@ -133,6 +134,7 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_BLOOPER) { return new EntityTypeWrapper(typeof(Blooper)); }
             else if (c == COL_SPAWN_AIRCHEEPCHEEP) { return new EntityTypeWrapper(typeof(AirCheepCheep)); }
             else if (c == COL_SPAWN_LAVABALL) { return new EntityTypeWrapper(typeof(LavaBallEntity)); }
+            else if (c == COL_SPAWN_TRAMPOLINE) { return new EntityTypeWrapper(typeof(TrampolineEntity)); }
             else { return new EntityTypeWrapper(null); }
         }
 

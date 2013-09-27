@@ -37,7 +37,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public bool isAlive = true;
 
-        public Player()
+        public Player(AbstractMarioPower pw = null)
             : base()
         {
             direction = Direction.RIGHT;
@@ -45,7 +45,10 @@ namespace SuperBitBros.Entities.DynamicEntities
             width = PLAYER_WIDTH * PLAYER_SCALE;
             height = PLAYER_HEIGHT * PLAYER_SCALE;
 
-            ChangePower(new StandardMarioPower());
+            if (pw == null)
+                ChangePower(new StandardMarioPower());
+            else
+                ChangePower(pw);
 
             AddController(new DefaultPlayerController(this));
         }
@@ -116,7 +119,7 @@ namespace SuperBitBros.Entities.DynamicEntities
                 }
                 else
                 {
-                    atexture.Set(3, (direction == Direction.LEFT) ? 1 : 0);
+                    atexture.Set(3, (direction == Direction.LEFT) ? 0 : 1);
                 }
             }
             else if (IsSwimming())
@@ -331,6 +334,12 @@ namespace SuperBitBros.Entities.DynamicEntities
         public Stack<AbstractEntityController> GetControllerStack()
         {
             return controllerStack;
+        }
+
+        public void DoTrampolineJump(int JUMP_POWER)
+        {
+            if (HasController() && controllerStack.Peek() is AbstractNewtonEntityController)
+                (controllerStack.Peek() as AbstractNewtonEntityController).movementDelta.Y = JUMP_POWER;
         }
     }
 }

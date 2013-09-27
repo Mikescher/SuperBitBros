@@ -15,7 +15,6 @@ namespace SuperBitBros
         public static OGLTextureSheet piranhaplant_sheet;
 
         public static OGLTexture[] array_coin;
-        public static OGLTexture texture_mariohead;
 
         public static OGLTexture texture_ground;
         public static OGLTexture texture_air;
@@ -27,24 +26,27 @@ namespace SuperBitBros
         public static OGLTexture texture_hill;
         public static OGLTexture texture_pipe;
         public static OGLTexture texture_castle;
-        public static OGLTexture texture_flag;
         public static OGLTexture texture_darkGround;
         public static OGLTexture texture_darkCeiling;
         public static OGLTexture texture_darkHill;
         public static OGLTexture texture_mshroomplatform;
         public static OGLTexture texture_castleGround;
         public static OGLTexture texture_lava;
-        public static OGLTexture texture_bridge;
-        public static OGLTexture texture_lever;
         public static OGLTexture texture_solidcloud;
-        public static OGLTexture texture_beanstalk;
         public static OGLTexture texture_underwater_water;
         public static OGLTexture texture_underwater_ground;
+
+        public static OGLTexture texture_beanstalk;
+        public static OGLTexture texture_bridge;
+        public static OGLTexture texture_lever;
+        public static OGLTexture texture_flag;
+        public static OGLTexture texture_trampoline;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
         public static OGLTexture texture_coin_2;
         public static OGLTexture texture_coin_3;
+        public static OGLTexture texture_mariohead;
 
         public static OGLTexture texture_mushroom;
         public static OGLTexture texture_flower;
@@ -72,8 +74,6 @@ namespace SuperBitBros
             mario_big_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_big, 16, 2);
             mario_fire_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_fire, 16, 2);
 
-            texture_mariohead = block_textures.GetTextureWrapper(261);
-
             texture_ground = block_textures.GetTextureWrapper(35);
             texture_air = block_textures.GetTextureWrapper(0);
             texture_ground_air = block_textures.GetTextureWrapper(7);
@@ -82,27 +82,29 @@ namespace SuperBitBros
             texture_hill = block_textures.GetTextureWrapper(77);
             texture_pipe = block_textures.GetTextureWrapper(72);
             texture_castle = block_textures.GetTextureWrapper(177);
-            texture_flag = block_textures.GetTextureWrapper(179);
             texture_ceiling = block_textures.GetTextureWrapper(256);
             texture_pillar = block_textures.GetTextureWrapper(176);
             texture_mshroomplatform = block_textures.GetTextureWrapper(84);
             texture_castleGround = block_textures.GetTextureWrapper(206);
             texture_lava = block_textures.GetTextureWrapper(94);
-            texture_bridge = block_textures.GetTextureWrapper(205);
-            texture_lever = block_textures.GetTextureWrapper(11);
             texture_solidcloud = block_textures.GetTextureWrapper(1);
-            texture_beanstalk = block_textures.GetTextureWrapper(21);
             texture_underwater_water = block_textures.GetTextureWrapper(263);
             texture_underwater_ground = block_textures.GetTextureWrapper(262);
-
             texture_darkGround = block_textures.GetTextureWrapper(178);
             texture_darkCeiling = block_textures.GetTextureWrapper(4);
             texture_darkHill = block_textures.GetTextureWrapper(255);
+
+            texture_flag = block_textures.GetTextureWrapper(179);
+            texture_bridge = block_textures.GetTextureWrapper(205);
+            texture_lever = block_textures.GetTextureWrapper(11);
+            texture_beanstalk = block_textures.GetTextureWrapper(21);
+            texture_trampoline = block_textures.GetTextureWrapper(23);
 
             texture_coin_0 = block_textures.GetTextureWrapper(40);
             texture_coin_1 = block_textures.GetTextureWrapper(48);
             texture_coin_2 = block_textures.GetTextureWrapper(41);
             texture_coin_3 = block_textures.GetTextureWrapper(124);
+            texture_mariohead = block_textures.GetTextureWrapper(261);
 
             texture_mushroom = block_textures.GetTextureWrapper(6);
             texture_flower = block_textures.GetTextureWrapper(12);

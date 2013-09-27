@@ -31,11 +31,14 @@ namespace SuperBitBros.Entities
             owner = model;
         }
 
+        public virtual void UpdateCollisionMapPosition()
+        {
+            if (IsInCollisionMap() && old_position != position && old_position != null && position != null)
+                owner.MoveEntityInCollisionMap(this, GetCollisionMapPosition(old_position), GetCollisionMapPosition(position));
+        }
+
         public override void Update(KeyboardDevice keyboard)
         {
-            if (old_position != position && old_position != null && position != null)
-                owner.MoveEntityInCollisionMap(this, GetCollisionMapPosition(old_position), GetCollisionMapPosition(position));
-
             base.Update(keyboard);
 
             CallControllerStack(keyboard);
@@ -47,7 +50,6 @@ namespace SuperBitBros.Entities
         {
             if (position.X < -MAX_MAP_DISTANCE || position.Y < -MAX_MAP_DISTANCE || position.X > owner.mapRealWidth + MAX_MAP_DISTANCE || position.Y > owner.mapRealHeight + MAX_MAP_DISTANCE)
             {
-                Console.Out.WriteLine("Out of Bounds Kill: " + GetType().Name);
                 KillLater();
             }
         }

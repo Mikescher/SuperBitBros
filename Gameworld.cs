@@ -3,6 +3,7 @@ using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.HUD;
+using SuperBitBros.MarioPower;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
@@ -31,12 +32,12 @@ namespace SuperBitBros
             mapLevel = level;
         }
 
-        public override void Init()
+        public override void Init(AbstractMarioPower p)
         {
-            base.Init();
+            base.Init(p);
 
             HUD = new StandardGameHUD(this);
-            LoadMapFromResources();
+            LoadMapFromResources(p);
         }
 
         public override void Update(KeyboardDevice keyboard)
@@ -57,7 +58,7 @@ namespace SuperBitBros
             AddEntity(setype.Get(), px, py);
         }
 
-        public void AddTriggerFromMapData(AddTriggerType triggertype, Color c, int x, int y)
+        public void AddTriggerFromMapData(AddTriggerType triggertype, Color c, int x, int y, AbstractMarioPower p)
         {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
@@ -67,7 +68,7 @@ namespace SuperBitBros
                 PlayerSpawnZone zone = new PlayerSpawnZone(new Vec2i(x, y));
                 AddTrigger(zone, x, y);
 
-                player = zone.SpawnPlayer();
+                player = zone.SpawnPlayer(p);
             }
             else if (triggertype == AddTriggerType.DEATH_ZONE)
             {
@@ -103,7 +104,7 @@ namespace SuperBitBros
             AddTrigger(pipeZoneType.Get(new Vec2i(x, y)), x, y);
         }
 
-        public void LoadMapFromResources()
+        public void LoadMapFromResources(AbstractMarioPower p)
         {
             ImageMapParser parser = new ImageMapParser(new OpenRasterImage(ResourceAccessor.GetMap(mapWorld, mapLevel)));
             setSize(parser.GetWidth(), parser.GetHeight());
@@ -135,7 +136,7 @@ namespace SuperBitBros
                     if (att == AddTriggerType.UNKNOWN_TRIGGER)
                         Console.Error.WriteLine("Could not parse Trigger-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y);
                     else if (att != AddTriggerType.NO_TRIGGER)
-                        AddTriggerFromMapData(att, parser.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y);
+                        AddTriggerFromMapData(att, parser.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y, p);
 
                     if (pzt == null)
                     { }  // No Zone
@@ -223,7 +224,7 @@ namespace SuperBitBros
         {
             Console.Out.WriteLine("Change World to {0}:{1}", world, level);
 
-            ownerView.ChangeWorld(world, level);
+            ownerView.ChangeWorld(world, level, player.power);
         }
 
         private PlayerSpawnZone FindSpawnZone()

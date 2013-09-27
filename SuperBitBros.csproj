@@ -118,6 +118,7 @@
     <Compile Include="Entities\DynamicEntities\PersistentCoinEntity.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingFireballEntity.cs" />
     <Compile Include="Entities\DynamicEntities\ToadEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\TrampolineEntity.cs" />
     <Compile Include="Entities\EnityController\BowserController.cs" />
     <Compile Include="Entities\EnityController\CheepCheepController.cs" />
     <Compile Include="Entities\EnityController\CoinExplosionController.cs" />
@@ -250,7 +251,7 @@
     <None Include="Resources\map_02-02.ora" />
     <None Include="Resources\map_02-03.ora" />
     <None Include="Resources\map_02-04.ora" />
-    <None Include="Resources\map_debug.ora" />
+    <None Include="Resources\map_03-01.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
     <None Include="Resources\plant.png" />
