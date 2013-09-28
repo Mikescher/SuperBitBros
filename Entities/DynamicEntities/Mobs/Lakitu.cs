@@ -5,35 +5,45 @@ using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
-    public class Hammerbro : Mob
+    public class Lakitu : Mob
     {
-        private const int HAMMERCOOLDOWN = 25;
+        private const int SPIKECOOLDOWN = 70;
 
         private static Random rand = new Random();
 
-        private int hammerCooldown = 0;
+        private int spikeCooldown = 0;
 
-        public Hammerbro()
+        private LakituController controller;
+
+        public Lakitu()
             : base()
         {
             distance = Entity.DISTANCE_MOBS;
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT;
 
-            texture = Textures.texture_hammerbro;
+            texture = Textures.texture_lakitu;
 
-            AddController(new HammerbroController(this));
+            AddController(controller = new LakituController(this));
         }
 
         public override void Update(KeyboardDevice keyboard)
         {
             base.Update(keyboard);
 
-            if (hammerCooldown-- < 0)
+            if (spikeCooldown-- < 0)
             {
-                hammerCooldown = HAMMERCOOLDOWN + (int)(rand.NextDouble() * 10);
+                spikeCooldown = SPIKECOOLDOWN + (int)(rand.NextDouble() * 30);
 
-                owner.AddEntity(new ShootingHammerEntity(), position.X - 4, position.Y + height);
+                if (controller.direction == -1)
+                {
+                    owner.AddEntity(new ShootingSpikeBallEntity(controller.direction), position.X - 8, position.Y + height / 2.0);
+                }
+                else
+                {
+                    owner.AddEntity(new ShootingSpikeBallEntity(controller.direction), position.X + Block.BLOCK_WIDTH + 8, position.Y + height / 2.0);
+                }
+
             }
         }
 

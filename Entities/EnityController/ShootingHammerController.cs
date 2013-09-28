@@ -9,7 +9,7 @@ namespace SuperBitBros.Entities.EnityController
         public const double X_SPEED = -2.25;
         public const double Y_SPEED = 8;
 
-        public ShootingHammerController(ShootingHammer e)
+        public ShootingHammerController(ShootingHammerEntity e)
             : base(e)
         {
             movementDelta.X = X_SPEED;
