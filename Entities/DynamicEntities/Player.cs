@@ -230,7 +230,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public void DoDeath(Mob m)
         {
-            if (!alive)
+            if (!isAlive)
                 return;
 
             Console.Out.WriteLine("Death by Mob: " + m.GetType().Name);
@@ -240,7 +240,7 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         public void DoDeath(Trigger t)
         {
-            if (!alive)
+            if (!isAlive)
                 return;
 
             Console.Out.WriteLine("Death by Zone: " + t.GetType().Name);
@@ -250,10 +250,10 @@ namespace SuperBitBros.Entities.DynamicEntities
 
         private void DoDeath(bool direct = false)
         {
-            if (!alive)
+            if (!isAlive)
                 return;
 
-            if (invincTime == 0 && !Program.debugViewSwitch.Value)
+            if ((invincTime == 0 || direct) && !Program.debugViewSwitch.Value)
             {
                 AbstractMarioPower sub = power.GetSubPower();
                 if (sub == null || direct)

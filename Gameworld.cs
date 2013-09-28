@@ -4,7 +4,6 @@ using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.HUD;
 using SuperBitBros.MarioPower;
-using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 using SuperBitBros.OpenRasterFormat;
 using SuperBitBros.Triggers;
@@ -194,7 +193,7 @@ namespace SuperBitBros
             }
         }
 
-        public void StartChangeWorld(int target_world, int target_level)
+        public void StartChangeWorld(int target_world, int target_level, AbstractMarioPower power = null)
         {
             player.MakeStatic();
 
@@ -217,14 +216,17 @@ namespace SuperBitBros
 
             AddDelayedAction(
                             (int)(LEVEL_END_ANIMATION_DURATION + 120),
-                            (() => ChangeWorld(target_world, target_level)));
+                            (() => ChangeWorld(target_world, target_level, power)));
         }
 
-        public void ChangeWorld(int world, int level)
+        public void ChangeWorld(int world, int level, AbstractMarioPower power = null)
         {
             Console.Out.WriteLine("Change World to {0}:{1}", world, level);
 
-            ownerView.ChangeWorld(world, level, player.power);
+            if (power == null)
+                power = new StandardMarioPower();
+
+            ownerView.ChangeWorld(world, level, power);
         }
 
         private PlayerSpawnZone FindSpawnZone()
@@ -255,8 +257,9 @@ namespace SuperBitBros
             {
                 Console.Out.WriteLine("Restart Game");
 
+                player.isAlive = false;
                 (HUD as StandardGameHUD).Reset();
-                StartChangeWorld(1, 1);
+                StartChangeWorld(1, 1, new StandardMarioPower());
             }
         }
 
