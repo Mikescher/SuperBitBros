@@ -22,7 +22,8 @@
             if (collidingEntity.GetBottomLeft().Y >= GetTopRight().Y && collidingEntity is DynamicEntity /* && ((DynamicEntity)collidingEntity).GetMovement().Y < 0 */ && isBlockingMovement)
             {
                 Player p = collidingEntity as Player;
-                if (p != null) p.OnMobHeadJump(this);
+                if (p != null)
+                    p.OnMobHeadJump(this);
                 OnHeadJump(collidingEntity);
             }
             else if (isDirectCollision || isTouching)
@@ -32,6 +33,11 @@
         public void Explode()
         {
             DoExplosionEffect(MOB_EXPLOSIONFRAGMENTS_X, MOB_EXPLOSIONFRAGMENTS_Y, MOB_EXPLOSIONFRAGMENTS_FORCE);
+        }
+
+        public virtual bool IsFireballImmune()
+        {
+            return false;
         }
 
         public abstract void OnHeadJump(Entity e);

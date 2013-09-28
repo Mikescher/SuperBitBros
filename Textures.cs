@@ -67,6 +67,8 @@ namespace SuperBitBros
         public static OGLTexture texture_blooper;
         public static OGLTexture texture_hammerbro;
         public static OGLTexture texture_lakitu;
+        public static OGLTexture texture_buzzybeetle;
+        public static OGLTexture texture_buzzybeetleshell;
 
         public static void Load()
         {
@@ -129,6 +131,8 @@ namespace SuperBitBros
             texture_blooper = block_textures.GetTextureWrapper(30);
             texture_hammerbro = block_textures.GetTextureWrapper(190);
             texture_lakitu = block_textures.GetTextureWrapper(167);
+            texture_buzzybeetle = block_textures.GetTextureWrapper(266);
+            texture_buzzybeetleshell = block_textures.GetTextureWrapper(267);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }

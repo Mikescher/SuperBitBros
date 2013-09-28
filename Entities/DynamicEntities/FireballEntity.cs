@@ -33,7 +33,7 @@ namespace SuperBitBros.Entities.DynamicEntities
             else
             {
                 Mob d = collidingEntity as Mob;
-                if (d != null && !d.IsInvincible())
+                if (d != null && !d.IsInvincible() && !d.IsFireballImmune())
                 {
                     d.KillLater();
                 }

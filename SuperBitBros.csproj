@@ -95,6 +95,8 @@
     <Compile Include="Entities\Blocks\StandardPillarBlock.cs" />
     <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
     <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetle.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetleShell.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingSpikeBallEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Lakitu.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingHammerEntity.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Entities\EnityController\BeanStalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\BlooperController.cs" />
     <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
+    <Compile Include="Entities\EnityController\BuzzyBeetleShellController.cs" />
     <Compile Include="Entities\EnityController\ShootingSpikeBallController.cs" />
     <Compile Include="Entities\EnityController\LakituController.cs" />
     <Compile Include="Entities\EnityController\ShootingHammerController.cs" />

@@ -1,11 +1,10 @@
-﻿using SuperBitBros.Entities.Blocks;
+﻿using OpenTK.Input;
+using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
-using System;
-using OpenTK.Input;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
-    public class KoopaShell : Mob
+    public class BuzzyBeetleShell : Mob
     {
         public const int REINCARNATION_TIME = 180;
 
@@ -16,7 +15,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
 
         private bool suppressExplosion = false;
 
-        public KoopaShell(Koopa k)
+        public BuzzyBeetleShell(BuzzyBeetle k)
             : base()
         {
             distance = Entity.DISTANCE_MOBS;
@@ -24,36 +23,36 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             height = Block.BLOCK_HEIGHT;
 
             timeUntilReinc = REINCARNATION_TIME;
-            
-            texture = Textures.texture_koopashell;
 
-            AddController(new KoopaShellController(this));
+            texture = Textures.texture_buzzybeetleshell;
+
+            AddController(new BuzzyBeetleShellController(this));
         }
 
         public override void Update(KeyboardDevice keyboard)
         {
             base.Update(keyboard);
 
-            if (! (controllerStack.Peek() as KoopaShellController).isStill())
+            if (!(controllerStack.Peek() as BuzzyBeetleShellController).isStill())
                 timeUntilReinc = REINCARNATION_TIME;
 
             if (timeUntilReinc-- == 0)
             {
                 suppressExplosion = true;
                 KillLater();
-                owner.AddEntity(new Koopa(), position.X, position.Y);
+                owner.AddEntity(new BuzzyBeetle(), position.X, position.Y);
             }
         }
 
         public override void OnHeadJump(Entity e)
         {
             timeUntilReinc = REINCARNATION_TIME;
-            (controllerStack.Peek() as KoopaShellController).ToogleSlide();
+            (controllerStack.Peek() as BuzzyBeetleShellController).ToogleSlide();
         }
 
         public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
         {
-            KoopaShellController c = (controllerStack.Peek() as KoopaShellController);
+            BuzzyBeetleShellController c = (controllerStack.Peek() as BuzzyBeetleShellController);
 
             Player p = e as Player;
             if (p != null)
@@ -74,13 +73,18 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             {
                 if (!c.isStill())
                 {
-                    if (e is KoopaShell)
+                    if (e is BuzzyBeetleShell)
                     {
                         KillLater();
                     }
                     (e as Mob).KillLater();
                 }
             }
+        }
+
+        public override bool IsFireballImmune()
+        {
+            return true;
         }
 
         protected override void OnKill()
