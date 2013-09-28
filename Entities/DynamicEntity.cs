@@ -273,7 +273,7 @@ namespace SuperBitBros.Entities
             return false;
         }
 
-        public bool IsCollidingRight()
+        public bool IsCollidingRight(Type exclude = null)
         {
             Rect2d newpos = new Rect2d(new Vec2d(position.X + DETECTION_TOLERANCE, position.Y), width, height);
 
@@ -288,20 +288,20 @@ namespace SuperBitBros.Entities
                 for (int y = bottom; y < top; y++)
                 {
                     Block b = owner.GetBlock(x, y);
-                    if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition()) && b.GetMiddle().X > this.GetMiddle().X)
+                    if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition()) && b.GetMiddle().X > this.GetMiddle().X && (exclude == null || ! exclude.IsAssignableFrom(b.GetType())))
                         return true;
                 }
 
             // TEST ENTITIES
 
             foreach (Entity e in owner.GetSurroundingEntityList(GetCollisionMapPosition()))
-                if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X > this.GetMiddle().X)
+                if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X > this.GetMiddle().X && (exclude == null || ! exclude.IsAssignableFrom(e.GetType())))
                     return true;
 
             return false;
         }
 
-        public bool IsCollidingLeft()
+        public bool IsCollidingLeft(Type exclude = null)
         {
             Rect2d newpos = new Rect2d(new Vec2d(position.X - DETECTION_TOLERANCE, position.Y), width, height);
 
@@ -316,14 +316,14 @@ namespace SuperBitBros.Entities
                 for (int y = bottom; y < top; y++)
                 {
                     Block b = owner.GetBlock(x, y);
-                    if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition()) && b.GetMiddle().X < this.GetMiddle().X)
+                    if (b != null && Entity.TestBlocking(b, this) && newpos.IsColldingWith(b.GetPosition()) && b.GetMiddle().X < this.GetMiddle().X && (exclude == null || ! exclude.IsAssignableFrom(b.GetType())))
                         return true;
                 }
 
             // TEST ENTITIES
 
             foreach (Entity e in owner.GetSurroundingEntityList(GetCollisionMapPosition()))
-                if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X < this.GetMiddle().X)
+                if (e != this && Entity.TestBlocking(e, this) && newpos.IsColldingWith(e.GetPosition()) && e.GetMiddle().X < this.GetMiddle().X && (exclude == null || ! exclude.IsAssignableFrom(e.GetType())))
                     return true;
 
             return false;

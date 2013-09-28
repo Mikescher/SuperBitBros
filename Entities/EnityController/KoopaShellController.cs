@@ -28,9 +28,10 @@ namespace SuperBitBros.Entities.EnityController
         {
             Vec2d delta = new Vec2d(0, 0);
 
-            if ((slideDirection > 0 && ent.IsCollidingRight()) || (slideDirection < 0 && ent.IsCollidingLeft()))
+            if ((slideDirection > 0 && ent.IsCollidingRight(typeof(Mob))) || (slideDirection < 0 && ent.IsCollidingLeft(typeof(Mob))))
             {
                 slideDirection *= -1;
+                ent.IsCollidingRight(typeof(Mob));
             }
 
             if ((slideDirection < 0 && movementDelta.X > -SHELL_SPEED) || (slideDirection > 0 && movementDelta.X < SHELL_SPEED))

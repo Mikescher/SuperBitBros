@@ -20,6 +20,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         public override void OnHeadJump(Entity e)
         {
             KillLater();
+            owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
         }
 
         public override void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
@@ -33,7 +34,6 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         {
             base.OnKill();
 
-            owner.AddEntity(new GoombaCorpse(this), position.X, position.Y);
             Explode();
         }
 
