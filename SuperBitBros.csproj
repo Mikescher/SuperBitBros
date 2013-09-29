@@ -76,6 +76,7 @@
     <Compile Include="Entities\Blocks\CastleGroundBlock.cs" />
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\BeanStalkBoxBlock.cs" />
+    <Compile Include="Entities\Blocks\BillBlasterBlock.cs" />
     <Compile Include="Entities\Blocks\WaterBlock.cs" />
     <Compile Include="Entities\Blocks\UnderwaterGroundBlock.cs" />
     <Compile Include="Entities\Blocks\FireBoxBlock.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetle.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetleShell.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\BulletBill.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingSpikeBallEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Lakitu.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingHammerEntity.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Entities\EnityController\BlooperController.cs" />
     <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
     <Compile Include="Entities\EnityController\BuzzyBeetleShellController.cs" />
+    <Compile Include="Entities\EnityController\BulletBillController.cs" />
     <Compile Include="Entities\EnityController\ShootingSpikeBallController.cs" />
     <Compile Include="Entities\EnityController\LakituController.cs" />
     <Compile Include="Entities\EnityController\ShootingHammerController.cs" />
@@ -272,6 +275,7 @@
     <None Include="Resources\map_04-02.ora" />
     <None Include="Resources\map_04-03.ora" />
     <None Include="Resources\map_04-04.ora" />
+    <None Include="Resources\map_05-01.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
     <None Include="Resources\plant.png" />

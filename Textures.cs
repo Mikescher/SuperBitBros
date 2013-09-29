@@ -35,6 +35,7 @@ namespace SuperBitBros
         public static OGLTexture texture_solidcloud;
         public static OGLTexture texture_underwater_water;
         public static OGLTexture texture_underwater_ground;
+        public static OGLTexture texture_billblaster;
 
         public static OGLTexture texture_beanstalk;
         public static OGLTexture texture_bridge;
@@ -69,6 +70,7 @@ namespace SuperBitBros
         public static OGLTexture texture_lakitu;
         public static OGLTexture texture_buzzybeetle;
         public static OGLTexture texture_buzzybeetleshell;
+        public static OGLTexture texture_bulletbill;
 
         public static void Load()
         {
@@ -99,6 +101,7 @@ namespace SuperBitBros
             texture_darkGround = block_textures.GetTextureWrapper(178);
             texture_darkCeiling = block_textures.GetTextureWrapper(4);
             texture_darkHill = block_textures.GetTextureWrapper(255);
+            texture_billblaster = block_textures.GetTextureWrapper(220);
 
             texture_flag = block_textures.GetTextureWrapper(179);
             texture_bridge = block_textures.GetTextureWrapper(205);
@@ -133,6 +136,7 @@ namespace SuperBitBros
             texture_lakitu = block_textures.GetTextureWrapper(167);
             texture_buzzybeetle = block_textures.GetTextureWrapper(266);
             texture_buzzybeetleshell = block_textures.GetTextureWrapper(267);
+            texture_bulletbill = block_textures.GetTextureWrapper(61);
 
             array_coin = new OGLTexture[] { texture_coin_0, texture_coin_1, texture_coin_2, texture_coin_3 };
         }

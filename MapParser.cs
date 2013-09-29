@@ -117,6 +117,7 @@ namespace SuperBitBros
             else if (c == BeanStalkBoxBlock.GetColor()) { return new BeanStalkBoxBlock(); }
             else if (c == UnderwaterGroundBlock.GetColor()) { return new UnderwaterGroundBlock(); }
             else if (c == WaterBlock.GetColor()) { return new WaterBlock(); }
+            else if (c == BillBlasterBlock.GetColor()) { return new BillBlasterBlock(); }
             else { return null; }
         }
 
