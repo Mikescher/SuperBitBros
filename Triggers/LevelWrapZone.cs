@@ -30,7 +30,7 @@ namespace SuperBitBros.Triggers
             if (p != null && active)
             {
                 active = false;
-                (owner as GameWorld).StartChangeWorld(target_world, target_level);
+                (owner as GameWorld).StartChangeWorld(target_world, target_level, (owner as GameWorld).player.power);
             }
         }
 
