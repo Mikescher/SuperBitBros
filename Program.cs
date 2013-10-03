@@ -42,4 +42,4 @@ namespace SuperBitBros
     }
 }
 
-//TODO Add BigMario Crouching
+//TODO Add Reverse Method to entity (do OGL flip X Axis) -> do with mobs / shootingentities ...
