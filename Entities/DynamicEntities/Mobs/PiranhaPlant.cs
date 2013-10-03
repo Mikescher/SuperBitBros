@@ -29,7 +29,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             width = 2 * Block.BLOCK_WIDTH;
             height = 0;
 
-            texture = Textures.piranhaplant_sheet.GetTextureWrapper(0);
+            texture = Textures.piranhaplant_sheet.GetTextureWrapper(0, 3);
 
             AddController(new StaticEntityController(this));
         }
@@ -70,7 +70,7 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
                 if (state == STATE_COUNT - 1)
                     direction = false;
 
-                texture = Textures.piranhaplant_sheet.GetTextureWrapper(state);
+                texture = Textures.piranhaplant_sheet.GetTextureWrapper(state, 3);
                 height = (Block.BLOCK_HEIGHT * 2.0) * (state * 1.0 / (STATE_COUNT - 1));
                 lastUpdate = 0;
             }

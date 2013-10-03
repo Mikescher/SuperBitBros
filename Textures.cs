@@ -74,8 +74,8 @@ namespace SuperBitBros
 
         public static void Load()
         {
-            block_textures = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 80, 4);
-            piranhaplant_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.plant, 16, 1);
+            block_textures = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 80, 8);
+            piranhaplant_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 40, 4);
             number_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.number_raster, 16, 4);
 
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);

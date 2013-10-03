@@ -250,6 +250,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -278,7 +279,6 @@
     <None Include="Resources\map_05-01.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
-    <None Include="Resources\plant.png" />
     <None Include="Resources\mario_small.png" />
   </ItemGroup>
   <ItemGroup>
