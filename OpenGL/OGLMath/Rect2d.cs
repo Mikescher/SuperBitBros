@@ -235,5 +235,17 @@
 
             return result;
         }
+
+        public void FlipXAxis()
+        {
+            position.X += Width;
+            Width *= -1;
+        }
+
+        public void FlipYAxis()
+        {
+            position.Y += Height;
+            Height *= -1;
+        }
     }
 }

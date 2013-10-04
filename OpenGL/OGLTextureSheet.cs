@@ -1,7 +1,7 @@
-﻿using System;
-using System.Drawing;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
+using System;
+using System.Drawing;
 
 namespace SuperBitBros.OpenGL
 {
@@ -27,6 +27,11 @@ namespace SuperBitBros.OpenGL
         public static OGLTextureSheet LoadTextureFromBitmap(Bitmap bmp, int width, int height)
         {
             return new OGLTextureSheet(OGLTexture.LoadResourceIntoUID(bmp), width, height);
+        }
+
+        public static OGLTextureSheet LoadTextureFromRessourceID(int id, int width, int height)
+        {
+            return new OGLTextureSheet(id, width, height);
         }
 
         public Rect2d GetCoordinates(int x, int y)

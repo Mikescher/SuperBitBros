@@ -6,13 +6,14 @@ namespace SuperBitBros
     public class Textures
     {
         public static OGLTextureSheet block_textures;
+        public static OGLTextureSheet doubleblock_sheet;
+        public static OGLTextureSheet doubleheight_sheet;
+
         public static OGLTextureSheet number_sheet;
 
         public static OGLTextureSheet mario_small_sheet;
         public static OGLTextureSheet mario_big_sheet;
         public static OGLTextureSheet mario_fire_sheet;
-
-        public static OGLTextureSheet piranhaplant_sheet;
 
         public static OGLTexture[] array_coin;
 
@@ -42,6 +43,7 @@ namespace SuperBitBros
         public static OGLTexture texture_lever;
         public static OGLTexture texture_flag;
         public static OGLTexture texture_trampoline;
+        public static OGLTexture texture_largetrampoline;
 
         public static OGLTexture texture_coin_0;
         public static OGLTexture texture_coin_1;
@@ -75,7 +77,8 @@ namespace SuperBitBros
         public static void Load()
         {
             block_textures = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 80, 8);
-            piranhaplant_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 40, 4);
+            doubleblock_sheet = OGLTextureSheet.LoadTextureFromRessourceID(block_textures.ID, 40, 4);
+            doubleheight_sheet = OGLTextureSheet.LoadTextureFromRessourceID(block_textures.ID, 80, 4);
             number_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.number_raster, 16, 4);
 
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
@@ -108,6 +111,7 @@ namespace SuperBitBros
             texture_lever = block_textures.GetTextureWrapper(11);
             texture_beanstalk = block_textures.GetTextureWrapper(21);
             texture_trampoline = block_textures.GetTextureWrapper(23);
+            texture_largetrampoline = doubleheight_sheet.GetTextureWrapper(24);
 
             texture_coin_0 = block_textures.GetTextureWrapper(40);
             texture_coin_1 = block_textures.GetTextureWrapper(48);

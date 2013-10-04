@@ -40,6 +40,11 @@
             return false;
         }
 
+        public override bool FlipTextureXAxis()
+        {
+            return GetMovement().X < 0;
+        }
+
         public abstract void OnHeadJump(Entity e);
 
         public abstract void OnTouch(Entity e, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching);

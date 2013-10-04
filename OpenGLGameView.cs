@@ -83,7 +83,7 @@ namespace SuperBitBros
                                 firstRender = false;
                             }
 
-                            RenderNoBindRectangle(e.GetTexturePosition(), e.GetCurrentTexture(), e.GetDistance(), e.GetTransparency());
+                            RenderNoBindRectangle(e.GetCorrectTexturePosition(), e.GetCurrentTexture(), e.GetDistance(), e.GetTransparency());
                         }
                     }
                 }

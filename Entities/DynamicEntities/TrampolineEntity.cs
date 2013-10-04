@@ -1,11 +1,6 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperBitBros.Entities.DynamicEntities
 {
@@ -25,7 +20,7 @@ namespace SuperBitBros.Entities.DynamicEntities
             width = Block.BLOCK_WIDTH;
             height = Block.BLOCK_HEIGHT * 2;
 
-            texture = Textures.texture_trampoline;
+            texture = (height == Block.BLOCK_HEIGHT * 2) ? Textures.texture_largetrampoline : Textures.texture_trampoline;
 
             AddController(new StaticEntityController(this));
         }
@@ -58,6 +53,8 @@ namespace SuperBitBros.Entities.DynamicEntities
                 height = Block.BLOCK_HEIGHT * 2;
                 jumpCountdown = JUMP_COUNTDOWN;
             }
+
+            texture = (height == Block.BLOCK_HEIGHT * 2) ? Textures.texture_largetrampoline : Textures.texture_trampoline;
         }
 
         private bool PlayerIsOnTop(Player p)

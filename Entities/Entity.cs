@@ -54,9 +54,32 @@ namespace SuperBitBros.Entities
             return new Rect2d(position, width, height);
         }
 
+        public Rect2d GetCorrectTexturePosition()
+        {
+            Rect2d r = GetTexturePosition();
+
+            if (FlipTextureXAxis())
+                r.FlipXAxis();
+
+            if (FlipTextureYAxis())
+                r.FlipYAxis();
+
+            return r;
+        }
+
         public virtual Rect2d GetTexturePosition()
         {
             return GetPosition();
+        }
+
+        public virtual bool FlipTextureXAxis()
+        {
+            return false;
+        }
+
+        public virtual bool FlipTextureYAxis()
+        {
+            return false;
         }
 
         public virtual Vec2d GetTopLeft()

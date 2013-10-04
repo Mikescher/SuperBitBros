@@ -54,12 +54,42 @@ namespace SuperBitBros.Entities.EnityController
             return !(next == null || !Entity.TestBlocking(next, ent));
         }
 
+        protected virtual bool IsOnPillar()
+        {
+            Vec2i blockPos;
+            if (walkDirection < 0)
+                blockPos = (Vec2i)(new Vec2d(ent.position.X + ent.width, ent.position.Y) / Block.BLOCK_SIZE);
+            else
+                blockPos = (Vec2i)(ent.position / Block.BLOCK_SIZE);
+
+            int y = (int)blockPos.Y - 1;
+            int x = (int)blockPos.X;
+
+            Block nextR = ent.owner.GetBlock(x + 1, y);
+            Block nextL = ent.owner.GetBlock(x - 1, y);
+
+            Block topR = ent.owner.GetBlock(x + 1, y + 1);
+            Block topL = ent.owner.GetBlock(x - 1, y + 1);
+
+            bool wr = !(nextR == null || !Entity.TestBlocking(nextR, ent));
+            bool wl = !(nextL == null || !Entity.TestBlocking(nextL, ent));
+
+            bool br = !(topR == null || !Entity.TestBlocking(topR, ent));
+            bool bl = !(topL == null || !Entity.TestBlocking(topL, ent));
+
+            bool cr = wr && !br;
+            bool cl = wl && !bl;
+
+            return !cl && !cr;
+        }
+
+
         public override void Update(KeyboardDevice keyboard)
         {
             if (IsCollidingInWalkingDirection())
                 ChangeDirection();
 
-            if (ent.IsOnGround() && !CanWalkWithoutFalling())
+            if (!IsOnPillar() && ent.IsOnGround() && !CanWalkWithoutFalling())
                 ChangeDirection();
 
             Vec2d delta = GetDirectionVector() * MOB_ACC;
@@ -67,7 +97,7 @@ namespace SuperBitBros.Entities.EnityController
             if (IsOnMaxSpeed(MOB_SPEED))
                 delta *= 0;
 
-            if (!ent.IsOnGround() || CanWalkWithoutFalling()) // Walk normal
+            if (!ent.IsOnGround() || CanWalkWithoutFalling() || IsOnPillar()) // Walk normal
             {
                 DoGravitationalMovement(delta);
             }
