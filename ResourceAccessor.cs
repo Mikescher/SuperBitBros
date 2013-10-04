@@ -120,7 +120,7 @@ namespace SuperBitBros
                     switch (lvl)
                     {
                         case 1:
-                            //return Resources.map_06_01;
+                            return Resources.map_06_01;
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 2:
                             //return Resources.map_06_02;
