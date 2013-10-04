@@ -7,6 +7,8 @@ namespace SuperBitBros
 
     public class Program
     {
+        public const int TEXTUREPACK = 2;
+
         public static BooleanKeySwitch debugViewSwitch = new BooleanKeySwitch(true, Key.F10, KeyTriggerMode.ON_DOWN);
         public static BooleanKeySwitch vectorDebugViewSwitch = new BooleanKeySwitch(true, Key.F9, KeyTriggerMode.ON_DOWN);
         public static BooleanKeySwitch minimapViewSwitch = new BooleanKeySwitch(false, Key.F8, KeyTriggerMode.ON_DOWN);
@@ -30,7 +32,7 @@ namespace SuperBitBros
 
 
             Console.Out.WriteLine("START");
-            GameModel world = new GameWorld(5, 2);
+            GameModel world = new GameWorld(5, 3);
             OpenGLView view = new OpenGLGameView(world);
 
             Textures.Load();

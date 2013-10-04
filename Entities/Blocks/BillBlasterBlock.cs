@@ -31,7 +31,7 @@ namespace SuperBitBros.Entities.Blocks
 
                 int direction = Math.Sign((owner as GameWorld).player.position.X - position.X);
 
-                owner.AddEntity(new BulletBill(direction), position.X + ((direction == -1) ? (-(width + 4)) : (width + 4)), position.Y + height / 2.0 - 1.5);
+                owner.TestAddEntity(new BulletBill(direction), position.X + ((direction == -1) ? (-(width + 4)) : (width + 4)), position.Y + height / 2.0 - 1.5);
             }
         }
 

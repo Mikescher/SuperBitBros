@@ -76,7 +76,7 @@ namespace SuperBitBros
 
         public static void Load()
         {
-            block_textures = OGLTextureSheet.LoadTextureFromBitmap(Resources.block_textures, 80, 8);
+            block_textures = OGLTextureSheet.LoadTextureFromBitmap(ResourceAccessor.GetTexturePack(Program.TEXTUREPACK), 80, 8);
             doubleblock_sheet = OGLTextureSheet.LoadTextureFromRessourceID(block_textures.ID, 40, 4);
             doubleheight_sheet = OGLTextureSheet.LoadTextureFromRessourceID(block_textures.ID, 80, 4);
             number_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.number_raster, 16, 4);

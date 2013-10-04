@@ -63,9 +63,29 @@ namespace SuperBitBros.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap block_textures {
+        internal static System.Drawing.Bitmap block_textures_0 {
             get {
-                object obj = ResourceManager.GetObject("block_textures", resourceCulture);
+                object obj = ResourceManager.GetObject("block_textures_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap block_textures_1 {
+            get {
+                object obj = ResourceManager.GetObject("block_textures_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap block_textures_2 {
+            get {
+                object obj = ResourceManager.GetObject("block_textures_2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +286,16 @@ namespace SuperBitBros.Properties {
         internal static byte[] map_05_02 {
             get {
                 object obj = ResourceManager.GetObject("map_05_02", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] map_05_03 {
+            get {
+                object obj = ResourceManager.GetObject("map_05_03", resourceCulture);
                 return ((byte[])(obj));
             }
         }

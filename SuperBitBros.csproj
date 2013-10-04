@@ -278,6 +278,7 @@
     <None Include="Resources\map_04-04.ora" />
     <None Include="Resources\map_05-01.ora" />
     <None Include="Resources\map_05-02.ora" />
+    <None Include="Resources\map_05-03.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
     <None Include="Resources\mario_small.png" />
@@ -304,6 +305,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mario_fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\block_textures_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\block_textures_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\block_textures_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
