@@ -24,7 +24,7 @@ namespace SuperBitBros
             Value = new Vec2d(off);
         }
 
-        public void Calculate(Rect2d target, int window_width, int window_height, double mapW, double mapH, bool capCorrection = true)
+        public void Calculate(Rect2d target, int window_width, int window_height, double mapW, double mapH, bool moveDown, bool capCorrection = true)
         {
             Rect2d cameraBox = GetOffsetBox(window_width, window_height);
             Vec2d playerPos = target.GetMiddle();
@@ -34,16 +34,23 @@ namespace SuperBitBros
 
             Vec2d moveCorrection = cameraBox.GetDistanceTo(playerPos);
 
+
+            if (moveDown && moveCorrection.Y == 0 && playerPos.Y != cameraBox.tl.Y)
+            {
+                moveCorrection.Y -= 5;
+            }
+
             // Offset NICHT verschieben wenn amn damit die Grenzen der aktuellen Zone verletzten Würde
             //###############################################################################
 
             Vec2d zoneCorrection = GetVisionZoneCorrection(Value + moveCorrection, playerPos, window_width, window_height);
-            moveCorrection += zoneCorrection; // Korrigierte MoveCorrection (durch die Zone)
+
+            Vec2d realCorrection = moveCorrection + zoneCorrection;
 
             if (capCorrection)
-                moveCorrection.DoMaxLength(MAX_CORRECTION_SPEED);
+                realCorrection.DoMaxLength(MAX_CORRECTION_SPEED);
 
-            Value += moveCorrection;
+            Value += realCorrection;
         }
 
         private Vec2d GetVisionZoneCorrection(Vec2d offset, Vec2d playerPos, int window_width, int window_height)

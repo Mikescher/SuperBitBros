@@ -43,7 +43,7 @@ namespace SuperBitBros
         {
             base.Update(keyboard);
 
-            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight);
+            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, keyboard[Key.Down] && player.IsOnGround());
 
             if (Program.debugViewSwitch.Value && Program.debugMapExplosionSwitch.Value)
                 StartChangeWorld(0, 0);
@@ -152,7 +152,7 @@ namespace SuperBitBros
             //AFTER MAP GEN
             //#############
 
-            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, false);
+            offset.Calculate(player.GetPosition(), viewPortWidth, viewPortHeight, mapRealWidth, mapRealHeight, false, false);
             foreach (DynamicEntity e in dynamicEntityList)
             {
                 e.OnAfterMapGen();
