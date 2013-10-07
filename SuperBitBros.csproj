@@ -286,6 +286,7 @@
     <None Include="Resources\map_06-04.ora" />
     <None Include="Resources\map_07-01.ora" />
     <None Include="Resources\map_07-02.ora" />
+    <None Include="Resources\map_07-03.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
     <None Include="Resources\mario_small.png" />

@@ -145,8 +145,7 @@ namespace SuperBitBros
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
 
                         case 3:
-                            //return Resources.map_07_03;
-                            throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
+                            return Resources.map_07_03;
 
                         case 4:
                             //return Resources.map_07_04;
