@@ -208,6 +208,9 @@
   <data name="map_07_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\map_07-01.ora;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="map_07_02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_07-02.ora;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="map_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\map_img.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
