@@ -81,7 +81,7 @@ namespace SuperBitBros.Entities.DynamicEntities
                     power.DoAction(this);
             }
 
-            if (Program.debugViewSwitch.Value && Program.debugExplosionSwitch.Value) { Explode(); KillLater(); }
+            if (Program.debugExplosionSwitch.Value) { Explode(); DoDeath(true); }
             if (Program.debugViewSwitch.Value && Program.debugPlayerUpgrade.Value) { if (IsBig())  GrowToShootingPlayer(); else GrowToBigPlayer(); }
 
             if (invincTime > 0)
