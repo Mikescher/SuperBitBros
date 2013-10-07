@@ -121,26 +121,26 @@ namespace SuperBitBros
                     PipeZoneTypeWrapper pzt = parser.GetPipeZone(imgX, imgY);
 
                     if (block == null)
-                        Console.Error.WriteLine("Could not parse Block-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_BLOCKS, imgX, imgY), x, y);
+                        throw new NotSupportedException(String.Format("Could not parse Block-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_BLOCKS, imgX, imgY), x, y));
                     else
                         AddBlock(block, x, y);
 
                     if (set == null)
                     { }  // No Entity
                     else if (!set.IsSet())
-                        Console.Error.WriteLine("Could not parse SpawnEntity-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_ENTITIES, imgX, imgY), x, y);
+                        throw new NotSupportedException(String.Format("Could not parse SpawnEntity-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_ENTITIES, imgX, imgY), x, y));
                     else
                         SpawnEntityFromMapData(set, x, y);
 
                     if (att == AddTriggerType.UNKNOWN_TRIGGER)
-                        Console.Error.WriteLine("Could not parse Trigger-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y);
+                        throw new NotSupportedException(String.Format("Could not parse Trigger-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y));
                     else if (att != AddTriggerType.NO_TRIGGER)
                         AddTriggerFromMapData(att, parser.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y, p);
 
                     if (pzt == null)
                     { }  // No Zone
                     else if (!pzt.IsSet())
-                        Console.Error.WriteLine("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY), x, y);
+                        throw new NotSupportedException(String.Format("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY), x, y));
                     else
                         AddPipeZoneFromMapData(pzt, x, y);
                 }
