@@ -99,6 +99,7 @@
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetle.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetleShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BulletBill.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\HammerBowser.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingSpikeBallEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Lakitu.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingHammerEntity.cs" />
@@ -260,7 +261,6 @@
     <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\block_textures.png" />
     <None Include="Resources\map_01-02.ora" />
     <None Include="Resources\map_01-03.ora" />
     <None Include="Resources\map_01-04.ora" />
@@ -287,6 +287,7 @@
     <None Include="Resources\map_07-01.ora" />
     <None Include="Resources\map_07-02.ora" />
     <None Include="Resources\map_07-03.ora" />
+    <None Include="Resources\map_07-04.ora" />
     <None Include="Resources\number_raster.png" />
     <None Include="Resources\map_img.png" />
     <None Include="Resources\mario_small.png" />

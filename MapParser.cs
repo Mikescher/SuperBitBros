@@ -48,6 +48,7 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_HAMMERBRO = Color.FromArgb(64, 0, 0);
         private static readonly Color COL_SPAWN_LAKITU = Color.FromArgb(0, 128, 192);
         private static readonly Color COL_SPAWN_BUZZYBEETLE = Color.FromArgb(64, 192, 128);
+        private static readonly Color COL_SPAWN_HAMMERBOWSER = Color.FromArgb(255, 92, 0);
 
         public readonly OpenRasterImage map;
 
@@ -144,6 +145,7 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_HAMMERBRO) { return new EntityTypeWrapper(typeof(Hammerbro)); }
             else if (c == COL_SPAWN_LAKITU) { return new EntityTypeWrapper(typeof(Lakitu)); }
             else if (c == COL_SPAWN_BUZZYBEETLE) { return new EntityTypeWrapper(typeof(BuzzyBeetle)); }
+            else if (c == COL_SPAWN_HAMMERBOWSER) { return new EntityTypeWrapper(typeof(HammerBowser)); }
             else { return new EntityTypeWrapper(null); }
         }
 
