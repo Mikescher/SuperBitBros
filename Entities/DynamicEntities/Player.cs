@@ -66,9 +66,6 @@ namespace SuperBitBros.Entities.DynamicEntities
 
             if (IsUserControlled())
             {
-                IsCrouching = keyboard[Key.Down] && IsOnGround();
-                UpdateHeight();
-
                 if (keyboard[Key.Down] && IsOnGround())
                     TestForPipe(PipeDirection.SOUTH);
                 if (keyboard[Key.Right] && IsCollidingRight())
@@ -79,6 +76,9 @@ namespace SuperBitBros.Entities.DynamicEntities
                     TestForPipe(PipeDirection.WEST);
                 if (actionSwitch.Value)
                     power.DoAction(this);
+
+                if (IsUserControlled())
+                    UpdateCrouch(keyboard);
             }
 
             if (Program.debugExplosionSwitch.Value) { Explode(); DoDeath(true); }
@@ -88,6 +88,31 @@ namespace SuperBitBros.Entities.DynamicEntities
                 invincTime--;
 
             UpdateTexture();
+        }
+
+        private void UpdateCrouch(KeyboardDevice keyboard)
+        {
+            if (IsCrouching)
+            {
+                IsCrouching = keyboard[Key.Down];
+
+                if (!IsCrouching)
+                {
+                    UpdateHeight();
+
+                    if (DoCollisions(true))
+                    {
+                        IsCrouching = true;
+                    }
+                }
+            }
+            else
+            {
+                IsCrouching = keyboard[Key.Down] && IsOnGround();
+            }
+
+
+            UpdateHeight();
         }
 
         private void TestForPipe(PipeDirection d)

@@ -15,6 +15,7 @@ namespace SuperBitBros.Entities.Blocks
             else
                 owner.AddEntity(new FlowerEntity(), GetTopLeft().X, GetTopLeft().Y);
             Deactivate();
+            KillMobsAboveBlock();
         }
 
         public static Color GetColor()

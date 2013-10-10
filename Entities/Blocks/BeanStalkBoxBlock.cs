@@ -36,6 +36,7 @@ namespace SuperBitBros.Entities.Blocks
             }
 
             Deactivate();
+            KillMobsAboveBlock();
         }
 
         public override Color GetBlockColor()

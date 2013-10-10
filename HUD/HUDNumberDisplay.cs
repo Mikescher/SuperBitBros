@@ -27,7 +27,7 @@ namespace SuperBitBros.HUD
             } 
         }
 
-        public HUDNumberDisplay(int layer, int w, int h)
+        public HUDNumberDisplay(int layer, double w, double h) : base()
         {
             Layer = layer;
             width = w;

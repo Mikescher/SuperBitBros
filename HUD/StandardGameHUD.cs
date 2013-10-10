@@ -4,6 +4,7 @@ using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using System.Diagnostics;
 
 namespace SuperBitBros.HUD
 {
@@ -30,10 +31,18 @@ namespace SuperBitBros.HUD
         private HUDNumberDisplay headNumberDisplay_2;
         public HUDNumberCounter headCounter;
 
+        private HUDNumberDisplay timeDisplay_1;
+        private HUDNumberDisplay timeDisplay_2;
+        private HUDNumberDisplay timeDisplay_3;
+        private HUDNumberDisplay timeDisplay_4;
+        private HUDNumberDisplay timeDisplay_5;
+        private HUDNumberCounter timeCounter;
+        public Stopwatch timeWatch = new Stopwatch();
+
         public StandardGameHUD(GameWorld model)
             : base(model)
         {
-
+            timeWatch.Restart();
         }
 
         public Vec2d GetCoinTarget()
@@ -93,6 +102,7 @@ namespace SuperBitBros.HUD
                 for (int i = 0; i < 10; i++)
                     AddCoin();
             }
+            timeCounter.Value = (int)timeWatch.Elapsed.TotalSeconds;
         }
 
         public override void CreateHUD()
@@ -105,6 +115,11 @@ namespace SuperBitBros.HUD
             Add(headNumberDisplay_1 = new HUDNumberDisplay(2, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 110, 10, HUDElementAlign.HEA_TL);
             Add(headNumberDisplay_2 = new HUDNumberDisplay(2, Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT), 130, 10, HUDElementAlign.HEA_TL);
 
+            Add(timeDisplay_1 = new HUDNumberDisplay(1, Block.BLOCK_WIDTH / 2.0, Block.BLOCK_HEIGHT / 2.0), 40, 0, HUDElementAlign.HEA_TR);
+            Add(timeDisplay_2 = new HUDNumberDisplay(1, Block.BLOCK_WIDTH / 2.0, Block.BLOCK_HEIGHT / 2.0), 30, 0, HUDElementAlign.HEA_TR);
+            Add(timeDisplay_3 = new HUDNumberDisplay(1, Block.BLOCK_WIDTH / 2.0, Block.BLOCK_HEIGHT / 2.0), 20, 0, HUDElementAlign.HEA_TR);
+            Add(timeDisplay_4 = new HUDNumberDisplay(1, Block.BLOCK_WIDTH / 2.0, Block.BLOCK_HEIGHT / 2.0), 10, 0, HUDElementAlign.HEA_TR);
+            Add(timeDisplay_5 = new HUDNumberDisplay(1, Block.BLOCK_WIDTH / 2.0, Block.BLOCK_HEIGHT / 2.0), 00, 0, HUDElementAlign.HEA_TR);
 
             coinCounter = new HUDNumberCounter();
             coinCounter.AddCounter(coinNumberDisplay_1);
@@ -113,6 +128,13 @@ namespace SuperBitBros.HUD
             headCounter = new HUDNumberCounter();
             headCounter.AddCounter(headNumberDisplay_1);
             headCounter.AddCounter(headNumberDisplay_2);
+
+            timeCounter = new HUDNumberCounter();
+            timeCounter.AddCounter(timeDisplay_1);
+            timeCounter.AddCounter(timeDisplay_2);
+            timeCounter.AddCounter(timeDisplay_3);
+            timeCounter.AddCounter(timeDisplay_4);
+            timeCounter.AddCounter(timeDisplay_5);
         }
 
         private void DoHeadExplode()
@@ -145,6 +167,8 @@ namespace SuperBitBros.HUD
 
             headCounter.Value = 0;
             headParticleCount = 0;
+
+            timeWatch.Restart();
         }
     }
 }

@@ -2,14 +2,14 @@
 using SuperBitBros.Entities;
 using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.Entities.DynamicEntities.Mobs;
 using SuperBitBros.OpenGL.OGLMath;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace SuperBitBros.Triggers
 {
-    public class TeleportEntryZone : Trigger //ONLY DETECT TRIGGER THAR ARE ADJACENT
+    public class TeleportEntryZone : Trigger
     {
         private const int COOLDOWN = 3;
 
@@ -35,6 +35,12 @@ namespace SuperBitBros.Triggers
             {
                 (owner as GameWorld).TeleportPlayer(deltaTeleportation);
                 baseZone.active = COOLDOWN;
+            }
+
+            DynamicEntity m = collider as DynamicEntity;
+            if (m != null && baseZone.active == 0)
+            {
+                m.position += deltaTeleportation;
             }
         }
 

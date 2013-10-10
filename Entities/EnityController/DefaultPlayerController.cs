@@ -42,17 +42,18 @@ namespace SuperBitBros.Entities.EnityController
                 {
                     delta.X += PLAYER_SPEED_ACC;
                 }
-
-                if (keyboard[Key.Space] && ent.IsOnGround())
-                {
-                    if (movementDelta.Y >= 0)
-                    {
-                        delta.Y = Math.Max((PLAYER_JUMP_POWER + Gravity_Acc) - movementDelta.Y, 0);
-                    }
-                    else
-                        delta.Y = PLAYER_JUMP_POWER + Gravity_Acc;
-                }
             }
+
+            if (keyboard[Key.Space] && ent.IsOnGround())
+            {
+                if (movementDelta.Y >= 0)
+                {
+                    delta.Y = Math.Max((PLAYER_JUMP_POWER + Gravity_Acc) - movementDelta.Y, 0);
+                }
+                else
+                    delta.Y = PLAYER_JUMP_POWER + Gravity_Acc;
+            }
+            
 
             if (Program.debugViewSwitch.Value && Program.debugFlySwitch.Value)
             {

@@ -40,7 +40,7 @@ namespace SuperBitBros.HUD
 
             if (align == HUDElementAlign.HEA_TL || align == HUDElementAlign.HEA_TR) // TOP
                 pos.Y = window_h - pos.Y - height;
-            else if (align == HUDElementAlign.HEA_BR || align == HUDElementAlign.HEA_TR) // Right
+            if (align == HUDElementAlign.HEA_BR || align == HUDElementAlign.HEA_TR) // Right
                 pos.X = window_w - pos.X - width;
 
             return new Rect2d(pos, width, height);

@@ -16,7 +16,7 @@ namespace SuperBitBros.Entities.Blocks
         public override void onCollide(Entity collidingEntity, bool isCollider, bool isBlockingMovement, bool isDirectCollision, bool isTouching)
         {
             Player p = collidingEntity as Player;
-            if (p != null)
+            if (p != null && !p.IsInPipe())
                 p.AddWaterController();
         }
 

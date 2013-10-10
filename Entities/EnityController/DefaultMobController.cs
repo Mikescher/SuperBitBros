@@ -7,7 +7,7 @@ namespace SuperBitBros.Entities.EnityController
 {
     public class DefaultMobController : AbstractNewtonEntityController
     {
-        protected int walkDirection = -1; // +1 ||-1 || 0
+        protected int walkDirection = 1; // +1 ||-1 || 0
 
         public const double MOB_ACC = 0.2;
         public const double MOB_SPEED = 1;

@@ -433,16 +433,6 @@ namespace SuperBitBros.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap map_img {
-            get {
-                object obj = ResourceManager.GetObject("map_img", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap mario_big {
             get {
                 object obj = ResourceManager.GetObject("mario_big", resourceCulture);

@@ -20,6 +20,7 @@ namespace SuperBitBros.Entities.Blocks
                 (collidingEntity as Player).StopYMovement();
                 DestroyExplode();
                 ((GameWorld)owner).ReplaceBlock(this, GetReplacementAir());
+                KillMobsAboveBlock();
             }
         }
 

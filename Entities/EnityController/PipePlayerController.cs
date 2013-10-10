@@ -35,7 +35,10 @@ namespace SuperBitBros.Entities.EnityController
             if (zone == null)
             {
                 if (hasConnected)
+                {
                     hasFinished = true;
+                    zone = GetUnderlyingZone();
+                }
             }
             else
             {

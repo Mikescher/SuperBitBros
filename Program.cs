@@ -44,20 +44,11 @@ namespace SuperBitBros
     }
 }
 
-//Time disp
-//Pushback big Mrio Pipe down (manchmal auch small -> 8-4)
 //Coin fo flag (~ 1 lvl on max)
 //1 heart for killing bowser
 //disp curr lvl
-//mario tex plant 0 lvl shows pixel
-//hammerbro ai wie hammerbowser
 //sprite move left pix overflow
-//jump when ducked
-//down stand up when ducked and cant
-//--> lvl 01-02
-//kill mobs when killing ceiling / activate activatorblocks
 //zoom x2 mode (double window size, no more vision rect)
 //test all level with level test world (respawn on death in lvl select world) -> add roguelike pipe to map, spawn in map on start
 //change testure pipes in lvl select lvl
 //musik
-//ENTER Right Pipe underwater -> 08-04

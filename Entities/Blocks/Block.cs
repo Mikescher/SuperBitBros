@@ -1,4 +1,5 @@
-﻿using SuperBitBros.Entities.DynamicEntities.Particles;
+﻿using SuperBitBros.Entities.DynamicEntities.Mobs;
+using SuperBitBros.Entities.DynamicEntities.Particles;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 using System.Drawing;
@@ -121,6 +122,23 @@ namespace SuperBitBros.Entities.Blocks
             }
 
             owner.ReplaceBlock(this, null);
+        }
+
+        public void KillMobsAboveBlock()
+        {
+            Vec2d mpos = position;
+
+            foreach (DynamicEntity e in owner.GetCurrentEntityList())
+            {
+                Mob m = e as Mob;
+                if (m != null)
+                {
+                    if (m.position.Y == (mpos.Y + height) && (m.position.X + m.width) >= mpos.X && m.position.X <= mpos.X + width)
+                    {
+                        m.KillLater();
+                    }
+                }
+            }
         }
     }
 }

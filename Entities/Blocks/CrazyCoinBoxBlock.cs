@@ -59,6 +59,7 @@ namespace SuperBitBros.Entities.Blocks
         public override void OnActivate(Player p)
         {
             isActive = true;
+            KillMobsAboveBlock();
         }
 
         public override Color GetBlockColor()

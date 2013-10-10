@@ -19,6 +19,7 @@ namespace SuperBitBros.Entities.Blocks
         {
             owner.AddEntity(new GravityCoinEntity(new Vec2d(0, COIN_SPAWN_FORCE)), GetTopLeft().X, GetTopLeft().Y);
             Deactivate();
+            KillMobsAboveBlock();
         }
 
         public override Color GetBlockColor()
