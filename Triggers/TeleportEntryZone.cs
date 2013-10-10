@@ -4,11 +4,12 @@ using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.DynamicEntities;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace SuperBitBros.Triggers
 {
-    public class TeleportEntryZone : Trigger
+    public class TeleportEntryZone : Trigger //ONLY DETECT TRIGGER THAR ARE ADJACENT
     {
         private const int COOLDOWN = 3;
 
@@ -66,15 +67,25 @@ namespace SuperBitBros.Triggers
         public Vec2i GetTeleportPosition()
         {
             Vec2i pos = new Vec2i(position);
-            foreach (Trigger t in owner.triggerList)
+
+            for (; ; )
             {
-                TeleportEntryZone tel = t as TeleportEntryZone;
-                if (tel != null && tel.GetTeleportID() == id)
+                List<Trigger> tx, ty;
+
+                ty = owner.getTriggerList(pos.X, pos.Y - 1);
+                tx = owner.getTriggerList(pos.X - 1, pos.Y);
+                if (ty != null && ty.Exists(x => ((x is TeleportEntryZone) && ((x as TeleportEntryZone).id == id))))
                 {
-                    pos.X = Math.Min(pos.X, tel.position.X);
-                    pos.Y = Math.Min(pos.Y, tel.position.Y);
+                    pos.Y -= 1;
                 }
+                else if (tx != null && tx.Exists(x => ((x is TeleportEntryZone) && ((x as TeleportEntryZone).id == id))))
+                {
+                    pos.X -= 1;
+                }
+                else
+                    break;
             }
+
 
             baseZone = owner.getTriggerList(pos.X, pos.Y).Find(x => x is TeleportEntryZone) as TeleportEntryZone;
 
