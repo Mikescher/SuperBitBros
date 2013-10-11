@@ -1,5 +1,6 @@
 ﻿using OpenTK.Input;
 using SuperBitBros.Entities.DynamicEntities;
+using SuperBitBros.HUD;
 using SuperBitBros.OpenGL.OGLMath;
 using System;
 
@@ -33,6 +34,7 @@ namespace SuperBitBros.Entities.EnityController
                         double X = flagPos.X - ent.position.X;
                         X = Math.Min(Math.Abs(X), DOWN_CORRECTION_SPEED) * Math.Sign(X);
                         MoveBy(new Vec2d(X, -SPEED_DOWN));
+                        ((StandardGameHUD)owner.HUD).AddCoinParticle(StandardGameHUD.COIN_PARTICLE_COMPLETIONCOUNT / 2);
                     }
                     else
                         mode = MovementSection.WALK;

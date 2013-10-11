@@ -1,10 +1,15 @@
 ﻿using SuperBitBros.Entities.Blocks;
 using SuperBitBros.Entities.EnityController;
+using SuperBitBros.HUD;
+using System;
 
 namespace SuperBitBros.Entities.DynamicEntities.Mobs
 {
     public class Bowser : Mob
     {
+
+        private bool hasCoins = true;
+
         public const double BOWSER_SCALE = 1.5;
 
         public Bowser()
@@ -42,6 +47,20 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
         protected override void OnKill()
         {
             base.OnKill();
+
+            if (hasCoins)
+            {
+                hasCoins = false;
+
+                for (int i = 0; i < 100; i++)
+                {
+                    owner.AddDelayedAction(i * 3, new Action(() =>
+                    {
+                        (owner.HUD as StandardGameHUD).AddCoinParticle(StandardGameHUD.COIN_PARTICLE_COMPLETIONCOUNT);
+                    }
+                    ));
+                }
+            }
 
             Explode();
         }

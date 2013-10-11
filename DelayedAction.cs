@@ -5,18 +5,18 @@ namespace SuperBitBros
     public class DelayedAction
     {
         private Action action;
-        private int time;
+        public int Delay { get; private set; }
 
         public DelayedAction(int countdown, Action a)
         {
-            time = countdown;
+            Delay = countdown;
             action = a;
         }
 
         public bool DecInvoke()
         {
-            time--;
-            if (time <= 0)
+            Delay--;
+            if (Delay <= 0)
             {
                 action.Invoke();
                 return true;

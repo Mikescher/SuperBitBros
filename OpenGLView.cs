@@ -302,11 +302,12 @@ namespace SuperBitBros
             GL.End();
         }
 
-        public void ChangeWorld(int world, int level, AbstractMarioPower power)
+        public GameWorld ChangeWorld(int world, int level, AbstractMarioPower power)
         {
             GameWorld g;
             SetModel(g = new GameWorld(world, level));
             g.Init(power);
+            return g;
         }
     }
 }

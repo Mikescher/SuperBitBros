@@ -226,7 +226,8 @@ namespace SuperBitBros
             if (power == null)
                 power = new StandardMarioPower();
 
-            ownerView.ChangeWorld(world, level, power);
+            GameWorld neww = ownerView.ChangeWorld(world, level, power);
+            neww.HUD = HUD; // Keep HUD
         }
 
         private PlayerSpawnZone FindSpawnZone()
@@ -258,8 +259,8 @@ namespace SuperBitBros
                 Console.Out.WriteLine("Restart Game");
 
                 player.isAlive = false;
-                (HUD as StandardGameHUD).Reset();
                 StartChangeWorld(1, 1, new StandardMarioPower());
+                AddDelayedAction(GetMaximumDelay(), new Action(() => (HUD as StandardGameHUD).Reset()));
             }
         }
 

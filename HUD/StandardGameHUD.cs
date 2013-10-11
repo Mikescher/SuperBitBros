@@ -14,8 +14,8 @@ namespace SuperBitBros.HUD
         private const int HEAD_EXPLOSIONFRAGMENTS_Y = 5;
         private const double HEAD_EXPLOSIONFRAGMENTS_FORCE = 48.0;
 
-        private const int COIN_PARTICLE_COMPLETIONCOUNT = CoinEntity.COIN_EXPLOSIONFRAGMENTS_X * CoinEntity.COIN_EXPLOSIONFRAGMENTS_Y;
-        private const int HEAD_PARTICLE_COMPLETIONCOUNT = HEAD_EXPLOSIONFRAGMENTS_X * HEAD_EXPLOSIONFRAGMENTS_Y;
+        public const int COIN_PARTICLE_COMPLETIONCOUNT = CoinEntity.COIN_EXPLOSIONFRAGMENTS_X * CoinEntity.COIN_EXPLOSIONFRAGMENTS_Y;
+        public const int HEAD_PARTICLE_COMPLETIONCOUNT = HEAD_EXPLOSIONFRAGMENTS_X * HEAD_EXPLOSIONFRAGMENTS_Y;
 
         private Random random = new Random();
 
@@ -55,16 +55,21 @@ namespace SuperBitBros.HUD
             return new Vec2d(90 + Block.BLOCK_WIDTH / 2, owner.viewPortHeight - 10 - Block.BLOCK_HEIGHT / 2);
         }
 
-        public void AddCoinParticle(Particle p)
+        public void AddCoinParticle(int c)
+        {
+            coinParticleCount += c;
+            if (coinParticleCount >= COIN_PARTICLE_COMPLETIONCOUNT)
+            {
+                coinParticleCount = 0;
+                AddCoin();
+            }
+        }
+
+        public void AddExplosionParticle(Particle p)
         {
             if (p is CoinExplosionParticle)
             {
-                coinParticleCount++;
-                if (coinParticleCount >= COIN_PARTICLE_COMPLETIONCOUNT)
-                {
-                    coinParticleCount = 0;
-                    AddCoin();
-                }
+                AddCoinParticle(1);
             }
             else if (p is HUDHeadExplosionParticle)
             {

@@ -360,6 +360,14 @@ namespace SuperBitBros
             delayedActionList.Add(new DelayedAction(delay, a));
         }
 
+        public int GetMaximumDelay()
+        {
+            int max = 0;
+
+            delayedActionList.ForEach(x => max = Math.Max(max, x.Delay));
+            return max;
+        }
+
         public abstract Vec2d GetOffset();
     }
 }

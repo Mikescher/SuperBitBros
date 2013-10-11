@@ -32,7 +32,7 @@ namespace SuperBitBros
 
 
             Console.Out.WriteLine("START");
-            GameModel world = new GameWorld(8, 4);
+            GameModel world = new GameWorld(1, 4);
             OpenGLView view = new OpenGLGameView(world);
 
             Textures.Load();
@@ -44,8 +44,6 @@ namespace SuperBitBros
     }
 }
 
-//Coin fo flag (~ 1 lvl on max)
-//1 heart for killing bowser
 //disp curr lvl
 //sprite move left pix overflow
 //zoom x2 mode (double window size, no more vision rect)
