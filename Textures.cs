@@ -17,6 +17,8 @@ namespace SuperBitBros
         public static OGLTextureSheet mario_big_sheet;
         public static OGLTextureSheet mario_fire_sheet;
 
+        public static OGLTexture[,] texture_logo;
+
         public static OGLTexture[] array_coin;
 
         public static OGLTexture texture_ground;
@@ -92,6 +94,11 @@ namespace SuperBitBros
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);
             mario_big_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_big, 16, 2);
             mario_fire_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_fire, 16, 2);
+
+            texture_logo = new OGLTexture[15, 5];
+            for (int x = 0; x < 15; x++)
+                for (int y = 0; y < 5; y++)
+                    texture_logo[x, y] = block_textures.GetTextureWrapper(65 + x, 7 - y);
 
             texture_ground = block_textures.GetTextureWrapper(35);
             texture_air = block_textures.GetTextureWrapper(0);

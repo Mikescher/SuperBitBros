@@ -7,7 +7,7 @@ namespace SuperBitBros
 
     public class Program
     {
-        public const int TEXTUREPACK = 2;
+        public const int TEXTUREPACK = 0;
 
         public static BooleanKeySwitch debugViewSwitch = new BooleanKeySwitch(true, Key.F10, KeyTriggerMode.ON_DOWN);
         public static BooleanKeySwitch vectorDebugViewSwitch = new BooleanKeySwitch(true, Key.F9, KeyTriggerMode.ON_DOWN);
@@ -47,6 +47,4 @@ namespace SuperBitBros
 //disp curr lvl
 //sprite move left pix overflow
 //zoom x2 mode (double window size, no more vision rect)
-//test all level with level test world (respawn on death in lvl select world) -> add roguelike pipe to map, spawn in map on start
-//change testure pipes in lvl select lvl
 //musik

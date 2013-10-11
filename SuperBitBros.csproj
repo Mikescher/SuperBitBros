@@ -77,6 +77,7 @@
     <Compile Include="Entities\Blocks\CoinBoxBlock.cs" />
     <Compile Include="Entities\Blocks\BeanStalkBoxBlock.cs" />
     <Compile Include="Entities\Blocks\BillBlasterBlock.cs" />
+    <Compile Include="Entities\Blocks\LogoBlock.cs" />
     <Compile Include="Entities\Blocks\WaterBlock.cs" />
     <Compile Include="Entities\Blocks\UnderwaterGroundBlock.cs" />
     <Compile Include="Entities\Blocks\FireBoxBlock.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="StaticStopWatch.cs" />
     <Compile Include="Triggers\BridgeDestroyZone.cs" />
     <Compile Include="Triggers\BeanStalkSpawnZone.cs" />
+    <Compile Include="Triggers\SpawnLogoZone.cs" />
     <Compile Include="Triggers\TextureChangeZone.cs" />
     <Compile Include="Triggers\TeleportExitZone.cs" />
     <Compile Include="Triggers\TeleportEntryZone.cs" />

@@ -97,6 +97,10 @@ namespace SuperBitBros
             {
                 AddTrigger(new TextureChangeZone(new Vec2i(x, y), c.G), x, y);
             }
+            else if (triggertype == AddTriggerType.SPAWN_LOGO)
+            {
+                AddTrigger(new SpawnLogoZone(new Vec2i(x, y)), x, y);
+            }
         }
 
         public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y)

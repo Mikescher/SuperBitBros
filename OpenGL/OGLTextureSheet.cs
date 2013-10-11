@@ -73,7 +73,7 @@ namespace SuperBitBros.OpenGL
             double tw = 1.0 / width;
             double th = 1.0 / height;
 
-            return new OGLReferenceTextureFragment(this, x * tw, x * th, w * tw, h * th).GetTextureWrapper();
+            return new OGLReferenceTextureFragment(this, x * tw, y * th, w * tw, h * th).GetTextureWrapper();
         }
 
         public OGLTexture GetTextureWrapper(int x, int y)
