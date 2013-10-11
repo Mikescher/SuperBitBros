@@ -263,7 +263,7 @@ namespace SuperBitBros
                 Console.Out.WriteLine("Restart Game");
 
                 player.isAlive = false;
-                StartChangeWorld(1, 1, new StandardMarioPower());
+                StartChangeWorld(0, 1, new StandardMarioPower());
                 AddDelayedAction(GetMaximumDelay(), new Action(() => (HUD as StandardGameHUD).Reset()));
             }
         }
