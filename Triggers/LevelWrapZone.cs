@@ -29,8 +29,31 @@ namespace SuperBitBros.Triggers
             Player p = collider as Player;
             if (p != null && active)
             {
-                active = false;
+                deactivate();
                 (owner as GameWorld).StartChangeWorld(target_world, target_level, (owner as GameWorld).player.power);
+            }
+        }
+
+        public void deactivate()
+        {
+            LevelWrapZone[] z = new LevelWrapZone[9];
+
+            z[0] = owner.getReliableTriggerList(position.X, position.Y).Find(x => x is LevelWrapZone) as LevelWrapZone;
+
+            z[1] = owner.getReliableTriggerList(position.X + 1, position.Y).Find(x => x is LevelWrapZone) as LevelWrapZone;
+            z[2] = owner.getReliableTriggerList(position.X, position.Y + 1).Find(x => x is LevelWrapZone) as LevelWrapZone;
+            z[3] = owner.getReliableTriggerList(position.X - 1, position.Y).Find(x => x is LevelWrapZone) as LevelWrapZone;
+            z[4] = owner.getReliableTriggerList(position.X, position.Y - 1).Find(x => x is LevelWrapZone) as LevelWrapZone;
+
+            z[5] = owner.getReliableTriggerList(position.X + 1, position.Y + 1).Find(x => x is LevelWrapZone) as LevelWrapZone;
+            z[6] = owner.getReliableTriggerList(position.X + 1, position.Y - 1).Find(x => x is LevelWrapZone) as LevelWrapZone;
+            z[7] = owner.getReliableTriggerList(position.X - 1, position.Y + 1).Find(x => x is LevelWrapZone) as LevelWrapZone;
+            z[8] = owner.getReliableTriggerList(position.X - 1, position.Y - 1).Find(x => x is LevelWrapZone) as LevelWrapZone;
+
+            for (int i = 0; i < 9; i++)
+            {
+                if (z[i] != null && z[i].target_level == target_level && z[i].target_world == target_world)
+                    z[i].active = false;
             }
         }
 

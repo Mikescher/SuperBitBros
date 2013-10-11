@@ -1,9 +1,9 @@
-﻿using System;
+﻿using OpenTK.Graphics.OpenGL;
+using SuperBitBros.OpenGL.OGLMath;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
-using OpenTK.Graphics.OpenGL;
-using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.OpenGL
 {
@@ -133,19 +133,19 @@ namespace SuperBitBros.OpenGL
             }
         }
 
-        public int GetID()
+        public virtual int GetID()
         {
             switch (mode)
             {
                 case OGLTextureMode.TM_SINGLE:
-                    return texSingle.ID;
+                    return texSingle.GetID();
 
                 case OGLTextureMode.TM_REFERENCE_XY:
                 case OGLTextureMode.TM_REFERENCE_POS:
-                    return texSheet.ID;
+                    return texSheet.GetID();
 
                 case OGLTextureMode.TM_FRAGMENT:
-                    return texFragment.ID;
+                    return texFragment.GetID();
 
                 default:
                     throw new InvalidEnumArgumentException("mode", (int)mode, typeof(OGLTextureMode));

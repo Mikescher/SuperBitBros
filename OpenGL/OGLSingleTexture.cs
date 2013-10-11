@@ -1,16 +1,21 @@
-﻿using System.Drawing;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
+using System.Drawing;
 
 namespace SuperBitBros.OpenGL
 {
     public class OGLSingleTexture
     {
-        public int ID { get; private set; }
+        private int texID;
 
         private OGLSingleTexture(int id)
         {
-            this.ID = id;
+            this.texID = id;
+        }
+
+        public virtual int GetID()
+        {
+            return texID;
         }
 
         public static OGLSingleTexture LoadTextureFromFile(string filename)
@@ -25,7 +30,7 @@ namespace SuperBitBros.OpenGL
 
         public void bind()
         {
-            GL.BindTexture(TextureTarget.Texture2D, ID);
+            GL.BindTexture(TextureTarget.Texture2D, GetID());
         }
 
         public Rect2d GetCoordinates()

@@ -1,20 +1,23 @@
-﻿using System;
-using System.Drawing;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
 
 namespace SuperBitBros.OpenGL
 {
     public class OGLTextureFragment
     {
-        public int ID { get; private set; }
+        private int texID;
 
         public Rect2d coords { get; private set; }
 
         public OGLTextureFragment(int id, double x, double y, double w, double h)
         {
             coords = new Rect2d(x, y, w, h);
-            this.ID = id;
+            this.texID = id;
+        }
+
+        public virtual int GetID()
+        {
+            return texID;
         }
 
         public Rect2d GetCoordinates()
@@ -24,7 +27,7 @@ namespace SuperBitBros.OpenGL
 
         public void bind()
         {
-            GL.BindTexture(TextureTarget.Texture2D, ID);
+            GL.BindTexture(TextureTarget.Texture2D, GetID());
         }
 
         public OGLTexture GetTextureWrapper()

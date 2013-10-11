@@ -5,9 +5,11 @@ namespace SuperBitBros
 {
     public class Textures
     {
-        public static OGLTextureSheet block_textures;
-        public static OGLTextureSheet doubleblock_sheet;
-        public static OGLTextureSheet doubleheight_sheet;
+        public static OGLTextureSheet[] texturePacks = new OGLTextureSheet[3];
+
+        public static OGLReferenceTextureSheet block_textures;
+        public static OGLReferenceTextureSheet doubleblock_sheet;
+        public static OGLReferenceTextureSheet doubleheight_sheet;
 
         public static OGLTextureSheet number_sheet;
 
@@ -76,9 +78,15 @@ namespace SuperBitBros
 
         public static void Load()
         {
-            block_textures = OGLTextureSheet.LoadTextureFromBitmap(ResourceAccessor.GetTexturePack(Program.TEXTUREPACK), 80, 8);
-            doubleblock_sheet = OGLTextureSheet.LoadTextureFromRessourceID(block_textures.ID, 40, 4);
-            doubleheight_sheet = OGLTextureSheet.LoadTextureFromRessourceID(block_textures.ID, 80, 4);
+            for (int i = 0; i < texturePacks.Length; i++)
+            {
+                texturePacks[i] = OGLTextureSheet.LoadTextureFromBitmap(ResourceAccessor.GetTexturePack(i), 80, 8);
+            }
+
+            block_textures = OGLReferenceTextureSheet.LoadTextureFromReference(texturePacks[Program.TEXTUREPACK], 80, 8);
+            doubleblock_sheet = OGLReferenceTextureSheet.LoadTextureFromReference(block_textures, 40, 4);
+            doubleheight_sheet = OGLReferenceTextureSheet.LoadTextureFromReference(block_textures, 80, 4);
+
             number_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.number_raster, 16, 4);
 
             mario_small_sheet = OGLTextureSheet.LoadTextureFromBitmap(Resources.mario_small, 16, 2);

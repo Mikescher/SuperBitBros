@@ -7,16 +7,21 @@ namespace SuperBitBros.OpenGL
 {
     public class OGLTextureSheet
     {
-        public int ID { get; private set; }
+        private int texID;
 
-        private int width; // texturecount X-Axis
-        private int height; // texturecount Y-Axis
+        protected int width; // texturecount X-Axis
+        protected int height; // texturecount Y-Axis
 
-        private OGLTextureSheet(int id, int w, int h)
+        protected OGLTextureSheet(int id, int w, int h)
         {
             this.width = w;
             this.height = h;
-            this.ID = id;
+            this.texID = id;
+        }
+
+        public virtual int GetID()
+        {
+            return texID;
         }
 
         public static OGLTextureSheet LoadTextureFromFile(string filename, int width, int height)
@@ -55,7 +60,7 @@ namespace SuperBitBros.OpenGL
 
         public void bind()
         {
-            GL.BindTexture(TextureTarget.Texture2D, ID);
+            GL.BindTexture(TextureTarget.Texture2D, GetID());
         }
 
         public OGLTexture GetTextureWrapper(int pos)
@@ -68,7 +73,7 @@ namespace SuperBitBros.OpenGL
             double tw = 1.0 / width;
             double th = 1.0 / height;
 
-            return new OGLTextureFragment(ID, x * tw, x * th, w * tw, h * th).GetTextureWrapper();
+            return new OGLReferenceTextureFragment(this, x * tw, x * th, w * tw, h * th).GetTextureWrapper();
         }
 
         public OGLTexture GetTextureWrapper(int x, int y)

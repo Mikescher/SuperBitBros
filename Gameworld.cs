@@ -93,6 +93,10 @@ namespace SuperBitBros
             {
                 AddTrigger(new TeleportExitZone(new Vec2i(x, y), c.R), x, y);
             }
+            else if (triggertype == AddTriggerType.TEXTURE_CHANGE)
+            {
+                AddTrigger(new TextureChangeZone(new Vec2i(x, y), c.G), x, y);
+            }
         }
 
         public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y)
