@@ -29,9 +29,16 @@ namespace SuperBitBros.Triggers
 
         public static Color color = Color.FromArgb(128, 128, 128);
 
+        public static Color i_s_color = Color.FromArgb(192, 192, 192);
+
         public static Color GetColor()
         {
             return color;
+        }
+
+        public static Color GetInitialSpawnColor()
+        {
+            return i_s_color;
         }
 
         public override Color GetTriggerColor()

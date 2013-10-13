@@ -25,7 +25,6 @@ namespace SuperBitBros.HUD
         private HUDNumberDisplay coinNumberDisplay_2;
         public HUDNumberCounter coinCounter;
 
-        private int headParticleCount = 0;
         private HUDImage headImage;
         private HUDNumberDisplay headNumberDisplay_1;
         private HUDNumberDisplay headNumberDisplay_2;
@@ -65,20 +64,11 @@ namespace SuperBitBros.HUD
             }
         }
 
-        public void AddExplosionParticle(Particle p)
+        public void AddExplosionParticle(CoinExplosionParticle p)
         {
             if (p is CoinExplosionParticle)
             {
                 AddCoinParticle(1);
-            }
-            else if (p is HUDHeadExplosionParticle)
-            {
-                headParticleCount++;
-                if (headParticleCount >= HEAD_PARTICLE_COMPLETIONCOUNT)
-                {
-                    headParticleCount = 0;
-                    AddHead();
-                }
             }
         }
 
@@ -89,6 +79,7 @@ namespace SuperBitBros.HUD
             {
                 coinCounter.Value -= 100;
                 DoHeadExplode();
+                AddHead();
             }
         }
 
@@ -171,7 +162,6 @@ namespace SuperBitBros.HUD
             coinParticleCount = 0;
 
             headCounter.Value = 0;
-            headParticleCount = 0;
 
             timeWatch.Restart();
         }

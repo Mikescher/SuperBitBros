@@ -34,8 +34,8 @@ namespace SuperBitBros
 
             Rect2i bRange = new Rect2i((int)(offset.X / Block.BLOCK_WIDTH) - 1,
                                                  (int)(offset.Y / Block.BLOCK_HEIGHT) - 1,
-                                                 (int)(window.Width / Block.BLOCK_WIDTH) + 4,
-                                                 (int)(window.Height / Block.BLOCK_HEIGHT) + 4);
+                                                 (int)(INIT_RESOLUTION_WIDTH / Block.BLOCK_WIDTH) + 4,
+                                                 (int)(INIT_RESOLUTION_HEIGHT / Block.BLOCK_HEIGHT) + 4);
 
             //#################################
             //######### <RENDER> ##############
@@ -151,7 +151,7 @@ namespace SuperBitBros
 
             foreach (HUDElement hel in hud.elements)
             {
-                RenderRectangle(hel.GetPosition(window.Width, window.Height), hel.GetCurrentTexture(), hel.GetDistance(), 1.0);
+                RenderRectangle(hel.GetPosition(INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT), hel.GetCurrentTexture(), hel.GetDistance(), 1.0);
             }
 
             GL.PopMatrix();
@@ -259,7 +259,7 @@ namespace SuperBitBros
 
                 #region OffsetBox
 
-                RenderColoredBox(((GameWorld)model).offset.GetOffsetBox(window.Width, window.Height), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 255, 0, 0));
+                RenderColoredBox(((GameWorld)model).offset.GetOffsetBox(INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT), Entity.DISTANCE_DEBUG_MARKER, Color.FromArgb(200, 255, 0, 0));
 
                 #endregion OffsetBox
             }
@@ -298,7 +298,7 @@ namespace SuperBitBros
 
         private void RenderMinimap(Vec2i offset, double distance)
         {
-            Rect2d mapRect = new Rect2d(offset.X + window.Width - 5 - model.mapBlockWidth, offset.Y + window.Height - 5 - model.mapBlockHeight, model.mapBlockWidth, model.mapBlockHeight);
+            Rect2d mapRect = new Rect2d(offset.X + INIT_RESOLUTION_WIDTH - 5 - model.mapBlockWidth, offset.Y + INIT_RESOLUTION_HEIGHT - 5 - model.mapBlockHeight, model.mapBlockWidth, model.mapBlockHeight);
 
             for (int x = 0; x < model.mapBlockWidth; x++)
             {
@@ -308,7 +308,7 @@ namespace SuperBitBros
                 }
             }
 
-            RenderColoredBox(new Rect2d(offset / Block.BLOCK_SIZE + mapRect.bl, window.Width * 1.0 / Block.BLOCK_WIDTH, window.Height * 1.0 / Block.BLOCK_HEIGHT), distance - 0.5, Color.FromArgb(255, 255, 0, 0));
+            RenderColoredBox(new Rect2d(offset / Block.BLOCK_SIZE + mapRect.bl, INIT_RESOLUTION_WIDTH * 1.0 / Block.BLOCK_WIDTH, INIT_RESOLUTION_HEIGHT * 1.0 / Block.BLOCK_HEIGHT), distance - 0.5, Color.FromArgb(255, 255, 0, 0));
         }
     }
 }

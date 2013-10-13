@@ -10,6 +10,7 @@ namespace SuperBitBros.Entities.EnityController
         public const double PLAYER_SPEED_FRICTION = 0.15;
         public const double PLAYER_SPEED_ACC = PLAYER_SPEED_FRICTION + 0.1;
         public const double PLAYER_SPEED_MAX = 4.5;
+        public const double CROUCH_SPEED_MAX = 0.1;
         public const double PLAYER_JUMP_POWER = 9.5;
 
         public const double PLAYER_MOB_KILL_JUMP = 4.5;
@@ -31,7 +32,22 @@ namespace SuperBitBros.Entities.EnityController
 
             delta.X = -Math.Sign(movementDelta.X) * Math.Min(PLAYER_SPEED_FRICTION, Math.Abs(movementDelta.X));
 
-            if (!(ent as Player).IsCrouching)
+            if ((ent as Player).IsCrouching)
+            {
+                if (!keyboard[Key.Down])
+                {
+                    if (keyboard[Key.Left] && movementDelta.X > -CROUCH_SPEED_MAX)
+                    {
+                        delta.X -= PLAYER_SPEED_ACC;
+                    }
+
+                    if (keyboard[Key.Right] && movementDelta.X < CROUCH_SPEED_MAX)
+                    {
+                        delta.X += PLAYER_SPEED_ACC;
+                    }
+                }
+            }
+            else
             {
                 if (keyboard[Key.Left] && movementDelta.X > -PLAYER_SPEED_MAX)
                 {
@@ -53,7 +69,7 @@ namespace SuperBitBros.Entities.EnityController
                 else
                     delta.Y = PLAYER_JUMP_POWER + Gravity_Acc;
             }
-            
+
 
             if (Program.debugViewSwitch.Value && Program.debugFlySwitch.Value)
             {

@@ -31,11 +31,15 @@ namespace SuperBitBros
             mapLevel = level;
         }
 
-        public override void Init(AbstractMarioPower p)
+        public override void Init(AbstractMarioPower p, HUDModel hmod)
         {
-            base.Init(p);
+            base.Init(p, hmod);
 
-            HUD = new StandardGameHUD(this);
+            if (hmod == null)
+                HUD = new StandardGameHUD(this);
+            else
+                HUD = hmod;
+
             LoadMapFromResources(p);
         }
 
@@ -62,12 +66,21 @@ namespace SuperBitBros
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
-            if (triggertype == AddTriggerType.PLAYER_SPAWN_POSITION)
+            if (triggertype == AddTriggerType.PLAYER_SPAWN_POSITION || triggertype == AddTriggerType.PLAYER_INITIAL_SPAWN_POSITION)
             {
                 PlayerSpawnZone zone = new PlayerSpawnZone(new Vec2i(x, y));
                 AddTrigger(zone, x, y);
 
-                player = zone.SpawnPlayer(p);
+                if (triggertype == AddTriggerType.PLAYER_INITIAL_SPAWN_POSITION)
+                {
+                    (HUD as StandardGameHUD).Reset();
+                    player = zone.SpawnPlayer();
+                }
+                else
+                {
+                    player = zone.SpawnPlayer(p);
+                }
+
             }
             else if (triggertype == AddTriggerType.DEATH_ZONE)
             {
@@ -100,6 +113,10 @@ namespace SuperBitBros
             else if (triggertype == AddTriggerType.SPAWN_LOGO)
             {
                 AddTrigger(new SpawnLogoZone(new Vec2i(x, y)), x, y);
+            }
+            else if (triggertype == AddTriggerType.SWITCH_ZOOM)
+            {
+                AddTrigger(new SwitchZoomZone(new Vec2i(x, y)), x, y);
             }
         }
 
@@ -234,8 +251,7 @@ namespace SuperBitBros
             if (power == null)
                 power = new StandardMarioPower();
 
-            GameWorld neww = ownerView.ChangeWorld(world, level, power);
-            neww.HUD = HUD; // Keep HUD
+            GameWorld neww = ownerView.ChangeWorld(world, level, power, HUD);
         }
 
         private PlayerSpawnZone FindSpawnZone()

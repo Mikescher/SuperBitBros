@@ -101,6 +101,7 @@
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetleShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BulletBill.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\HammerBowser.cs" />
+    <Compile Include="Entities\DynamicEntities\Particles\HUDHeadExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingSpikeBallEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\Lakitu.cs" />
     <Compile Include="Entities\DynamicEntities\ShootingHammerEntity.cs" />
@@ -122,7 +123,6 @@
     <Compile Include="Entities\DynamicEntities\Particles\CoinExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\BlockExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\BlockDestroyParticle.cs" />
-    <Compile Include="Entities\DynamicEntities\Particles\HUDHeadExplosionParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\FragmentParticle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\Particle.cs" />
     <Compile Include="Entities\DynamicEntities\Particles\DynamicEntityExplosionParticle.cs" />
@@ -138,6 +138,7 @@
     <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
     <Compile Include="Entities\EnityController\BuzzyBeetleShellController.cs" />
     <Compile Include="Entities\EnityController\BulletBillController.cs" />
+    <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\ShootingSpikeBallController.cs" />
     <Compile Include="Entities\EnityController\LakituController.cs" />
     <Compile Include="Entities\EnityController\ShootingHammerController.cs" />
@@ -145,7 +146,6 @@
     <Compile Include="Entities\EnityController\JumpingParatroopaController.cs" />
     <Compile Include="Entities\EnityController\LavaballController.cs" />
     <Compile Include="Entities\EnityController\ShootingFireballController.cs" />
-    <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\LevelEndWalkPlayerController.cs" />
     <Compile Include="Entities\EnityController\FireballController.cs" />
     <Compile Include="Entities\EnityController\ParatroopaController.cs" />
@@ -188,6 +188,7 @@
     <Compile Include="StaticStopWatch.cs" />
     <Compile Include="Triggers\BridgeDestroyZone.cs" />
     <Compile Include="Triggers\BeanStalkSpawnZone.cs" />
+    <Compile Include="Triggers\SwitchZoomZone.cs" />
     <Compile Include="Triggers\SpawnLogoZone.cs" />
     <Compile Include="Triggers\TextureChangeZone.cs" />
     <Compile Include="Triggers\TeleportExitZone.cs" />

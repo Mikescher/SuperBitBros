@@ -2,6 +2,7 @@
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using QuickFont;
+using SuperBitBros.HUD;
 using SuperBitBros.MarioPower;
 using SuperBitBros.OpenGL;
 using SuperBitBros.OpenGL.OGLMath;
@@ -12,6 +13,8 @@ namespace SuperBitBros
 {
     public abstract class OpenGLView
     {
+        public int zoom { get; private set; }
+
         public const int INIT_RESOLUTION_WIDTH = 540;
         public const int INIT_RESOLUTION_HEIGHT = 280;
 
@@ -28,7 +31,8 @@ namespace SuperBitBros
 
         public OpenGLView(GameModel model)
         {
-            window = new MyGameWindow(this, INIT_RESOLUTION_WIDTH, INIT_RESOLUTION_HEIGHT);
+            zoom = 1;
+            window = new MyGameWindow(this, INIT_RESOLUTION_WIDTH * zoom, INIT_RESOLUTION_HEIGHT * zoom);
             SetModel(model);
 
             window.RenderFrame += new EventHandler<FrameEventArgs>(OnRender);
@@ -37,6 +41,14 @@ namespace SuperBitBros
             window.Load += new EventHandler<EventArgs>(OnLoad);
 
             OnInit();
+        }
+
+        public void switchZoom()
+        {
+            zoom = -zoom + 3; // Dat Formula (f(1) = 2 || f(2) = 1) 
+
+            window.Width = INIT_RESOLUTION_WIDTH * zoom;
+            window.Height = INIT_RESOLUTION_HEIGHT * zoom;
         }
 
         private void SetModel(GameModel w)
@@ -100,7 +112,7 @@ namespace SuperBitBros
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat);
 
             GL.LoadIdentity();
-            GL.Ortho(0, window.Width, 0, window.Height, 0, -100);
+            GL.Ortho(0, INIT_RESOLUTION_WIDTH, 0, INIT_RESOLUTION_HEIGHT, 0, -100);
         }
 
         protected virtual void EndRender()
@@ -112,8 +124,8 @@ namespace SuperBitBros
 
         public void OnResize()
         {
-            model.viewPortWidth = window.Width;
-            model.viewPortHeight = window.Height;
+            model.viewPortWidth = INIT_RESOLUTION_WIDTH;
+            model.viewPortHeight = INIT_RESOLUTION_HEIGHT;
         }
 
         protected virtual void RenderRectangle(Vec2d tl, Vec2d bl, Vec2d br, Vec2d tr, double distance)
@@ -258,12 +270,18 @@ namespace SuperBitBros
         public void RenderFont(Vec2d off, Vec2d pos, QFont font, string text, Color4 col)
         {
             Vec2d offset = new Vec2d(off);
-            offset.Y += window.Height;
+            offset.Y += INIT_RESOLUTION_HEIGHT;
             float w = font.Measure(text).Width;
             float h = font.Measure(text).Height;
+
+            w /= zoom;
+            h /= zoom;
+
             offset.Y -= h;
-            offset.X += pos.X;
-            offset.Y -= pos.Y;
+
+            offset.X += pos.X / zoom;
+            offset.Y -= pos.Y / zoom;
+
             RenderColoredRectangle(new Rect2d(offset, w, h), 1, Color.FromArgb(128, 255, 255, 255));
 
 
@@ -302,11 +320,13 @@ namespace SuperBitBros
             GL.End();
         }
 
-        public GameWorld ChangeWorld(int world, int level, AbstractMarioPower power)
+        public GameWorld ChangeWorld(int world, int level, AbstractMarioPower power, HUDModel hud)
         {
             GameWorld g;
             SetModel(g = new GameWorld(world, level));
-            g.Init(power);
+
+            g.Init(power, hud);
+
             return g;
         }
     }

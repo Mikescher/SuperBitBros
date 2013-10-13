@@ -48,7 +48,6 @@ namespace SuperBitBros.Entities.EnityController
 
             if ((rtarg - ent.position).GetLength() < KILL_DISTANCE)
             {
-                hud.AddExplosionParticle(ent as Particle);
                 ent.KillLater();
             }
         }

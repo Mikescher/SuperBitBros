@@ -60,9 +60,11 @@ namespace SuperBitBros
             delayedActionList = new List<DelayedAction>();
         }
 
-        public virtual void Init(AbstractMarioPower p)
+        public virtual void Init(AbstractMarioPower p, HUDModel hmod)
         {
             entityCache = new EntityCache();
+
+            HUD = hmod;
         }
 
         protected void AddBlock(Block b, int x, int y)
