@@ -7,9 +7,10 @@ namespace SuperBitBros.OpenGL
 {
     public class CheatKeySwitch : BooleanKeySwitch
     {
-        int pos = 0;
+        private int pos = 0;
         private string code;
-        bool activated;
+        private bool targetKeyState = false;
+        private bool activated;
 
         public CheatKeySwitch(bool initial, Key actkey, KeyTriggerMode tmode, string cheat)
             : base(initial, actkey, tmode)
@@ -32,19 +33,30 @@ namespace SuperBitBros.OpenGL
                 Key k = getKeyForChar(c);
                 if (keyboard[k])
                 {
-                    if (pos < code.Length && code[pos] == c)
+                    if (pos < code.Length && code[pos] == c && targetKeyState)
                     {
+                        //Console.Out.WriteLine("CHEAT INC");
                         pos++;
+                        targetKeyState = false;
                         return;
                     }
                     else if (pos > 0 && code[pos - 1] == c)
                     {
+                        //Console.Out.WriteLine("CHEAT STAY");
                         // all OK
                     }
-                    else
+                    else if (targetKeyState)
                     {
+                        //Console.Out.WriteLine("CHEAT RESET");
                         pos = 0;
                         return;
+                    }
+                }
+                else
+                {
+                    if (pos < code.Length && code[pos] == c && !targetKeyState)
+                    {
+                        targetKeyState = true;
                     }
                 }
             }
@@ -97,6 +109,25 @@ namespace SuperBitBros.OpenGL
                 case 'x': { return Key.X; }
                 case 'y': { return Key.Y; }
                 case 'z': { return Key.Z; }
+
+                case '!': { return Key.Up; }
+                case '=': { return Key.Right; }
+                case '§': { return Key.Down; }
+                case '$': { return Key.Left; }
+                case '%': { return Key.Enter; }
+                case '&': { return Key.BackSpace; }
+                case '/': { return Key.ShiftRight; }
+                case '(': { return Key.ScrollLock; }
+                case ')': { return Key.Slash; }
+                case '?': { return Key.Tab; }
+                case '[': { return Key.WinLeft; }
+                case ']': { return Key.RAlt; }
+                case '{': { return Key.Tilde; }
+                case '}': { return Key.Minus; }
+                case '*': { return Key.Menu; }
+                case '+': { return Key.Home; }
+                case '#': { return Key.Insert; }
+
                 default: { return Key.Unknown; }
             }
         }
