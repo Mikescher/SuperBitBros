@@ -11,7 +11,7 @@ namespace SuperBitBros
 
         public const int TEXTUREPACK = 0;
 
-        public static BooleanKeySwitch debugViewSwitch = new BooleanKeySwitch(DEBUGMODE, Key.F10, DEBUGMODE ? KeyTriggerMode.ON_DOWN : KeyTriggerMode.NEVER);
+        public static BooleanKeySwitch debugViewSwitch = new CheatKeySwitch(DEBUGMODE, Key.F10, KeyTriggerMode.ON_DOWN, CheatKeySwitch.Decrypt("qKcjj3o7NHoMtIzyG+ofTbk5GFaFdVmVZ/xTgC6r9oc="));
         public static BooleanKeySwitch vectorDebugViewSwitch = new BooleanKeySwitch(true, Key.F9, KeyTriggerMode.ON_DOWN);
         public static BooleanKeySwitch minimapViewSwitch = new BooleanKeySwitch(false, Key.F8, KeyTriggerMode.ON_DOWN);
 

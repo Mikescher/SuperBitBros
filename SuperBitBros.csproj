@@ -188,6 +188,7 @@
     <Compile Include="OffsetCalculator.cs" />
     <Compile Include="OpenGL\AvgDurationWatch.cs" />
     <Compile Include="OpenGL\BooleanKeySwitch.cs" />
+    <Compile Include="OpenGL\CheatKeySwitch.cs" />
     <Compile Include="OpenGL\OGLReferenceTextureFragment.cs" />
     <Compile Include="OpenGL\OGLReferenceTextureSheet.cs" />
     <Compile Include="OpenGL\OGLTextureFragment.cs" />
@@ -269,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Resources\map_00-00.ora" />
     <None Include="Resources\map_00-01.ora" />
     <None Include="Resources\map_01-01.ora" />

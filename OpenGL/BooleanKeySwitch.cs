@@ -86,7 +86,7 @@ namespace SuperBitBros.OpenGL
             switchList.ForEach(x => x.Update(keyboard));
         }
 
-        private void Update(KeyboardDevice keyboard)
+        protected virtual void Update(KeyboardDevice keyboard)
         {
             bool newstate = keyboard[key];
 
