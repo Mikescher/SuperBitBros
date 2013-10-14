@@ -118,6 +118,10 @@ namespace SuperBitBros
             {
                 AddTrigger(new SwitchZoomZone(new Vec2i(x, y)), x, y);
             }
+            else if (triggertype == AddTriggerType.PLAYER_GROW)
+            {
+                AddTrigger(new GrowPlayerZone(new Vec2i(x, y)), x, y);
+            }
         }
 
         public void AddPipeZoneFromMapData(PipeZoneTypeWrapper pipeZoneType, int x, int y)

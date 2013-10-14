@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2883D4C2-0746-40F8-96BF-87099D37213C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SuperBitBros</RootNamespace>
     <AssemblyName>SuperBitBros</AssemblyName>
@@ -196,6 +196,7 @@
     <Compile Include="StaticStopWatch.cs" />
     <Compile Include="Triggers\BridgeDestroyZone.cs" />
     <Compile Include="Triggers\BeanStalkSpawnZone.cs" />
+    <Compile Include="Triggers\GrowPlayerZone.cs" />
     <Compile Include="Triggers\SwitchZoomZone.cs" />
     <Compile Include="Triggers\SpawnLogoZone.cs" />
     <Compile Include="Triggers\TextureChangeZone.cs" />

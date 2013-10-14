@@ -27,7 +27,7 @@ namespace SuperBitBros
         private static void Main(string[] args)
         {
             Console.Out.WriteLine("START");
-            GameModel world = new GameWorld(0, 1);
+            GameModel world = new GameWorld(2, 3);
             OpenGLView view = new OpenGLGameView(world);
 
             Textures.Load();
