@@ -101,25 +101,14 @@ namespace SuperBitBros.OpenGL
             }
         }
 
-        private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-        private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
         public static string Crypt(string text)
         {
-            SymmetricAlgorithm algorithm = DES.Create();
-            ICryptoTransform transform = algorithm.CreateEncryptor(key, iv);
-            byte[] inputbuffer = Encoding.Unicode.GetBytes(text);
-            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
-            return Convert.ToBase64String(outputBuffer);
+            return Convert.ToBase64String(DES.Create().CreateEncryptor(new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 }, new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 }).TransformFinalBlock(Encoding.Unicode.GetBytes(text), 0, Encoding.Unicode.GetBytes(text).Length));
         }
 
         public static string Decrypt(string text)
         {
-            SymmetricAlgorithm algorithm = DES.Create();
-            ICryptoTransform transform = algorithm.CreateDecryptor(key, iv);
-            byte[] inputbuffer = Convert.FromBase64String(text);
-            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
-            return Encoding.Unicode.GetString(outputBuffer);
+            return Encoding.Unicode.GetString(DES.Create().CreateDecryptor(new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 }, new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 }).TransformFinalBlock(Convert.FromBase64String(text), 0, Convert.FromBase64String(text).Length));
         }
     }
 }
