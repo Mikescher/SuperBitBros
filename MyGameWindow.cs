@@ -11,7 +11,7 @@ namespace SuperBitBros
         private OpenGLView owner;
 
         public MyGameWindow(OpenGLView v, int resX, int resY)
-            : base(resX, resY, GraphicsMode.Default, "title")
+            : base(resX, resY, GraphicsMode.Default, "SuperBitBros")
         {
             owner = v;
             WindowBorder = WindowBorder.Fixed;
