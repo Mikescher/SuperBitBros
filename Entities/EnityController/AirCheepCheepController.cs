@@ -8,7 +8,7 @@ namespace SuperBitBros.Entities.EnityController
 {
     public class AirCheepCheepController : AbstractNewtonEntityController
     {
-        private const int MAX_COOLDOWN = 240;
+        private const int MAX_COOLDOWN = 600;
         public static readonly Vec2d JUMP_SPEED = new Vec2d(3.5, 11);
         public const double CHEEP_SPEED = 1.5;
 
@@ -19,6 +19,7 @@ namespace SuperBitBros.Entities.EnityController
         public AirCheepCheepController(AirCheepCheep p)
             : base(p)
         {
+            cooldown = (int)(rand.NextDouble() * MAX_COOLDOWN);
             Gravity_Acc = Gravity_Acc / 2.0;
         }
 
