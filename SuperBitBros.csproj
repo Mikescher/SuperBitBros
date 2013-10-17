@@ -104,6 +104,7 @@
     <Compile Include="Entities\Blocks\StandardPillarBlock.cs" />
     <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
     <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\NumberDisplayEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetle.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetleShell.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BulletBill.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Entities\EnityController\AirCheepCheepController.cs" />
     <Compile Include="Entities\EnityController\BuzzyBeetleShellController.cs" />
     <Compile Include="Entities\EnityController\BulletBillController.cs" />
+    <Compile Include="Entities\EnityController\FreeFloatingEntityController.cs" />
     <Compile Include="Entities\EnityController\HUDHeadExplosionController.cs" />
     <Compile Include="Entities\EnityController\ShootingSpikeBallController.cs" />
     <Compile Include="Entities\EnityController\LakituController.cs" />
@@ -270,8 +272,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Resources\map_00-00.ora" />
     <None Include="Resources\map_00-01.ora" />
     <None Include="Resources\map_01-01.ora" />

@@ -86,7 +86,7 @@ namespace SuperBitBros.Entities.EnityController
             }
             else
             {
-                if ((ent.position.X <= 0 && delta.X < 0) || ((ent.position.X + ent.width) >= ent.owner.mapRealWidth && delta.X > 0))
+                if ((ent.position.X <= 0 && (delta.X + movementDelta.X) < 0) || ((ent.position.X + ent.width) >= ent.owner.mapRealWidth && (delta.X + movementDelta.X) > 0))
                 {
                     delta.X = 0;
                     movementDelta.X = 0;

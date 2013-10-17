@@ -21,8 +21,8 @@ namespace SuperBitBros
 
         public Player player;
 
-        private int mapWorld;
-        private int mapLevel;
+        public int mapWorld { get; private set; }
+        public int mapLevel { get; private set; }
 
         public GameWorld(int world, int level)
             : base()
@@ -53,12 +53,14 @@ namespace SuperBitBros
                 StartChangeWorld(0, 0);
         }
 
-        public void SpawnEntityFromMapData(EntityTypeWrapper setype, double x, double y)
+        public void SpawnEntityFromMapData(EntityTypeWrapper setype, Color col, double x, double y)
         {
             double px = x * Block.BLOCK_WIDTH;
             double py = y * Block.BLOCK_HEIGHT;
 
-            AddEntity(setype.Get(), px, py);
+            DynamicEntity d;
+            AddEntity(d = setype.Get(), px, py);
+            d.InitAfterMapParse(col);
         }
 
         public void AddTriggerFromMapData(AddTriggerType triggertype, Color c, int x, int y, AbstractMarioPower p)
@@ -144,32 +146,38 @@ namespace SuperBitBros
                     int imgX = x;
                     int imgY = parser.GetHeight() - (1 + y);
 
+                    Color col_b = parser.map.GetColor(ImageMapParser.LAYER_BLOCKS, imgX, imgY);
+                    Color col_e = parser.map.GetColor(ImageMapParser.LAYER_ENTITIES, imgX, imgY);
+                    Color col_t = parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY);
+                    Color col_p = parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY);
+                    Color col_v = parser.map.GetColor(ImageMapParser.LAYER_PLAYERVISION, imgX, imgY);
+
                     Block block = parser.GetBlock(imgX, imgY);
                     EntityTypeWrapper set = parser.GetEntity(imgX, imgY);
                     AddTriggerType att = parser.GetTrigger(imgX, imgY);
                     PipeZoneTypeWrapper pzt = parser.GetPipeZone(imgX, imgY);
 
                     if (block == null)
-                        throw new NotSupportedException(String.Format("Could not parse Block-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_BLOCKS, imgX, imgY), x, y));
+                        throw new NotSupportedException(String.Format("Could not parse Block-Color in Map: {0} ({1}|{2})", col_b, x, y));
                     else
                         AddBlock(block, x, y);
 
                     if (set == null)
                     { }  // No Entity
                     else if (!set.IsSet())
-                        throw new NotSupportedException(String.Format("Could not parse SpawnEntity-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_ENTITIES, imgX, imgY), x, y));
+                        throw new NotSupportedException(String.Format("Could not parse SpawnEntity-Color in Map: {0} ({1}|{2})", col_e, x, y));
                     else
-                        SpawnEntityFromMapData(set, x, y);
+                        SpawnEntityFromMapData(set, col_e, x, y);
 
                     if (att == AddTriggerType.UNKNOWN_TRIGGER)
-                        throw new NotSupportedException(String.Format("Could not parse Trigger-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y));
+                        throw new NotSupportedException(String.Format("Could not parse Trigger-Color in Map: {0} ({1}|{2})", col_t, x, y));
                     else if (att != AddTriggerType.NO_TRIGGER)
-                        AddTriggerFromMapData(att, parser.GetColor(ImageMapParser.LAYER_TRIGGER, imgX, imgY), x, y, p);
+                        AddTriggerFromMapData(att, col_t, x, y, p);
 
                     if (pzt == null)
                     { }  // No Zone
                     else if (!pzt.IsSet())
-                        throw new NotSupportedException(String.Format("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", parser.map.GetColor(ImageMapParser.LAYER_PIPEZONES, imgX, imgY), x, y));
+                        throw new NotSupportedException(String.Format("Could not parse PipeZone-Color in Map: {0} ({1}|{2})", col_p, x, y));
                     else
                         AddPipeZoneFromMapData(pzt, x, y);
                 }

@@ -49,6 +49,9 @@ namespace SuperBitBros
 
             if (capCorrection)
                 realCorrection.DoMaxLength(MAX_CORRECTION_SPEED);
+            if (realCorrection.GetLength() < 0.001)
+                realCorrection = Vec2d.Zero;
+
 
             Value += realCorrection;
         }

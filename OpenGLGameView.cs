@@ -289,6 +289,7 @@ namespace SuperBitBros
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg R-Time: {0}", ((int)(render_watch.Duration * 10)) / 10.0), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Avg U-Time: {0}", ((int)(update_watch.Duration * 10)) / 10.0), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Delayed Actions: {0}", model.delayedActionList.Count), col);
+            RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("World: {0}-{1}", (model as GameWorld).mapWorld, (model as GameWorld).mapLevel), col);
             RenderFont(offset, new Vec2d(5, 5 + foy++ * 12), DebugFont, String.Format("Controller ({0}): {1}", pl.GetControllerStack().Count, pl.GetControllerStack().Count > 0 ? pl.GetControllerStack().Peek().GetType().Name : "null"), col);
 
             #endregion DebugTexts

@@ -27,7 +27,7 @@ namespace SuperBitBros
         private static void Main(string[] args)
         {
             Console.Out.WriteLine("START");
-            GameModel world = new GameWorld(2, 3);
+            GameModel world = new GameWorld(4, 2);
             OpenGLView view = new OpenGLGameView(world);
 
             Textures.Load();
@@ -41,5 +41,4 @@ namespace SuperBitBros
 
 //disp curr lvl
 //sprite move left pix overflow
-//zoom x2 mode (double window size, no more vision rect)
 //musik

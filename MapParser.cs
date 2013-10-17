@@ -49,6 +49,16 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_LAKITU = Color.FromArgb(0, 128, 192);
         private static readonly Color COL_SPAWN_BUZZYBEETLE = Color.FromArgb(64, 192, 128);
         private static readonly Color COL_SPAWN_HAMMERBOWSER = Color.FromArgb(255, 92, 0);
+        private static readonly Color COL_SPAWN_NUMBER_0 = Color.FromArgb(100, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_1 = Color.FromArgb(101, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_2 = Color.FromArgb(102, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_3 = Color.FromArgb(103, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_4 = Color.FromArgb(104, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_5 = Color.FromArgb(105, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_6 = Color.FromArgb(106, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_7 = Color.FromArgb(107, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_8 = Color.FromArgb(108, 255, 255);
+        private static readonly Color COL_SPAWN_NUMBER_9 = Color.FromArgb(109, 255, 255);
 
         public readonly OpenRasterImage map;
 
@@ -146,6 +156,16 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_LAKITU) { return new EntityTypeWrapper(typeof(Lakitu)); }
             else if (c == COL_SPAWN_BUZZYBEETLE) { return new EntityTypeWrapper(typeof(BuzzyBeetle)); }
             else if (c == COL_SPAWN_HAMMERBOWSER) { return new EntityTypeWrapper(typeof(HammerBowser)); }
+            else if (c == COL_SPAWN_NUMBER_0) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_1) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_2) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_3) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_4) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_5) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_6) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_7) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_8) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
+            else if (c == COL_SPAWN_NUMBER_9) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
             else { return new EntityTypeWrapper(null); }
         }
 
