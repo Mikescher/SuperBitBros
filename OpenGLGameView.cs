@@ -294,12 +294,37 @@ namespace SuperBitBros
 
             #endregion DebugTexts
 
+            if (Program.debugKeyBindingSwitch.Value)
+            {
+                #region CheatTexts
+
+                int foy2 = 1;
+                int dfcx = INIT_RESOLUTION_WIDTH * zoom - 115;
+                Color4 col2 = Color.FromArgb(255, 0, 0);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F1] ", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F2] Lifes", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F3] Power", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F4] Coins", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F5] Suicide", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F6] DebugWorld", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F7] Particles", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F8] MinimapView", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F9] VectorView", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F10] DebugView", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F11] KeySheet", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[F12] ", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[Ctrl] Fly", col2);
+                RenderFont(offset, new Vec2d(dfcx, 5 + foy2++ * 12), DebugFont, "[Shift] NoClip", col2);
+
+                #endregion DebugTexts
+            }
+
             GL.Enable(EnableCap.Texture2D);
         }
 
         private void RenderMinimap(Vec2i offset, double distance)
         {
-            Rect2d mapRect = new Rect2d(offset.X + INIT_RESOLUTION_WIDTH - 5 - model.mapBlockWidth, offset.Y + INIT_RESOLUTION_HEIGHT - 5 - model.mapBlockHeight, model.mapBlockWidth, model.mapBlockHeight);
+            Rect2d mapRect = new Rect2d(offset.X + INIT_RESOLUTION_WIDTH - 5 - model.mapBlockWidth - (Program.debugKeyBindingSwitch.Value ? 115 : 0), offset.Y + INIT_RESOLUTION_HEIGHT - 5 - model.mapBlockHeight - 12, model.mapBlockWidth, model.mapBlockHeight);
 
             for (int x = 0; x < model.mapBlockWidth; x++)
             {

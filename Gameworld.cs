@@ -51,6 +51,9 @@ namespace SuperBitBros
 
             if (Program.debugViewSwitch.Value && Program.debugMapExplosionSwitch.Value)
                 StartChangeWorld(0, 0);
+
+            if (Program.debugViewSwitch.Value && Program.debugSwitchZoom.Value)
+                ownerView.switchZoom();
         }
 
         public void SpawnEntityFromMapData(EntityTypeWrapper setype, Color col, double x, double y)

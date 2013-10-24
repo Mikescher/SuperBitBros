@@ -102,14 +102,14 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
             }
             Type typeUnder = blockUnder.GetType();
 
-            for (; ; )
-            { // minX
-                Block b = owner.GetBlock(minX - 1, maxY);
-                if (b != null && b.GetType() == typeUnder)
-                    minX--;
-                else
-                    break;
-            }
+            //for (; ; )
+            //{ // minX
+            //    Block b = owner.GetBlock(minX - 1, maxY);
+            //    if (b != null && b.GetType() == typeUnder)
+            //        minX--;
+            //    else
+            //        break;
+            //}
 
             for (; ; )
             { // maxX
@@ -119,6 +119,10 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
                 else
                     break;
             }
+
+            int width = maxX - minX + 1;
+            width = Math.Min(width, 2);
+            maxX = width + minX - 1;
 
             for (; ; )
             { // minY
@@ -138,8 +142,10 @@ namespace SuperBitBros.Entities.DynamicEntities.Mobs
                     break;
             }
 
-            int width = maxX - minX + 1;
+            
             int height = maxY - minY + 1;
+
+            
 
             pipeUnder = new Rect2d(minX * Block.BLOCK_WIDTH, minY * Block.BLOCK_HEIGHT, width * Block.BLOCK_WIDTH, height * Block.BLOCK_HEIGHT);
         }

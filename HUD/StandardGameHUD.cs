@@ -98,6 +98,12 @@ namespace SuperBitBros.HUD
                 for (int i = 0; i < 10; i++)
                     AddCoin();
             }
+
+            if (Program.debugViewSwitch.Value && Program.debugHPCheatSwitch.Value)
+            {
+                AddHead();
+            }
+
             timeCounter.Value = (int)timeWatch.Elapsed.TotalSeconds;
         }
 
