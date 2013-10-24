@@ -49,6 +49,7 @@ namespace SuperBitBros
         private static readonly Color COL_SPAWN_LAKITU = Color.FromArgb(0, 128, 192);
         private static readonly Color COL_SPAWN_BUZZYBEETLE = Color.FromArgb(64, 192, 128);
         private static readonly Color COL_SPAWN_HAMMERBOWSER = Color.FromArgb(255, 92, 0);
+        private static readonly Color COL_SPAWN_PRISONBOWSER = Color.FromArgb(250, 92, 0);
         private static readonly Color COL_SPAWN_NUMBER_0 = Color.FromArgb(100, 255, 255);
         private static readonly Color COL_SPAWN_NUMBER_1 = Color.FromArgb(101, 255, 255);
         private static readonly Color COL_SPAWN_NUMBER_2 = Color.FromArgb(102, 255, 255);
@@ -156,6 +157,7 @@ namespace SuperBitBros
             else if (c == COL_SPAWN_LAKITU) { return new EntityTypeWrapper(typeof(Lakitu)); }
             else if (c == COL_SPAWN_BUZZYBEETLE) { return new EntityTypeWrapper(typeof(BuzzyBeetle)); }
             else if (c == COL_SPAWN_HAMMERBOWSER) { return new EntityTypeWrapper(typeof(HammerBowser)); }
+            else if (c == COL_SPAWN_PRISONBOWSER) { return new EntityTypeWrapper(typeof(PrisonBowser)); }
             else if (c == COL_SPAWN_NUMBER_0) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
             else if (c == COL_SPAWN_NUMBER_1) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }
             else if (c == COL_SPAWN_NUMBER_2) { return new EntityTypeWrapper(typeof(NumberDisplayEntity)); }

@@ -104,6 +104,7 @@
     <Compile Include="Entities\Blocks\StandardPillarBlock.cs" />
     <Compile Include="Entities\DynamicEntities\BridgeEntity.cs" />
     <Compile Include="Entities\DynamicEntities\BeanStalkEntity.cs" />
+    <Compile Include="Entities\DynamicEntities\Mobs\PrisonBowser.cs" />
     <Compile Include="Entities\DynamicEntities\NumberDisplayEntity.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetle.cs" />
     <Compile Include="Entities\DynamicEntities\Mobs\BuzzyBeetleShell.cs" />
@@ -274,6 +275,7 @@
   <ItemGroup>
     <None Include="Resources\map_00-00.ora" />
     <None Include="Resources\map_00-01.ora" />
+    <None Include="Resources\map_00-02.ora" />
     <None Include="Resources\map_01-01.ora" />
   </ItemGroup>
   <ItemGroup>

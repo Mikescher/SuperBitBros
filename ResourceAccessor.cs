@@ -18,7 +18,7 @@ namespace SuperBitBros
                         case 1:
                             return Resources.map_00_01; // LevelChooseMap
                         case 2:
-                            throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
+                            return Resources.map_00_02; // EndlessEndMap
                         case 3:
                             throw new NotImplementedException(String.Format("Map {0}-{1} not implemented", world, lvl));
                         case 4:

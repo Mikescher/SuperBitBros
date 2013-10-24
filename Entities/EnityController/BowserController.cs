@@ -14,7 +14,7 @@ namespace SuperBitBros.Entities.EnityController
         public const double MOB_SPEED = 0.75;
         public const double JUMP_POWER = 5.5;
 
-        private bool active = false;
+        public bool active = false;
 
         private double borderLeft = Double.MaxValue;
         private double borderRight = Double.MinValue;
