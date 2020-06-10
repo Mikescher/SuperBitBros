@@ -17,6 +17,8 @@ namespace SuperBitBros.OpenRasterFormat
 
         public OpenRasterImage(byte[] file)
         {
+            ICSharpCode.SharpZipLib.Zip.ZipConstants.DefaultCodePage = 437;
+
             MemoryStream ms = new MemoryStream(file);
             ms.Write(file, 0, file.Length);
             ZipFile zfile = new ZipFile(ms);
